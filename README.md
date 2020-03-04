@@ -23,7 +23,7 @@ public InfinitusAppServiceClient InfinitusAppServiceClient
 }
 ```
 
-#### Create a new instance from InfinitusApp.Services and pass your instance from InfinitusAppServiceClient 
+#### Create a new instance from InfinitusApp.Services and pass your instance created from InfinitusAppServiceClient 
 
 ```csharp
 public SignaturePlanService SignaturePlanService 
