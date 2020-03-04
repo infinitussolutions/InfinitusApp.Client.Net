@@ -11,7 +11,7 @@ PM > Install-Package InfinitusApp.Services
 
 ## How to use
 
-Create a new intance from InfinitusAppServiceClient
+#### Create a new intance from InfinitusAppServiceClient
 
 ``` csharp
 public InfinitusAppServiceClient InfinitusAppServiceClient 
@@ -23,7 +23,7 @@ public InfinitusAppServiceClient InfinitusAppServiceClient
 }
 ```
 
-#### Create a new instance from InfinitusApp.Services
+#### Create a new instance from InfinitusApp.Services and pass your instance from InfinitusAppServiceClient 
 
 ```csharp
 public SignaturePlanService SignaturePlanService 
