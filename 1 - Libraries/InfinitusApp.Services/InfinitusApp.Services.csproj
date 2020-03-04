@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.4;netstandard1.6;netstandard2.0</TargetFrameworks>
+	<PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
+	<Authors>Infinitus Solutions, Alexandre Sanlim</Authors>
+	<Company>Infinitus Solutions</Company>
+	<Version>1.0.3</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
+    <PackageReference Include="Naylah.Identity.Client" Version="2017.4.26-alpha" />
+    <PackageReference Include="Naylah.Services.Client" Version="2017.4.26-alpha" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="OData.QueryBuilder" Version="1.0.11" />
+    <PackageReference Include="Twilio" Version="5.37.2" />
+    <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InfinitusApp.Core\InfinitusApp.Core.csproj" />
+  </ItemGroup>
+
+</Project>
