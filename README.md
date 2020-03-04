@@ -4,12 +4,12 @@
 
 Create a new intance from InfinitusAppServiceClient
 
-```csharp
+``` csharp
 public InfinitusAppServiceClient InfinitusAppServiceClient 
 { 
-  get 
-  { 
-    return InfinitusServiceExt.CreateInfinitusAppServiceClientForApp("Yout AppId", "Yout AppSecret", "You ClientId"); 
-  } 
+    get 
+    { 
+      return InfinitusServiceExt.CreateInfinitusAppServiceClientForApp("Yout AppId", "Yout AppSecret", "You ClientId"); 
+    } 
 }
 ```
