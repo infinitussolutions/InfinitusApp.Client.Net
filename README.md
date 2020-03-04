@@ -18,7 +18,7 @@ public InfinitusAppServiceClient InfinitusAppServiceClient
 { 
     get 
     { 
-      return InfinitusServiceExt.CreateInfinitusAppServiceClientForApp("Yout AppId", "Yout AppSecret", "You ClientId"); 
+      return InfinitusServiceExt.CreateInfinitusAppServiceClientForApp("Your AppId", "Your AppSecret", "Your Naylah ClientId"); 
     } 
 }
 ```
