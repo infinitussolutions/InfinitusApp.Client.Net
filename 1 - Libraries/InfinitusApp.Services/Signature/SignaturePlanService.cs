@@ -55,5 +55,15 @@ namespace InfinitusApp.Services.Signature
 
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<SignaturePlan>>("SignaturePlan/GetAll", HttpMethod.Get, dic);
         }
+
+        public async Task<SignaturePlan> GetById(string id)
+        {
+            var dic = new Dictionary<string, string>
+            {
+                {"id",id }
+            };
+
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<SignaturePlan>("SignaturePlan/GetById", HttpMethod.Get, dic);
+        }
     }
 }
