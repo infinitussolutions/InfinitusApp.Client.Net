@@ -19,7 +19,7 @@ namespace InfinitusApp.Services.DataItem
 
         }
 
-        public async Task<List<Core.Data.DataModels.DataItem>> GetAllByDataStoreId(string dataStoreId, TimeSpan timeInCached, Expression<Func<Core.Data.DataModels.DataItem, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.DataItem, object>> entityOrderBy = null, int skip = 0, int top = 10, bool desc = false)
+        public async Task<List<Core.Data.DataModels.DataItem>> GetAllByDataStoreId(string dataStoreId, Expression<Func<Core.Data.DataModels.DataItem, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.DataItem, object>> entityOrderBy = null, int skip = 0, int top = 10, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<Core.Data.DataModels.DataItem>("")
                     .For<Core.Data.DataModels.DataItem>(x => x)

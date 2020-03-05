@@ -1,8 +1,10 @@
 ﻿using InfinitusApp.Core.Data.Commands;
 using InfinitusApp.Core.Data.DataModels.Signature;
 using InfinitusApp.Core.Extensions;
+using OData.QueryBuilder.Builders;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,9 +27,33 @@ namespace InfinitusApp.Services.Signature
             return await ServiceClient.InvokeApiAsync<UpdateSignaturePlanCommand, SignaturePlan>("SignaturePlan/Update", createCommand, HttpMethod.Patch, null);
         }
 
-        public async Task<List<SignaturePlan>> GetAll()
+        public async Task<List<SignaturePlan>> GetAll(Expression<Func<SignaturePlan, bool>> entityFilter = null, Expression<Func<SignaturePlan, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
-            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<SignaturePlan>>("SignaturePlan/GetAll", HttpMethod.Get, null);
+            var odataBuilder = new ODataQueryBuilder<SignaturePlan>("")
+                    .For<SignaturePlan>(x => x)
+                    .ByList();
+
+            if (top.HasValue)
+                odataBuilder.Top(top.Value);
+
+            if (skip.HasValue)
+                odataBuilder.Skip(skip.Value);
+
+            if (entityFilter != null)
+                odataBuilder.Filter(entityFilter);
+
+            if (entityOrderBy != null)
+            {
+                if (desc)
+                    odataBuilder.OrderByDescending(entityOrderBy);
+
+                else
+                    odataBuilder.OrderBy(entityOrderBy);
+            }
+
+            var dic = odataBuilder.ToDictionary();
+
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<SignaturePlan>>("SignaturePlan/GetAll", HttpMethod.Get, dic);
         }
     }
 }
