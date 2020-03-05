@@ -1,5 +1,6 @@
 # InfinitusApp.Client.Net
-
+## Actions
+![publish to nuget](https://github.com/infinitussolutions/InfinitusApp.Client.Net/workflows/publish%20to%20nuget/badge.svg)
 ## Start
 ### Install InfinitusApp.Services in your project
 [![Nuget](https://img.shields.io/nuget/dt/InfinitusApp.Services)](https://www.nuget.org/packages/InfinitusApp.Services)
