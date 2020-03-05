@@ -20,6 +20,11 @@ namespace InfinitusApp.Services.Signature
             return await ServiceClient.InvokeApiAsync<CreateSignaturePlanCommand, SignaturePlan>("SignaturePlan/Create", createCommand);
         }
 
+        public async Task<SignaturePlan> Update(UpdateSignaturePlanCommand createCommand)
+        {
+            return await ServiceClient.InvokeApiAsync<UpdateSignaturePlanCommand, SignaturePlan>("SignaturePlan/Update", createCommand, HttpMethod.Patch, null);
+        }
+
         public async Task<List<SignaturePlan>> GetAll()
         {
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<SignaturePlan>>("SignaturePlan/GetAll", HttpMethod.Get, null);
