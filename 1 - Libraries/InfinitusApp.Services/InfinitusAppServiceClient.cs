@@ -1,4 +1,5 @@
-﻿using Naylah.Identity.Client;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using Naylah.Identity.Client;
 using Naylah.Service.Client.Services;
 using Naylah.Services.Client;
 using System;
@@ -7,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace InfinitusApp.Services
 {
-    public partial class InfinitusAppServiceClient : NaylahServiceClient
+    public class InfinitusAppServiceClient : NaylahServiceClient
     {
-        protected InfinitusAppServiceClient(Uri serviceUri, InfinitusAppServiceSettings settings) : base(serviceUri, settings)
+        public InfinitusAppServiceClient(Uri serviceUri, InfinitusAppServiceSettings settings) : base(serviceUri, settings)
         {
             ServiceSettings = settings;
         }
 
-        protected InfinitusAppServiceClient(Uri serviceUri) : base(serviceUri)
+        public InfinitusAppServiceClient(Uri serviceUri) : base(serviceUri)
         {
         }
 
@@ -28,21 +29,36 @@ namespace InfinitusApp.Services
             string naylahIdentityClientId
             )
         {
-            var settings = new InfinitusAppServiceSettings()
+            try
             {
-                AppId = appId,
-                AppSecret = appSecret
-            };
+                var settings = new InfinitusAppServiceSettings()
+                {
+                    AppId = appId,
+                    AppSecret = appSecret
+                };
 
-            var serviceUri = InfinitusAppServiceAccess.GetServiceAccessUri(environmentsType);
+                var serviceUri = InfinitusAppServiceAccess.GetServiceAccessUri(environmentsType);
 
-            var nClient = new InfinitusAppServiceClient(serviceUri, settings);
+                var nClient = new InfinitusAppServiceClient(serviceUri, settings);
 
-            nClient.AddService(new InfinitusAppApplicationService());
+                nClient.AddService(new InfinitusAppApplicationService());
 
-            nClient.ConfigureNaylahIdentityService(naylahIdentityClientId); //default...
+                nClient.ConfigureNaylahIdentityService(naylahIdentityClientId); //default...
 
-            return nClient;
+                return nClient;
+            }
+            catch (MobileServiceInvalidOperationException e)
+            {
+                var a = e.Response.Content.ReadAsStringAsync().Result;
+                throw e;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
+            
         }
 
         public void ConfigureNaylahIdentityService(string naylahIdentityClientId = "infinitusapp.hybrid")

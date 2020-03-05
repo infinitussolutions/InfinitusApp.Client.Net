@@ -44,7 +44,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
                 if (!LastChargePayment.HasValue && string.IsNullOrEmpty(SignaturePlan?.Id))
                     return DateTimeOffset.MinValue;
 
-                return LastChargePayment.HasValue ? LastChargePayment.Value.AddDays(SignaturePlan.RecurrencyDaysToCharge) : DateTimeOffset.UtcNow.AddMonths(SignaturePlan.SignatureStartDateConfig.Mounths).AddDays(SignaturePlan.SignatureStartDateConfig.Days).Date;
+                return LastChargePayment.HasValue ? LastChargePayment.Value.AddDays(SignaturePlan.Config.RecurrenceChargeDaysFromType) : DateTimeOffset.UtcNow.AddDays(SignaturePlan.Config.DaysToStartFirstCharge).Date;
             }
         }
 
@@ -74,7 +74,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
                 if (!IsBlockPlan)
                 {
                     if (DaysWithoutPayment > 0)
-                        return "Plano ativo, porém a " + DaysWithoutPayment + " dias sem pagamento, ao atingir " + SignaturePlan.DaysWithoutPaymentToBlock + " dias o mesmo será bloqueado";
+                        return "Plano ativo, porém a " + DaysWithoutPayment + " dias sem pagamento, ao atingir " + SignaturePlan.Config.DaysWithoutPaymentToBlock + " dias o mesmo será bloqueado";
 
                     return "Plano ativo! Próxima pagamento em " + NextCharge.ToString("dd/MM/yyyy dddd");
                 }
@@ -84,7 +84,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
                     if (!LastChargePayment.HasValue)
                         return "Primeiro pagamento ainda não encontrado";
 
-                    if (DaysWithoutPayment >= SignaturePlan.DaysWithoutPaymentToBlock)
+                    if (DaysWithoutPayment >= SignaturePlan.Config.DaysWithoutPaymentToBlock)
                         return "Plano bloqueado por falta de pagamento";
                 }
 
@@ -105,7 +105,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
                         return true;
                 }
 
-                return DaysWithoutPayment >= SignaturePlan.DaysWithoutPaymentToBlock;
+                return DaysWithoutPayment >= SignaturePlan.Config.DaysWithoutPaymentToBlock;
             }
         }
 

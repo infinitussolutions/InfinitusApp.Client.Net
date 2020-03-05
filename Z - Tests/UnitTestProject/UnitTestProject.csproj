@@ -13,4 +13,9 @@
     <PackageReference Include="coverlet.collector" Version="1.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\1 - Libraries\InfinitusApp.Core\InfinitusApp.Core.csproj" />
+    <ProjectReference Include="..\..\1 - Libraries\InfinitusApp.Services\InfinitusApp.Services.csproj" />
+  </ItemGroup>
+
 </Project>

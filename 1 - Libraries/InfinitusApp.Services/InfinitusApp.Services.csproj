@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.4;netstandard1.6;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;netstandard1.4;netstandard1.6;netstandard2.0</TargetFrameworks>
 	<PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
-	<Authors>Infinitus Solutions, Alexandre Sanlim</Authors>
+	<Authors>Infinitus Solutions Team</Authors>
 	<Company>Infinitus Solutions</Company>
-	<Version>1.0.3</Version>
+	<Version>1.0.5</Version>
   </PropertyGroup>
 
   <ItemGroup>

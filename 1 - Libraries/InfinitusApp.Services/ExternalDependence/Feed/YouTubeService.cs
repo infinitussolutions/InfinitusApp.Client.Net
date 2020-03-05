@@ -22,7 +22,7 @@ namespace InfinitusApp.Services.ExternalDependence.Feed
             // Documentation @ https://developers.google.com/apis-explorer/#p/youtube/v3/youtube.videos.list 
             // Parameters https://developers.google.com/youtube/v3/docs/videos/list
 
-            ApiKey = "AIzaSyC6ViThoTIxSxxcmd-wfMfr00aqHDUBUaI";
+            ApiKey = "you api key";
             ChannelId = "UCZ1bVhVLHjnLkCRx2IiiBPA";
             ChannelName = "Infinitus Solutions";
         }

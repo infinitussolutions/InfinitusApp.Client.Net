@@ -14,7 +14,7 @@ namespace InfinitusApp.Core.Data.Commands
     {
         public SignatureBaseCommand()
         {
-            SignatureStartDateConfig = new SignatureStartDateConfig();
+            Config = new SignaturePlanConfig();
         }
 
         public string Title { get; set; }
@@ -23,7 +23,7 @@ namespace InfinitusApp.Core.Data.Commands
 
         public decimal Amount { get; set; }
 
-        public SignatureStartDateConfig SignatureStartDateConfig { get; set; }
+        public SignaturePlanConfig Config { get; set; }
     }
 
     public class CreateSignaturePlanCommand : SignatureBaseCommand

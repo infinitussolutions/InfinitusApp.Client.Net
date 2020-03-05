@@ -15,7 +15,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
     {
         public SignaturePlan()
         {
-            SignatureStartDateConfig = new SignatureStartDateConfig();
+            Config = new SignaturePlanConfig();
             SignaturePlanApplicationUsers = new List<SignaturePlanApplicationUser>();
         }
 
@@ -25,6 +25,29 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         public decimal Amount { get; set; }
 
+        public SignaturePlanConfig Config { get; set; }
+
+        #region Relations
+
+        public virtual string DataStoreId { get; set; }
+
+        public virtual IList<SignaturePlanApplicationUser> SignaturePlanApplicationUsers { get; set; }
+
+        #endregion
+
+        #region Help
+
+        public string AmountPresentation { get { return "Preço: " + Amount.ToString("C"); } }
+
+        #endregion
+
+
+    }
+
+    public class SignaturePlanConfig
+    {
+        public int DaysToStartFirstCharge { get; set; }
+
         public SignaturePlanRecurrenceChargeDays RecurrenceChargeDaysType { get; set; } = SignaturePlanRecurrenceChargeDays.Monthy;
 
         /// <summary>
@@ -32,14 +55,9 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         /// </summary>
         public int DaysWithoutPaymentToBlock { get; set; } = 5;
 
-        /// <summary>
-        /// Set to sample, 3 mounths free so set 3 to mounth
-        /// </summary>
-        public SignatureStartDateConfig SignatureStartDateConfig { get; set; }
-
         #region Help
 
-        public int RecurrencyDaysToCharge
+        public int RecurrenceChargeDaysFromType
         {
             get
             {
@@ -58,23 +76,59 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
             }
         }
 
+        public string RecurrencyPresentation
+        {
+            get
+            {
+                var msg = "Recorrência: ";
+
+                switch (RecurrenceChargeDaysType)
+                {
+                    case SignaturePlanRecurrenceChargeDays.Semester:
+                        msg += "Semestral";
+                        break;
+                    case SignaturePlanRecurrenceChargeDays.Yearly:
+                        msg += "Anual";
+                        break;
+                    case SignaturePlanRecurrenceChargeDays.Monthy:
+                    default:
+                        msg += "Mensal";
+                        break;
+                }
+
+                return msg;
+
+            }
+        }
+
+        public string DaysWithoutPaymentToBlockPresentation
+        {
+            get
+            {
+                return "Dias sem pagamento p/ bloquear assinatura: " + DaysWithoutPaymentToBlock;
+            }
+        }
+
+        public string DaysToStartFirstChargePresentation
+        {
+            get
+            {
+                var date = DateTime.UtcNow.AddDays(DaysToStartFirstCharge).Date;
+
+                var msg = "Começa a pagar a partir de: ";
+
+                if (DaysToStartFirstCharge.Equals(0))
+                    msg += "Mesmo Dia ";
+
+                else
+                    msg += DaysToStartFirstCharge + " dias ";
+
+                msg += "(" + date.ToString("dd/MM") + ")";
+
+                return msg;
+            }
+        }
+
         #endregion
-
-        #region Relations
-
-        public virtual DataStore DataStore { get; set; }
-
-        public virtual string DataStoreId { get; set; }
-
-        public virtual IList<SignaturePlanApplicationUser> SignaturePlanApplicationUsers { get; set; }
-
-        #endregion
-    }
-
-    public class SignatureStartDateConfig
-    {
-        public int Mounths { get; set; }
-
-        public int Days { get; set; }
     }
 }
