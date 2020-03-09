@@ -13,6 +13,8 @@ namespace InfinitusApp.Core.Data.Commands
         public PaymentConditionPrice ExtraValue { get; set; }
 
         public PaymentConditionTarget Target { get; set; }
+
+        public string ExternalReference { get; set; }
     }
 
     public class CreatePaymentConditionCommand : PaymentConditionCommand

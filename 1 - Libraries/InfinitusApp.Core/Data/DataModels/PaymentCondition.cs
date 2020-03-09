@@ -30,6 +30,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public PaymentConditionTarget Target { get; set; }
 
+        public string ExternalReference { get; set; }
+
         #region Relations
 
         public virtual DataStore DataStore { get; set; }
