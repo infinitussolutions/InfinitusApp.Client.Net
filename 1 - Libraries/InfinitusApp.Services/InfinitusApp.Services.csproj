@@ -5,7 +5,7 @@
 	<PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
 	<Authors>Infinitus Solutions Team</Authors>
 	<Company>Infinitus Solutions</Company>
-	<Version>1.0.12</Version>
+	<Version>1.0.13</Version>
   </PropertyGroup>
 
   <ItemGroup>
