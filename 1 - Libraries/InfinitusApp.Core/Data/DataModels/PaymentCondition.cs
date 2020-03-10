@@ -175,17 +175,25 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                if (DayForPayment == PaymentDay.None)
-                    return QuantityDaysForPayment > 0 ? DateTime.Now.AddDays(QuantityDaysForPayment) : DateTime.Now;
+                try
+                {
+                    if (DayForPayment == PaymentDay.None)
+                        return QuantityDaysForPayment > 0 ? DateTime.Now.AddDays(QuantityDaysForPayment) : DateTime.Now;
 
-                var day = (int)DayForPayment;
+                    var day = (int)DayForPayment;
 
-                if (day > DateTime.Now.Day)
-                    return new DateTime(DateTime.Now.Year, DateTime.Now.Month, day);
+                    if (day > DateTime.Now.Day)
+                        return new DateTime(DateTime.Now.Year, DateTime.Now.Month, day);
 
-                var nextMonth = DateTime.Now.AddMonths(1);
+                    var nextMonth = DateTime.Now.AddMonths(1);
 
-                return new DateTime(nextMonth.Year, nextMonth.Month, day);
+                    return new DateTime(nextMonth.Year, nextMonth.Month, day);
+                }
+
+                catch (Exception)
+                {
+                    return DateTime.Now;
+                }
             }
         }
     }
