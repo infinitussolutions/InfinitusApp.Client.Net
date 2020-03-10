@@ -79,6 +79,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public enum InvoiceInstallmentmentStatus
     {
+        None = -1,
         Pending,
         Paid,
         Canceled,
