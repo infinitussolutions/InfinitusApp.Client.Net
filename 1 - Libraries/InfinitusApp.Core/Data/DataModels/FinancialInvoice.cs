@@ -75,6 +75,17 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        public string SettlementDatePresentation 
+        {
+            get
+            {
+                if (SettlementDate == null)
+                    return "Não liquidado";
+
+                return SettlementDate.Value.ToString("dd/MM/yyyy");
+            }
+        }
+
         #endregion
 
     }
