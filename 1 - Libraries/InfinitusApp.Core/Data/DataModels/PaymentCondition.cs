@@ -176,7 +176,7 @@ namespace InfinitusApp.Core.Data.DataModels
             get
             {
                 if (DayForPayment == PaymentDay.None)
-                    return DateTime.Now.AddDays(QuantityDaysForPayment);
+                    return QuantityDaysForPayment > 0 ? DateTime.Now.AddDays(QuantityDaysForPayment) : DateTime.Now;
 
                 var day = (int)DayForPayment;
 
@@ -186,7 +186,6 @@ namespace InfinitusApp.Core.Data.DataModels
                 var nextMonth = DateTime.Now.AddMonths(1);
 
                 return new DateTime(nextMonth.Year, nextMonth.Month, day);
-
             }
         }
     }
