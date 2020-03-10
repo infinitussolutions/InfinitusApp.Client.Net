@@ -23,6 +23,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public DateTimeOffset DueDate { get; set; }
 
+        public DateTimeOffset? SettlementDate { get; set; }
+
         public int InstallmentNumber { get; set; }
 
         public Price InstallmentPrice { get; set; }

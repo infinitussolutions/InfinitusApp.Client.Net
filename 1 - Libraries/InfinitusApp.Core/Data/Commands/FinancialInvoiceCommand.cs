@@ -7,19 +7,30 @@ namespace InfinitusApp.Core.Data.Commands
 {
     public class FinancialInvoiceCommand
     {
+        public InvoiceInstallmentmentStatus Status { get; set; }
+        public string Description { get; set; }
 
+        public DateTimeOffset? SettlementDate { get; set; }
+    }
+
+    public class FinancialInvoiceCreateCommand : FinancialInvoiceCommand
+    {
+        public string FinancialRequestId { get; set; }
+        public ExternalReference ExternalReference { get; set; }
+
+        public DateTimeOffset DueDate { get; set; }
+
+        public int InstallmentNumber { get; set; }
+
+        public Price InstallmentPrice { get; set; }
+
+        public string DataStoreId { get; set; }
     }
 
     public class FinancialInvoiceUpdateCommand : FinancialInvoiceCommand
     {
         public string Id { get; set; }
-        public InvoiceInstallmentmentStatus Status { get; set; }
     }
 
-    public class FinancialInvoiceGetCommand
-    {
-        public string DataStoreId { get; set; }
-        public DateTimeOffset? InitialDate { get; set; }
-        public DateTimeOffset FinalDate { get; set; }
-    }
+  
 }
