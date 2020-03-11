@@ -125,6 +125,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     case PageNameType.DataItemGroup: title += "Grupo de DataItem"; break;
                     case PageNameType.TicketSale: title += "Venda de Ingressos"; break;
                     case PageNameType.Tag: title += "Tag"; break;
+                    case PageNameType.Signature: title += "Assinaturas"; break;
                 }
 
                 return title;
@@ -176,7 +177,8 @@ namespace InfinitusApp.Core.Data.DataModels
         InviteApp,
         TicketSale,
         Tag,
-        Preference
+        Preference,
+        Signature
     }
 
     public enum PageOrderType
