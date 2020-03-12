@@ -617,7 +617,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return IsPaid ? "Pago\n" : "Pendente\n";
+                return IsPaid ? "Pago" : "Pendente";
             }
         }
 
