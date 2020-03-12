@@ -87,8 +87,11 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                if (ExtraValue.DiscountInPercent > 0)
+                if (ExtraValue.Total > 0)
                     return string.Format("{0} ({1}% de desconto)", Title, ExtraValue.DiscountInPercent);
+
+                if (ExtraValue.Total < 0)
+                    return string.Format("{0} ({1}% de juros)", Title, ExtraValue.AdditionalInPercent);
 
                 return Title;
             }
