@@ -214,5 +214,13 @@ namespace InfinitusApp.Core.Data.DataModels
         public decimal DiscountInPercent { get; set; }
 
         public decimal AdditionalInPercent { get; set; }
+
+        public decimal Total 
+        {
+            get
+            {
+                return DiscountInPercent - AdditionalInPercent;
+            }
+        }
     }
 }
