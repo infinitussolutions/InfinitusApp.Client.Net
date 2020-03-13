@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;netstandard1.4;netstandard1.6;netstandard2.0</TargetFrameworks>
 	<PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
-	<Version>1.0.26</Version>
+	<Version>1.0.27</Version>
 	<Company>Infinitus Solutions</Company>
   </PropertyGroup>
 
