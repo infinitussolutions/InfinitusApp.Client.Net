@@ -51,23 +51,25 @@ namespace InfinitusApp.Services.Storage
         public string ContainerName { get; set; }
     }
 
-    public static class StorageExtensions
-    {
-        public static async Task<CloudBlockBlob> UploadToBlob(this string path, Uri blobSasuri)
-        {
-            var blob = new CloudBlockBlob(blobSasuri);
-            await blob.UploadFromFileAsync(path);
+    // BUG INFINITUS CLIENT
 
-            return blob;
-        }
+    //public static class StorageExtensions
+    //{
+    //    public static async Task<CloudBlockBlob> UploadToBlob(this string path, Uri blobSasuri)
+    //    {
+    //        var blob = new CloudBlockBlob(blobSasuri);
+    //        await blob.UploadFromFileAsync(path);
 
-        public static async Task<CloudBlockBlob> UploadToBlobHtml(this MemoryStream memoryStream, Uri blobSasuri)
-        {
-            var blob = new CloudBlockBlob(blobSasuri);
-            blob.Properties.ContentType = "text/html";
-            await blob.UploadFromStreamAsync(memoryStream);
+    //        return blob;
+    //    }
 
-            return blob;
-        }
-    }
+    //    public static async Task<CloudBlockBlob> UploadToBlobHtml(this MemoryStream memoryStream, Uri blobSasuri)
+    //    {
+    //        var blob = new CloudBlockBlob(blobSasuri);
+    //        blob.Properties.ContentType = "text/html";
+    //        await blob.UploadFromStreamAsync(memoryStream);
+
+    //        return blob;
+    //    }
+    //}
 }
