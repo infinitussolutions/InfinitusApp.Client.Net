@@ -3,12 +3,12 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;netstandard1.4;netstandard1.6;netstandard2.0</TargetFrameworks>
 	<PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
-	<Version>1.0.24</Version>
+	<Version>1.0.23</Version>
 	<Company>Infinitus Solutions</Company>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ebanx.net" Version="2.0.12-alpha" />
+    <PackageReference Include="Ebanx.net" Version="2.0.4" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="Naylah.Core" Version="2017.6.20" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
