@@ -1,10 +1,10 @@
 ﻿using InfinitusApp.Core.Data.Commands;
 using InfinitusApp.Core.Data.DataModels.Signature;
+using InfinitusApp.Core.Extensions;
 using OData.QueryBuilder.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
