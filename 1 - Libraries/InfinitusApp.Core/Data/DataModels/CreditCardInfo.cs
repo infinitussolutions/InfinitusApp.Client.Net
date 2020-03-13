@@ -38,6 +38,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public bool HasAProblem { get { return !string.IsNullOrEmpty(ProblemDescription); } }
 
+        public string TypeAndMasked { get { return "(" + Type + ") " + MaskedNumber; } }
+
         #endregion
     }
 }
