@@ -14,6 +14,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Items = new List<FinancialRequestItem>();
             TrackingCode = new TrackingCode();
             DiscountInRequest = new Discount();
+            ExtraChargeInRequest = new ExtraCharge();
             //  InformationToGeneratedInstallment = new InvoiceInfo();
 
             Customer = new Customer();
@@ -49,6 +50,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public TrackingCode TrackingCode { get; set; }
 
         public Discount DiscountInRequest { get; set; }
+
+        public ExtraCharge ExtraChargeInRequest { get; set; }
 
         public IList<FinancialInvoiceToSimulation> InvoicesSimulation { get; set; }
 
@@ -208,13 +211,46 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #endregion
 
+        #region Extra Charge
+
+        public decimal TotalRequestExtraCharge
+        {
+            get
+            {
+                if (ExtraChargeInRequest == null)
+                    return 0;
+
+                var total = ExtraChargeInRequest.InMoney;
+
+                if (ExtraChargeInRequest.InPercent > 0)
+                    total += (TotalItemsWithDiscount * ExtraChargeInRequest.InPercent) / 100;
+
+                return total;
+            }
+        }
+
+        public string ExtraChargePresentation
+        {
+            get
+            {
+                if (TotalRequestExtraCharge == 0)
+                    return "";
+
+                return TotalRequestExtraCharge.ToString("C");
+            }
+        }
+
+        #endregion
+
         #region Request
+
+
 
         public decimal TotalRequest
         {
             get
             {
-                return (TotalItemsWithDiscount + DeliveryPrice) - Discount;
+                return (TotalItemsWithDiscount + DeliveryPrice + TotalRequestExtraCharge) - Discount;
             }
         }
 

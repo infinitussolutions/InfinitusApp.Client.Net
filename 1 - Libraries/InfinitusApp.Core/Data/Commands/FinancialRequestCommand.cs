@@ -15,6 +15,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public Discount DiscountInRequest { get; set; }
 
+        public ExtraCharge ExtraChargeInRequest { get; set; }
+
         public bool IsSimulate { get; set; }
 
         public ExternalReference ExternalReference { get; set; }
