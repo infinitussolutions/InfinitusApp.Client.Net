@@ -21,7 +21,7 @@ namespace InfinitusApp.Services.Signature
             return await ServiceClient.InvokeApiAsync<CreateSignaturePlanApplicationUserCommand, SignaturePlanApplicationUser>("SignaturePlanApplicationUser/Create", createCommand);
         }
 
-        public async Task<List<SignaturePlanApplicationUser>> GetAll(Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        public async Task<SignaturePlanApplicationUser> GetAll(Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<SignaturePlanApplicationUser>("")
                     .For<SignaturePlanApplicationUser>(x => x)
@@ -47,10 +47,10 @@ namespace InfinitusApp.Services.Signature
 
             var dic = odataBuilder.ToDictionary();
 
-            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<SignaturePlanApplicationUser>>("SignaturePlanApplicationUser/GetAll", HttpMethod.Get, dic);
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<SignaturePlanApplicationUser>("SignaturePlanApplicationUser/GetAll", HttpMethod.Get, dic);
         }
 
-        public async Task<List<SignaturePlanApplicationUser>> GetById(string id, Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        public async Task<SignaturePlanApplicationUser> GetById(string id, Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<SignaturePlanApplicationUser>("")
                     .For<SignaturePlanApplicationUser>(x => x)
@@ -77,10 +77,10 @@ namespace InfinitusApp.Services.Signature
             var dic = odataBuilder.ToDictionary();
             dic.Add("id", id);
 
-            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<SignaturePlanApplicationUser>>("SignaturePlanApplicationUser/GetById", HttpMethod.Get, dic);
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<SignaturePlanApplicationUser>("SignaturePlanApplicationUser/GetById", HttpMethod.Get, dic);
         }
 
-        public async Task<List<SignaturePlanApplicationUser>> GetBySignaturePlanId(string signaturePlanId, Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        public async Task<SignaturePlanApplicationUser> GetBySignaturePlanId(string signaturePlanId, Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<SignaturePlanApplicationUser>("")
                     .For<SignaturePlanApplicationUser>(x => x)
@@ -107,7 +107,7 @@ namespace InfinitusApp.Services.Signature
             var dic = odataBuilder.ToDictionary();
             dic.Add("signaturePlanId", signaturePlanId);
 
-            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<SignaturePlanApplicationUser>>("SignaturePlanApplicationUser/GetBySignaturePlanId", HttpMethod.Get, dic);
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<SignaturePlanApplicationUser>("SignaturePlanApplicationUser/GetBySignaturePlanId", HttpMethod.Get, dic);
         }
     }
 }
