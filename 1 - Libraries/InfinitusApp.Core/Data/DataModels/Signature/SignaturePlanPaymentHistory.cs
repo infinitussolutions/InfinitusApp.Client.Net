@@ -7,15 +7,17 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 {
     public class SignaturePlanPaymentHistory : Naylah.Core.Entities.EntityBase
     {
+        public SignaturePlanPaymentHistory()
+        {
+            SignaturePlanApplicationUser = new SignaturePlanApplicationUser();
+        }
+
         public DateTimeOffset NextPaymentDate { get; set; }
 
         public ExternalReferenceType ExternalReferenceType { get; set; }
 
         public string ExternalReferenceId { get; set; }
 
-        /// <summary>
-        /// Ebanx type is PaymentResponse
-        /// </summary>
         public object ExternalReferenceModel { get; set; }
 
         #region Relations
@@ -24,78 +26,19 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         public virtual SignaturePlanApplicationUser SignaturePlanApplicationUser { get; set; }
 
-        public virtual DataStore DataStore { get; set; }
-
         public virtual string DataStoreId { get; set; }
 
         #endregion
 
         #region Help
 
-        public decimal ExternalReferenceAmount
-        {
-            get
-            {
-                switch (ExternalReferenceType)
-                {
-                    case ExternalReferenceType.Undefined:
-                        throw new ArgumentException(nameof(ExternalReferenceType.Undefined) + " is not a valid type");
+        public decimal ExternalReferenceAmount { get; set; }
 
-                    case ExternalReferenceType.Iugu:
-                        throw new ArgumentException(nameof(ExternalReferenceType.Iugu) + " is not a valid type");
+        public string ExternalReferenceAmountPresentation { get; set; }
 
-                    case ExternalReferenceType.Ebanx:
-                    default:
-                        var m = (PaymentResponse)ExternalReferenceModel;
-                        return decimal.Parse(m.AmountBr.ToString());
-                }
-            }
-        }
+        public bool ExternalReferenceIsPaid { get; set; }
 
-        public string ExternalReferenceAmountPresentation { get { return ExternalReferenceAmount.ToString("C"); } }
-
-        public bool ExternalReferenceIsPaid
-        {
-            get
-            {
-                switch (ExternalReferenceType)
-                {
-                    case ExternalReferenceType.Undefined:
-                        throw new ArgumentException(nameof(ExternalReferenceType.Undefined) + " is not a valid type");
-
-                    case ExternalReferenceType.Iugu:
-                        throw new ArgumentException(nameof(ExternalReferenceType.Iugu) + " is not a valid type");
-
-                    case ExternalReferenceType.Ebanx:
-                    default:
-                        var m = (PaymentResponse)ExternalReferenceModel;
-                        return m.IsPaid;
-                }
-            }
-        }
-
-        public DateTime? ExternalReferenceConfirmPaymentDate
-        {
-            get
-            {
-                if (!ExternalReferenceIsPaid)
-                    return null;
-
-                switch (ExternalReferenceType)
-                {
-                    case ExternalReferenceType.Undefined:
-                        throw new ArgumentException(nameof(ExternalReferenceType.Undefined) + " is not a valid type");
-
-                    case ExternalReferenceType.Iugu:
-                        throw new ArgumentException(nameof(ExternalReferenceType.Iugu) + " is not a valid type");
-
-                    case ExternalReferenceType.Ebanx:
-                    default:
-                        var m = (PaymentResponse)ExternalReferenceModel;
-                        return DateTime.Parse(m.ConfirmDate);
-                }
-            }
-        }
+        public DateTime? ExternalReferenceConfirmPaymentDate { get; set; }
 
         #endregion
     }
