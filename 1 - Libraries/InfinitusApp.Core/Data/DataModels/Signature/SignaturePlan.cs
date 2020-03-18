@@ -37,7 +37,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         #region Help
 
-        public string AmountPresentation { get { return "Preço: " + Amount.ToString("C"); } }
+        public string AmountPresentation { get { return Amount.ToString("C"); } }
 
         #endregion
 
@@ -80,24 +80,16 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         {
             get
             {
-                var msg = "Recorrência: ";
-
                 switch (RecurrenceChargeDaysType)
                 {
                     case SignaturePlanRecurrenceChargeDays.Semester:
-                        msg += "Semestral";
-                        break;
+                        return "Semestral";
                     case SignaturePlanRecurrenceChargeDays.Yearly:
-                        msg += "Anual";
-                        break;
+                        return "Anual";
                     case SignaturePlanRecurrenceChargeDays.Monthy:
                     default:
-                        msg += "Mensal";
-                        break;
+                        return "Mensal";
                 }
-
-                return msg;
-
             }
         }
 
