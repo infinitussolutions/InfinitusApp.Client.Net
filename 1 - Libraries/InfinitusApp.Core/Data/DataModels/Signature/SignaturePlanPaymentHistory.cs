@@ -32,13 +32,15 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         #region Help
 
-        public decimal ExternalReferenceAmount { get; set; }
+        public decimal ExternalReferenceAmount { get { return Convert.ToDecimal(((PaymentResponse)ExternalReferenceModel)?.AmountBr); } }
 
-        public string ExternalReferenceAmountPresentation { get; set; }
+        public string ExternalReferenceAmountPresentation { get { return ExternalReferenceAmount.ToString("C"); } }
 
-        public bool ExternalReferenceIsPaid { get; set; }
+        public bool? ExternalReferenceIsPaid { get { return ((PaymentResponse)ExternalReferenceModel)?.IsPaid ?? null; } }
 
-        public DateTime? ExternalReferenceConfirmPaymentDate { get; set; }
+        public DateTime? ExternalReferenceConfirmPaymentDate { get { return Convert.ToDateTime(((PaymentResponse)ExternalReferenceModel)?.ConfirmDate); } }
+
+        public string PaymentType { get { return ((PaymentResponse)ExternalReferenceModel)?.PaymentTypeCode } }
 
         #endregion
     }
