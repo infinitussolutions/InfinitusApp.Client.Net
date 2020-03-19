@@ -86,6 +86,9 @@ namespace InfinitusApp.Core.Data.DataModels
         public PaymentCondition PaymentCondition { get; set; }
         public string PaymentConditionId { get; set; }
 
+        public DataItem Provider { get; set; }
+        public string ProviderId { get; set; }
+
         #endregion
 
         #region Helper
