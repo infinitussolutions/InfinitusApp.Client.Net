@@ -40,7 +40,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         public DateTime? ExternalReferenceConfirmPaymentDate { get { return Convert.ToDateTime(((PaymentResponse)ExternalReferenceModel)?.ConfirmDate); } }
 
-        public string PaymentType { get { return ((PaymentResponse)ExternalReferenceModel)?.PaymentTypeCode } }
+        public string PaymentType { get { return ((PaymentResponse)ExternalReferenceModel)?.PaymentTypeCode; } }
 
         #endregion
     }
