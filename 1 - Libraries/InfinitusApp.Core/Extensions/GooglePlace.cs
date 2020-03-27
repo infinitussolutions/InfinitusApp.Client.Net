@@ -92,7 +92,7 @@ namespace InfinitusApp.Core.Extensions
                 Country = googlePlaceDetail?.result?.address_components?.Where(x => x.types.Any(y => y.Equals("country")))?.FirstOrDefault()?.long_name,
                 CountyCode = googlePlaceDetail?.result?.address_components?.Where(x => x.types.Any(y => y.Equals("country")))?.FirstOrDefault()?.short_name,
                 StateProvince = googlePlaceDetail?.result?.address_components?.Where(x => x.types.Any(y => y.Equals("administrative_area_level_1")))?.FirstOrDefault()?.short_name,
-                PostalCode = googlePlaceDetail?.result?.address_components?.Where(x => x.types.Any(y => y.Equals("postal_code")))?.FirstOrDefault()?.short_name,
+                PostalCode = googlePlaceDetail?.result?.address_components?.Where(x => x.types.Any(y => y.Equals("postal_code")))?.FirstOrDefault()?.short_name?.Replace("-", ""),
                 //Number = googlePlaceDetail?.result?.address_components?.Where(x => x.types.Any(y => y.Equals("street_number")))?.FirstOrDefault()?.short_name,
                 Location = new Data.DataModels.Location
                 {

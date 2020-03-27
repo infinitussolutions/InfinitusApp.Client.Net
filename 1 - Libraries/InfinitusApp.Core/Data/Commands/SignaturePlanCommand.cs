@@ -28,7 +28,7 @@ namespace InfinitusApp.Core.Data.Commands
 
     public class CreateSignaturePlanCommand : SignatureBaseCommand
     {
-        //public string DataStoreId { get; set; }
+        public string DataStoreId { get; set; }
 
         public string MsgIsNotValid
         {
@@ -80,6 +80,10 @@ namespace InfinitusApp.Core.Data.Commands
 
         public string CreditCardInfoId { get; set; }
 
+        public string DataStoreId { get; set; }
+
+        public string AppUserId { get; set; }
+
         public string MsgIsNotValid
         {
             get
@@ -122,6 +126,8 @@ namespace InfinitusApp.Core.Data.Commands
         //public PaymentResponse ExternalReferenceModel { get { return DirectResponse.Payment; } }
 
         //public CreditCardInfo CreditCard { get; set; }
+
+        public string DataStoreId { get; set; }
 
         public string MsgIsNotValid
         {
