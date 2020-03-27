@@ -17,17 +17,20 @@ namespace InfinitusApp.Core.Extensions
                 return new List<string>
                 {
                     "#16a085",
+                    "#27ae60",
                     "#2980b9",
                     "#8e44ad",
                     "#2c3e50",
-                    "#1abc9c",
-                    "#3498db",
-                    "#9b59b6",
-                    "#34495e",
+                    "#f39c12",
+                    "#d35400",
+                    "#c0392b",
                 };
             }
         }
 
-        public static string GetARandomHexFlatColor { get { return HexFlatColors.PickRandom(); } }
+        public static string GetARandomHexFlatColor()
+        {
+            return HexFlatColors.PickRandom();
+        }
     }
 }
