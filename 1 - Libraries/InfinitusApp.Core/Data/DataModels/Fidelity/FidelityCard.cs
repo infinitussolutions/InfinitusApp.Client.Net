@@ -41,7 +41,7 @@ namespace InfinitusApp.Core.Data.DataModels.Fidelity
 
         public string TotalExpensePresentation { get { return TotalExpense.ToString("C"); } }
 
-        public string Color { get { return ColorExtention.GetARandomHexFlatColor; } }
+        public string Color { get { return ColorExtention.GetARandomHexFlatColor(); } }
 
         public string PointsAndBenefitsInfo
         {
