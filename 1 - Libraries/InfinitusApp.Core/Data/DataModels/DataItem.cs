@@ -615,29 +615,37 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                var list = new List<Booking>();
-
-                var firstDateConfig = BookingConfiguration.FirstDateToStart;
-                var lastDateConfig = BookingConfiguration.LastDateToStart;
-                var startDateTime = firstDateConfig.AddHours(BookingConfiguration.HourToCheckIn.HourSelected);
-                var finishiDateTime = lastDateConfig.AddHours(BookingConfiguration.HourToCheckIn.HourSelected);
-
-                do
+                try
                 {
-                    var bookingAvailable = new Booking
+                    var list = new List<Booking>();
+
+                    var firstDateConfig = BookingConfiguration.FirstDateToStart;
+                    var lastDateConfig = BookingConfiguration.LastDateToStart;
+                    var startDateTime = firstDateConfig.AddHours(BookingConfiguration.HourToCheckIn.HourSelected);
+                    var finishiDateTime = lastDateConfig.AddHours(BookingConfiguration.HourToCheckIn.HourSelected);
+
+                    do
                     {
-                        CheckInDate = startDateTime
-                    };
-                    bookingAvailable.CheckOutDate = bookingAvailable.CheckInDate.AddMinutes(BookingConfiguration.DurationInMinutesToCheckOut);
+                        var bookingAvailable = new Booking
+                        {
+                            CheckInDate = startDateTime
+                        };
+                        bookingAvailable.CheckOutDate = bookingAvailable.CheckInDate.AddMinutes(BookingConfiguration.DurationInMinutesToCheckOut);
 
-                    if (!Bookings.Any(x => (bookingAvailable.CheckInDate.Ticks > x.CheckInDate.Ticks && bookingAvailable.CheckInDate.Ticks < x.CheckOutDate.Ticks) || (bookingAvailable.CheckOutDate.Ticks > x.CheckInDate.Ticks && bookingAvailable.CheckOutDate.Ticks < x.CheckOutDate.Ticks)))
-                        list.Add(bookingAvailable);
+                        if (!Bookings.Any(x => (bookingAvailable.CheckInDate.Ticks > x.CheckInDate.Ticks && bookingAvailable.CheckInDate.Ticks < x.CheckOutDate.Ticks) || (bookingAvailable.CheckOutDate.Ticks > x.CheckInDate.Ticks && bookingAvailable.CheckOutDate.Ticks < x.CheckOutDate.Ticks)))
+                            list.Add(bookingAvailable);
 
-                    startDateTime = bookingAvailable.CheckOutDate;
+                        startDateTime = bookingAvailable.CheckOutDate;
 
-                } while (!startDateTime.Equals(finishiDateTime));
+                    } while (!startDateTime.Equals(finishiDateTime));
 
-                return list;
+                    return list;
+                }
+
+                catch(Exception e)
+                {
+                    return null;
+                }
             }
         }
 
