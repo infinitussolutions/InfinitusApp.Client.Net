@@ -20,6 +20,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public TermsOfUse TermsOfUse { get; set; }
 
+        public StructureType Type { get; set; }
+
         public IList<string> TargetGroups { get; set; }
     }
 

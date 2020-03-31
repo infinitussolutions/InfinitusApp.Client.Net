@@ -46,6 +46,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public StructurePosition Position { get; set; }
 
+        public StructureType Type { get; set; }
+
         #region Relations
 
         public Application Application { get; set; }
@@ -62,6 +64,12 @@ namespace InfinitusApp.Core.Data.DataModels
             Dashboard,
             Bottom,
             Top
+        }
+
+        public enum StructureType
+        {
+            Default,
+            User
         }
 
         #region Helps
