@@ -132,6 +132,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string BookingConfigurationId { get; set; }
 
+        public OpeningHours OpeningHours { get; set; }
+
         [JsonIgnore]
         public bool HasVariations
         {

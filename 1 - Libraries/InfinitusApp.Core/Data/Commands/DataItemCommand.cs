@@ -21,7 +21,9 @@ namespace InfinitusApp.Core.Data.Commands
         public DataItemIdentificationInfo IdentificationCode { get; set; }
 
         public MediaImageData MediaImageData { get; set; }
-        
+
+        public OpeningHours OpeningHours { get; set; }
+
     }
 
     public class CreateDataItemCommand : DataItemCommand
