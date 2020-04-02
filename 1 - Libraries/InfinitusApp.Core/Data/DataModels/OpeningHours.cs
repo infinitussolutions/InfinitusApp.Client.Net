@@ -114,6 +114,14 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        public bool IsValid 
+        {
+            get
+            {
+                return Start <= End;
+            }
+        }
+
         public static string GetDayPresentation(int day)
         {
             switch (day)
