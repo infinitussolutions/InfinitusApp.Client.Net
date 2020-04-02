@@ -67,10 +67,25 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                if (CurrentDay == null)
+                if (CurrentDay == null || !CurrentDay.IsOpen)
                     return false;
 
                 return DateTime.Now.TimeOfDay >= CurrentDay.Start && DateTime.Now.TimeOfDay < CurrentDay.End;
+            }
+        }
+
+        public bool HasConfiguration 
+        {
+            get
+            {
+                return
+                    Sunday.IsOpen ||
+                    Monday.IsOpen ||
+                    Tuesday.IsOpen ||
+                    Wednesday.IsOpen ||
+                    Thursday.IsOpen ||
+                    Friday.IsOpen ||
+                    Saturday.IsOpen;
             }
         }
     }
@@ -80,5 +95,25 @@ namespace InfinitusApp.Core.Data.DataModels
         public bool IsOpen { get; set; }
         public TimeSpan Start { get; set; }
         public TimeSpan End { get; set; }
+
+        #region Presentation
+
+        public string IsOpenPresentation 
+        {
+            get
+            {
+                return IsOpen ? "Aberto" : "Fechado";
+            }
+        }
+
+        public string PeriodPresentation 
+        {
+            get
+            {
+                return string.Format("{0} - {1}", Start.ToString("h':'m"), End.ToString("h':'m"));
+            }
+        }
+
+        #endregion
     }
 }
