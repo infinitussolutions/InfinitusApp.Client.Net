@@ -428,21 +428,34 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        public OpeningHours CurrentOpeningHours 
+        { 
+            get
+            {
+                if (!string.IsNullOrEmpty(Parent?.Id) && Parent.OpeningHours.HasConfiguration)
+                    return Parent.OpeningHours;
+
+                return OpeningHours;
+            }
+        }
+
         [JsonIgnore]
         public bool HasOperating
         {
             get
             {
-                if (Parent != null && Parent.Schedule != null && !Parent.Schedule.Deleted && Parent.Schedule.Schedules.Count > 0)
-                {
-                    Schedule = Parent.Schedule;
-                    return true;
-                }
+                return CurrentOpeningHours.HasConfiguration;
 
-                if (Schedule != null && !Schedule.Deleted && Schedule.Schedules.Count > 0)
-                    return true;
+                //if (Parent != null && Parent.Schedule != null && !Parent.Schedule.Deleted && Parent.Schedule.Schedules.Count > 0)
+                //{
+                //    Schedule = Parent.Schedule;
+                //    return true;
+                //}
 
-                return false;
+                //if (Schedule != null && !Schedule.Deleted && Schedule.Schedules.Count > 0)
+                //    return true;
+
+                //return false;
             }
         }
 
@@ -454,22 +467,24 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (!HasOperating)
                     return Availability.DaysAvailable.AvailableDaysOfWeak.HasToday;
 
-                var schedulesConfig = new List<ScheduleConfig>();
+                return CurrentOpeningHours.CurrentDayIsOpen;
 
-                if (!string.IsNullOrEmpty(Parent?.Id) && Parent.Schedule?.Schedules?.Count > 0)
-                    schedulesConfig = Parent.Schedule.Schedules.ToList();
+                //var schedulesConfig = new List<ScheduleConfig>();
 
-                else
-                    schedulesConfig = Schedule.Schedules.ToList();
+                //if (!string.IsNullOrEmpty(Parent?.Id) && Parent.Schedule?.Schedules?.Count > 0)
+                //    schedulesConfig = Parent.Schedule.Schedules.ToList();
 
-                var operationToday = schedulesConfig.Where(x => x.DayOfWeek == DateTime.Today.DayOfWeek).FirstOrDefault();
+                //else
+                //    schedulesConfig = Schedule.Schedules.ToList();
 
-                if (operationToday == null)
-                    return false;
+                //var operationToday = schedulesConfig.Where(x => x.DayOfWeek == DateTime.Today.DayOfWeek).FirstOrDefault();
 
-                var actualTimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+                //if (operationToday == null)
+                //    return false;
 
-                return actualTimeSpan > operationToday.Start && actualTimeSpan < operationToday.End;
+                //var actualTimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+
+                //return actualTimeSpan > operationToday.Start && actualTimeSpan < operationToday.End;
             }
         }
 
@@ -501,37 +516,45 @@ namespace InfinitusApp.Core.Data.DataModels
                         }
                     }
 
-                    var schedulesConfig = Schedule.Schedules;
+                    if (!CurrentOpeningHours.HasConfiguration)
+                        return "Fechado";
 
-                    var operationToday = schedulesConfig.Where(x => x.DayOfWeek == DateTime.Today.DayOfWeek).FirstOrDefault();
+                    if (CurrentOpeningHours.CurrentDayIsOpen)
+                        return string.Format("Aberto, fecha as {0}", CurrentOpeningHours.CurrentDay.EndPresentation);
 
-                    if (operationToday == null)
-                    {
-                        var schedule = schedulesConfig.FirstOrDefault(x => x.DayOfWeek > DateTime.Now.DayOfWeek);
-                        return "Fechado hoje, abre " + schedule.DayOfWeek.ToPresentation() + " ás " + new DateTime(schedule.Start.Ticks).ToString("HH:mm tt");
+                    return string.Format("Fechado, abre {0} ás {1}", WorkingDay.GetDayPresentation((int)CurrentOpeningHours.NextOpenDay.DayOfWeek), CurrentOpeningHours.NextOpenDay.StartPresentation);
 
-                        //for (int i = 1; i < 7; i++)
-                        //{
-                        //    var thisDayOfWeek = DateTime.Today.AddDays(i).DayOfWeek;
-                        //    var schedule = .FirstOrDefault();
+                    //var schedulesConfig = Schedule.Schedules;
 
-                        //    if (schedule != null)
-                        //        return "Fechado hoje, abre " + schedule.DayOfWeek.ToPresentation() + " ás " + new DateTime(schedule.Start.Ticks).ToString("HH:mm tt");
-                        //}
-                    }
+                    //var operationToday = schedulesConfig.Where(x => x.DayOfWeek == DateTime.Today.DayOfWeek).FirstOrDefault();
 
-                    var actualTimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+                    //if (operationToday == null)
+                    //{
+                    //    var schedule = schedulesConfig.FirstOrDefault(x => x.DayOfWeek > DateTime.Now.DayOfWeek);
+                    //    return "Fechado hoje, abre " + schedule.DayOfWeek.ToPresentation() + " ás " + new DateTime(schedule.Start.Ticks).ToString("HH:mm tt");
 
-                    if (actualTimeSpan > operationToday.Start && actualTimeSpan < operationToday.End)
-                        return "Aberto agora, fecha às " + new DateTime(operationToday.End.Ticks).ToString("HH:mm tt");
+                    //    //for (int i = 1; i < 7; i++)
+                    //    //{
+                    //    //    var thisDayOfWeek = DateTime.Today.AddDays(i).DayOfWeek;
+                    //    //    var schedule = .FirstOrDefault();
 
-                    if (actualTimeSpan < operationToday.Start)
-                        return "Fechado agora, abre às " + new DateTime(operationToday.Start.Ticks).ToString("HH:mm tt");
+                    //    //    if (schedule != null)
+                    //    //        return "Fechado hoje, abre " + schedule.DayOfWeek.ToPresentation() + " ás " + new DateTime(schedule.Start.Ticks).ToString("HH:mm tt");
+                    //    //}
+                    //}
 
-                    if (actualTimeSpan > operationToday.End)
-                        return "Fechado agora, fechou a " + new DateTime((actualTimeSpan - operationToday.End).Ticks).ToString("HH:mm") + " atrás";
+                    //var actualTimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
 
-                    return msg;
+                    //if (actualTimeSpan > operationToday.Start && actualTimeSpan < operationToday.End)
+                    //    return "Aberto agora, fecha às " + new DateTime(operationToday.End.Ticks).ToString("HH:mm tt");
+
+                    //if (actualTimeSpan < operationToday.Start)
+                    //    return "Fechado agora, abre às " + new DateTime(operationToday.Start.Ticks).ToString("HH:mm tt");
+
+                    //if (actualTimeSpan > operationToday.End)
+                    //    return "Fechado agora, fechou a " + new DateTime((actualTimeSpan - operationToday.End).Ticks).ToString("HH:mm") + " atrás";
+
+                    //return msg;
                 }
 
                 catch (Exception)
@@ -678,7 +701,10 @@ namespace InfinitusApp.Core.Data.DataModels
                     if (string.IsNullOrEmpty(Company?.DocumentNumber))
                         msg += "- CNPJ/CPF não informado.\n";
 
-                    if (string.IsNullOrEmpty(ScheduleId))
+                    //if (string.IsNullOrEmpty(ScheduleId))
+                    //    msg += "- Horário de funcionamento não informado.\n";
+
+                    if (!OpeningHours.HasConfiguration)
                         msg += "- Horário de funcionamento não informado.\n";
                 }
 

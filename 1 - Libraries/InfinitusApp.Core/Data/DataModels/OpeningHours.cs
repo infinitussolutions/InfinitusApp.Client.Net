@@ -189,6 +189,22 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        public string StartPresentation
+        {
+            get
+            {
+                return Start.ToString("h':'m");
+            }
+        }
+
+        public string EndPresentation
+        {
+            get
+            {
+                return End.ToString("h':'m");
+            }
+        }
+
         public bool IsValid
         {
             get
