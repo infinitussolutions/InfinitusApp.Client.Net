@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace InfinitusApp.Core.Data.DataModels
@@ -16,6 +17,8 @@ namespace InfinitusApp.Core.Data.DataModels
             Friday = new WorkingDay();
             Saturday = new WorkingDay();
         }
+
+
         /// <summary>
         /// Domingo
         /// </summary>
@@ -45,6 +48,25 @@ namespace InfinitusApp.Core.Data.DataModels
         /// </summary>
         public WorkingDay Saturday { get; set; }
 
+        #region Helps
+
+        public List<WorkingDay> ListDays
+        {
+            get
+            {
+                return new List<WorkingDay>
+                {
+                    Sunday,
+                    Monday,
+                    Tuesday,
+                    Wednesday,
+                    Thursday,
+                    Friday,
+                    Saturday
+                };
+            }
+        }
+
         public WorkingDay CurrentDay
         {
             get
@@ -63,7 +85,36 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public bool IsOpen
+        public WorkingDay NextOpenDay
+        {
+            get
+            {
+                if (!HasConfiguration)
+                    return null;
+
+                var dayIndex = (int)DateTime.Now.DayOfWeek + 1;
+
+                for (int i = 0; i < 7; i++)
+                {
+                    if (dayIndex == 7)
+                        dayIndex = 0;
+
+                    if (ListDays[dayIndex].IsOpen)
+                    {
+                        ListDays[dayIndex].DayOfWeek = (DayOfWeek)dayIndex;
+
+                        return ListDays[dayIndex];
+                    }
+
+                    dayIndex++;
+                }
+
+                return null;
+
+            }
+        }
+
+        public bool CurrentDayIsOpen
         {
             get
             {
@@ -74,20 +125,39 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public bool HasConfiguration 
+        public bool HasConfiguration
         {
             get
             {
-                return
-                    Sunday.IsOpen ||
-                    Monday.IsOpen ||
-                    Tuesday.IsOpen ||
-                    Wednesday.IsOpen ||
-                    Thursday.IsOpen ||
-                    Friday.IsOpen ||
-                    Saturday.IsOpen;
+                return ListDays.Any(x => x.IsOpen);
             }
         }
+
+        public string DaysPresentation
+        {
+            get
+            {
+                return string.Format(
+                    "Segunda: {0}\n" +
+                    "Terça: {1}\n" +
+                    "Quarta: {2}\n" +
+                    "Quinta: {3}\n" +
+                    "Sexta: {4}\n" +
+                    "Sábado: {5}\n" +
+                    "Domingo: {6}",
+                    Monday.PeriodPresentation,
+                    Tuesday.PeriodPresentation,
+                    Wednesday.PeriodPresentation,
+                    Thursday.PeriodPresentation,
+                    Friday.PeriodPresentation,
+                    Saturday.PeriodPresentation,
+                    Sunday.PeriodPresentation
+                    );
+            }
+        }
+
+
+        #endregion
     }
 
     public class WorkingDay
@@ -96,9 +166,11 @@ namespace InfinitusApp.Core.Data.DataModels
         public TimeSpan Start { get; set; }
         public TimeSpan End { get; set; }
 
+        public DayOfWeek? DayOfWeek { get; set; }
+
         #region Presentation
 
-        public string IsOpenPresentation 
+        public string IsOpenPresentation
         {
             get
             {
@@ -106,15 +178,18 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public string PeriodPresentation 
+        public string PeriodPresentation
         {
             get
             {
+                if (!IsOpen)
+                    return "Fechado";
+
                 return string.Format("{0} - {1}", Start.ToString("h':'m"), End.ToString("h':'m"));
             }
         }
 
-        public bool IsValid 
+        public bool IsValid
         {
             get
             {
