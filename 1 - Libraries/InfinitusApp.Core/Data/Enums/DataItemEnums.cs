@@ -60,7 +60,7 @@ namespace InfinitusApp.Core.Data.Enums
                 case DataItemType.Book:
                     return plural ? "Livros" : "Livro";
                 case DataItemType.Company:
-                    return plural ? "Estabelecimentos" : "Estabelecimento";
+                    return plural ? "Negócio" : "Negócios";
                 case DataItemType.Pet:
                     return plural ? "Animais de Estimação" : "Animal de Estimação";
                 case DataItemType.PropertyTenancy:
@@ -109,7 +109,7 @@ namespace InfinitusApp.Core.Data.Enums
                 case "Book":
                     return plural ? "Livros" : "Livro";
                 case "Company":
-                    return plural ? "Estabelecimentos" : "Estabelecimento";
+                    return plural ? "Negócios" : "Negócio";
                 case "Pet":
                     return plural ? "Animais de Estimação" : "Animal de Estimação";
                 case "PropertyTenancy":
