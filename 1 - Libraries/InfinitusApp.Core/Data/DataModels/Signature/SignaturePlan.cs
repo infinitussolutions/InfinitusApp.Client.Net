@@ -27,6 +27,8 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         public SignaturePlanConfig Config { get; set; }
 
+        public bool Active { get; set; } = true;
+
         #region Relations
 
         public virtual string DataStoreId { get; set; }

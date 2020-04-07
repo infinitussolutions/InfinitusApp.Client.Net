@@ -57,6 +57,8 @@ namespace InfinitusApp.Core.Data.Commands
     {
         public string Id { get; set; }
 
+        public bool Active { get; set; } = true;
+
         public string MsgIsNotValid
         {
             get
