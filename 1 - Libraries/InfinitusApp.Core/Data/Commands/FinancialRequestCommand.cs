@@ -25,6 +25,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public string ProviderId { get; set; }
 
+        public string PaymentMethodPresentation { get; set; }
+
     }
 
     public class CreateFinancialRequestCommand : FinancialRequestCommand
