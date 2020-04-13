@@ -43,6 +43,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public FinancialRequestExternalModel ExternalModel { get; set; }
 
+        public AddressComplex DeliveryAddress { get; set; }
+
         #region Extention
 
         // public InvoiceInfo InformationToGeneratedInstallment { get; set; }
