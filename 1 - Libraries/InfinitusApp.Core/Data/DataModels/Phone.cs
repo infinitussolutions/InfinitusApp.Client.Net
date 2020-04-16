@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using InfinitusApp.Core.Data.Commands;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace InfinitusApp.Core.Data.DataModels
@@ -46,6 +48,22 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 return "+" + (string.IsNullOrEmpty(CountryCode) ? "55" : CountryCode) + " " + DDD + " " + Number;
             }
+        }
+
+        public static List<CreatePhoneCommand> ToListCreateCommand(List<Phone> phones)
+        {
+            if (phones == null)
+                return new List<CreatePhoneCommand>();
+
+            return phones.Select(x => new CreatePhoneCommand
+            {
+                ApplicationUserId = x.ApplicationUserId,
+                AvailableInApp = x.AvailableInApp,
+                CountryCode = x.CountryCode,
+                DataItemId = x.DataItemId,
+                Number = x.Number,
+                PhoneNumberType = x.PhoneNumberType
+            }).ToList();
         }
 
         #endregion
