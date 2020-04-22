@@ -14,6 +14,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Iugu = new IuguMarketplace();
             InvoiceConfig = new InvoiceConfig();
             Ebanx = new EbanxMarketplace();
+            InfinitusConfig = new InfinitusMarketplaceConfig();
         }
 
         public PaymentInfo PaymentInfo { get; set; }
@@ -23,6 +24,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public IuguMarketplace Iugu { get; set; }
 
         public EbanxMarketplace Ebanx { get; set; }
+
+        public InfinitusMarketplaceConfig InfinitusConfig { get; set; }
 
 
         #region Relations
@@ -105,5 +108,10 @@ namespace InfinitusApp.Core.Data.DataModels
     public class EbanxMarketplace
     {
         public string AccountId { get; set; }
+    }
+
+    public class InfinitusMarketplaceConfig
+    {
+        public bool UseWhatsapp { get; set; }
     }
 }

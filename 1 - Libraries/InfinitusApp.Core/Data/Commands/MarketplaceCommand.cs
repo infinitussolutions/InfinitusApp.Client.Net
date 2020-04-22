@@ -26,6 +26,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public EbanxMarketplace Ebanx { get; set; }
 
+        public InfinitusMarketplaceConfig InfinitusConfig { get; set; }
+
         public string DefaultFinancialOriginId { get; set; }
 
         public string DefaultCustomerId { get; set; }

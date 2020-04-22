@@ -32,6 +32,7 @@ namespace InfinitusApp.Core.Data.Commands
         {
             CompanyInfo = new CreateDataItemCompanyInfo();
             Price = new DataItemPriceInfo();
+            Phones = new List<CreatePhoneCommand>();
         }
 
         public CreateDataItemCompanyInfo CompanyInfo { get; set; }
@@ -45,6 +46,8 @@ namespace InfinitusApp.Core.Data.Commands
         public string ApplicationUserId { get; set; }
 
         public DataItemPriceInfo Price { get; set; }
+
+        public List<CreatePhoneCommand> Phones { get; set; }
     }
 
     public class UpdateDataItemCommand : DataItemCommand

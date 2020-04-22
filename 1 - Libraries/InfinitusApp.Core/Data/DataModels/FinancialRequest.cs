@@ -27,6 +27,7 @@ namespace InfinitusApp.Core.Data.DataModels
             AdditionalInfos = new List<AdditionalInfo>();
             Bookings = new List<Booking>();
             ExternalModel = new FinancialRequestExternalModel();
+            FinancialRequestStatusRelations = new List<FinancialRequestStatusRelation>();
         }
 
         public string Observation { get; set; }
@@ -42,6 +43,10 @@ namespace InfinitusApp.Core.Data.DataModels
         public bool IsTest { get; set; }
 
         public FinancialRequestExternalModel ExternalModel { get; set; }
+
+        public AddressComplex DeliveryAddress { get; set; }
+
+       
 
         #region Extention
 
@@ -88,6 +93,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public DataItem Provider { get; set; }
         public string ProviderId { get; set; }
+
+        public List<FinancialRequestStatusRelation> FinancialRequestStatusRelations { get; set; }
 
         #endregion
 
@@ -736,5 +743,23 @@ namespace InfinitusApp.Core.Data.DataModels
         }
     }
 
-  
+    public class FinancialRequestStatusRelation : Naylah.Core.Entities.EntityBase
+    {
+        public FinancialRequestStatusRelation()
+        {
+
+        }
+
+        public string Message { get; set; }
+
+        #region Relations
+
+        public virtual FinancialRequest FinancialRequest { get; set; }
+        public virtual string FinancialRequestId { get; set; }
+        public virtual StatusFinancialRequest StatusFinancialRequest { get; set; }
+        public virtual string StatusFinancialRequestId { get; set; }
+
+        #endregion
+    }
+
 }

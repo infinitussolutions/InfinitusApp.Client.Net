@@ -305,7 +305,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return Helper?.Auxiliary?.FirstPhone != null;
+                return Helper?.Auxiliary?.FirstPhone != null && !string.IsNullOrEmpty(Helper.Auxiliary.FirstPhone.Number);
             }
         }
 
