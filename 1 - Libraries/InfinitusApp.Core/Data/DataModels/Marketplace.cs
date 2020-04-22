@@ -108,6 +108,7 @@ namespace InfinitusApp.Core.Data.DataModels
     public class EbanxMarketplace
     {
         public string AccountId { get; set; }
+        public string RecipientCode { get; set; }
     }
 
     public class InfinitusMarketplaceConfig
