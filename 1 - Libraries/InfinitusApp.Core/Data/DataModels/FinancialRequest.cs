@@ -100,7 +100,22 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #region Helper
 
-        public StatusFinancialRequest CurrentStatus { get; set; }
+        public StatusFinancialRequest CurrentStatus 
+        {
+            get
+            {
+                if (IfIsCanceledInfo.IsCanceled)
+                    return new StatusFinancialRequest { Title = "Cancelado" };
+
+                if (FinancialRequestStatusRelations == null)
+                    return new StatusFinancialRequest { Title = "Indefinido" };
+
+                if (FinancialRequestStatusRelations.Count == 0)
+                    return new StatusFinancialRequest { Title = "Aberto" };
+
+                return FinancialRequestStatusRelations.OrderByDescending(x => x.CreatedAt).FirstOrDefault().StatusFinancialRequest;
+            }
+        }
 
         [JsonIgnore]
         public FinancialRequestActions PossibleActions
