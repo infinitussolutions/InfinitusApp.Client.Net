@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;netstandard1.4;netstandard1.6;netstandard2.0</TargetFrameworks>
     <PackageTargetFallback Condition="'$(TargetFramework)'=='Net45'">$(PackageTargetFallback);portable-net45+win8+wpa81+wp8</PackageTargetFallback>
-	<Version>1.0.62</Version>
+	<Version>1.0.63</Version>
 	<Company>Infinitus Solutions</Company>
 	<Description>InfinitusApp Models</Description>
   </PropertyGroup>
