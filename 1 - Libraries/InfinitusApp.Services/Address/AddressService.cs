@@ -25,7 +25,7 @@ namespace InfinitusApp.Services.Address
             return await ServiceClient.InvokeApiAsync<UpdateAddressCommand, Core.Data.DataModels.Address>("Address/Update", cmd, HttpMethod.Patch, null);
         }
 
-        public async Task<List<DataItemAddressResult>> GetAllDataItemByLocation(string dataStoreId, double latitude, double longitude, TimeSpan timeInCached, string dtItemType = "", string groupId = "", int skip = 0, int top = 10, string tagId = "")
+        public async Task<List<DataItemAddressResult>> GetAllDataItemByLocation(string dataStoreId, double latitude, double longitude, string dtItemType = "", string groupId = "", int skip = 0, int top = 10, string tagId = "", string q = "")
         {
             var dic = new Dictionary<string, string>
             {
@@ -44,6 +44,9 @@ namespace InfinitusApp.Services.Address
 
             if (!string.IsNullOrEmpty(tagId))
                 dic.Add("tagId", tagId);
+
+            if (!string.IsNullOrEmpty(q))
+                dic.Add("q", q);
 
             //return await ServiceClient.InvokeApiAsync<List<DataItemAddressResult>>("Address/GetAllDataItemByLocation", HttpMethod.Get, dic);
 
