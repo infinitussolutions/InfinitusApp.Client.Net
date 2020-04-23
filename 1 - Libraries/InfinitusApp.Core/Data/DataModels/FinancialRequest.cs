@@ -100,6 +100,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #region Helper
 
+        public StatusFinancialRequest CurrentStatus { get; set; }
+
         [JsonIgnore]
         public FinancialRequestActions PossibleActions
         {
