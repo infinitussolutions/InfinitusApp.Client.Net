@@ -65,6 +65,8 @@ namespace InfinitusApp.Core.Data.Commands
         public FinancialRequestStatus? Status { get; set; }
 
         public IList<UpdateFinancialRequestItemCommand> Items { get; set; }
+
+        public CanceledInfo IfIsCanceledInfo { get; set; }
     }
 
     public class UpdateFinancialRequestStatusCommand
