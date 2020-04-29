@@ -1095,6 +1095,32 @@ namespace InfinitusApp.Core.Data.DataModels
         public string WebSiteUri { get; set; }
 
         public string DocumentNumber { get; set; }
+
+        public bool IsCPF 
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(DocumentNumber))
+                    return false;
+
+                return DocumentNumber.Replace(".", "").Replace("-", "").Length.Equals(11);
+            }
+        }
+
+        public bool IsCNPJ
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(DocumentNumber))
+                    return false;
+
+                return DocumentNumber
+                    .Replace(".", "")
+                    .Replace("-", "")
+                    .Replace("/", "")
+                    .Length.Equals(14);
+            }
+        }
     }
 
     public class DataItemPersonInfo
