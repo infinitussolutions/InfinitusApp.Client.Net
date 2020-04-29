@@ -46,11 +46,19 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        public bool IsPluzapDelivery
+        {
+            get
+            {
+                return AppId.Equals("36dcf919-5bec-4582-bfe3-1c7596d6362a");
+            }
+        }
+
         public bool IsPluzap
         {
             get
             {
-                return IsPluzapFood || IsPluzapService || IsPluzapStore;
+                return IsPluzapFood || IsPluzapService || IsPluzapStore || IsPluzapDelivery || Name.ToUpper().Contains("PLUZAPP");
             }
         }
 
