@@ -487,6 +487,18 @@ namespace InfinitusApp.Core.Data.DataModels
                 //return actualTimeSpan > operationToday.Start && actualTimeSpan < operationToday.End;
             }
         }
+        [JsonIgnore]
+        public bool ShowAddress
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(FirstAddressPresentation) || Company.IsCPF)
+                    return false;
+
+                return true;
+
+            }
+        }
 
         [JsonIgnore]
         public bool NotOperating
