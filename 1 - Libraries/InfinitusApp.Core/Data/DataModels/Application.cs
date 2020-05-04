@@ -182,6 +182,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public ApplicationTimelineCustomization Timeline { get; set; }
 
+        public bool HideInactiveDataitems { get; set; }
+
         [JsonIgnore]
         public bool NotUseGeolocation { get { return !UseGeolocation; } }
     }
