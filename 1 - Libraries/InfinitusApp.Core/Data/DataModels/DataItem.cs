@@ -66,6 +66,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Bookings = new List<Booking>();
             TagRelations = new List<TagDataItemRelation>();
             SocialMedia = new SocialMedia();
+            BlockInfo = new DataItemBlockInfo();
         }
 
         public string Referency { get; set; }
@@ -133,6 +134,10 @@ namespace InfinitusApp.Core.Data.DataModels
         public string BookingConfigurationId { get; set; }
 
         public OpeningHours OpeningHours { get; set; }
+
+        public DateTimeOffset LastActivityFromUser { get; set; }
+
+        public bool VisibleForUsers { get; set; }
 
         [JsonIgnore]
         public bool HasVariations
@@ -262,6 +267,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public PaymentInfo PaymentInfo { get; set; }
 
         public DeliveryInfo DeliveryInfo { get; set; }
+
+        public DataItemBlockInfo BlockInfo { get; set; }
 
         public IList<DeliveryFee> DeliveryFees { get; set; }
 
@@ -485,6 +492,18 @@ namespace InfinitusApp.Core.Data.DataModels
                 //var actualTimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
 
                 //return actualTimeSpan > operationToday.Start && actualTimeSpan < operationToday.End;
+            }
+        }
+        [JsonIgnore]
+        public bool ShowAddress
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(FirstAddressPresentation) || Company.IsCPF)
+                    return false;
+
+                return true;
+
             }
         }
 
@@ -1095,6 +1114,32 @@ namespace InfinitusApp.Core.Data.DataModels
         public string WebSiteUri { get; set; }
 
         public string DocumentNumber { get; set; }
+
+        public bool IsCPF 
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(DocumentNumber))
+                    return false;
+
+                return DocumentNumber.Replace(".", "").Replace("-", "").Length.Equals(11);
+            }
+        }
+
+        public bool IsCNPJ
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(DocumentNumber))
+                    return false;
+
+                return DocumentNumber
+                    .Replace(".", "")
+                    .Replace("-", "")
+                    .Replace("/", "")
+                    .Length.Equals(14);
+            }
+        }
     }
 
     public class DataItemPersonInfo
@@ -1281,6 +1326,17 @@ namespace InfinitusApp.Core.Data.DataModels
                 default: return DataItemPreDefinedTypes.Generic;
             }
         }
+    }
+
+    public class DataItemBlockInfo
+    {
+        public DataItemBlockInfo()
+        {
+
+        }
+
+        public bool Blocked { get; set; }
+        public string Reason { get; set; }
     }
 
     public class DataItemIdentificationInfo
