@@ -14,7 +14,7 @@ namespace InfinitusApp.Core.Data.Commands
 
         public bool? ShowInFeed { get; set; }
 
-        public bool? IsDisabled { get; set; }
+        public bool? Paused { get; set; }
 
         public string ScheduleId { get; set; }
 

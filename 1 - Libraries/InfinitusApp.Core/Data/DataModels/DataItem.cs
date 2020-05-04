@@ -72,7 +72,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public bool Visible { get; set; }
 
-        public bool IsDisabled { get; set; }
+        public bool Paused { get; set; }
 
         public bool ShowInFeed { get; set; }
 
