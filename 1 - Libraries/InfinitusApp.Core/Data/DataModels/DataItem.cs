@@ -66,7 +66,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Bookings = new List<Booking>();
             TagRelations = new List<TagDataItemRelation>();
             SocialMedia = new SocialMedia();
-            BlockInfo = new VisibilityInfo();
+            Visibility = new VisibilityInfo();
         }
 
         public string Referency { get; set; }
@@ -266,7 +266,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public DeliveryInfo DeliveryInfo { get; set; }
 
-        public VisibilityInfo BlockInfo { get; set; }
+        public VisibilityInfo Visibility { get; set; }
 
         public IList<DeliveryFee> DeliveryFees { get; set; }
 
