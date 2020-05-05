@@ -66,7 +66,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Bookings = new List<Booking>();
             TagRelations = new List<TagDataItemRelation>();
             SocialMedia = new SocialMedia();
-            BlockInfo = new DataItemBlockInfo();
+            BlockInfo = new VisibilityInfo();
         }
 
         public string Referency { get; set; }
@@ -136,8 +136,6 @@ namespace InfinitusApp.Core.Data.DataModels
         public OpeningHours OpeningHours { get; set; }
 
         public DateTimeOffset LastActivityFromUser { get; set; }
-
-        public bool VisibleForUsers { get; set; }
 
         [JsonIgnore]
         public bool HasVariations
@@ -268,7 +266,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public DeliveryInfo DeliveryInfo { get; set; }
 
-        public DataItemBlockInfo BlockInfo { get; set; }
+        public VisibilityInfo BlockInfo { get; set; }
 
         public IList<DeliveryFee> DeliveryFees { get; set; }
 
@@ -1328,15 +1326,20 @@ namespace InfinitusApp.Core.Data.DataModels
         }
     }
 
-    public class DataItemBlockInfo
+    public class VisibilityInfo
     {
-        public DataItemBlockInfo()
+        public VisibilityInfo()
         {
 
         }
 
-        public bool Blocked { get; set; }
-        public string Reason { get; set; }
+        public bool Visible { get; set; }
+
+        public bool ShowInFeed { get; set; }
+
+        public bool PausedByUser { get; set; }
+
+        public string LastObservation { get; set; }
     }
 
     public class DataItemIdentificationInfo
