@@ -730,7 +730,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (string.IsNullOrEmpty(msg))
                 { 
                     msg += Visible ? "Aprovado" : "Aguardando aprovação";
-                    msg += !Paused ? " | Inativo" : " | Pausado";
+                    msg += !Paused ? " | Ativo" : " | Pausado";
                 }
 
                 return msg;
