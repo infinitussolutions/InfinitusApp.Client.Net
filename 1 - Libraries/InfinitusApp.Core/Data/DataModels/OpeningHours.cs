@@ -185,7 +185,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (!IsOpen)
                     return "Fechado";
 
-                return string.Format("{0} - {1}", Start.ToString("h':'m"), End.ToString("h':'m"));
+                return string.Format("{0} - {1}", Start.ToString("hh':'mm"), End.ToString("hh':'mm"));
             }
         }
 
