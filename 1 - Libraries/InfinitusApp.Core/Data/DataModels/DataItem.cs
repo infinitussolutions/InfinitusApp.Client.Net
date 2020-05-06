@@ -70,11 +70,11 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         public string Referency { get; set; }
-
+        [Obsolete("Use Visibility.Visible")]
         public bool Visible { get; set; }
-
+        [Obsolete("Use Visibility.PausedByUser")]
         public bool Paused { get; set; }
-
+        [Obsolete("Use Visibility.ShowInFeed")]
         public bool ShowInFeed { get; set; }
 
         public string Type { get; set; }
