@@ -1340,6 +1340,22 @@ namespace InfinitusApp.Core.Data.DataModels
         public bool PausedByUser { get; set; }
 
         public string LastObservation { get; set; }
+
+        public bool IsVisible
+        {
+            get
+            {
+                return Visible && !PausedByUser;
+            }
+        }
+
+        public bool IsVisibleInFeed
+        {
+            get
+            {
+                return IsVisible && ShowInFeed;
+            }
+        }
     }
 
     public class DataItemIdentificationInfo
