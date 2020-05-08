@@ -435,8 +435,8 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public OpeningHours CurrentOpeningHours 
-        { 
+        public OpeningHours CurrentOpeningHours
+        {
             get
             {
                 if (!string.IsNullOrEmpty(Parent?.Id) && Parent.OpeningHours.HasConfiguration)
@@ -686,7 +686,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     return list;
                 }
 
-                catch(Exception e)
+                catch (Exception e)
                 {
                     return null;
                 }
@@ -715,6 +715,9 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (string.IsNullOrEmpty(MediaImageData?.WideImageUri))
                     msg += "- Logomarca não enviado.\n";
 
+                if (string.IsNullOrEmpty(GroupTypeId))
+                    msg += "- Grupo não informado.\n";
+
                 if (Type.Equals("Company"))
                 {
                     if (string.IsNullOrEmpty(Company?.DocumentNumber))
@@ -728,13 +731,46 @@ namespace InfinitusApp.Core.Data.DataModels
                 }
 
                 if (string.IsNullOrEmpty(msg))
-                { 
+                {
                     msg += Visible ? "Aprovado" : "Aguardando aprovação";
                     msg += !Paused ? " | Inativo" : " | Pausado";
                 }
 
                 return msg;
             }
+        }
+
+        [JsonIgnore]
+        public int InfoCompleteRegistrationPercent
+        {
+            get
+            {
+                var percent = 0;
+
+                if (!string.IsNullOrEmpty(Description?.Title))
+                    percent += 15;
+
+                if (!string.IsNullOrEmpty(MediaImageData?.WideImageUri))
+                    percent += 15;
+
+                if (!string.IsNullOrEmpty(GroupTypeId))
+                    percent += 15;
+
+                if (Type.Equals("Company"))
+                {
+                    if (!string.IsNullOrEmpty(Company?.DocumentNumber))
+                        percent += 15;
+
+                    //if (string.IsNullOrEmpty(ScheduleId))
+                    //    msg += "- Horário de funcionamento não informado.\n";
+
+                    if (OpeningHours.HasConfiguration)
+                        percent += 15;
+                }
+
+                return percent;
+            }
+
         }
 
         [JsonIgnore]
@@ -1115,7 +1151,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string DocumentNumber { get; set; }
 
-        public bool IsCPF 
+        public bool IsCPF
         {
             get
             {

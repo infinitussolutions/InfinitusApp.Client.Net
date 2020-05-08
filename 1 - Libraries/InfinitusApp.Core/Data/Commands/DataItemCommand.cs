@@ -24,6 +24,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public OpeningHours OpeningHours { get; set; }
 
+        public DataItemPriceInfo Price { get; set; }
+
     }
 
     public class CreateDataItemCommand : DataItemCommand
@@ -44,8 +46,6 @@ namespace InfinitusApp.Core.Data.Commands
         public string Type { get; set; }
 
         public string ApplicationUserId { get; set; }
-
-        public DataItemPriceInfo Price { get; set; }
 
         public List<CreatePhoneCommand> Phones { get; set; }
     }
