@@ -88,14 +88,28 @@ namespace InfinitusApp.Services.ApplicationUserService
             return await ServiceClient.InvokeApiAsync<List<ApplicationUserInteractionRating>>("ApplicationUserInteractionRating/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
 
-        public async Task<List<DataItemRatingPresentation>> GetAllDataItemRatingByDataStoreId(string dataStoreId, int skip = 0, int top = 10)
+        public async Task<List<DataItemRatingPresentation>> GetAllDataItemRatingByDataStoreId(string dataStoreId, int skip = 0, int top = 10, Expression<Func<DataItemRatingPresentation, bool>> entityFilter = null)
         {
-            var dic = new Dictionary<string, string>
-            {
-                { "dataStoreId", dataStoreId },
-                { "$skip", skip.ToString() },
-                { "$top", top.ToString() }
-            };
+            var odataBuilder = new ODataQueryBuilder<DataItemRatingPresentation>("")
+                  .For<DataItemRatingPresentation>(x => x)
+                  .ByList()
+                  .Top(top)
+                  .Skip(skip)
+                  ;
+
+            if (entityFilter != null)
+                odataBuilder.Filter(entityFilter);
+
+            var dic = odataBuilder.ToDictionary();
+
+            dic.Add("dataStoreId", dataStoreId);
+
+            //var dic = new Dictionary<string, string>
+            //{
+            //    { "dataStoreId", dataStoreId },
+            //    { "$skip", skip.ToString() },
+            //    { "$top", top.ToString() }
+            //};
 
             return await ServiceClient.InvokeApiAsync<List<DataItemRatingPresentation>>("ApplicationUserInteractionRating/GetAllDataItemRatingByDataStoreId", HttpMethod.Get, dic);
         }

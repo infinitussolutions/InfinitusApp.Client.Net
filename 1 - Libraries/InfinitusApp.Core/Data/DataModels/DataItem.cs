@@ -66,15 +66,15 @@ namespace InfinitusApp.Core.Data.DataModels
             Bookings = new List<Booking>();
             TagRelations = new List<TagDataItemRelation>();
             SocialMedia = new SocialMedia();
-            BlockInfo = new DataItemBlockInfo();
+            Visibility = new VisibilityInfo();
         }
 
         public string Referency { get; set; }
-
+        [Obsolete("Use Visibility.Visible")]
         public bool Visible { get; set; }
-
+        [Obsolete("Use Visibility.PausedByUser")]
         public bool Paused { get; set; }
-
+        [Obsolete("Use Visibility.ShowInFeed")]
         public bool ShowInFeed { get; set; }
 
         public string Type { get; set; }
@@ -136,8 +136,6 @@ namespace InfinitusApp.Core.Data.DataModels
         public OpeningHours OpeningHours { get; set; }
 
         public DateTimeOffset LastActivityFromUser { get; set; }
-
-        public bool VisibleForUsers { get; set; }
 
         [JsonIgnore]
         public bool HasVariations
@@ -268,7 +266,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public DeliveryInfo DeliveryInfo { get; set; }
 
-        public DataItemBlockInfo BlockInfo { get; set; }
+        public VisibilityInfo Visibility { get; set; }
 
         public IList<DeliveryFee> DeliveryFees { get; set; }
 
@@ -733,7 +731,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (string.IsNullOrEmpty(msg))
                 {
                     msg += Visible ? "Aprovado" : "Aguardando aprovação";
-                    msg += !Paused ? " | Inativo" : " | Pausado";
+                    msg += !Paused ? " | Ativo" : " | Pausado";
                 }
 
                 return msg;
@@ -1364,15 +1362,36 @@ namespace InfinitusApp.Core.Data.DataModels
         }
     }
 
-    public class DataItemBlockInfo
+    public class VisibilityInfo
     {
-        public DataItemBlockInfo()
+        public VisibilityInfo()
         {
 
         }
 
-        public bool Blocked { get; set; }
-        public string Reason { get; set; }
+        public bool Visible { get; set; }
+
+        public bool ShowInFeed { get; set; }
+
+        public bool PausedByUser { get; set; }
+
+        public string LastObservation { get; set; }
+
+        public bool IsVisible
+        {
+            get
+            {
+                return Visible && !PausedByUser;
+            }
+        }
+
+        public bool IsVisibleInFeed
+        {
+            get
+            {
+                return IsVisible && ShowInFeed;
+            }
+        }
     }
 
     public class DataItemIdentificationInfo
