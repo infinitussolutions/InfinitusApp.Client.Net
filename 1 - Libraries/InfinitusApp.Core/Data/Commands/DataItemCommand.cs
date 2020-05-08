@@ -24,6 +24,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public OpeningHours OpeningHours { get; set; }
 
+        public VisibilityInfo Visibility { get; set; }
+
         public DataItemPriceInfo Price { get; set; }
 
     }
