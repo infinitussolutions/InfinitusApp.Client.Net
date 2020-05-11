@@ -137,6 +137,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public DateTimeOffset LastActivityFromUser { get; set; }
 
+        public bool ActiveInLastMonthByUser { get; set; }
+
         [JsonIgnore]
         public bool HasVariations
         {
