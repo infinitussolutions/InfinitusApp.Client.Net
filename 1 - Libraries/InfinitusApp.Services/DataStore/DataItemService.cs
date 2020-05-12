@@ -19,7 +19,7 @@ namespace InfinitusApp.Services.DataItem
 
         }
 
-        public async Task<List<Core.Data.DataModels.DataItem>> GetAllByDataStoreId(string dataStoreId, Expression<Func<Core.Data.DataModels.DataItem, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.DataItem, object>> entityOrderBy = null, int skip = 0, int top = 10, bool desc = false)
+        public async Task<List<Core.Data.DataModels.DataItem>> GetAllByDataStoreId(string dataStoreId, Expression<Func<Core.Data.DataModels.DataItem, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.DataItem, object>> entityOrderBy = null, int skip = 0, int top = 10, bool desc = false, string filterString = null)
         {
             var odataBuilder = new ODataQueryBuilder<Core.Data.DataModels.DataItem>("")
                     .For<Core.Data.DataModels.DataItem>(x => x)
@@ -46,6 +46,9 @@ namespace InfinitusApp.Services.DataItem
             var dic = odataBuilder.ToDictionary();
 
             dic.Add("dataStoreId", dataStoreId);
+
+            if (entityFilter == null && !string.IsNullOrEmpty(filterString))
+                dic.Add("$filter", filterString);
 
             return await ServiceClient.InvokeApiAsync<List<Core.Data.DataModels.DataItem>>("DataItem/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
