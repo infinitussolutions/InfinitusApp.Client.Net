@@ -31,7 +31,7 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         public string Observation { get; set; }
-
+        [Obsolete("Use CurrentStatus")]
         public FinancialRequestStatus Status { get; set; }
 
         public FinancialRequestType Type { get; set; }
@@ -101,6 +101,14 @@ namespace InfinitusApp.Core.Data.DataModels
         #region Helper
 
         public StatusFinancialRequest CurrentStatus { get; set; }
+
+        public bool HasId 
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(Id);
+            }
+        }
 
         [JsonIgnore]
         public FinancialRequestActions PossibleActions
