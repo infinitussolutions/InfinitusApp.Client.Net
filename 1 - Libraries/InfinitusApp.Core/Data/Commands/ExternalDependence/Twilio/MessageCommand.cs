@@ -7,9 +7,16 @@ namespace InfinitusApp.Core.Data.Commands.ExternalDependence.Twilio
 {
     public class MessageCommand
     {
+        public MessageCommand()
+        {
+            ToNumberList = new List<string>();
+        }
+
         public string DataStoreId { get; set; }
         public string ToNumber { get; set; }
         public MessageType Type { get; set; }
+        public bool ForAllUsers { get; set; }
+        public IList<string> ToNumberList { get; set; }
     }
 
     public class CreateTwilioMessageCommand : MessageCommand
