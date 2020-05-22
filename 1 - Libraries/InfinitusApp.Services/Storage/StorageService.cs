@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAzure.Storage.Blob;
+﻿using InfinitusApp.Core.Data.Commands;
+using Microsoft.WindowsAzure.Storage.Blob;
 using Naylah.Services.Client;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,11 @@ namespace InfinitusApp.Services.Storage
                 .InvokeApiAsync<FileBlobRequestRepresenation, FileBlobRequestRepresenation>("Storage/Infinitus/GetBlobStorageSASUri", obj);
 
             return new Uri(result.BlobUri);
+        }
+
+        public async Task<Uri> Create(BlobCommand cmd)
+        {
+            return await ServiceClient.InvokeApiAsync<BlobCommand, Uri>("Storage/Infinitus/UploadToBlob", cmd);
         }
     }
 
