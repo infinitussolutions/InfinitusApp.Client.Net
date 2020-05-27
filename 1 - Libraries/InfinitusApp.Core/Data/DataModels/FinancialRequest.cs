@@ -126,7 +126,14 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         [JsonIgnore]
-        public bool StatusIsOpen { get { return Status == FinancialRequestStatus.Open; } }
+        public bool StatusIsOpen 
+        {
+            get
+            {
+                return string.IsNullOrEmpty(CurrentStatus?.Id);
+             //   return Status == FinancialRequestStatus.Open; 
+            } 
+        }
 
         [JsonIgnore]
         public bool StatusNotIsOpen { get { return !StatusIsOpen; } }
