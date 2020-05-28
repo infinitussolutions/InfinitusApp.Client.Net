@@ -120,6 +120,9 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (!string.IsNullOrEmpty(Number))
                     returnAddress += ", " + Number;
 
+                if (!string.IsNullOrEmpty(AddressLine2))
+                    returnAddress += " - " + AddressLine2;
+
                 if (!string.IsNullOrEmpty(District))
                     returnAddress += " - " + District;
 
