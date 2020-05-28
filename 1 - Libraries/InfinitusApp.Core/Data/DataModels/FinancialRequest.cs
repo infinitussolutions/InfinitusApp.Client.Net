@@ -31,7 +31,7 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         public string Observation { get; set; }
-
+        [Obsolete("Use CurrentStatus")]
         public FinancialRequestStatus Status { get; set; }
 
         public FinancialRequestType Type { get; set; }
@@ -102,6 +102,14 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public StatusFinancialRequest CurrentStatus { get; set; }
 
+        public bool HasId 
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(Id);
+            }
+        }
+
         [JsonIgnore]
         public FinancialRequestActions PossibleActions
         {
@@ -118,7 +126,14 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         [JsonIgnore]
-        public bool StatusIsOpen { get { return Status == FinancialRequestStatus.Open; } }
+        public bool StatusIsOpen 
+        {
+            get
+            {
+                return string.IsNullOrEmpty(CurrentStatus?.Id);
+             //   return Status == FinancialRequestStatus.Open; 
+            } 
+        }
 
         [JsonIgnore]
         public bool StatusNotIsOpen { get { return !StatusIsOpen; } }
