@@ -1,4 +1,5 @@
 ﻿using InfinitusApp.Core.Data.DataModels;
+using Naylah.Core.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -10,10 +11,13 @@ namespace InfinitusApp.Core.Data.Commands
     {
         public DataItemDescriptionInfo Description { get; set; }
 
+        [Obsolete("Use Visibility", true)]
         public bool? Visible { get; set; }
 
+        [Obsolete("Use Visibility", true)]
         public bool? ShowInFeed { get; set; }
 
+        [Obsolete("Use Visibility", true)]
         public bool? Paused { get; set; }
 
         public string ScheduleId { get; set; }
