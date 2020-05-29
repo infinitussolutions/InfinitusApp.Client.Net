@@ -70,11 +70,14 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         public string Referency { get; set; }
-        [Obsolete("Use Visibility.Visible")]
+
+        [Obsolete("Use Visibility.Visible", true)]
         public bool Visible { get; set; }
-        [Obsolete("Use Visibility.PausedByUser")]
+
+        [Obsolete("Use Visibility.PausedByUser", true)]
         public bool Paused { get; set; }
-        [Obsolete("Use Visibility.ShowInFeed")]
+
+        [Obsolete("Use Visibility.ShowInFeed", true)]
         public bool ShowInFeed { get; set; }
 
         public string Type { get; set; }
@@ -417,7 +420,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return Visible ?
+                return Visibility.Visible ?
                     "Aprovado! Este item já esta visivel para os usuários, e você já pode incluir seus itens." :
                     "Pendente de Aprovação Este Item esta em processo de aprovação por um administrador, após aprovado você podera enviar suas imagens e incluir seus itens.";
             }
@@ -732,8 +735,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 if (string.IsNullOrEmpty(msg))
                 {
-                    msg += Visible ? "Aprovado" : "Aguardando aprovação";
-                    msg += !Paused ? " | Ativo" : " | Pausado";
+                    msg += Visibility.Visible ? "Aprovado" : "Aguardando aprovação";
+                    msg += !Visibility.PausedByUser ? " | Ativo" : " | Pausado";
                 }
 
                 return msg;
@@ -784,8 +787,11 @@ namespace InfinitusApp.Core.Data.DataModels
                 Type = DataItemType.Person.ToString(),
                 ApplicationUserId = user.Id,
                 DataStoreId = dataStoreId,
-                ShowInFeed = false,
-                Visible = false,
+                Visibility = new VisibilityInfo
+                {
+                    ShowInFeed = false,
+                    Visible = false
+                },
 
                 MediaImageData = new MediaImageData
                 {
@@ -1875,7 +1881,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     DataItemId = dtItem.Id,
                     Id = dtItem.Id,
                     MediaImageData = dtItem.MediaImageData,
-                    ShowOnFeed = dtItem.ShowInFeed,
+                    ShowOnFeed = dtItem.Visibility.ShowInFeed,
                     DataStoreId = dtItem.DataStoreId,
                     Deleted = dtItem.Deleted,
                     Description = dtItem.Description,
@@ -1916,7 +1922,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     DataItemId = dtItem.Id,
                     Id = dtItem.Id,
                     MediaImageData = dtItem.MediaImageData,
-                    ShowOnFeed = dtItem.ShowInFeed,
+                    ShowOnFeed = dtItem.Visibility.ShowInFeed,
                     DataStoreId = dtItem.DataStoreId,
                     Deleted = dtItem.Deleted,
                     Description = dtItem.Description,
