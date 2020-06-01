@@ -107,12 +107,52 @@ namespace InfinitusApp.Core.Data.DataModels
     }
     public class EbanxMarketplace
     {
+        public EbanxMarketplace()
+        {
+            Fees = new MarketplaceFee();
+        }
+
         public string AccountId { get; set; }
         public string RecipientCode { get; set; }
+        public MarketplaceFee Fees { get; set; }
     }
 
     public class InfinitusMarketplaceConfig
     {
         public bool UseWhatsapp { get; set; }
+    }
+
+    public class MarketplaceFee
+    {
+        public MarketplaceFee()
+        {
+            BankSlip = new BankSlipFee();
+            CreditCard = new CreditCardFee();
+        }
+
+        public BankSlipFee BankSlip { get; set; }
+        public CreditCardFee CreditCard { get; set; }
+    }
+
+    public class BankSlipFee
+    {
+        public float AmountInfinitus { get; set; }
+        public float AmountAppOwner { get; set; }
+        public float Amount { get; set; }
+    }
+
+    public class CreditCardFee
+    {
+        public float PercentageInfinitus { get; set; }
+        public float PercentageAppOwner { get; set; }
+        public float Percentage { get; set; }
+
+        public bool IsValid
+        {
+            get
+            {
+                return Percentage + PercentageAppOwner + PercentageInfinitus == 100;
+            }
+        }
     }
 }
