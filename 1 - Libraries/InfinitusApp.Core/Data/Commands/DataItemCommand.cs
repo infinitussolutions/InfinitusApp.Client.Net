@@ -11,13 +11,13 @@ namespace InfinitusApp.Core.Data.Commands
     {
         public DataItemDescriptionInfo Description { get; set; }
 
-        [Obsolete("Use Visibility", true)]
+        [Obsolete("Use Visibility")]
         public bool? Visible { get; set; }
 
-        [Obsolete("Use Visibility", true)]
+        [Obsolete("Use Visibility")]
         public bool? ShowInFeed { get; set; }
 
-        [Obsolete("Use Visibility", true)]
+        [Obsolete("Use Visibility")]
         public bool? Paused { get; set; }
 
         public string ScheduleId { get; set; }
