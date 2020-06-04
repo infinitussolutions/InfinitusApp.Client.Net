@@ -53,6 +53,36 @@ namespace InfinitusApp.Services.DataItem
             return await ServiceClient.InvokeApiAsync<List<Core.Data.DataModels.DataItem>>("DataItem/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
 
+        public async Task<List<Core.Data.DataModels.DataItem>> GetAllSimple(Expression<Func<Core.Data.DataModels.DataItem, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.DataItem, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        {
+            var odataBuilder = new ODataQueryBuilder<Core.Data.DataModels.DataItem>("")
+                    .For<Core.Data.DataModels.DataItem>(x => x)
+                    .ByList();
+
+            if (top.HasValue)
+                odataBuilder.Top(top.Value);
+
+            if (skip.HasValue)
+                odataBuilder.Skip(skip.Value);
+
+            if (entityFilter != null)
+                odataBuilder.Filter(entityFilter);
+
+            if (entityOrderBy != null)
+            {
+                if (desc)
+                    odataBuilder.OrderByDescending(entityOrderBy);
+
+                else
+                    odataBuilder.OrderBy(entityOrderBy);
+            }
+
+            var dic = odataBuilder.ToDictionary();
+
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<Core.Data.DataModels.DataItem>>("DataItem/GetAllSimple", HttpMethod.Get, dic);
+        }
+
+
         //public async Task<List<Core.Data.DataModels.DataItem>> GetAllByDataStoreId(string dataStoreId, ODataFiltersParameter parameter = null, Expression<Func<Core.Data.DataModels.DataItem, object>> OrderByPropertyName = null, int skip = 0, int top = 10, bool desc = false)
         //{
         //    var dic = new Dictionary<string, string>
