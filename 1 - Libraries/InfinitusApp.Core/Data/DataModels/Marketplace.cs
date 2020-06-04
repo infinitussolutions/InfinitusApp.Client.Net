@@ -38,6 +38,10 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string SalesmanUserId { get; set; }
 
+        public DataItem DataItem { get; set; }
+
+        public string DataItemId { get; set; }
+
         #endregion
 
         #region Helps
@@ -138,21 +142,11 @@ namespace InfinitusApp.Core.Data.DataModels
     {
         public float AmountInfinitus { get; set; }
         public float AmountAppOwner { get; set; }
-        public float Amount { get; set; }
     }
 
     public class CreditCardFee
     {
         public float PercentageInfinitus { get; set; }
         public float PercentageAppOwner { get; set; }
-        public float Percentage { get; set; }
-
-        public bool IsValid
-        {
-            get
-            {
-                return Percentage + PercentageAppOwner + PercentageInfinitus == 100;
-            }
-        }
     }
 }

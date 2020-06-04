@@ -14,6 +14,7 @@ namespace InfinitusApp.Core.Data.Commands
     public class CreateMarketplaceCommand : MarketplaceCommand
     {
         public string DataStoreId { get; set; }
+        public string DataItemId { get; set; }
     }
 
     public class UpdateMarketplaceCommand : MarketplaceCommand

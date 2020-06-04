@@ -6,6 +6,7 @@ namespace InfinitusApp.Core.Data.Commands.ExternalDependence.Ebanx
     {
         public string FinancialRequestId { get; set; }
         public DirectRequest DirectCommand { get; set; }
-        public string MarketplaceId { get; set; }
+        public string DataItemId { get; set; }
+        public string DataStoreId { get; set; }
     }
 }
