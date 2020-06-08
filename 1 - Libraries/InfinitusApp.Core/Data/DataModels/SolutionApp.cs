@@ -79,5 +79,6 @@ namespace InfinitusApp.Core.Data.DataModels
         public const string LeadsWhatsApp = "C1A9335A-83D9-48A3-A3A1-6165509271E7";
         public const string Booking = "ED6E7A28-7FA7-4E2C-A117-1B6BFFE09D71";
         public const string Company = "4600D14A-0BF7-4BBC-84EE-A73145B7538E";
+        public const string SignaturePlan = "89EE6DDD-93C5-4E50-A7D8-6C66EA85A1C0";
     }
 }
