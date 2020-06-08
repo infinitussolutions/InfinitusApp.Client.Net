@@ -58,6 +58,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         /// </summary>
         public int DaysWithoutPaymentToBlock { get; set; } = 5;
 
+        public SignaturePlanRequirements Requirements { get; set; }
         #region Help
 
         public int RecurrenceChargeDaysFromType
