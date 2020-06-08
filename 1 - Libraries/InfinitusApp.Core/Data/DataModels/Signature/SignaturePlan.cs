@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Naylah.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -124,5 +125,28 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         }
 
         #endregion
+    }
+
+    public class SignaturePlanConsumption : EntityBase
+    {
+        public string Description { get; set; }
+
+        public double Quantity { get; set; }
+
+        public decimal Total { get; set; }
+
+        public string Observation { get; set; }
+
+        #region Relations
+
+        public SignaturePlan SignaturePlan { get; set; }
+        public string SignaturePlanId { get; set; }
+
+        #endregion
+    }
+
+    public class SignaturePlanRequirements
+    {
+        public bool SubAccount { get; set; }
     }
 }

@@ -24,6 +24,8 @@ namespace InfinitusApp.Core.Data.Commands
         public decimal Amount { get; set; }
 
         public SignaturePlanConfig Config { get; set; }
+
+        public SignaturePlanRequirements Requirements { get; set; }
     }
 
     public class CreateSignaturePlanCommand : SignatureBaseCommand

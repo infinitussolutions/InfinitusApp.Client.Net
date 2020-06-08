@@ -130,21 +130,23 @@ namespace InfinitusApp.Core.Data.DataModels
     {
         public MarketplaceFee()
         {
-            BankSlip = new BankSlipFee();
-            CreditCard = new CreditCardFee();
+            BankSlip = new AmountFee();
+            CreditCard = new PercentageFee();
+            Others = new PercentageFee();
         }
 
-        public BankSlipFee BankSlip { get; set; }
-        public CreditCardFee CreditCard { get; set; }
+        public AmountFee BankSlip { get; set; }
+        public PercentageFee CreditCard { get; set; }
+        public PercentageFee Others { get; set; }
     }
 
-    public class BankSlipFee
+    public class AmountFee
     {
         public float AmountInfinitus { get; set; }
         public float AmountAppOwner { get; set; }
     }
 
-    public class CreditCardFee
+    public class PercentageFee
     {
         public float PercentageInfinitus { get; set; }
         public float PercentageAppOwner { get; set; }
