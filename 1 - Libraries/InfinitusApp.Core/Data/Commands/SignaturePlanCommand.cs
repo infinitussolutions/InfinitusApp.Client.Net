@@ -151,4 +151,29 @@ namespace InfinitusApp.Core.Data.Commands
             }
         }
     }
+
+    #region Consumption
+
+    public class SignaturePlanConsumptionCommand
+    {
+        public string Description { get; set; }
+
+        public double Quantity { get; set; }
+
+        public decimal Total { get; set; }
+
+        public string Observation { get; set; }
+    }
+
+    public class CreateSignaturePlanConsumptionCommand : SignaturePlanConsumptionCommand
+    {
+        public string SignaturePlanId { get; set; }
+    }
+
+    public class UpdateSignaturePlanConsumptionCommand : SignaturePlanConsumptionCommand
+    {
+        public string Id { get; set; }
+    }
+
+    #endregion
 }
