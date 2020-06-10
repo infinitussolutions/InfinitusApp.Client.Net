@@ -23,5 +23,15 @@ namespace InfinitusApp.Services.FInancial
 
             return await ServiceClient.InvokeApiAsync<Marketplace>("Marketplace/GetByDataStoreId", HttpMethod.Get, dic);
         }
+
+        public async Task<Marketplace> GetByDataItemId(string dataItemId)
+        {
+            var dic = new Dictionary<string, string>
+            {
+                { "dataItemId", dataItemId }
+            };
+
+            return await ServiceClient.InvokeApiAsync<Marketplace>("Marketplace/GetByDataItemId", HttpMethod.Get, dic);
+        }
     }
 }
