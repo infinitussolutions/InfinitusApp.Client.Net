@@ -113,5 +113,7 @@ namespace InfinitusApp.Services.Address
         public string DataItemGroupId { get; set; }
 
         public bool InOperating { get; set; }
+
+        public bool DeviveryToDistance { get; set; }
     }
 }
