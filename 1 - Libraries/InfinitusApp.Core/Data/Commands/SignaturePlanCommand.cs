@@ -83,6 +83,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public string CreditCardInfoId { get; set; }
 
+        public string DataItemId { get; set; }
+
         public string DataStoreId { get; set; }
 
         public string AppUserId { get; set; }
