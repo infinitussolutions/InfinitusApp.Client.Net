@@ -18,6 +18,8 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         {
             Config = new SignaturePlanConfig();
             SignaturePlanApplicationUsers = new List<SignaturePlanApplicationUser>();
+            Consumptions = new List<SignaturePlanConsumption>();
+            Actions = new List<SignaturePlanAction>();
         }
 
         public string Title { get; set; }
@@ -32,9 +34,13 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         #region Relations
 
-        public virtual string DataStoreId { get; set; }
+        public string DataStoreId { get; set; }
 
-        public virtual IList<SignaturePlanApplicationUser> SignaturePlanApplicationUsers { get; set; }
+        public IList<SignaturePlanApplicationUser> SignaturePlanApplicationUsers { get; set; }
+
+        public IList<SignaturePlanConsumption> Consumptions { get; set; }
+
+        public IList<SignaturePlanAction> Actions { get; set; }
 
         #endregion
 
@@ -149,5 +155,17 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
     public class SignaturePlanRequirements
     {
         public bool SubAccount { get; set; }
+    }
+
+    public class SignaturePlanAction : EntityBase
+    {
+        public string SolutionId { get; set; }
+
+        #region Relations
+
+        public SignaturePlan SignaturePlan { get; set; }
+        public string SignaturePlanId { get; set; }
+
+        #endregion
     }
 }
