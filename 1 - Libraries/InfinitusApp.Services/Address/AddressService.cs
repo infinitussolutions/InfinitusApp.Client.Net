@@ -114,6 +114,6 @@ namespace InfinitusApp.Services.Address
 
         public bool InOperating { get; set; }
 
-        public bool DeviveryToDistance { get; set; }
+        public double? MaxKilometerReceive { get; set; }
     }
 }
