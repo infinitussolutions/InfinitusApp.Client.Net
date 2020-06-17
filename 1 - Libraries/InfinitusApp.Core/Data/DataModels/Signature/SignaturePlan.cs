@@ -55,6 +55,10 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
     public class SignaturePlanConfig
     {
+        public SignaturePlanConfig()
+        {
+            Requirements = new SignaturePlanRequirements();
+        }
         public int DaysToStartFirstCharge { get; set; }
 
         public SignaturePlanRecurrenceChargeDays RecurrenceChargeDaysType { get; set; } = SignaturePlanRecurrenceChargeDays.Monthy;
@@ -65,6 +69,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         public int DaysWithoutPaymentToBlock { get; set; } = 5;
 
         public SignaturePlanRequirements Requirements { get; set; }
+
         #region Help
 
         public int RecurrenceChargeDaysFromType
