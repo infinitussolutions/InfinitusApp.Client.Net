@@ -100,6 +100,7 @@ namespace InfinitusApp.Services.Address
         {
             DataItem = new Core.Data.DataModels.DataItem();
             Schedule = new Schedule();
+            DeliveryFees = new List<DeliveryFee>();
         }
 
         public Core.Data.DataModels.DataItem DataItem { get; set; }
@@ -114,6 +115,6 @@ namespace InfinitusApp.Services.Address
 
         public bool InOperating { get; set; }
 
-        public double? MaxKilometerReceive { get; set; }
+        public IEnumerable<DeliveryFee> DeliveryFees { get; set; }
     }
 }
