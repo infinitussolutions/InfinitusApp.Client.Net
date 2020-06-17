@@ -783,7 +783,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public decimal? DeliveryPriceByDistanceFromActualLocation => DeliveryFees?.OrderBy(y => y?.Kilometer)?.FirstOrDefault(y => Math.Round(y.Kilometer) >= Math.Round(DistanceFromActualLocation.InKilometer))?.Price?.FinalPrice;
 
         [JsonIgnore]
-        public string DeliveryPriceByDistanceFromActualLocationMessage => DeliveryPriceByDistanceFromActualLocation.HasValue ? "Entrega: " + (DeliveryPriceByDistanceFromActualLocation > 0 ? DeliveryPriceByDistanceFromActualLocation.Value.ToString("C") : "Grátis") : "";
+        public string DeliveryPriceByDistanceFromActualLocationPresentation => DeliveryPriceByDistanceFromActualLocation.HasValue ? (DeliveryPriceByDistanceFromActualLocation > 0 ? DeliveryPriceByDistanceFromActualLocation.Value.ToString("C") : "Grátis") : "";
 
         [JsonIgnore]
         public bool CompleteRegistrationVisible { get { return IsAdmin && !string.IsNullOrEmpty(InfoCompleteRegistration); } }
