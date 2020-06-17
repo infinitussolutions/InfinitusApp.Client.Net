@@ -1,4 +1,5 @@
-﻿using InfinitusApp.Core.Extensions;
+﻿using InfinitusApp.Core.Data.Commands;
+using InfinitusApp.Core.Extensions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -778,6 +779,9 @@ namespace InfinitusApp.Core.Data.DataModels
             }
 
         }
+
+        [JsonIgnore]
+        public bool HasDeliveryFees => DeliveryFees?.Count > 0;
 
         [JsonIgnore]
         public decimal? DeliveryPriceByDistanceFromActualLocation => DeliveryFees?.OrderBy(y => y?.Kilometer)?.FirstOrDefault(y => Math.Round(y.Kilometer) >= Math.Round(DistanceFromActualLocation.InKilometer))?.Price?.FinalPrice;
