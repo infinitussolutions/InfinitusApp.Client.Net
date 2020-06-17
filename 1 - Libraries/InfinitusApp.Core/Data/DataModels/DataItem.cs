@@ -780,8 +780,13 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         [JsonIgnore]
-        public bool CompleteRegistrationVisible { get { return IsAdmin && !string.IsNullOrEmpty(InfoCompleteRegistration); } }
+        public decimal? DeliveryPriceByDistanceFromActualLocation => DeliveryFees?.OrderBy(y => y?.Kilometer)?.FirstOrDefault(y => Math.Round(y.Kilometer) >= Math.Round(DistanceFromActualLocation.InKilometer))?.Price?.FinalPrice;
 
+        [JsonIgnore]
+        public string DeliveryPriceByDistanceFromActualLocationMessage => DeliveryPriceByDistanceFromActualLocation.HasValue ? "Entrega: " + (DeliveryPriceByDistanceFromActualLocation > 0 ? DeliveryPriceByDistanceFromActualLocation.Value.ToString("C") : "Grátis") : "";
+
+        [JsonIgnore]
+        public bool CompleteRegistrationVisible { get { return IsAdmin && !string.IsNullOrEmpty(InfoCompleteRegistration); } }
 
         public static DataItem ConvertAppUserToPerson(ApplicationUser user, string dataStoreId)
         {
@@ -1549,6 +1554,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public bool InHands { get; set; } = true;
 
         public double MaxKm { get; set; }
+
+        
     }
 
     #region Agenda
