@@ -178,4 +178,16 @@ namespace InfinitusApp.Core.Data.Commands
     }
 
     #endregion
+
+    public class SignaturePlanActionCommand
+    {
+
+    }
+
+    public class CreateSignaturePlanActionCommand : SignaturePlanActionCommand
+    {
+        public string SignaturePlanId { get; set; }
+
+        public string SolutionId { get; set; }
+    }
 }
