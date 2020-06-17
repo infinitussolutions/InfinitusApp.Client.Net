@@ -784,13 +784,13 @@ namespace InfinitusApp.Core.Data.DataModels
         public bool HasDeliveryFees => DeliveryFees?.Count > 0;
 
         [JsonIgnore]
-        public bool DeliveryNotReceiveFromActualLocation => HasDeliveryFees && (DistanceFromActualLocation.InKilometer > DeliveryFees?.OrderBy(y => y?.Kilometer)?.LastOrDefault().Kilometer);
+        public bool DeliveryNotReceiveByActualLocation => HasDeliveryFees && (DistanceFromActualLocation.InKilometer > DeliveryFees?.OrderBy(y => y?.Kilometer)?.LastOrDefault().Kilometer);
 
         [JsonIgnore]
-        public decimal? DeliveryPriceByDistanceFromActualLocation => DeliveryFees?.OrderBy(y => y?.Kilometer)?.FirstOrDefault(y => Math.Round(y.Kilometer) >= Math.Round(DistanceFromActualLocation.InKilometer))?.Price?.FinalPrice;
+        public decimal? DeliveryPriceByDistanceByActualLocation => DeliveryFees?.OrderBy(y => y?.Kilometer)?.FirstOrDefault(y => Math.Round(y.Kilometer) >= Math.Round(DistanceFromActualLocation.InKilometer))?.Price?.FinalPrice;
 
         [JsonIgnore]
-        public string DeliveryPriceByDistanceFromActualLocationPresentation => DeliveryPriceByDistanceFromActualLocation.HasValue ? (DeliveryPriceByDistanceFromActualLocation > 0 ? DeliveryPriceByDistanceFromActualLocation.Value.ToString("C") : "Grátis") : "";
+        public string DeliveryPriceByDistanceByActualLocationPresentation => DeliveryPriceByDistanceByActualLocation.HasValue ? (DeliveryPriceByDistanceByActualLocation > 0 ? DeliveryPriceByDistanceByActualLocation.Value.ToString("C") : "Grátis") : "";
 
         [JsonIgnore]
         public bool CompleteRegistrationVisible { get { return IsAdmin && !string.IsNullOrEmpty(InfoCompleteRegistration); } }
