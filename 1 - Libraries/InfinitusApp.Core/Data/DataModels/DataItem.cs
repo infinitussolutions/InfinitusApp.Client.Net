@@ -700,10 +700,7 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         [JsonIgnore]
-        public bool ShowMessageBlockIfNotOperating { get; set; }
-
-        [JsonIgnore]
-        public bool ShowMessageBlockIfNotKilometerReceive { get; set; }
+        public bool ShowPanelBlock { get; set; }
 
         //[JsonIgnore]
         //public double DistanceFromActualLocation { get; set; } = 0;
