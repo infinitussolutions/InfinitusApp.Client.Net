@@ -439,6 +439,7 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        [JsonIgnore]
         public OpeningHours CurrentOpeningHours
         {
             get
@@ -529,18 +530,19 @@ namespace InfinitusApp.Core.Data.DataModels
                 {
                     var msg = "";
 
-                    if (!HasOperating)
-                    {
-                        if (!Availability.DaysAvailable.AvailableDaysOfWeak.HasToday)
-                        {
-                            var nextDay = Availability.DaysAvailable.Days.FirstOrDefault(x => x > DateTime.Now.DayOfWeek).ToPresentation();
-                            msg += Description.Title + ", disponível na próxima " + nextDay + ".";
-                            return msg;
-                        }
-                    }
+                    //if (!HasOperating)
+                    //{
+                    //    return msg;
+                    //    //if (!Availability.DaysAvailable.AvailableDaysOfWeak.HasToday)
+                    //    //{
+                    //    //    var nextDay = Availability.DaysAvailable.Days.FirstOrDefault(x => x > DateTime.Now.DayOfWeek).ToPresentation();
+                    //    //    msg += Description.Title + ", disponível na próxima " + nextDay + ".";
+                    //    //    return msg;
+                    //    //}
+                    //}
 
                     if (!CurrentOpeningHours.HasConfiguration)
-                        return "Fechado";
+                        return msg;
 
                     if (CurrentOpeningHours.CurrentDayIsOpen)
                         return string.Format("Aberto, fecha as {0}", CurrentOpeningHours.CurrentDay.EndPresentation);
