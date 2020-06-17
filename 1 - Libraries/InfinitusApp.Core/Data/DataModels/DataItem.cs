@@ -784,6 +784,9 @@ namespace InfinitusApp.Core.Data.DataModels
         public bool HasDeliveryFees => DeliveryFees?.Count > 0;
 
         [JsonIgnore]
+        public bool DeliveryNotReceiveFromActualLocation => HasDeliveryFees && (DistanceFromActualLocation.InKilometer > DeliveryFees?.OrderBy(y => y?.Kilometer)?.LastOrDefault().Kilometer);
+
+        [JsonIgnore]
         public decimal? DeliveryPriceByDistanceFromActualLocation => DeliveryFees?.OrderBy(y => y?.Kilometer)?.FirstOrDefault(y => Math.Round(y.Kilometer) >= Math.Round(DistanceFromActualLocation.InKilometer))?.Price?.FinalPrice;
 
         [JsonIgnore]
