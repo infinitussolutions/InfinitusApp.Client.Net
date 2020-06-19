@@ -14,6 +14,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Type = PaymentConditionType.InCash;
             PaymentMethod = PaymentMethodType.Cash;
             Term = new TermCondition();
+            Relations = new List<PaymentConditionRelation>();
         }
 
         public string Title { get; set; }
@@ -34,11 +35,13 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #region Relations
 
-        public virtual DataStore DataStore { get; set; }
+        public DataStore DataStore { get; set; }
 
-        public virtual string DataStoreId { get; set; }
+        public string DataStoreId { get; set; }
 
-        public virtual IList<FinancialRequest> FinancialRequests { get; set; }
+        public IList<FinancialRequest> FinancialRequests { get; set; }
+
+        public IList<PaymentConditionRelation> Relations { get; set; }
 
         #endregion
 
@@ -225,5 +228,13 @@ namespace InfinitusApp.Core.Data.DataModels
                 return DiscountInPercent - AdditionalInPercent;
             }
         }
+    }
+
+    public class PaymentConditionRelation : EntityBase
+    {
+        public virtual PaymentCondition PaymentCondition { get; set; }
+        public virtual string PaymentConditionId { get; set; }
+        public virtual DataItem DataItem { get; set; }
+        public virtual string DataItemId { get; set; }
     }
 }

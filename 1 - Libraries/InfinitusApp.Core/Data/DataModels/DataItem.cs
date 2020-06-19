@@ -68,6 +68,7 @@ namespace InfinitusApp.Core.Data.DataModels
             TagRelations = new List<TagDataItemRelation>();
             SocialMedia = new SocialMedia();
             Visibility = new VisibilityInfo();
+            PaymentConditionRelations = new List<PaymentConditionRelation>();
         }
 
         public string Referency { get; set; }
@@ -128,6 +129,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public IList<Variation> Variations { get; set; }
 
         public IList<TagDataItemRelation> TagRelations { get; set; }
+
+        public IList<PaymentConditionRelation> PaymentConditionRelations { get; set; }
 
         public IList<Indication> Indications { get; set; }
 

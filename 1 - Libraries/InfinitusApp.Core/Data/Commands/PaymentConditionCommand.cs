@@ -125,4 +125,20 @@ namespace InfinitusApp.Core.Data.Commands
     {
         public string Id { get; set; }
     }
+
+    #region PaymentConditionRelation
+
+    public class PaymentConditionRelationCommand
+    {
+
+    }
+
+    public class CreatePaymentConditionRelationCommand : PaymentConditionRelationCommand
+    {
+        public string PaymentConditionId { get; set; }
+        public string DataItemId { get; set; }
+    }
+
+
+    #endregion
 }
