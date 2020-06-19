@@ -50,6 +50,35 @@ namespace InfinitusApp.Services.Signature
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<SignaturePlanApplicationUser>>("SignaturePlanApplicationUser/GetAll", HttpMethod.Get, dic);
         }
 
+        public async Task<List<SignaturePlanApplicationUser>> GetAllByCurrentUser(Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        {
+            var odataBuilder = new ODataQueryBuilder<SignaturePlanApplicationUser>("")
+                    .For<SignaturePlanApplicationUser>(x => x)
+                    .ByList();
+
+            if (top.HasValue)
+                odataBuilder.Top(top.Value);
+
+            if (skip.HasValue)
+                odataBuilder.Skip(skip.Value);
+
+            if (entityFilter != null)
+                odataBuilder.Filter(entityFilter);
+
+            if (entityOrderBy != null)
+            {
+                if (desc)
+                    odataBuilder.OrderByDescending(entityOrderBy);
+
+                else
+                    odataBuilder.OrderBy(entityOrderBy);
+            }
+
+            var dic = odataBuilder.ToDictionary();
+
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<SignaturePlanApplicationUser>>("SignaturePlanApplicationUser/GetAllByCurrentUser", HttpMethod.Get, dic);
+        }
+
         public async Task<SignaturePlanApplicationUser> GetById(string id, Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<SignaturePlanApplicationUser>("")
