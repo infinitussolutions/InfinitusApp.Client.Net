@@ -1,4 +1,5 @@
-﻿using InfinitusApp.Core.Extensions;
+﻿using InfinitusApp.Core.Data.Commands;
+using InfinitusApp.Core.Extensions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -438,6 +439,7 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        [JsonIgnore]
         public OpeningHours CurrentOpeningHours
         {
             get
@@ -528,18 +530,19 @@ namespace InfinitusApp.Core.Data.DataModels
                 {
                     var msg = "";
 
-                    if (!HasOperating)
-                    {
-                        if (!Availability.DaysAvailable.AvailableDaysOfWeak.HasToday)
-                        {
-                            var nextDay = Availability.DaysAvailable.Days.FirstOrDefault(x => x > DateTime.Now.DayOfWeek).ToPresentation();
-                            msg += Description.Title + ", disponível na próxima " + nextDay + ".";
-                            return msg;
-                        }
-                    }
+                    //if (!HasOperating)
+                    //{
+                    //    return msg;
+                    //    //if (!Availability.DaysAvailable.AvailableDaysOfWeak.HasToday)
+                    //    //{
+                    //    //    var nextDay = Availability.DaysAvailable.Days.FirstOrDefault(x => x > DateTime.Now.DayOfWeek).ToPresentation();
+                    //    //    msg += Description.Title + ", disponível na próxima " + nextDay + ".";
+                    //    //    return msg;
+                    //    //}
+                    //}
 
                     if (!CurrentOpeningHours.HasConfiguration)
-                        return "Fechado";
+                        return msg;
 
                     if (CurrentOpeningHours.CurrentDayIsOpen)
                         return string.Format("Aberto, fecha as {0}", CurrentOpeningHours.CurrentDay.EndPresentation);
@@ -697,7 +700,7 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         [JsonIgnore]
-        public bool ShowMessageBlockIfNotOperating { get; set; }
+        public bool ShowPanelBlock { get; set; }
 
         //[JsonIgnore]
         //public double DistanceFromActualLocation { get; set; } = 0;
@@ -777,8 +780,19 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         [JsonIgnore]
-        public bool CompleteRegistrationVisible { get { return IsAdmin && !string.IsNullOrEmpty(InfoCompleteRegistration); } }
+        public bool HasDeliveryFees => DeliveryFees?.Count > 0;
 
+        [JsonIgnore]
+        public bool DeliveryNotReceiveByActualLocation => HasDeliveryFees && (DistanceFromActualLocation.InKilometer > DeliveryFees?.OrderBy(y => y?.Kilometer)?.LastOrDefault().Kilometer);
+
+        [JsonIgnore]
+        public decimal? DeliveryPriceByDistanceByActualLocation => DeliveryFees?.OrderBy(y => y?.Kilometer)?.FirstOrDefault(y => Math.Round(y.Kilometer) >= Math.Round(DistanceFromActualLocation.InKilometer))?.Price?.FinalPrice;
+
+        [JsonIgnore]
+        public string DeliveryPriceByDistanceByActualLocationPresentation => DeliveryPriceByDistanceByActualLocation.HasValue ? (DeliveryPriceByDistanceByActualLocation > 0 ? DeliveryPriceByDistanceByActualLocation.Value.ToString("C") : "Grátis") : "";
+
+        [JsonIgnore]
+        public bool CompleteRegistrationVisible { get { return IsAdmin && !string.IsNullOrEmpty(InfoCompleteRegistration); } }
 
         public static DataItem ConvertAppUserToPerson(ApplicationUser user, string dataStoreId)
         {
@@ -1546,6 +1560,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public bool InHands { get; set; } = true;
 
         public double MaxKm { get; set; }
+
+        
     }
 
     #region Agenda

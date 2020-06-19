@@ -26,7 +26,9 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         public virtual string CreditCardInfoId { get; set; }
 
-        public virtual DataStore DataStore { get; set; }
+        public virtual DataItem DataItem { get; set; }
+
+        public virtual string DataItemId { get; set; }
 
         public virtual string DataStoreId { get; set; }
 
