@@ -68,8 +68,8 @@ namespace InfinitusApp.Core.Data.DataModels
                     case PaymentMethodType.Cash: return "Dinheiro";
                     case PaymentMethodType.CreditCard: return "Cartão de Crédito";
                     case PaymentMethodType.DebitCard: return "Cartão de Débito";
-                    case PaymentMethodType.FoodVoucher: return "Vale Refeição";
-                    case PaymentMethodType.MealTicket: return "Vale Alimentação";
+                    case PaymentMethodType.FoodVoucher: return "Vale Alimentação";
+                    case PaymentMethodType.MealTicket: return "Vale Refeição";
                     default: return string.Empty;
                 }
             }
