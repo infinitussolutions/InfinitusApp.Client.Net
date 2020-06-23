@@ -1,4 +1,5 @@
 ﻿using InfinitusApp.Core.Data.Commands;
+using InfinitusApp.Core.Data.DataModels.Signature;
 using InfinitusApp.Core.Extensions;
 using Newtonsoft.Json;
 using System;
@@ -69,6 +70,7 @@ namespace InfinitusApp.Core.Data.DataModels
             SocialMedia = new SocialMedia();
             Visibility = new VisibilityInfo();
             PaymentConditionRelations = new List<PaymentConditionRelation>();
+            SignaturePlanApplicationUsers = new List<SignaturePlanApplicationUser>();
         }
 
         public string Referency { get; set; }
@@ -131,6 +133,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public IList<TagDataItemRelation> TagRelations { get; set; }
 
         public IList<PaymentConditionRelation> PaymentConditionRelations { get; set; }
+
+        public IList<SignaturePlanApplicationUser> SignaturePlanApplicationUsers { get; set; }
 
         public IList<Indication> Indications { get; set; }
 
