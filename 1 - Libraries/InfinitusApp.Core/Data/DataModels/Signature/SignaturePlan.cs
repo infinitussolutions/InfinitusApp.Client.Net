@@ -20,6 +20,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
             SignaturePlanApplicationUsers = new List<SignaturePlanApplicationUser>();
             Consumptions = new List<SignaturePlanConsumption>();
             Actions = new List<SignaturePlanAction>();
+            TermsOfUse = new TermsOfUse();
         }
 
         public string Title { get; set; }
@@ -31,6 +32,8 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         public SignaturePlanConfig Config { get; set; }
 
         public bool Active { get; set; } = true;
+
+        public TermsOfUse TermsOfUse { get; set; }
 
         #region Relations
 

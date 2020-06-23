@@ -15,6 +15,7 @@ namespace InfinitusApp.Core.Data.Commands
         public SignatureBaseCommand()
         {
             Config = new SignaturePlanConfig();
+            TermsOfUse = new TermsOfUse();
         }
 
         public string Title { get; set; }
@@ -24,6 +25,8 @@ namespace InfinitusApp.Core.Data.Commands
         public decimal Amount { get; set; }
 
         public SignaturePlanConfig Config { get; set; }
+
+        public TermsOfUse TermsOfUse { get; set; }
 
     }
 
