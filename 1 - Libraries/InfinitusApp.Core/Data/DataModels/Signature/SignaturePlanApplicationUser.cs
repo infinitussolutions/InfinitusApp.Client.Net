@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,15 +39,124 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         #region Help
 
-        public DateTimeOffset NextCharge { get; set; }
+        [JsonIgnore]
+        public DateTimeOffset NextCharge
+        {
+            get
+            {
+                try
+                {
+                    if (!LastChargePayment.HasValue && string.IsNullOrEmpty(SignaturePlan?.Id))
+                        return DateTimeOffset.MinValue;
 
-        public DateTimeOffset? LastChargePayment { get; set; }
+                    return LastChargePayment.HasValue ? LastChargePayment.Value.AddDays(SignaturePlan.Config.RecurrenceChargeDaysFromType) : DateTimeOffset.UtcNow.AddDays(SignaturePlan.Config.DaysToStartFirstCharge).Date;
+                }
+                catch (Exception)
+                {
+                    return DateTime.MinValue;
+                }
+            }
+        }
 
-        public int DaysWithoutPayment { get; set; }
+        [JsonIgnore]
+        public DateTimeOffset? LastChargePayment
+        {
+            get
+            {
+                if (PaymentHistoryList == null || PaymentHistoryList.Count.Equals(0))
+                    return null;
 
-        public string PlanStatusMsg { get; set; }
+                return PaymentHistoryList?.OrderByDescending(x => x.CreatedAt).Select(x => x.CreatedAt)?.FirstOrDefault().Value.LocalDateTime.Date;
+            }
+        }
 
-        public bool? IsBlockPlan { get; set; }
+        [JsonIgnore]
+        public int DaysWithoutPayment
+        {
+            get
+            {
+                try
+                {
+                    return (int)((DateTimeOffset.Now.Date - NextCharge.Date).TotalDays);
+                }
+                catch (Exception)
+                {
+                    return 0;
+                }
+            }
+        }
+
+        [JsonIgnore]
+        public string PlanStatusMsg
+        {
+            get
+            {
+                try
+                {
+                    if (!IsBlockPlan.HasValue)
+                        return "Not found info";
+
+                    if (!IsBlockPlan.Value)
+                    {
+                        if (DaysWithoutPayment > 0)
+                            return "Ativo! porém a " + DaysWithoutPayment + " dias sem pagamento, ao atingir " + SignaturePlan?.Config?.DaysWithoutPaymentToBlock + " dias o mesmo será bloqueado";
+
+                        return "Ativo! Próxima pagamento em " + NextCharge.ToString("dd/MM");
+                    }
+
+                    else
+                    {
+                        if (!LastChargePayment.HasValue)
+                            return "Primeiro pagamento não encontrado";
+
+                        if (DaysWithoutPayment >= SignaturePlan?.Config?.DaysWithoutPaymentToBlock)
+                            return "Bloqueado por falta de pagamento";
+                    }
+
+                    return "";
+                }
+                catch (Exception)
+                {
+                    return "Not found info";
+                }
+            }
+        }
+
+        [JsonIgnore]
+        public bool? IsBlockPlan
+        {
+            get
+            {
+                try
+                {
+                    if (NextCharge.Date > DateTimeOffset.Now.Date)
+                        return false;
+
+                    else
+                    {
+                        if (!LastChargePayment.HasValue)
+                            return true;
+                    }
+
+                    return DaysWithoutPayment >= SignaturePlan.Config.DaysWithoutPaymentToBlock;
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+        }
+
+
+        //public DateTimeOffset NextCharge { get; set; }
+
+        //public DateTimeOffset? LastChargePayment { get; set; }
+
+        //public int DaysWithoutPayment { get; set; }
+
+        //public string PlanStatusMsg { get; set; }
+
+        //public bool? IsBlockPlan { get; set; }
 
         #endregion
     }
