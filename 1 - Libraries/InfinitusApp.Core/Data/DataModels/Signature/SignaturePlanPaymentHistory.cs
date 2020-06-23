@@ -18,7 +18,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         public string ExternalReferenceId { get; set; }
 
-        public object ExternalReferenceModel { get; set; }
+        public PaymentResponse ExternalReferenceModel { get; set; }
 
         #region Relations
 
