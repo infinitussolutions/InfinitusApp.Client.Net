@@ -14,6 +14,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Type = PaymentConditionType.InCash;
             PaymentMethod = PaymentMethodType.Cash;
             Term = new TermCondition();
+            Relations = new List<PaymentConditionRelation>();
         }
 
         public string Title { get; set; }
@@ -34,11 +35,13 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #region Relations
 
-        public virtual DataStore DataStore { get; set; }
+        public DataStore DataStore { get; set; }
 
-        public virtual string DataStoreId { get; set; }
+        public string DataStoreId { get; set; }
 
-        public virtual IList<FinancialRequest> FinancialRequests { get; set; }
+        public IList<FinancialRequest> FinancialRequests { get; set; }
+
+        public IList<PaymentConditionRelation> Relations { get; set; }
 
         #endregion
 
@@ -68,8 +71,8 @@ namespace InfinitusApp.Core.Data.DataModels
                     case PaymentMethodType.Cash: return "Dinheiro";
                     case PaymentMethodType.CreditCard: return "Cartão de Crédito";
                     case PaymentMethodType.DebitCard: return "Cartão de Débito";
-                    case PaymentMethodType.FoodVoucher: return "Vale Refeição";
-                    case PaymentMethodType.MealTicket: return "Vale Alimentação";
+                    case PaymentMethodType.FoodVoucher: return "Vale Alimentação";
+                    case PaymentMethodType.MealTicket: return "Vale Refeição";
                     default: return string.Empty;
                 }
             }
@@ -225,5 +228,13 @@ namespace InfinitusApp.Core.Data.DataModels
                 return DiscountInPercent - AdditionalInPercent;
             }
         }
+    }
+
+    public class PaymentConditionRelation : EntityBase
+    {
+        public virtual PaymentCondition PaymentCondition { get; set; }
+        public virtual string PaymentConditionId { get; set; }
+        public virtual DataItem DataItem { get; set; }
+        public virtual string DataItemId { get; set; }
     }
 }

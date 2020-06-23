@@ -15,10 +15,10 @@ namespace InfinitusApp.Services.FInancial
         {
         }
 
-        public async Task<List<PaymentCondition>> GetAll(Expression<Func<PaymentCondition, bool>> entityFilter = null, Expression<Func<PaymentCondition, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        public async Task<List<InfinitusApp.Core.Data.DataModels.PaymentCondition>> GetAll(Expression<Func<InfinitusApp.Core.Data.DataModels.PaymentCondition, bool>> entityFilter = null, Expression<Func<InfinitusApp.Core.Data.DataModels.PaymentCondition, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
-            var odataBuilder = new ODataQueryBuilder<PaymentCondition>("")
-                    .For<PaymentCondition>(x => x)
+            var odataBuilder = new ODataQueryBuilder<InfinitusApp.Core.Data.DataModels.PaymentCondition>("")
+                    .For<InfinitusApp.Core.Data.DataModels.PaymentCondition>(x => x)
                     .ByList();
 
             if (top.HasValue)
@@ -41,7 +41,7 @@ namespace InfinitusApp.Services.FInancial
 
             var dic = odataBuilder.ToDictionary();
 
-            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<PaymentCondition>>("PaymentCondition/GetAll", HttpMethod.Get, dic);
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<InfinitusApp.Core.Data.DataModels.PaymentCondition>>("PaymentCondition/GetAll", HttpMethod.Get, dic);
         }
     }
 }
