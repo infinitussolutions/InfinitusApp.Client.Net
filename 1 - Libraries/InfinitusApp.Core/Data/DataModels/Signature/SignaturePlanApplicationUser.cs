@@ -59,6 +59,9 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         }
 
         [JsonIgnore]
+        public string NextChargePresentation => NextCharge.ToString("dd/MMMM");
+
+        [JsonIgnore]
         public DateTimeOffset? LastChargePayment
         {
             get
