@@ -1,4 +1,5 @@
 ﻿using Naylah.Core.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,6 +33,12 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         public bool Active { get; set; } = true;
 
+        /// <summary>
+        /// Used to show where is upgrade action
+        /// </summary>
+        [JsonIgnore]
+        public bool ShowToUpgrade { get; set; }
+
         #region Relations
 
         public string DataStoreId { get; set; }
@@ -46,11 +53,10 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         #region Help
 
+        [JsonIgnore]
         public string AmountPresentation { get { return Amount.ToString("C"); } }
 
         #endregion
-
-
     }
 
     public class SignaturePlanConfig

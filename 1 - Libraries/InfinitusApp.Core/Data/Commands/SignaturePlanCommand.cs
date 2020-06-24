@@ -75,17 +75,20 @@ namespace InfinitusApp.Core.Data.Commands
     }
 
 
-    public class CreateSignaturePlanApplicationUserCommand
+    public class SignaturePlanApplicationUserBaseCommand
     {
         public string SignaturePlanId { get; set; }
 
         //public string ApplicationUserId { get; set; }
 
         public string CreditCardInfoId { get; set; }
+    }
+
+    public class CreateSignaturePlanApplicationUserCommand : SignaturePlanApplicationUserBaseCommand
+    {
+        public string DataStoreId { get; set; }
 
         public string DataItemId { get; set; }
-
-        public string DataStoreId { get; set; }
 
         public string AppUserId { get; set; }
 
@@ -107,6 +110,11 @@ namespace InfinitusApp.Core.Data.Commands
                 return msg;
             }
         }
+    }
+
+    public class UpdateSignaturePlanApplicationUserCommand : SignaturePlanApplicationUserBaseCommand
+    {
+        public string Id { get; set; }
     }
 
     public class CreateSignaturePlanPaymentHistoryCommand
