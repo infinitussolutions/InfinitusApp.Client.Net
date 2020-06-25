@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using static InfinitusApp.Core.Data.Enums.DataItemEnums;
 
 namespace InfinitusApp.Services.Signature
 {
@@ -19,6 +20,11 @@ namespace InfinitusApp.Services.Signature
         public async Task<SignaturePlanApplicationUser> Create(CreateSignaturePlanApplicationUserCommand createCommand)
         {
             return await ServiceClient.InvokeApiAsync<CreateSignaturePlanApplicationUserCommand, SignaturePlanApplicationUser>("SignaturePlanApplicationUser/Create", createCommand);
+        }
+
+        public async Task<SignaturePlanApplicationUser> Update(UpdateSignaturePlanApplicationUserCommand updateCommand)
+        {
+            return await ServiceClient.InvokeApiAsync<UpdateSignaturePlanApplicationUserCommand, SignaturePlanApplicationUser>("SignaturePlanApplicationUser/Update", updateCommand, HttpMethod.Patch, null);
         }
 
         public async Task<List<SignaturePlanApplicationUser>> GetAll(Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
