@@ -6,7 +6,7 @@ namespace InfinitusApp.Core.Data.DataModels
 {
     public class CanceledInfo
     {
-        public bool IsCanceled { get; set; }
+        public bool IsCanceled => CanceledIn.HasValue;
 
         public string Motive { get; set; }
 

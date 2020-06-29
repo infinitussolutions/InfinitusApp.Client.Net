@@ -11,7 +11,10 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         public SignaturePlanApplicationUser()
         {
             PaymentHistoryList = new List<SignaturePlanPaymentHistory>();
+            CanceledInfo = new CanceledInfo();
         }
+
+        public CanceledInfo CanceledInfo { get; set; }
 
         #region Relations
 
