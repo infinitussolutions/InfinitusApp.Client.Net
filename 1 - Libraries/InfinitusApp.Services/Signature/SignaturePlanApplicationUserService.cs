@@ -27,6 +27,11 @@ namespace InfinitusApp.Services.Signature
             return await ServiceClient.InvokeApiAsync<UpdateSignaturePlanApplicationUserCommand, SignaturePlanApplicationUser>("SignaturePlanApplicationUser/Update", updateCommand, HttpMethod.Patch, null);
         }
 
+        public async Task<bool> Cancel(CanceledInfoCommand cmd)
+        {
+            return await ServiceClient.InvokeApiAsync<CanceledInfoCommand, bool>("SignaturePlanApplicationUser/Cancel", cmd, HttpMethod.Patch, null);
+        }
+
         public async Task<List<SignaturePlanApplicationUser>> GetAll(Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<SignaturePlanApplicationUser>("")
