@@ -15,6 +15,8 @@ namespace InfinitusApp.Core.Data.Commands
         public PaymentConditionTarget Target { get; set; }
 
         public string ExternalReference { get; set; }
+
+        public bool ExternalProcessing { get; set; }
     }
 
     public class CreatePaymentConditionCommand : PaymentConditionCommand

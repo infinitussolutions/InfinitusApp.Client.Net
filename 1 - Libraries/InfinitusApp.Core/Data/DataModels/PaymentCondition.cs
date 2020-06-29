@@ -33,6 +33,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string ExternalReference { get; set; }
 
+        public bool ExternalProcessing { get; set; }
+
         #region Relations
 
         public DataStore DataStore { get; set; }
