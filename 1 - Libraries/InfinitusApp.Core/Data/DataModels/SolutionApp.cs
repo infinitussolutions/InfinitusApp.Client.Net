@@ -80,5 +80,6 @@ namespace InfinitusApp.Core.Data.DataModels
         public const string Booking = "ED6E7A28-7FA7-4E2C-A117-1B6BFFE09D71";
         public const string Company = "4600D14A-0BF7-4BBC-84EE-A73145B7538E";
         public const string SignaturePlan = "89EE6DDD-93C5-4E50-A7D8-6C66EA85A1C0";
+        public const string FidelityCard = "45538054-D44E-4C9B-ACE5-226F3448FA24";
     }
 }
