@@ -134,12 +134,14 @@ namespace InfinitusApp.Core.Data.DataModels
             CreditCard = new PercentageFee();
             Others = new PercentageFee();
             FixedValue = new AmountFee();
+            InfinitusDelivery = new AmountFee();
         }
 
         public AmountFee BankSlip { get; set; }
         public PercentageFee CreditCard { get; set; }
         public PercentageFee Others { get; set; }
         public AmountFee FixedValue { get; set; }
+        public AmountFee InfinitusDelivery { get; set; }
     }
 
     public class AmountFee
