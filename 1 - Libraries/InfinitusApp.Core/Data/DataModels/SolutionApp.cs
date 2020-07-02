@@ -81,5 +81,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public const string Company = "4600D14A-0BF7-4BBC-84EE-A73145B7538E";
         public const string SignaturePlan = "89EE6DDD-93C5-4E50-A7D8-6C66EA85A1C0";
         public const string FidelityCard = "45538054-D44E-4C9B-ACE5-226F3448FA24";
+        public const string PaymentWithCreditCart = "E7CB723D-FDF5-4164-AA81-605196C372A6";
+        public const string PaymentWithBankSlip = "2402C9B7-18AE-49D9-BADF-7841419101A6";
     }
 }
