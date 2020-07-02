@@ -42,4 +42,11 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #endregion
     }
+
+    public class CreditCardValidResponse
+    {
+        public bool IsValid { get; set; }
+
+        public string Message { get; set; }
+    }
 }

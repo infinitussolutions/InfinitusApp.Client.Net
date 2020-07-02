@@ -21,6 +21,11 @@ namespace InfinitusApp.Services.CreditCard
             return await ServiceClient.InvokeApiAsync<CreateCreditCardInfoCommand, CreditCardInfo>("CreditCardInfo/CreateToCurrentApplicationUser", cmd, HttpMethod.Post, null);
         }
 
+        public async Task<CreditCardValidResponse> IsCreditCartValid(CreateCreditCardInfoCommand cmd)
+        {
+            return await ServiceClient.InvokeApiAsync<CreateCreditCardInfoCommand, CreditCardValidResponse>("CreditCardInfo/IsCreditCartValid", cmd, HttpMethod.Post, null);
+        }
+
         public async Task<List<CreditCardInfo>> GetAllByCurrentApplicationUser(Expression<Func<CreditCardInfo, bool>> entityFilter = null, Expression<Func<CreditCardInfo, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<CreditCardInfo>("")
