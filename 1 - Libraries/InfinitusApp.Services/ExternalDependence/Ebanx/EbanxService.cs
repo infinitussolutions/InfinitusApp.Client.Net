@@ -1,4 +1,5 @@
-﻿using Ebanx.net.Parameters.Responses.DirectOperation;
+﻿using Ebanx.net.Parameters.Responses.Affiliate;
+using Ebanx.net.Parameters.Responses.DirectOperation;
 using Ebanx.net.Parameters.Responses.QueryOperation;
 using InfinitusApp.Core.Data.Commands.ExternalDependence.Ebanx;
 using InfinitusApp.Core.Extensions;
@@ -28,6 +29,11 @@ namespace InfinitusApp.Services.ExternalDependence.Ebanx
             };
 
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<QueryResponse>>("Ebanx/GetInvoice", HttpMethod.Get, dic);
+        }
+
+        public async Task<CreateResponse> CreateSubAccount(EbanxSubAccountCommand cmd)
+        {
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<EbanxSubAccountCommand, CreateResponse>("Ebanx/CreateSubAccount", cmd);
         }
     }
 }

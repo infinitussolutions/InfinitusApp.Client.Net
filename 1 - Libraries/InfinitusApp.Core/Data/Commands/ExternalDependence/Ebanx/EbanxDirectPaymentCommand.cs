@@ -9,4 +9,6 @@ namespace InfinitusApp.Core.Data.Commands.ExternalDependence.Ebanx
         public string DataItemId { get; set; }
         public string DataStoreId { get; set; }
     }
+
+
 }
