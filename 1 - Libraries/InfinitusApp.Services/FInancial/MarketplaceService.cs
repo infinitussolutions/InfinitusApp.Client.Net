@@ -1,4 +1,5 @@
-﻿using InfinitusApp.Core.Data.DataModels;
+﻿using InfinitusApp.Core.Data.Commands;
+using InfinitusApp.Core.Data.DataModels;
 using InfinitusApp.Core.Extensions;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,16 @@ namespace InfinitusApp.Services.FInancial
         public MarketplaceService(InfinitusAppServiceClient _serviceClient) : base(_serviceClient)
         {
 
+        }
+
+        public async Task<Marketplace> Create(CreateMarketplaceCommand cmd)
+        {
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<CreateMarketplaceCommand, Marketplace>("Marketplace/Create", cmd);
+        }
+
+        public async Task<Marketplace> Update(UpdateMarketplaceCommand cmd)
+        {
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<UpdateMarketplaceCommand, Marketplace>("Marketplace/Update", cmd, HttpMethod.Patch, null);
         }
 
         public async Task<Marketplace> GetByDataStoreId(string dataStoreId)
