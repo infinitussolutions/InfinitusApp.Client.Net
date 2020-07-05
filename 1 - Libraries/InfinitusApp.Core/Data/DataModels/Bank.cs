@@ -10,5 +10,13 @@ namespace InfinitusApp.Core.Data.DataModels
         public string Name { get; set; }
         public string Document { get; set; }
         public bool IsDeleted { get; set; }
+
+        public string CodeWithName 
+        {
+            get
+            {
+                return string.Format("{0} - {1}", Code, Name);
+            }
+        }
     }
 }
