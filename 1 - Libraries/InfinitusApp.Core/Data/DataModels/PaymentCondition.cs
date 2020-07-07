@@ -15,6 +15,7 @@ namespace InfinitusApp.Core.Data.DataModels
             PaymentMethod = PaymentMethodType.Cash;
             Term = new TermCondition();
             Relations = new List<PaymentConditionRelation>();
+            Icon = new FontIcon();
         }
 
         public string Title { get; set; }
@@ -34,6 +35,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public string ExternalReference { get; set; }
 
         public bool ExternalProcessing { get; set; }
+
+        public FontIcon Icon { get; set; }
 
         #region Relations
 

@@ -17,6 +17,8 @@ namespace InfinitusApp.Core.Data.Commands
         public string ExternalReference { get; set; }
 
         public bool ExternalProcessing { get; set; }
+
+        public FontIcon Icon { get; set; }
     }
 
     public class CreatePaymentConditionCommand : PaymentConditionCommand
