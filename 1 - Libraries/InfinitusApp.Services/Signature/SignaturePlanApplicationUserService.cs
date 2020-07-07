@@ -131,6 +131,16 @@ namespace InfinitusApp.Services.Signature
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<bool>("SignaturePlanApplicationUser/HasActiveSignatureByDataItemAndSolutionId", HttpMethod.Get, dic);
         }
 
+        public async Task<SignaturePlanApplicationUser> GetById(string dataItemId)
+        {
+            var dic = new Dictionary<string, string>
+            {
+                { "dataItemId", dataItemId }
+            };
+
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<SignaturePlanApplicationUser>("SignaturePlanApplicationUser/GetById", HttpMethod.Get, dic);
+        }
+
         public async Task<List<SignaturePlanApplicationUser>> GetAllBySignaturePlanId(string signaturePlanId, Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<SignaturePlanApplicationUser>("")
