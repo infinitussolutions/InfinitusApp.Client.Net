@@ -90,7 +90,7 @@ namespace InfinitusApp.Services.Signature
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<SignaturePlanApplicationUser>>("SignaturePlanApplicationUser/GetAllByCurrentUser", HttpMethod.Get, dic);
         }
 
-        public async Task<SignaturePlanApplicationUser> GetById(string id, Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        public async Task<SignaturePlanApplicationUser> HasActiveSignatureByDataItemAndSolutionId(string id, Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<SignaturePlanApplicationUser>("")
                     .For<SignaturePlanApplicationUser>(x => x)
@@ -120,35 +120,15 @@ namespace InfinitusApp.Services.Signature
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<SignaturePlanApplicationUser>("SignaturePlanApplicationUser/GetById", HttpMethod.Get, dic);
         }
 
-        public async Task<List<SignaturePlanApplicationUser>> GetAllNotCanceledByDataItemId(string dataItemId, Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        public async Task<bool> HasActiveSignatureByDataItemAndSolutionId(string dataItemId, string solutionId)
         {
-            var odataBuilder = new ODataQueryBuilder<SignaturePlanApplicationUser>("")
-                    .For<SignaturePlanApplicationUser>(x => x)
-                    .ByList();
-
-            if (top.HasValue)
-                odataBuilder.Top(top.Value);
-
-            if (skip.HasValue)
-                odataBuilder.Skip(skip.Value);
-
-            if (entityFilter != null)
-                odataBuilder.Filter(entityFilter);
-
-            if (entityOrderBy != null)
+            var dic = new Dictionary<string, string>
             {
-                if (desc)
-                    odataBuilder.OrderByDescending(entityOrderBy);
+                { "dataItemId", dataItemId },
+                { "solutionId", solutionId }
+            };
 
-                else
-                    odataBuilder.OrderBy(entityOrderBy);
-            }
-
-            var dic = odataBuilder.ToDictionary();
-
-            dic.Add("dataItemId", dataItemId);
-
-            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<SignaturePlanApplicationUser>>("SignaturePlanApplicationUser/GetAllNotCanceledByDataItemId", HttpMethod.Get, dic);
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<bool>("SignaturePlanApplicationUser/HasActiveSignatureByDataItemAndSolutionId", HttpMethod.Get, dic);
         }
 
         public async Task<List<SignaturePlanApplicationUser>> GetAllBySignaturePlanId(string signaturePlanId, Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
