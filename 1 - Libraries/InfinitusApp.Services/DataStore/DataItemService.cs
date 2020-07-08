@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using static InfinitusApp.Core.Data.Enums.DataItemEnums;
 using OData.QueryBuilder.Builders;
+using InfinitusApp.Services.Address;
 
 namespace InfinitusApp.Services.DataItem
 {
@@ -80,6 +81,31 @@ namespace InfinitusApp.Services.DataItem
             var dic = odataBuilder.ToDictionary();
 
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<Core.Data.DataModels.DataItem>>("DataItem/GetAllSimple", HttpMethod.Get, dic);
+        }
+
+        public async Task<List<DataItemAddressResult>> GetAllDataItemByLocation(double latitude, double longitude, string dtItemType = "", string groupId = "", int skip = 0, int top = 10, string tagId = "", string q = "")
+        {
+            var dic = new Dictionary<string, string>
+            {
+                { "$skip", skip.ToString() },
+                { "$top", top.ToString() },
+                {"latitude",latitude.ToString().Replace(",",".") },
+                {"longitude",longitude.ToString().Replace(",",".") }
+            };
+
+            if (!string.IsNullOrEmpty(dtItemType))
+                dic.Add("dataItemType", dtItemType.ToString());
+
+            if (!string.IsNullOrEmpty(groupId))
+                dic.Add("groupId", groupId.ToString());
+
+            if (!string.IsNullOrEmpty(tagId))
+                dic.Add("tagId", tagId);
+
+            if (!string.IsNullOrEmpty(q))
+                dic.Add("q", q);
+
+            return await ServiceClient.InvokeApiAsync<List<DataItemAddressResult>>("DataItem/GetAllDataItemByLocation", HttpMethod.Get, dic);
         }
 
 
