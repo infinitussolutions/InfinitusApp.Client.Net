@@ -160,8 +160,12 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         #region Relations
 
-        public SignaturePlan SignaturePlan { get; set; }
-        public string SignaturePlanId { get; set; }
+        public virtual DataStore DataStore { get; set; }
+        public virtual string DataStoreId { get; set; }
+        public virtual SignaturePlan SignaturePlan { get; set; }
+        public virtual string SignaturePlanId { get; set; }
+        public virtual FinancialRequest FinancialRequest { get; set; }
+        public virtual string FinancialRequestId { get; set; }
 
         #endregion
     }

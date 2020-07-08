@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using InfinitusApp.Core.Data.DataModels.Signature;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Bookings = new List<Booking>();
             ExternalModel = new FinancialRequestExternalModel();
             FinancialRequestStatusRelations = new List<FinancialRequestStatusRelation>();
+            SignaturePlanConsumptions = new List<SignaturePlanConsumption>();
         }
 
         public string Observation { get; set; }
@@ -95,6 +97,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public string ProviderId { get; set; }
 
         public List<FinancialRequestStatusRelation> FinancialRequestStatusRelations { get; set; }
+
+        public List<SignaturePlanConsumption> SignaturePlanConsumptions { get; set; }
 
         #endregion
 

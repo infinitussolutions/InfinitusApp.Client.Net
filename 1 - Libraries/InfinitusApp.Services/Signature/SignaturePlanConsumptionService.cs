@@ -26,7 +26,7 @@ namespace InfinitusApp.Services.Signature
             return await ServiceClient.InvokeApiAsync<UpdateSignaturePlanConsumptionCommand, SignaturePlanConsumption>("SignaturePlanConsumption/Update", cmd, HttpMethod.Patch, null);
         }
 
-        public async Task<List<SignaturePlanConsumption>> GetAll(string signaturePlanId, Expression<Func<SignaturePlanConsumption, bool>> entityFilter = null, Expression<Func<SignaturePlanConsumption, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        public async Task<List<SignaturePlanConsumption>> GetAll(string dataStoreId, Expression<Func<SignaturePlanConsumption, bool>> entityFilter = null, Expression<Func<SignaturePlanConsumption, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<SignaturePlanConsumption>("")
                     .For<SignaturePlanConsumption>(x => x)
@@ -52,7 +52,7 @@ namespace InfinitusApp.Services.Signature
 
             var dic = odataBuilder.ToDictionary();
 
-            dic.Add("signaturePlanId", signaturePlanId);
+            dic.Add("dataStoreId", dataStoreId);
 
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<SignaturePlanConsumption>>("SignaturePlanConsumption/GetAll", HttpMethod.Get, dic);
         }
