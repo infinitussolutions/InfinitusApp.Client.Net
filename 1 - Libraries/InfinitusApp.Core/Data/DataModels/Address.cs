@@ -155,7 +155,7 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        
+
 
         #endregion
     }
@@ -176,7 +176,8 @@ namespace InfinitusApp.Core.Data.DataModels
                 StateProvince = a.StateProvince,
                 Altitude = a.Location?.Altitude,
                 Longitude = a.Location?.Longitude,
-                Latitude = a.Location?.Latitude
+                Latitude = a.Location?.Latitude,
+                Location = a.Location
             };
         }
     }

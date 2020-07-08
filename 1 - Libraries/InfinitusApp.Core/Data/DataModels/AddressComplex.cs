@@ -4,7 +4,7 @@ using System;
 
 namespace InfinitusApp.Core.Data.DataModels
 {
-    [Obsolete("Use Address Model")]
+    
     public class AddressComplex
     {
         public string AddressLine1 { get; set; }
@@ -20,8 +20,15 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string PostalCode { get; set; }
 
+        public Location Location { get; set; }
+
+        [Obsolete("Use location property")]
         public double? Longitude { get; set; }
+
+        [Obsolete("Use location property")]
         public double? Latitude { get; set; }
+
+        [Obsolete("Use location property")]
         public double? Altitude { get; set; }
 
         public string FullAddress
