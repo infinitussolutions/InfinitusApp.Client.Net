@@ -181,11 +181,14 @@ namespace InfinitusApp.Core.Data.Commands
     public class CreateSignaturePlanConsumptionCommand : SignaturePlanConsumptionCommand
     {
         public string SignaturePlanId { get; set; }
+        public string FinancialRequestId { get; set; }
+        public string DataStoreId { get; set; }
     }
 
     public class UpdateSignaturePlanConsumptionCommand : SignaturePlanConsumptionCommand
     {
         public string Id { get; set; }
+        public bool Deleted { get; set; }
     }
 
     #endregion
