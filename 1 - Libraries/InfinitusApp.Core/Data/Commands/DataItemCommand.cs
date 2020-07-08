@@ -32,6 +32,7 @@ namespace InfinitusApp.Core.Data.Commands
 
         public DataItemPriceInfo Price { get; set; }
 
+        public DataItemLocationInfo Location { get; set; }
     }
 
     public class CreateDataItemCommand : DataItemCommand
