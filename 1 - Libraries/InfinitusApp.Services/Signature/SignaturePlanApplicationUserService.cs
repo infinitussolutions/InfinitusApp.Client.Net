@@ -90,7 +90,7 @@ namespace InfinitusApp.Services.Signature
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<SignaturePlanApplicationUser>>("SignaturePlanApplicationUser/GetAllByCurrentUser", HttpMethod.Get, dic);
         }
 
-        public async Task<SignaturePlanApplicationUser> GetById(string id, Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        public async Task<SignaturePlanApplicationUser> HasActiveSignatureByDataItemAndSolutionId(string id, Expression<Func<SignaturePlanApplicationUser, bool>> entityFilter = null, Expression<Func<SignaturePlanApplicationUser, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<SignaturePlanApplicationUser>("")
                     .For<SignaturePlanApplicationUser>(x => x)
@@ -116,6 +116,27 @@ namespace InfinitusApp.Services.Signature
 
             var dic = odataBuilder.ToDictionary();
             dic.Add("id", id);
+
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<SignaturePlanApplicationUser>("SignaturePlanApplicationUser/GetById", HttpMethod.Get, dic);
+        }
+
+        public async Task<bool> HasActiveSignatureByDataItemAndSolutionId(string dataItemId, string solutionId)
+        {
+            var dic = new Dictionary<string, string>
+            {
+                { "dataItemId", dataItemId },
+                { "solutionId", solutionId }
+            };
+
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<bool>("SignaturePlanApplicationUser/HasActiveSignatureByDataItemAndSolutionId", HttpMethod.Get, dic);
+        }
+
+        public async Task<SignaturePlanApplicationUser> GetById(string dataItemId)
+        {
+            var dic = new Dictionary<string, string>
+            {
+                { "dataItemId", dataItemId }
+            };
 
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<SignaturePlanApplicationUser>("SignaturePlanApplicationUser/GetById", HttpMethod.Get, dic);
         }
