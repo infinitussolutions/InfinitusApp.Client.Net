@@ -175,5 +175,25 @@ namespace InfinitusApp.Core.Data.Enums
                     return "\uf00d";
             }
         }
+
+        public static string NewText(this DataItemType dataItemType, bool plural = false)
+        {
+            var text = plural ? "Novos " : "Novo ";
+
+            switch (dataItemType)
+            {
+                case DataItemType.Eat:
+                case DataItemType.ImageGroup:
+                case DataItemType.Person:
+                case DataItemType.Property:
+                case DataItemType.PropertyTenancy:
+                    text = plural ? "Novas " : "Nova ";
+                    break;
+            }
+
+            text += dataItemType.ToPresentation(plural);
+
+            return text;
+        }
     }
 }
