@@ -176,7 +176,7 @@ namespace InfinitusApp.Core.Data.Enums
             }
         }
 
-        public static string NewText(this DataItemType dataItemType, bool plural = false)
+        public static string ToPresentationNew(this DataItemType dataItemType, bool plural = false)
         {
             var text = plural ? "Novos " : "Novo ";
 
@@ -196,7 +196,7 @@ namespace InfinitusApp.Core.Data.Enums
             return text;
         }
 
-        public static string MyText(this DataItemType dataItemType, bool plural = false)
+        public static string ToPresentationMy(this DataItemType dataItemType, bool plural = false)
         {
             var text = plural ? "Meus " : "Meu ";
 
