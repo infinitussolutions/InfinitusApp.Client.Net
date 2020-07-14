@@ -2098,6 +2098,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public decimal Price { get; set; }
 
-        public string Presentation => Identity + " " + Price.ToString("C");
+        public string PricePresentation => Price.ToString("C");
+
+        public string PriceAndIdentiyPresentation => Identity + ": " + PricePresentation;
     }
 }
