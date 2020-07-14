@@ -786,6 +786,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         }
 
+        #region Delivery
+
         [JsonIgnore]
         public bool HasDeliveryFees => DeliveryFees?.Count > 0;
 
@@ -797,6 +799,37 @@ namespace InfinitusApp.Core.Data.DataModels
 
         [JsonIgnore]
         public string DeliveryPriceByDistanceByActualLocationPresentation => DeliveryPriceByDistanceByActualLocation.HasValue ? (DeliveryPriceByDistanceByActualLocation > 0 ? DeliveryPriceByDistanceByActualLocation.Value.ToString("C") : "Grátis") : "";
+
+        [JsonIgnore]
+        public List<DeliveryOptionsToPresentation> DeliveryOptions
+        {
+            get
+            {
+                var l = new List<DeliveryOptionsToPresentation>();
+
+                if (DeliveryPriceByDistanceByActualLocation.HasValue)
+                {
+                    l.Add(new DeliveryOptionsToPresentation
+                    {
+                        Identity = "Entrega para sua localização atual ",
+                        Price = DeliveryPriceByDistanceByActualLocation.Value
+                    });
+                }
+
+                if (DeliveryInfo.InHands)
+                {
+                    l.Add(new DeliveryOptionsToPresentation
+                    {
+                        Identity = "Retirar no local ",
+                        Price = 0
+                    });
+                }
+
+                return l;
+            }
+        }
+
+        #endregion
 
         [JsonIgnore]
         public bool CompleteRegistrationVisible { get { return IsAdmin && !string.IsNullOrEmpty(InfoCompleteRegistration); } }
@@ -1568,7 +1601,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public double MaxKm { get; set; }
 
-        
+
     }
 
     #region Agenda
@@ -1662,9 +1695,9 @@ namespace InfinitusApp.Core.Data.DataModels
     {
         public DataItemAuxiliaryHelper()
         {
-            FirstLocation = new Location();
+            //FirstLocation = new Location();
             FirstPhone = new Phone();
-            FirstAddress = new Address();
+            //FirstAddress = new Address();
             Type = new DataItemAuxiliaryType();
             Actions = new DataItemAuxiliaryActions();
         }
@@ -2057,5 +2090,14 @@ namespace InfinitusApp.Core.Data.DataModels
 
             return objReturn;
         }
+    }
+
+    public class DeliveryOptionsToPresentation
+    {
+        public string Identity { get; set; }
+
+        public decimal Price { get; set; }
+
+        public string Presentation => Identity + " " + Price.ToString("C");
     }
 }
