@@ -295,6 +295,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string FirstAddressPresentation { get; set; }
 
+        [Obsolete("Use location", true)]
         public Location FirstLocation { get; set; }
 
         public string DateOfEventWithTitle { get; set; }
