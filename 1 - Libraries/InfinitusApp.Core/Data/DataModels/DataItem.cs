@@ -1669,10 +1669,12 @@ namespace InfinitusApp.Core.Data.DataModels
             Actions = new DataItemAuxiliaryActions();
         }
 
+        [Obsolete("Use location address", true)]
         public Location FirstLocation { get; set; }
 
         public Phone FirstPhone { get; set; }
 
+        [Obsolete("Use location address", true)]
         public Address FirstAddress { get; set; }
 
         public double ActualRatting { get; set; }
