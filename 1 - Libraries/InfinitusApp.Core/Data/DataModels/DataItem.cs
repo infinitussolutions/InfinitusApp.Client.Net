@@ -811,7 +811,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 {
                     l.Add(new DeliveryOptionsToPresentation
                     {
-                        Identity = "Entrega para sua localização atual ",
+                        Identity = "Entregador de " + Description?.Title,
                         Price = DeliveryPriceByDistanceByActualLocation.Value
                     });
                 }
@@ -828,6 +828,9 @@ namespace InfinitusApp.Core.Data.DataModels
                 return l;
             }
         }
+
+        [JsonIgnore]
+        public bool HasDeliveryOption => DeliveryOptions.Count > 0;
 
         #endregion
 
