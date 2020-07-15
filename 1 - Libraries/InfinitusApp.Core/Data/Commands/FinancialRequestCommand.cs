@@ -1,4 +1,5 @@
 ﻿
+using InfinitusApp.Core.Data.Commands.ExternalDependence.Ebanx;
 using InfinitusApp.Core.Data.DataModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,8 @@ namespace InfinitusApp.Core.Data.Commands
         /// </summary>
 
         public string SalesmanUserId { get; set; }
+
+        public EbanxDirectPaymentCommand EbanxCommand { get; set; }
     }
 
     public class UpdateFinancialRequestCommand : FinancialRequestCommand
