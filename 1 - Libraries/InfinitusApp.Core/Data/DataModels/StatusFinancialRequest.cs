@@ -10,11 +10,14 @@ namespace InfinitusApp.Core.Data.DataModels
         public StatusFinancialRequest()
         {
             Action = new StatusActionsFinancialRequest();
+            Config = new StatusFinancialRequestConfig();
         }
 
         public string Title { get; set; }
 
         public StatusActionsFinancialRequest Action { get; set; }
+
+        public StatusFinancialRequestConfig Config { get; set; }
 
         #region Relations
 
@@ -52,5 +55,10 @@ namespace InfinitusApp.Core.Data.DataModels
     {
         public bool EditRequest { get; set; }
         public bool CancelRequest { get; set; }
+    }
+
+    public class StatusFinancialRequestConfig
+    {
+        public bool IsClosed { get; set; }
     }
 }
