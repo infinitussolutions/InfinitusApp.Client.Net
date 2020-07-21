@@ -1,4 +1,5 @@
 ﻿using InfinitusApp.Core.Data.DataModels.Signature;
+using InfinitusApp.Core.Extensions;
 using Naylah.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,12 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string TypeAndMasked { get { return "(" + Type + ") " + MaskedNumber; } }
 
+        public PrimaryAndDarkColor PrimaryAndDarkColor => ColorExtention.GetARandomPrimaryAndDarkColor();
+
+        public string ValidPresentation => "mm/yy";
+
+        public string IconFromType => Type.GetLogo();
+
         #endregion
     }
 
@@ -48,5 +55,27 @@ namespace InfinitusApp.Core.Data.DataModels
         public bool IsValid { get; set; }
 
         public string Message { get; set; }
+    }
+
+    public static class CreditCartInfoExtention
+    {
+        public static string GetLogo(this string cardType)
+        {
+            switch (cardType)
+            {
+                case "martercard":
+                    return "\uf1f1";
+                case "visa":
+                    return "\uf1f0";
+                case "americanexpress":
+                    return "\uf1f3";
+                case "discover":
+                    return "\uf1f2";
+                case "jcb":
+                    return "\uf24b";
+            }
+
+            return "";
+        }
     }
 }
