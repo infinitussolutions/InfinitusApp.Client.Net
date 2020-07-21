@@ -43,11 +43,11 @@ namespace InfinitusApp.Core.Data.DataModels
 
         //public PrimaryAndDarkColor PrimaryAndDarkColor => ColorExtention.GetARandomPrimaryAndDarkColor();
 
-        public string HexPrimaryDarkColor { get; set; }
+        //public string HexPrimaryDarkColor { get; set; }
 
-        public string HexPrimaryColor { get; set; }
+        //public string HexPrimaryColor { get; set; }
 
-        public string ValidPresentation => "mm/yy";
+        public PrimaryAndDarkColor PrimaryAndDarkColor => ColorExtention.GetARandomPrimaryAndDarkColor();
 
         public string IconFromType => Type.GetLogo();
 
