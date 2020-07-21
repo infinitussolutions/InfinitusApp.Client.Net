@@ -35,6 +35,8 @@ namespace InfinitusApp.Core.Data.Commands
         public DataItemLocationInfo Location { get; set; }
 
         public DeliveryInfo DeliveryInfo { get; set; }
+
+        public string ApplicationUserId { get; set; }
     }
 
     public class CreateDataItemCommand : DataItemCommand
@@ -53,8 +55,6 @@ namespace InfinitusApp.Core.Data.Commands
         public string ParentId { get; set; }
 
         public string Type { get; set; }
-
-        public string ApplicationUserId { get; set; }
 
         public List<CreatePhoneCommand> Phones { get; set; }
     }
