@@ -63,7 +63,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             switch (cardType)
             {
-                case "martercard":
+                case "mastercard":
                     return "\uf1f1";
                 case "visa":
                     return "\uf1f0";

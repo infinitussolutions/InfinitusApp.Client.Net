@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -84,5 +85,9 @@ namespace InfinitusApp.Core.Extensions
         public string Primary { get; set; }
 
         public string PrimaryDark { get; set; }
+
+        public Color PrimaryHtml => ColorTranslator.FromHtml(Primary);
+
+        public Color PrimaryDarkHtml => ColorTranslator.FromHtml(PrimaryDark);
     }
 }
