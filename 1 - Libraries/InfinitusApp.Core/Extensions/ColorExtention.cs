@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -29,65 +28,61 @@ namespace InfinitusApp.Core.Extensions
             }
         }
 
-        public static List<PrimaryAndDarkColor> PrimaryAndDarkColors
-        {
-            get
-            {
-                return new List<PrimaryAndDarkColor>
-                {
-                    new PrimaryAndDarkColor
-                    {
-                        PrimaryDark = "#C2185B",
-                        Primary = "#E91E63"
-                    },
-                    new PrimaryAndDarkColor
-                    {
-                        PrimaryDark = "#00796B",
-                        Primary ="#009688"
-                    },
-                    new PrimaryAndDarkColor
-                    {
-                        PrimaryDark = "#7B1FA2",
-                        Primary = "#9C27B0"
-                    },
-                    new PrimaryAndDarkColor
-                    {
-                        PrimaryDark = "#1976D2",
-                        Primary = "#2196F3"
-                    },
-                    new PrimaryAndDarkColor
-                    {
-                        PrimaryDark = "#388E3C",
-                        Primary = "#4CAF50"
-                    },
-                    new PrimaryAndDarkColor
-                    {
-                        PrimaryDark = "#512DA8",
-                        Primary = "#673AB7"
-                    }
-                };
-            }
-        }
+        //public static List<PrimaryAndDarkColor> PrimaryAndDarkColors
+        //{
+        //    get
+        //    {
+        //        return new List<PrimaryAndDarkColor>
+        //        {
+        //            new PrimaryAndDarkColor
+        //            {
+        //                PrimaryDark = "#C2185B",
+        //                Primary = "#E91E63"
+        //            },
+        //            new PrimaryAndDarkColor
+        //            {
+        //                PrimaryDark = "#00796B",
+        //                Primary ="#009688"
+        //            },
+        //            new PrimaryAndDarkColor
+        //            {
+        //                PrimaryDark = "#7B1FA2",
+        //                Primary = "#9C27B0"
+        //            },
+        //            new PrimaryAndDarkColor
+        //            {
+        //                PrimaryDark = "#1976D2",
+        //                Primary = "#2196F3"
+        //            },
+        //            new PrimaryAndDarkColor
+        //            {
+        //                PrimaryDark = "#388E3C",
+        //                Primary = "#4CAF50"
+        //            },
+        //            new PrimaryAndDarkColor
+        //            {
+        //                PrimaryDark = "#512DA8",
+        //                Primary = "#673AB7"
+        //            }
+        //        };
+        //    }
+        //}
 
         public static string GetARandomHexFlatColor()
         {
             return HexFlatColors.PickRandom();
         }
 
-        public static PrimaryAndDarkColor GetARandomPrimaryAndDarkColor()
-        {
-            return PrimaryAndDarkColors.PickRandom();
-        }
+        //public static PrimaryAndDarkColor GetARandomPrimaryAndDarkColor()
+        //{
+        //    return PrimaryAndDarkColors.PickRandom();
+        //}
     }
 
-    public class PrimaryAndDarkColor
-    {
-        public string Primary { get; set; }
+    //public class PrimaryAndDarkColor
+    //{
+    //    public string Primary { get; set; }
 
-        public string PrimaryDark { get; set; }
-
-        public Color PrimaryHtml => ColorTranslator.FromHtml(Primary);
-
-        public Color PrimaryDarkHtml => ColorTranslator.FromHtml(PrimaryDark);
-    }
+    //    public string PrimaryDark { get; set; }
+    //}
 }

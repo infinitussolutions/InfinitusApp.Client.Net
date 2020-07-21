@@ -41,7 +41,11 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string TypeAndMasked { get { return "(" + Type + ") " + MaskedNumber; } }
 
-        public PrimaryAndDarkColor PrimaryAndDarkColor => ColorExtention.GetARandomPrimaryAndDarkColor();
+        //public PrimaryAndDarkColor PrimaryAndDarkColor => ColorExtention.GetARandomPrimaryAndDarkColor();
+
+        public string HexPrimaryDarkColor { get; set; }
+
+        public string HexPrimaryColor { get; set; }
 
         public string ValidPresentation => "mm/yy";
 
