@@ -80,4 +80,11 @@ namespace InfinitusApp.Core.Data.Commands
             }
         }
     }
+
+    public class ChangeCreditCardDefaultCommand
+    {
+        public string FromId { get; set; }
+
+        public string ToId { get; set; }
+    }
 }

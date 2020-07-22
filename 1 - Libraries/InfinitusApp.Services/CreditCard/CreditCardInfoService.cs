@@ -59,5 +59,15 @@ namespace InfinitusApp.Services.CreditCard
         {
             return await ServiceClient.InvokeApiAsync<SetAProblemCreditCardInfoCommand, CreditCardInfo>("CreditCardInfo/SetAProblem", cmd, HttpMethod.Patch, null);
         }
+
+        public async Task<bool> ChangeCreditCardDefault(ChangeCreditCardDefaultCommand cmd)
+        {
+            return await ServiceClient.InvokeApiAsync<ChangeCreditCardDefaultCommand, bool>("CreditCardInfo/ChangeCreditCardDefault", cmd, HttpMethod.Patch, null);
+        }
+
+        public async Task<bool> Delete(string id)
+        {
+            return await ServiceClient.InvokeApiAsync<string, bool>("CreditCardInfo/Delete", id, HttpMethod.Delete, null);
+        }
     }
 }
