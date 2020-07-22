@@ -10,6 +10,8 @@ namespace InfinitusApp.Core.Data.Commands
         public string Title { get; set; }
 
         public StatusActionsFinancialRequest Action { get; set; }
+
+        public StatusFinancialRequestConfig Config { get; set; }
     }
 
     public class CreateStatusFinancialRequestCommand : StatusFinancialRequestCommand
