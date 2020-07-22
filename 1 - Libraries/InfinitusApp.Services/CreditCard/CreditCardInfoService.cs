@@ -67,7 +67,12 @@ namespace InfinitusApp.Services.CreditCard
 
         public async Task<bool> Delete(string id)
         {
-            return await ServiceClient.InvokeApiAsync<string, bool>("CreditCardInfo/Delete", id, HttpMethod.Delete, null);
+            var dic = new Dictionary<string, string>
+            {
+                {"id", id }
+            };
+
+            return await ServiceClient.InvokeApiAsync<bool>("CreditCardInfo/Delete", HttpMethod.Delete, dic);
         }
     }
 }

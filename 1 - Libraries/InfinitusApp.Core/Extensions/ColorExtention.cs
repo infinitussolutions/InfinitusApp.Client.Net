@@ -51,11 +51,6 @@ namespace InfinitusApp.Core.Extensions
                     },
                     new PrimaryAndDarkColor
                     {
-                        PrimaryDark = "#388E3C",
-                        Primary = "#4CAF50"
-                    },
-                    new PrimaryAndDarkColor
-                    {
                         PrimaryDark = "#512DA8",
                         Primary = "#673AB7"
                     }
