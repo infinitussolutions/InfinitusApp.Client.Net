@@ -1599,13 +1599,33 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public class DeliveryInfo
     {
+        public DeliveryInfo()
+        {
+            Deliveryman = new DeliverymanInfo();
+        }
+
         public bool MakesDelivery { get; set; } = true;
 
         public bool InHands { get; set; } = true;
 
         public double MaxKm { get; set; }
 
+        public DeliverymanInfo Deliveryman { get; set; }
 
+    }
+
+    public class DeliverymanInfo
+    {
+        public DeliveryMethodEnum DeliveryMethod { get; set; }
+
+        public enum DeliveryMethodEnum
+        {
+            Unknown,
+            Motorcycle,
+            Car,
+            Bike,
+            OnFoot
+        }
     }
 
     #region Agenda
