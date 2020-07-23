@@ -25,6 +25,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string ProblemDescription { get; set; }
 
+        public bool IsDefault { get; set; }
+
         #region Relations
 
         public virtual ApplicationUser ApplicationUser { get; set; }

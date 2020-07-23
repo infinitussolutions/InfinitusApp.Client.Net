@@ -17,6 +17,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public string CardCvv { get; set; }
 
+        public bool IsDefault { get; set; }
+
         /// <summary>
         /// Format mm/yyyy
         /// </summary>
@@ -80,4 +82,11 @@ namespace InfinitusApp.Core.Data.Commands
             }
         }
     }
+
+    //public class ChangeCreditCardDefaultCommand
+    //{
+    //    public string FromId { get; set; }
+
+    //    public string ToId { get; set; }
+    //}
 }
