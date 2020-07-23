@@ -17,6 +17,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public string CardCvv { get; set; }
 
+        public bool IsDefault { get; set; }
+
         /// <summary>
         /// Format mm/yyyy
         /// </summary>
