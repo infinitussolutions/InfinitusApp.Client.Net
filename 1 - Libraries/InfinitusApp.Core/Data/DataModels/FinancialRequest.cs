@@ -48,7 +48,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public AddressComplex DeliveryAddress { get; set; }
 
-       
+
 
         #region Extention
 
@@ -106,7 +106,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public StatusFinancialRequest CurrentStatus { get; set; }
 
-        public bool HasId 
+        public bool HasId
         {
             get
             {
@@ -130,13 +130,13 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         [JsonIgnore]
-        public bool StatusIsOpen 
+        public bool StatusIsOpen
         {
             get
             {
                 return string.IsNullOrEmpty(CurrentStatus?.Id);
-             //   return Status == FinancialRequestStatus.Open; 
-            } 
+                //   return Status == FinancialRequestStatus.Open; 
+            }
         }
 
         [JsonIgnore]
@@ -419,12 +419,12 @@ namespace InfinitusApp.Core.Data.DataModels
         public InvoiceInfo()
         {
             PayableWith = InvoicePaymentType.Any;
-           // InfoForFirstDueDate = new InvoiceDate();
+            // InfoForFirstDueDate = new InvoiceDate();
         }
 
         public int Quantity { get; set; }
 
-       // public InvoiceDate InfoForFirstDueDate { get; set; }
+        // public InvoiceDate InfoForFirstDueDate { get; set; }
 
         public bool OnlyWorkingDays { get; set; }
 
@@ -704,7 +704,7 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        
+
 
         public static FinancialRequestPresentationStatus FinancialRequestStatusToPresentation(FinancialRequestStatus status)
         {
@@ -744,7 +744,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public string PaymentMethod { get; set; }
         public int Instalments { get; set; }
 
-        public bool HasBoleto 
+        public bool HasBoleto
         {
             get
             {
@@ -752,7 +752,7 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public bool HasExternalModel 
+        public bool HasExternalModel
         {
             get
             {
@@ -776,9 +776,18 @@ namespace InfinitusApp.Core.Data.DataModels
         #region Relations
 
         public virtual FinancialRequest FinancialRequest { get; set; }
+
         public virtual string FinancialRequestId { get; set; }
+
         public virtual StatusFinancialRequest StatusFinancialRequest { get; set; }
+
         public virtual string StatusFinancialRequestId { get; set; }
+
+        #endregion
+
+        #region Helpers
+
+        public string ActualPresentation => CreatedAt.Value.ToString("dd MMM hh:mm") + " | " + StatusFinancialRequest.Title + "\n" + Message;
 
         #endregion
     }
