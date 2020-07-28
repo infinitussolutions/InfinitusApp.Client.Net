@@ -41,7 +41,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Phones = new List<Phone>();
             TermsOfUseAccepteds = new List<TermsOfUseAccepted>();
             Addresses = new List<Address>();
-
+            ExternalConnections = new List<ExternalConnection>();
         }
 
         public PhoneComplex Phone { get; set; }
@@ -77,6 +77,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public IList<Indication> Indications { get; set; }
 
         public IList<Address> Addresses { get; set; }
+
+        public IList<ExternalConnection> ExternalConnections { get; set; }
 
         #region Enum
         public enum UserStatus

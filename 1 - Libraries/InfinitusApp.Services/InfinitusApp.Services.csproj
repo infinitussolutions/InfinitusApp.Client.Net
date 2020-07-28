@@ -23,4 +23,10 @@
     <ProjectReference Include="..\InfinitusApp.Core\InfinitusApp.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="iugu.net">
+      <Version>1.9.5</Version>
+    </PackageReference>
+  </ItemGroup>
+
 </Project>
