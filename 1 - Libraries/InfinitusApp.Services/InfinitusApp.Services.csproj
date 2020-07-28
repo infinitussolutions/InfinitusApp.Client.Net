@@ -5,7 +5,7 @@
 	<PackageTargetFallback Condition="'$(TargetFramework)'=='Net45'">$(PackageTargetFallback);portable-net45+win8+wpa81+wp8</PackageTargetFallback>
 	<Authors>Infinitus Solutions Team</Authors>
 	<Company>Infinitus Solutions</Company>
-	<Version>1.1.60</Version>
+	<Version>1.1.61</Version>
 	<Description>InfinitusApp .net api library</Description>
   </PropertyGroup>
 
@@ -21,12 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InfinitusApp.Core\InfinitusApp.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="iugu.net">
-      <Version>1.9.5</Version>
-    </PackageReference>
   </ItemGroup>
 
 </Project>
