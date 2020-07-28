@@ -28,20 +28,6 @@ namespace InfinitusApp.Services.FInancial
 
         public async Task<List<FinancialRequest>> GetAllByDataStoreId(string dataStoreId, string customerEmail = "", Expression<Func<FinancialRequest, bool>> entityFilter = null, int skip = 0, int top = 10)
         {
-            //var dic = new Dictionary<string, string>
-            //{
-            //    { "dataStoreId", dataStoreId },
-            //    { "$skip", skip.ToString() },
-            //    { "$top", top.ToString() }
-            //};
-
-
-
-            //if (parameter != null && !string.IsNullOrEmpty(parameter?.ODataFilter))
-            //    dic.Add("$filter", parameter.ODataFilter);
-
-            //dic.Add("$orderby", "CreatedAt desc");
-
             var odataBuilder = new ODataQueryBuilder<FinancialRequest>("")
                  .For<FinancialRequest>(x => x)
                  .ByList()
@@ -61,6 +47,34 @@ namespace InfinitusApp.Services.FInancial
                 dic.Add("customerEmail", customerEmail);
 
             return await ServiceClient.InvokeApiAsync<List<FinancialRequest>>("FinancialRequest/GetAllByDataStoreId", HttpMethod.Get, dic);
+        }
+
+        public async Task<List<FinancialRequest>> GetAll(string customerEmail = "", Expression<Func<FinancialRequest, bool>> entityFilter = null, Expression<Func<FinancialRequest, object>> entityOrderBy = null, int? skip = null, int? top = null)
+        {
+            var odataBuilder = new ODataQueryBuilder<FinancialRequest>("")
+               .For<FinancialRequest>(x => x)
+               .ByList()
+               .OrderByDescending(x => x.CreatedAt)
+               ;
+
+            if (skip.HasValue)
+                odataBuilder.Skip(skip.Value);
+
+            if (top.HasValue)
+                odataBuilder.Top(top.Value);
+
+            if (entityFilter != null)
+                odataBuilder.Filter(entityFilter);
+
+            if (entityOrderBy != null)
+                odataBuilder.OrderBy(entityOrderBy);
+
+            var dic = odataBuilder.ToDictionary();
+
+            if (!string.IsNullOrEmpty(customerEmail))
+                dic.Add("customerEmail", customerEmail);
+
+            return await ServiceClient.InvokeApiAsync<List<FinancialRequest>>("FinancialRequest/GetAll", HttpMethod.Get, dic);
         }
 
         public async Task<int> GetAllByDataStoreIdCount(string dataStoreId, string customerEmail = "")
