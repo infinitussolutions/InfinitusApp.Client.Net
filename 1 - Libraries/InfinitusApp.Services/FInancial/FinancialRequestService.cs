@@ -49,7 +49,7 @@ namespace InfinitusApp.Services.FInancial
             return await ServiceClient.InvokeApiAsync<List<FinancialRequest>>("FinancialRequest/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
 
-        public async Task<List<FinancialRequest>> GetAll(Expression<Func<FinancialRequest, bool>> entityFilter = null, Expression<Func<FinancialRequest, object>> entityOrderBy = null, int? skip = null, int? top = null)
+        public async Task<List<FinancialRequest>> GetAll(string customerEmail = "", Expression<Func<FinancialRequest, bool>> entityFilter = null, Expression<Func<FinancialRequest, object>> entityOrderBy = null, int? skip = null, int? top = null)
         {
             var odataBuilder = new ODataQueryBuilder<FinancialRequest>("")
                .For<FinancialRequest>(x => x)
@@ -70,6 +70,9 @@ namespace InfinitusApp.Services.FInancial
                 odataBuilder.OrderBy(entityOrderBy);
 
             var dic = odataBuilder.ToDictionary();
+
+            if (!string.IsNullOrEmpty(customerEmail))
+                dic.Add("customerEmail", customerEmail);
 
             return await ServiceClient.InvokeApiAsync<List<FinancialRequest>>("FinancialRequest/GetAll", HttpMethod.Get, dic);
         }
