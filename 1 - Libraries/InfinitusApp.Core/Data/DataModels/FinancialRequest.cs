@@ -787,7 +787,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #region Helpers
 
-        public string ActualPresentation => CreatedAt.Value.ToString("dd MMM hh:mm") + " | " + StatusFinancialRequest.Title + "\n" + Message;
+        public string ActualPresentation => CreatedAt.Value.ToString("dd MMM hh:mm") + " | " + StatusFinancialRequest.Title + " | " + Message;
 
         #endregion
     }
