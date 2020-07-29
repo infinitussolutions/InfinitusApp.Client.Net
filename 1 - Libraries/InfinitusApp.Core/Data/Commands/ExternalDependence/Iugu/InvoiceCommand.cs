@@ -34,7 +34,7 @@ namespace InfinitusApp.Core.Data.Commands.ExternalDependence.Iugu
 
     public class CreateWithCreditCardCommand : InvoiceCommand
     {
-
+        public string PaymentMethodId { get; set; }
     }
 
     public class CreateWithBankSlipCommand : InvoiceCommand
