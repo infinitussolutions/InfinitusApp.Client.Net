@@ -77,17 +77,17 @@ namespace InfinitusApp.Services.FInancial
             return await ServiceClient.InvokeApiAsync<List<FinancialRequest>>("FinancialRequest/GetAll", HttpMethod.Get, dic);
         }
 
-        public async Task<int> GetAllByDataStoreIdCount(string dataStoreId, string customerEmail = "")
+        public async Task<int> GetCount(string customerEmail = "", bool anyOpen = true)
         {
             var dic = new Dictionary<string, string>
             {
-                { "dataStoreId", dataStoreId }
+                { "anyOpen", anyOpen.ToString() }
             };
 
             if (!string.IsNullOrEmpty(customerEmail))
                 dic.Add("customerEmail", customerEmail);
 
-            return await ServiceClient.InvokeApiAsync<int>("FinancialRequest/GetAllByDataStoreIdCount", HttpMethod.Get, dic);
+            return await ServiceClient.InvokeApiAsync<int>("FinancialRequest/GetCount", HttpMethod.Get, dic);
         }
 
         public async Task<FinancialRequest> GetById(string Id)
