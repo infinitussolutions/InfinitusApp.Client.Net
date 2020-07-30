@@ -15,5 +15,6 @@ namespace InfinitusApp.Core.Data.Commands
     public class CreateExternalConnectionCommand : ExternalConnectionCommand
     {
         public string ApplicationUserId { get; set; }
+        public bool IsTest { get; set; }
     }
 }
