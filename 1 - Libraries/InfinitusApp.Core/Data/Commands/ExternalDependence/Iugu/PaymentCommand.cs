@@ -11,10 +11,10 @@ namespace InfinitusApp.Core.Data.Commands.ExternalDependence.Iugu
         /// <summary>
         /// if informed, SubscriptionId is not required
         /// </summary>
-        public IuguAccountInfo IuguAccountInfo { get; set; }
+        public IuguPaymentAccountInfo IuguAccountInfo { get; set; }
     }
 
-    public class IuguAccountInfo
+    public class IuguPaymentAccountInfo
     {
         public string AccountId { get; set; }
 
