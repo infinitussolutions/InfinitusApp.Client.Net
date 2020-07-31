@@ -18,7 +18,13 @@ namespace InfinitusApp.Core.Data.DataModels.External.Iugu
         /// Pessoa Física || Pessoa Jurídica
         /// </summary>
         [JsonProperty("person_type")]
-        public string AccountType { get; set; }
+        public string AccountType
+        {
+            get
+            {
+                return PhysicalPerson ? "Pessoa Física" : "Pessoa Jurídica";
+            }
+        }
         [JsonProperty("automatic_transfer")]
         public bool AutomaticWithdrawal { get { return false; } }
         [JsonProperty("cnpj")]
@@ -51,6 +57,8 @@ namespace InfinitusApp.Core.Data.DataModels.External.Iugu
         public string BankAccountType { get; set; }
         [JsonProperty("bank_cc")]
         public string BankAccountNumber { get; set; }
+        [JsonIgnore]
+        public bool PhysicalPerson { get; set; } = true;
     }
 
     public class IuguRequestWithdrawCommand
