@@ -53,6 +53,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string IconFromType => Type.GetLogo();
 
+        public bool IsIugu { get; set; }
+
         #endregion
     }
 
