@@ -26,10 +26,6 @@ namespace InfinitusApp.Core.Data.DataModels.Voucher
 
         #region Action
 
-        public FidelityCard UsedOnFidelityCard { get; set; }
-
-        public string UsedOnFidelityCardId { get; set; }
-
         public FinancialRequest UsedOnFinancialRequest { get; set; }
 
         public string UsedOnFinancialRequestId { get; set; }
@@ -61,16 +57,13 @@ namespace InfinitusApp.Core.Data.DataModels.Voucher
         public DateTime ExpiresAt => VoucherCampaign != null ? VoucherCampaign.Config.ToUse.ExpiresAt.HasValue ? VoucherCampaign.Config.ToUse.ExpiresAt.Value.Date : DateTime.MaxValue : DateTime.MaxValue;
 
         [JsonIgnore]
-        public string CanAddOnlyFidelityCardId => VoucherCampaign != null ? VoucherCampaign.Config.ToUse.OnlyUseOn.ReferenceType == VoucherCampaignConfigToUseOnType.FidelityCard ? VoucherCampaign.Config.ToUse.OnlyUseOn.ReferenceId : "" : "";
-
-        [JsonIgnore]
         public string CanAddOnlyFinancialRequestId => VoucherCampaign != null ? VoucherCampaign.Config.ToUse.OnlyUseOn.ReferenceType == VoucherCampaignConfigToUseOnType.FinancialRequest ? VoucherCampaign.Config.ToUse.OnlyUseOn.ReferenceId : "" : "";
 
         [JsonIgnore]
         public string CanUsedOnlyByApplicationUserId => VoucherCampaign != null ? VoucherCampaign.Config.ToUse.OnlyUseBy.ReferenceType == VoucherCampaignConfigToUseByType.ApplicationUser ? VoucherCampaign.Config.ToUse.OnlyUseBy.ReferenceId : "" : "";
 
         [JsonIgnore]
-        public bool HasRestriction => !string.IsNullOrEmpty(CanAddOnlyFidelityCardId) || !string.IsNullOrEmpty(CanAddOnlyFinancialRequestId) || !string.IsNullOrEmpty(CanUsedOnlyByApplicationUserId);
+        public bool HasRestriction => !string.IsNullOrEmpty(CanAddOnlyFinancialRequestId) || !string.IsNullOrEmpty(CanUsedOnlyByApplicationUserId);
 
         #endregion
     }

@@ -17,14 +17,14 @@ namespace InfinitusApp.Services.Voucher
 
         }
 
-        public async Task<VoucherCampaign> Create(CreateSignaturePlanCommand createCommand)
+        public async Task<VoucherCampaign> Create(CreateVoucherCampaignCommand createCommand)
         {
-            return await ServiceClient.InvokeApiAsync<CreateSignaturePlanCommand, VoucherCampaign>(nameof(VoucherCampaign) + "/Create", createCommand);
+            return await ServiceClient.InvokeApiAsync<CreateVoucherCampaignCommand, VoucherCampaign>(nameof(VoucherCampaign) + "/Create", createCommand);
         }
 
-        public async Task<VoucherCampaign> Update(UpdateSignaturePlanCommand createCommand)
+        public async Task<VoucherCampaign> Update(UpdateVoucherCampaignCommand createCommand)
         {
-            return await ServiceClient.InvokeApiAsync<UpdateSignaturePlanCommand, VoucherCampaign>(nameof(VoucherCampaign) + "/Update", createCommand, HttpMethod.Patch, null);
+            return await ServiceClient.InvokeApiAsync<UpdateVoucherCampaignCommand, VoucherCampaign>(nameof(VoucherCampaign) + "/Update", createCommand, HttpMethod.Patch, null);
         }
 
         public async Task<List<VoucherCampaign>> GetAll(Expression<Func<VoucherCampaign, bool>> entityFilter = null, Expression<Func<VoucherCampaign, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)

@@ -47,7 +47,6 @@ namespace InfinitusApp.Core.Data.DataModels.Voucher
     public enum VoucherCampaignConfigToUseOnType
     {
         Undefined,
-        FidelityCard,
         FinancialRequest,
     }
 }
