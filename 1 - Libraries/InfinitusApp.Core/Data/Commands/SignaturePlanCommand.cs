@@ -1,4 +1,5 @@
-﻿using InfinitusApp.Core.Data.DataModels;
+﻿using InfinitusApp.Core.Data.Commands.ExternalDependence.Iugu;
+using InfinitusApp.Core.Data.DataModels;
 using InfinitusApp.Core.Data.DataModels.Signature;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,8 @@ namespace InfinitusApp.Core.Data.Commands
     public class CreateSignaturePlanCommand : SignatureBaseCommand
     {
         public string DataStoreId { get; set; }
+
+        public CreateIuguPlanCommand IuguCommand { get; set; }
 
         public string MsgIsNotValid
         {
