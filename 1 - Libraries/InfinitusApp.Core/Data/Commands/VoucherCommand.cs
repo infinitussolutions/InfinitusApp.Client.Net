@@ -16,7 +16,7 @@ namespace InfinitusApp.Core.Data.Commands
         public VoucherCampaignConfig Config { get; set; }
     }
 
-    public class CreateVoucherCampanignCommand : VoucherCampaignCommand
+    public class CreateVoucherCampaignCommand : VoucherCampaignCommand
     {
 
         public string ParentDataItemId { get; set; }
