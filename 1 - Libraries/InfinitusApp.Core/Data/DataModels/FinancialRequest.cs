@@ -48,7 +48,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public AddressComplex DeliveryAddress { get; set; }
 
-
+        public decimal DeliveryPrice { get; set; }
 
         #region Extention
 
@@ -196,18 +196,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #region Delivery
 
-        public decimal DeliveryPrice { get; set; }
-
-        public string DeliveryPricePresentation
-        {
-            get
-            {
-                if (DeliveryPrice == 0)
-                    return "";
-
-                return DeliveryPrice.ToString("C");
-            }
-        }
+        [JsonIgnore]
+        public string DeliveryPricePresentation => DeliveryPrice.ToString("C");
 
         #endregion
 

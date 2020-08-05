@@ -31,6 +31,7 @@ namespace InfinitusApp.Core.Data.Commands
 
         public AddressComplex DeliveryAddress { get; set; }
 
+        public decimal DeliveryPrice { get; set; }
     }
 
     public class CreateFinancialRequestCommand : FinancialRequestCommand
