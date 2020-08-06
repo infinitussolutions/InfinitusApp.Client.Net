@@ -40,14 +40,13 @@ namespace InfinitusApp.Core.Data.DataModels.External.Iugu
                 if (Agency == null)
                     return string.Empty;
 
-                if (AgencyMask.Contains("-"))
+                while (Agency.Length < AgencyMaskLenght)
                 {
-
-                    if (Agency.Length < AgencyMask.IndexOf("-"))
-                        return Number;
-
-                    return Agency.Insert(AgencyMask.IndexOf("-"), "-");
+                    Agency = Agency.Insert(0, "0");
                 }
+
+                if (AgencyMask.Contains("-"))
+                    return Agency.Insert(Agency.Length - 1, "-");
 
                 return Agency;
             }
@@ -60,19 +59,13 @@ namespace InfinitusApp.Core.Data.DataModels.External.Iugu
                 if (Number == null)
                     return string.Empty;
 
-                while ((NumberMask.Contains("-") ? Number.Length + 1 : Number.Length) < NumberMaskLenght)
+                while (Number.Length < NumberMaskLenght)
                 {
-                    Number.Insert(0, "0");
+                    Number = Number.Insert(0, "0");
                 }
 
                 if (NumberMask.Contains("-"))
-                {
-                    if (Number.Length < NumberMask.IndexOf("-"))
-                        return Number;
-
-                    return Number.Insert(NumberMask.IndexOf("-"), "-");
-                }
-
+                    return Number.Insert(Number.Length - 1, "-");
 
                 return Number;
             }
