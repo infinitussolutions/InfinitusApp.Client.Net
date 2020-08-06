@@ -29,13 +29,13 @@ namespace InfinitusApp.Core.Data.Commands
 
         public TermsOfUse TermsOfUse { get; set; }
 
+        public CreateIuguPlanCommand IuguCommand { get; set; }
+
     }
 
     public class CreateSignaturePlanCommand : SignatureBaseCommand
     {
         public string DataStoreId { get; set; }
-
-        public CreateIuguPlanCommand IuguCommand { get; set; }
 
         public string MsgIsNotValid
         {
