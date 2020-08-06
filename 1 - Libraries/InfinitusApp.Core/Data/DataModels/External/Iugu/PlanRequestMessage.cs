@@ -37,6 +37,16 @@ namespace InfinitusApp.Core.Data.DataModels.External.Iugu
             CurrencyTypeName = CurrencyType.BRL.ToString();
         }
 
+        public PlanRequestMessage(UpdateSignaturePlanCommand cmd, string dataStoreId)
+        {
+            Name = cmd.Title;
+            UniqueIdentifier = string.Format("{0} - {1}", cmd.Title, dataStoreId);
+            Cycle = 1;
+            IntervalType = PlanIntervalType.Monthly.ToString();
+            ValueInCents = int.Parse((cmd.Amount * 100).ToString());
+            CurrencyTypeName = CurrencyType.BRL.ToString();
+        }
+
         [JsonProperty("name")]
         public string Name { get; }
         [JsonProperty("identifier")]
