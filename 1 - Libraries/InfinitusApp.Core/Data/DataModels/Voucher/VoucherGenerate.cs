@@ -39,6 +39,15 @@ namespace InfinitusApp.Core.Data.DataModels.Voucher
         #region Helpers
 
         [JsonIgnore]
+        public string Emoji { get; set; }
+
+        [JsonIgnore]
+        public string CreateAtPresentation => CreatedAt.HasValue ? CreatedAt.Value.ToString("dd MMMM") : "";
+
+        [JsonIgnore]
+        public string ValidAtPresentation => !(ExpiresAt == DateTime.MaxValue) ? ExpiresAt.ToString("dd MMMM") : "";
+
+        [JsonIgnore]
         public bool IsUsed => UsedAt.HasValue;
 
         [JsonIgnore]

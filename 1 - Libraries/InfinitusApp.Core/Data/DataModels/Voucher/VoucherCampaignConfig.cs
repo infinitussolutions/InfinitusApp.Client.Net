@@ -27,6 +27,8 @@ namespace InfinitusApp.Core.Data.DataModels.Voucher
 
         public int Value { get; set; }
 
+        public string ValuePresentation => Type == VoucherCampaignTypeToIdentityCreditInfoType.Price ? Value.ToString("C") : Value.ToString() + "%";
+
         public string ValueFromTypePresentation => Type == VoucherCampaignTypeToIdentityCreditInfoType.Price ? Value.ToString("N") : Value.ToString() + "%";
 
         public string CurrencySymbol => Type == VoucherCampaignTypeToIdentityCreditInfoType.Price ? NumberFormatInfo.CurrentInfo.CurrencySymbol : "";
