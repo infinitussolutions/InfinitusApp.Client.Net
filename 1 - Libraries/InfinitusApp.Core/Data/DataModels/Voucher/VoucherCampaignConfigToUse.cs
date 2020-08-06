@@ -22,6 +22,8 @@ namespace InfinitusApp.Core.Data.DataModels.Voucher
         public DateTime? ExpiresAt { get; set; }
 
         public bool HasExpiration => ExpiresAt.HasValue;
+
+        public string ExpiresAtPresentation => HasExpiration ? ExpiresAt.Value.ToString("dd MMMM yyyy") : "";
     }
 
     public class VoucherCampaignConfigToUseOnlyUseBy

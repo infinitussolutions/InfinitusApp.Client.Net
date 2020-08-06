@@ -26,6 +26,29 @@ namespace InfinitusApp.Core.Data.DataModels.Voucher
             ToType != VoucherCampaignToGenerateCodeToType.AddAStaticCode &&
             ToType != VoucherCampaignToGenerateCodeToType.FavoriteADataItem || !string.IsNullOrEmpty(ReferenceId)
             ;
+
+        public string ToTypePresentation 
+        { 
+            get
+            {
+                switch (ToType)
+                {
+                    
+
+                    case VoucherCampaignToGenerateCodeToType.AddARandomCode:
+                        return "Randômico";
+                    case VoucherCampaignToGenerateCodeToType.AddAStaticCode:
+                        return "Estático";
+                    case VoucherCampaignToGenerateCodeToType.FavoriteADataItem:
+                        return "Favoritar um Data Item";
+                    case VoucherCampaignToGenerateCodeToType.Draw:
+                        return "Sorteio";
+                    case VoucherCampaignToGenerateCodeToType.Undefined:
+                    default:
+                        return "";
+                }
+            }
+        }
     }
 
     public enum VoucherCampaignToGenerateCodeToType
