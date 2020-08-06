@@ -60,6 +60,11 @@ namespace InfinitusApp.Core.Data.DataModels.External.Iugu
                 if (Number == null)
                     return string.Empty;
 
+                while ((NumberMask.Contains("-") ? Number.Length + 1 : Number.Length) < NumberMaskLenght)
+                {
+                    Number.Insert(0, "0");
+                }
+
                 if (NumberMask.Contains("-"))
                 {
                     if (Number.Length < NumberMask.IndexOf("-"))
@@ -67,6 +72,7 @@ namespace InfinitusApp.Core.Data.DataModels.External.Iugu
 
                     return Number.Insert(NumberMask.IndexOf("-"), "-");
                 }
+
 
                 return Number;
             }
