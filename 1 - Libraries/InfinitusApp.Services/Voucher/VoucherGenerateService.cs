@@ -55,14 +55,14 @@ namespace InfinitusApp.Services.Voucher
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<VoucherGenerate>(nameof(VoucherGenerate) + "/GetById", HttpMethod.Get, dic);
         }
 
-        public async Task<bool> SetUsedByCurrentApplicationUser(string voucherGenerateId)
+        public async Task<VoucherGenerate> SetUsedByCurrentApplicationUser(string voucherCode)
         {
             var dic = new Dictionary<string, string>
             {
-                {"voucherGenerateId",voucherGenerateId }
+                {"voucherCode",voucherCode }
             };
 
-            return await ServiceClient.MobileServiceClient.InvokeApiAsync<bool>(nameof(VoucherGenerate) + "/SetUsedByCurrentApplicationUser", HttpMethod.Patch, dic);
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<VoucherGenerate>(nameof(VoucherGenerate) + "/SetUsedByCurrentApplicationUser", HttpMethod.Patch, dic);
         }
     }
 }
