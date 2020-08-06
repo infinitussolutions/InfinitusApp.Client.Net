@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace InfinitusApp.Core.Data.DataModels.Voucher
@@ -25,6 +26,14 @@ namespace InfinitusApp.Core.Data.DataModels.Voucher
         public VoucherCampaignTypeToIdentityCreditInfoType Type { get; set; }
 
         public int Value { get; set; }
+
+        public string ValuePresentation => Type == VoucherCampaignTypeToIdentityCreditInfoType.Price ? Value.ToString("C") : Value.ToString() + "%";
+
+        public string ValueFromTypePresentation => Type == VoucherCampaignTypeToIdentityCreditInfoType.Price ? Value.ToString("N") : Value.ToString() + "%";
+
+        public string CurrencySymbol => Type == VoucherCampaignTypeToIdentityCreditInfoType.Price ? NumberFormatInfo.CurrentInfo.CurrencySymbol : "";
+
+        public string PercentMsg => Type == VoucherCampaignTypeToIdentityCreditInfoType.Percent ? "OFF" : "";
     }
 
     public enum VoucherCampaignTypeToIdentityCreditInfoType
