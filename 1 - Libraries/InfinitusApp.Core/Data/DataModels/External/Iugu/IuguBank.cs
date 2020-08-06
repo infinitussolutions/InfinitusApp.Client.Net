@@ -56,7 +56,7 @@ namespace InfinitusApp.Core.Data.DataModels.External.Iugu
         {
             get
             {
-                if (Number == null)
+                if (Number == null || Number.Length < 4)
                     return string.Empty;
 
                 while (Number.Length < NumberMaskLenght)
