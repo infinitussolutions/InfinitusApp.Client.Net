@@ -6,11 +6,7 @@ namespace InfinitusApp.Core.Extensions
 {
     public static class EmojiExtention
     {
-        private static List<string> EmojiHappy
-        {
-            get
-            {
-                return new List<string>
+        private static List<string> EmojiHappy => new List<string>
                 {
                     "😀",
                     "😁",
@@ -19,30 +15,38 @@ namespace InfinitusApp.Core.Extensions
                     "😄",
                     "🙂",
                     "🎉",
-                    "🎇",
+                    "😎",
+                    "😍",
                     "😝",
                     "👏",
                     "🤙"
                 };
-            }
-        }
 
-        private static List<string> EmojiMoney
-        {
-            get
-            {
-                return new List<string>
+        private static List<string> EmojiMoney => new List<string>
                 {
                     "🤑",
                     "💰",
                     "💵",
                     "💲",
                 };
+
+        private static List<string> EmojiHappyAndMoney
+        {
+            get
+            {
+                var l = new List<string>();
+
+                l.AddRange(EmojiHappy);
+                l.AddRange(EmojiMoney);
+
+                return l;
             }
         }
 
-        public static string GetARandomEmojiHappy { get { return EmojiHappy.PickRandom(); } }
+        public static string GetARandomEmojiHappy => EmojiHappy.PickRandom();
 
-        public static string GetARandomEmojiMoney { get { return EmojiMoney.PickRandom(); } }
+        public static string GetARandomEmojiMoney => EmojiMoney.PickRandom();
+
+        public static string GetARandomEmojiHappyAndMoney => EmojiHappyAndMoney.PickRandom();
     }
 }
