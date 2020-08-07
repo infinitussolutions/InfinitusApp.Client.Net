@@ -39,6 +39,9 @@ namespace InfinitusApp.Core.Data.DataModels.Voucher
         #region Helpers
 
         [JsonIgnore]
+        public string CodeAndValue => Code + "(" + CreditValue.ToString("C") + ")";
+
+        [JsonIgnore]
         public string Emoji { get; set; }
 
         [JsonIgnore]
