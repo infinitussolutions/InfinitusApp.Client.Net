@@ -1,4 +1,5 @@
 ﻿using InfinitusApp.Core.Data.DataModels.Signature;
+using InfinitusApp.Core.Data.DataModels.Voucher;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace InfinitusApp.Core.Data.DataModels
             ExternalModel = new FinancialRequestExternalModel();
             FinancialRequestStatusRelations = new List<FinancialRequestStatusRelation>();
             SignaturePlanConsumptions = new List<SignaturePlanConsumption>();
+            VoucherGenerateList = new List<VoucherGenerate>();
         }
 
         public string Observation { get; set; }
@@ -99,6 +101,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public List<FinancialRequestStatusRelation> FinancialRequestStatusRelations { get; set; }
 
         public List<SignaturePlanConsumption> SignaturePlanConsumptions { get; set; }
+
+        public List<VoucherGenerate> VoucherGenerateList { get; set; }
 
         #endregion
 
@@ -265,13 +269,15 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #region Request
 
+        public int TotalDiscountFromVoucher => VoucherGenerateList.Sum(x => x.CreditValue);
 
+        public string TotalDiscountFromVoucherPresentation => TotalDiscountFromVoucher.ToString("C");
 
         public decimal TotalRequest
         {
             get
             {
-                return (TotalItemsWithDiscount + DeliveryPrice + TotalRequestExtraCharge) - Discount;
+                return ((TotalItemsWithDiscount + DeliveryPrice + TotalRequestExtraCharge) - Discount) - TotalDiscountFromVoucher;
             }
         }
 
