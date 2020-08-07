@@ -8,6 +8,11 @@ namespace InfinitusApp.Core.Data.DataModels.External.Iugu
 {
     public class PlanRequestMessage
     {
+        public PlanRequestMessage()
+        {
+
+        }
+
         public PlanRequestMessage(string name, string uniqueIdentifier, int cycle, PlanIntervalType interval, int valueInCents)
         {
             Name = name;

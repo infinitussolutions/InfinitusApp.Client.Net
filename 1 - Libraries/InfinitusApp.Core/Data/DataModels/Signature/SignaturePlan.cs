@@ -22,6 +22,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
             Consumptions = new List<SignaturePlanConsumption>();
             Actions = new List<SignaturePlanAction>();
             TermsOfUse = new TermsOfUse();
+            ExternalReference = new ExternalReference();
         }
 
         public string Title { get; set; }
@@ -31,6 +32,8 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         public decimal Amount { get; set; }
 
         public SignaturePlanConfig Config { get; set; }
+
+        public ExternalReference ExternalReference { get; set; }
 
         public bool Active { get; set; } = true;
 
