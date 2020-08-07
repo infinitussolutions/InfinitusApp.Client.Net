@@ -2,6 +2,7 @@
 using InfinitusApp.Core.Data.Commands.ExternalDependence.Ebanx;
 using InfinitusApp.Core.Data.Commands.ExternalDependence.Iugu;
 using InfinitusApp.Core.Data.DataModels;
+using InfinitusApp.Core.Data.DataModels.Voucher;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,6 +40,7 @@ namespace InfinitusApp.Core.Data.Commands
         public CreateFinancialRequestCommand()
         {
             Items = new List<CreateFinancialRequestItemCommand>();
+            VouchersGenerate = new List<VoucherGenerate>();
         }
 
         public string DataStoreId { get; set; }
@@ -46,6 +48,8 @@ namespace InfinitusApp.Core.Data.Commands
         public string CustomerId { get; set; }
 
         public IList<CreateFinancialRequestItemCommand> Items { get; set; }
+
+        public IList<VoucherGenerate> VouchersGenerate { get; set; }
 
         public bool IsTest { get; set; }
 
