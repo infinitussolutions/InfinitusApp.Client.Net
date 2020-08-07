@@ -45,12 +45,31 @@ namespace InfinitusApp.Services.Voucher
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<VoucherGenerate>>(nameof(VoucherGenerate) + "/GetAll", HttpMethod.Get, dic);
         }
 
-        public async Task<List<VoucherGenerate>> GetAllValidByCurrentAppUser()
+        public async Task<List<VoucherGenerate>> GetAllValidByCurrentAppUser(Expression<Func<VoucherGenerate, bool>> entityFilter = null, Expression<Func<VoucherGenerate, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
-            var dic = new Dictionary<string, string>
-            {
+            var odataBuilder = new ODataQueryBuilder<VoucherGenerate>("")
+                    .For<VoucherGenerate>(x => x)
+                    .ByList();
 
-            };
+            if (top.HasValue)
+                odataBuilder.Top(top.Value);
+
+            if (skip.HasValue)
+                odataBuilder.Skip(skip.Value);
+
+            if (entityFilter != null)
+                odataBuilder.Filter(entityFilter);
+
+            if (entityOrderBy != null)
+            {
+                if (desc)
+                    odataBuilder.OrderByDescending(entityOrderBy);
+
+                else
+                    odataBuilder.OrderBy(entityOrderBy);
+            }
+
+            var dic = odataBuilder.ToDictionary();
 
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<VoucherGenerate>>(nameof(VoucherGenerate) + "/GetAllValidByCurrentAppUser", HttpMethod.Get, dic);
         }
