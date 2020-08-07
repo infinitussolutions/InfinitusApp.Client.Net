@@ -45,6 +45,16 @@ namespace InfinitusApp.Services.Voucher
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<VoucherGenerate>>(nameof(VoucherGenerate) + "/GetAll", HttpMethod.Get, dic);
         }
 
+        public async Task<List<VoucherGenerate>> GetAllValidByCurrentAppUser()
+        {
+            var dic = new Dictionary<string, string>
+            {
+
+            };
+
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<VoucherGenerate>>(nameof(VoucherGenerate) + "/GetAllValidByCurrentAppUser", HttpMethod.Get, dic);
+        }
+
         public async Task<VoucherGenerate> GetById(string id)
         {
             var dic = new Dictionary<string, string>
