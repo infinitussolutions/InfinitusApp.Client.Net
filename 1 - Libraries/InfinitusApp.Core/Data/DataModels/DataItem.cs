@@ -287,6 +287,17 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public Availability Availability { get; set; }
 
+        public string WebAdminUri
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Id))
+                    return "http://ec2-18-222-239-212.us-east-2.compute.amazonaws.com/#/order/";
+
+                return string.Format("http://ec2-18-222-239-212.us-east-2.compute.amazonaws.com/#/order/{0}", Id);
+            }
+        }
+
         #region Helpers Props
 
         public DataItemHelper Helper { get; set; }
