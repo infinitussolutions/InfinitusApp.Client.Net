@@ -83,5 +83,6 @@ namespace InfinitusApp.Core.Data.DataModels
         public const string FidelityCard = "45538054-D44E-4C9B-ACE5-226F3448FA24";
         public const string PaymentWithCreditCart = "E7CB723D-FDF5-4164-AA81-605196C372A6";
         public const string PaymentWithBankSlip = "2402C9B7-18AE-49D9-BADF-7841419101A6";
+        public const string Voucher = "A0781F2A-E191-4D28-A111-1774A785203D";
     }
 }
