@@ -40,7 +40,7 @@ namespace InfinitusApp.Core.Data.Commands
         public CreateFinancialRequestCommand()
         {
             Items = new List<CreateFinancialRequestItemCommand>();
-            VouchersGenerate = new List<VoucherGenerate>();
+            //VouchersGenerate = new List<VoucherGenerate>();
         }
 
         public string DataStoreId { get; set; }
@@ -49,7 +49,7 @@ namespace InfinitusApp.Core.Data.Commands
 
         public IList<CreateFinancialRequestItemCommand> Items { get; set; }
 
-        public IList<VoucherGenerate> VouchersGenerate { get; set; }
+        public VoucherGenerate VouchersGenerate { get; set; }
 
         public bool IsTest { get; set; }
 
