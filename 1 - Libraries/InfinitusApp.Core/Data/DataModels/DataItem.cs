@@ -1615,13 +1615,16 @@ namespace InfinitusApp.Core.Data.DataModels
             Deliveryman = new DeliverymanInfo();
         }
 
+        [Obsolete]
         public bool MakesDelivery { get; set; } = true;
 
         public bool InHands { get; set; } = true;
-
+        [Obsolete("use delivery fee")]
         public double MaxKm { get; set; }
 
         public DeliverymanInfo Deliveryman { get; set; }
+
+        public bool MakeHumanizedDelivery { get; set; }
 
     }
 

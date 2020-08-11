@@ -48,6 +48,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public StructureType Type { get; set; }
 
+        public string Presentation { get; set; }
+
         #region Relations
 
         public Application Application { get; set; }

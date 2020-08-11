@@ -23,6 +23,8 @@ namespace InfinitusApp.Core.Data.Commands
         public StructureType Type { get; set; }
 
         public IList<string> TargetGroups { get; set; }
+
+        public string Presentation { get; set; }
     }
 
     public class CreateStructureConfigurationCommand : StructureConfigurationCommand
