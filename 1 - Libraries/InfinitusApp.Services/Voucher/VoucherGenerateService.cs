@@ -45,7 +45,7 @@ namespace InfinitusApp.Services.Voucher
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<VoucherGenerate>>(nameof(VoucherGenerate) + "/GetAll", HttpMethod.Get, dic);
         }
 
-        public async Task<List<VoucherGenerate>> GetAllValidByCurrentAppUser(Expression<Func<VoucherGenerate, bool>> entityFilter = null, Expression<Func<VoucherGenerate, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        public async Task<List<VoucherGenerate>> GetAllByCurrentAppUser(bool onlyNotExpired = false, Expression<Func<VoucherGenerate, bool>> entityFilter = null, Expression<Func<VoucherGenerate, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<VoucherGenerate>("")
                     .For<VoucherGenerate>(x => x)
@@ -70,6 +70,8 @@ namespace InfinitusApp.Services.Voucher
             }
 
             var dic = odataBuilder.ToDictionary();
+
+            dic.Add("onlyNotExpired", onlyNotExpired.ToString());
 
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<VoucherGenerate>>(nameof(VoucherGenerate) + "/GetAllValidByCurrentAppUser", HttpMethod.Get, dic);
         }
