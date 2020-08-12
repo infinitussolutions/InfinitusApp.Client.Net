@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using static InfinitusApp.Core.Data.DataModels.FinancialRequestDeliveryInfo;
 using static InfinitusApp.Core.Data.Enums.DataItemEnums;
 
 namespace InfinitusApp.Core.Data.DataModels
@@ -824,7 +825,8 @@ namespace InfinitusApp.Core.Data.DataModels
                     l.Add(new DeliveryOptionsToPresentation
                     {
                         Identity = "Entregador de " + Description?.Title,
-                        Price = DeliveryPriceByDistanceByActualLocation.Value
+                        Price = DeliveryPriceByDistanceByActualLocation.Value,
+                        DeliveryType = FinancialRequestDeliveryType.Normal
                     });
                 }
 
@@ -833,7 +835,18 @@ namespace InfinitusApp.Core.Data.DataModels
                     l.Add(new DeliveryOptionsToPresentation
                     {
                         Identity = "Retirar no local ",
-                        Price = 0
+                        Price = 0,
+                        DeliveryType = FinancialRequestDeliveryType.InHands
+                    });
+                }
+
+                if (DeliveryInfo.MakeHumanizedDelivery)
+                {
+                    l.Add(new DeliveryOptionsToPresentation
+                    {
+                        Identity = "Entrega Humanizada ",
+                        Price = 0,
+                        DeliveryType = FinancialRequestDeliveryType.Humanized
                     });
                 }
 
@@ -2139,5 +2152,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public string PricePresentation => Price.ToString("C");
 
         public string PriceAndIdentiyPresentation => Identity + ": " + PricePresentation;
+
+        public FinancialRequestDeliveryType DeliveryType { get; set; }
     }
 }
