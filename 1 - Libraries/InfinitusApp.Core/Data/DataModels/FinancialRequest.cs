@@ -48,9 +48,11 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public FinancialRequestExternalModel ExternalModel { get; set; }
 
-        public AddressComplex DeliveryAddress { get; set; }
+        //public AddressComplex DeliveryAddress { get; set; }
 
-        public decimal DeliveryPrice { get; set; }
+        //public decimal DeliveryPrice { get; set; }
+
+        public FinancialRequestDeliveryInfo DeliveryInfo { get; set; }
 
         #region Extention
 
@@ -201,7 +203,7 @@ namespace InfinitusApp.Core.Data.DataModels
         #region Delivery
 
         [JsonIgnore]
-        public string DeliveryPricePresentation => DeliveryPrice.ToString("C");
+        public string DeliveryPricePresentation => DeliveryInfo.PricePresentation;
 
         #endregion
 
@@ -277,7 +279,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #region Total
 
-        public decimal TotalRequest => ((TotalItemsWithDiscount + DeliveryPrice + TotalRequestExtraCharge) - Discount) - TotalDiscountFromVoucher;
+        public decimal TotalRequest => ((TotalItemsWithDiscount + DeliveryInfo.Price + TotalRequestExtraCharge) - Discount) - TotalDiscountFromVoucher;
 
         public string TotalRequestPresentation => TotalRequest.ToString("C");
 
@@ -774,4 +776,47 @@ namespace InfinitusApp.Core.Data.DataModels
         #endregion
     }
 
+    public class FinancialRequestDeliveryInfo
+    {
+        public FinancialRequestDeliveryInfo()
+        {
+            Address = new AddressComplex();
+        }
+
+        public FinancialRequestDeliveryType Type { get; set; }
+
+        public AddressComplex Address { get; set; }
+
+        public decimal Price { get; set; }
+
+        public string TypePresentation 
+        {
+            get
+            {
+                switch (Type)
+                {
+                    case FinancialRequestDeliveryType.Humanized: return "Humanizada";
+                    case FinancialRequestDeliveryType.InHands: return "Retirar na loja";
+                    case FinancialRequestDeliveryType.Normal: return "Normal";
+                    default: return "Desconhecido";
+                }
+            }
+        }
+
+        public string PricePresentation 
+        {
+            get
+            {
+                return Price.ToString("C");
+            } 
+        }
+
+        public enum FinancialRequestDeliveryType
+        {
+            Unknown,
+            InHands,
+            Normal,
+            Humanized
+        }
+    }
 }
