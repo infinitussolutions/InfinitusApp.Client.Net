@@ -32,6 +32,7 @@ namespace InfinitusApp.Core.Data.DataModels
             FinancialRequestStatusRelations = new List<FinancialRequestStatusRelation>();
             SignaturePlanConsumptions = new List<SignaturePlanConsumption>();
             VoucherGenerateList = new List<VoucherGenerate>();
+            DeliveryInfo = new FinancialRequestDeliveryInfo();
         }
 
         public string Observation { get; set; }
