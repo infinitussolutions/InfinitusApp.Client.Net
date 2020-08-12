@@ -267,35 +267,21 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #endregion
 
-        #region Request
+        #region Discount
 
         public int TotalDiscountFromVoucher => VoucherGenerateList.Sum(x => x.CreditValue);
 
         public string TotalDiscountFromVoucherPresentation => TotalDiscountFromVoucher.ToString("C");
 
-        public decimal TotalRequest
-        {
-            get
-            {
-                return ((TotalItemsWithDiscount + DeliveryPrice + TotalRequestExtraCharge) - Discount) - TotalDiscountFromVoucher;
-            }
-        }
+        #endregion
 
-        public string TotalRequestPresentation
-        {
-            get
-            {
-                return TotalRequest.ToString("C");
-            }
-        }
+        #region Total
 
-        public string DateCreatedPresentation
-        {
-            get
-            {
-                return CreatedAt.HasValue ? CreatedAt.Value.ToString("dd/MM/yyyy HH:mm") : "Não Encontrado";
-            }
-        }
+        public decimal TotalRequest => ((TotalItemsWithDiscount + DeliveryPrice + TotalRequestExtraCharge) - Discount) - TotalDiscountFromVoucher;
+
+        public string TotalRequestPresentation => TotalRequest.ToString("C");
+
+        public string DateCreatedPresentation => CreatedAt.HasValue ? CreatedAt.Value.ToString("dd/MM/yyyy HH:mm") : "Não Encontrado";
 
         #endregion
 

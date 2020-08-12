@@ -51,7 +51,7 @@ namespace InfinitusApp.Core.Data.DataModels.Voucher
         public string ValidAtPresentation => !(ExpiresAt == DateTime.MaxValue) ? ExpiresAt.ToString("dd MMMM") : "";
 
         [JsonIgnore]
-        public bool IsUsed => UsedAt.HasValue;
+        public bool IsUsed => UsedAt.HasValue || !string.IsNullOrEmpty(UsedOnFinancialRequestId);
 
         [JsonIgnore]
         public bool IsExpires => DateTime.Now.Date > ExpiresAt;
@@ -66,7 +66,7 @@ namespace InfinitusApp.Core.Data.DataModels.Voucher
         public int CreditValue => VoucherCampaign != null ? VoucherCampaign.Config.CreditInfo.Value : 0;
 
         [JsonIgnore]
-        public DateTime ExpiresAt => VoucherCampaign != null ? VoucherCampaign.Config.ToUse.ExpiresAt.HasValue ? VoucherCampaign.Config.ToUse.ExpiresAt.Value.Date : DateTime.MaxValue : DateTime.MaxValue;
+        public DateTime ExpiresAt => VoucherCampaign != null ? VoucherCampaign.Config.ToUse.ExpiresAt.HasValue ? VoucherCampaign.Config.ToUse.ExpiresAt.Value.Date : DateTime.MinValue : DateTime.MinValue;
 
         [JsonIgnore]
         public string CanAddOnlyFinancialRequestId => VoucherCampaign != null ? VoucherCampaign.Config.ToUse.OnlyUseOn.ReferenceType == VoucherCampaignConfigToUseOnType.FinancialRequest ? VoucherCampaign.Config.ToUse.OnlyUseOn.ReferenceId : "" : "";
@@ -76,6 +76,37 @@ namespace InfinitusApp.Core.Data.DataModels.Voucher
 
         [JsonIgnore]
         public bool HasRestriction => !string.IsNullOrEmpty(CanAddOnlyFinancialRequestId) || !string.IsNullOrEmpty(CanUsedOnlyByApplicationUserId);
+
+        [JsonIgnore]
+        public string UsedOrExpiredMsg
+        {
+            get
+            {
+                var msg = "";
+
+                if (IsUsed)
+                    msg = "Usado";
+
+                if (IsExpires)
+                    msg = "Expirado";
+
+                return msg;
+            }
+        }
+
+        [JsonIgnore]
+        public string UsedOrExpiredOrRedemMsg
+        {
+            get
+            {
+                var msg = UsedOrExpiredMsg;
+
+                if (!string.IsNullOrEmpty(UsedByApplicationUserId))
+                    msg = "Resgatado";
+
+                return msg;
+            }
+        }
 
         #endregion
     }
