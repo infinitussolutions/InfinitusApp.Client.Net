@@ -279,7 +279,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #region Total
 
-        public decimal TotalRequest => ((TotalItemsWithDiscount + DeliveryInfo.Price + TotalRequestExtraCharge) - Discount) - TotalDiscountFromVoucher;
+        public decimal TotalRequest => ((TotalItemsWithDiscount + (DeliveryInfo?.Price ?? 0) + TotalRequestExtraCharge) - Discount) - TotalDiscountFromVoucher;
 
         public string TotalRequestPresentation => TotalRequest.ToString("C");
 
