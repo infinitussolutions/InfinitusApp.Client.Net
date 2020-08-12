@@ -48,10 +48,10 @@ namespace InfinitusApp.Core.Data.DataModels.Voucher
         public string CreateAtPresentation => CreatedAt.HasValue ? CreatedAt.Value.ToString("dd MMMM") : "";
 
         [JsonIgnore]
-        public string ValidAtPresentation => !(ExpiresAt == DateTime.MaxValue) ? ExpiresAt.ToString("dd MMMM") : "";
+        public string ValidAtPresentation => ExpiresAt != DateTime.MinValue ? ExpiresAt.ToString("dd MMMM") : "";
 
         [JsonIgnore]
-        public bool IsUsed => UsedAt.HasValue || !string.IsNullOrEmpty(UsedOnFinancialRequestId);
+        public bool IsUsed => !string.IsNullOrEmpty(UsedOnFinancialRequestId);
 
         [JsonIgnore]
         public bool IsExpires => DateTime.Now.Date > ExpiresAt;
