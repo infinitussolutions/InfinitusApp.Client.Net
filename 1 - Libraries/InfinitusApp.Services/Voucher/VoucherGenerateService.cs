@@ -73,7 +73,7 @@ namespace InfinitusApp.Services.Voucher
 
             dic.Add("onlyNotExpired", onlyNotExpired.ToString());
 
-            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<VoucherGenerate>>(nameof(VoucherGenerate) + "/GetAllValidByCurrentAppUser", HttpMethod.Get, dic);
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<VoucherGenerate>>(nameof(VoucherGenerate) + "/GetAllByCurrentAppUser", HttpMethod.Get, dic);
         }
 
         public async Task<VoucherGenerate> GetById(string id)
