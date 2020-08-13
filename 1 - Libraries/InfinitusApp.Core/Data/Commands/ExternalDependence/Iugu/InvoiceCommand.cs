@@ -30,6 +30,8 @@ namespace InfinitusApp.Core.Data.Commands.ExternalDependence.Iugu
 
         public IList<string> DataItemIds { get; set; }
 
+        public int? DiscountInCents { get; set; }
+
     }
 
     public class CreateWithCreditCardCommand : InvoiceCommand
