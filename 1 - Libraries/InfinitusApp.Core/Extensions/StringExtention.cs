@@ -230,6 +230,17 @@ namespace InfinitusApp.Core.Extensions
             }
         }
 
+        public static bool IsCEP(this string postalCode)
+        {
+            if (string.IsNullOrEmpty(postalCode))
+                return false;
+
+            postalCode = postalCode.Replace("-", "");
+            postalCode = postalCode.Replace(".", "");
+
+            return postalCode.Length == 8;
+        }
+
         public static string GetStringBetweenTags(string text, string startTag, string endTag)
         {
             int startIndex = text.IndexOf(startTag) + startTag.Length;

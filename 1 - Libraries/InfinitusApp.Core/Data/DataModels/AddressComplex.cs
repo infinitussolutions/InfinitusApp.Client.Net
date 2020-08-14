@@ -1,4 +1,5 @@
 ﻿using InfinitusApp.Core.Data.Commands.ExternalDependence.Iugu;
+using InfinitusApp.Core.Extensions;
 using Newtonsoft.Json;
 using System;
 
@@ -59,6 +60,24 @@ namespace InfinitusApp.Core.Data.DataModels
                 Street = address.AddressLine1,
                 ZipCode = address.PostalCode
             };
+        }
+
+        public bool IsValid 
+        {
+            get
+            {
+                if (
+                string.IsNullOrEmpty(AddressLine1)
+                || string.IsNullOrEmpty(PostalCode)
+                || string.IsNullOrEmpty(District)
+                || string.IsNullOrEmpty(City)
+                || string.IsNullOrEmpty(Number)
+                || !PostalCode.IsCEP()
+                )
+                    return false;
+
+                return true;
+            }
         }
     }
 
