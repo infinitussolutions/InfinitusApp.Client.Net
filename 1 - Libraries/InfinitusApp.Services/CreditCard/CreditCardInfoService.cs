@@ -54,7 +54,10 @@ namespace InfinitusApp.Services.CreditCard
             var dic = odataBuilder.ToDictionary();
 
             if (externalConnectionType.HasValue)
-                dic.Add("externalConnectionType", externalConnectionType.Value.ToString());
+            {
+                var intValue = (int)externalConnectionType.Value;
+                dic.Add("externalConnectionType", intValue.ToString());
+            }
 
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<CreditCardInfo>>("CreditCardInfo/GetAllByCurrentApplicationUser", HttpMethod.Get, dic);
         }
