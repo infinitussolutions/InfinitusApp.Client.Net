@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using static InfinitusApp.Core.Data.DataModels.ExternalConnection;
 
 namespace InfinitusApp.Services.CreditCard
 {
@@ -26,7 +27,7 @@ namespace InfinitusApp.Services.CreditCard
             return await ServiceClient.InvokeApiAsync<CreateCreditCardInfoCommand, CreditCardValidResponse>("CreditCardInfo/IsCreditCartValid", cmd, HttpMethod.Post, null);
         }
 
-        public async Task<List<CreditCardInfo>> GetAllByCurrentApplicationUser(Expression<Func<CreditCardInfo, bool>> entityFilter = null, Expression<Func<CreditCardInfo, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        public async Task<List<CreditCardInfo>> GetAllByCurrentApplicationUser(Expression<Func<CreditCardInfo, bool>> entityFilter = null, Expression<Func<CreditCardInfo, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false, ExternalConnectionType? externalConnectionType = null)
         {
             var odataBuilder = new ODataQueryBuilder<CreditCardInfo>("")
                     .For<CreditCardInfo>(x => x)
@@ -51,6 +52,9 @@ namespace InfinitusApp.Services.CreditCard
             }
 
             var dic = odataBuilder.ToDictionary();
+
+            if (externalConnectionType.HasValue)
+                dic.Add("externalConnectionType", externalConnectionType.ToString());
 
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<CreditCardInfo>>("CreditCardInfo/GetAllByCurrentApplicationUser", HttpMethod.Get, dic);
         }
