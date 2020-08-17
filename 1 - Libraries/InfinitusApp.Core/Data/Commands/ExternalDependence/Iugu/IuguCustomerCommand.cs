@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static InfinitusApp.Core.Data.DataModels.ExternalConnection;
 
 namespace InfinitusApp.Core.Data.Commands.ExternalDependence.Iugu
 {
@@ -33,6 +34,7 @@ namespace InfinitusApp.Core.Data.Commands.ExternalDependence.Iugu
         public bool IsDefault { get; set; }
         [JsonProperty("customer_id")]
         public bool CustomerId { get; set; }
+        public ExternalConnectionType ExternalConnectionType { get; set; }
     }
 
     public class CreateIuguPaymentMethodCommand : IuguPaymentMethodCommand
