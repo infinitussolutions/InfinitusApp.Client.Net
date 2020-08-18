@@ -26,6 +26,11 @@ namespace InfinitusApp.Core.Data.Commands.ExternalDependence.Iugu
 
     public class IuguPaymentMethodCommand
     {
+        public IuguPaymentMethodCommand()
+        {
+            ExternalConnectionType = ExternalConnectionType.IuguCustomer;
+        }
+
         public string DataStoreId { get; set; }
         public string ApplicationUserId { get; set; }
         [JsonProperty("description")]
@@ -51,11 +56,18 @@ namespace InfinitusApp.Core.Data.Commands.ExternalDependence.Iugu
 
     public class DeleteIuguPaymentMethodCommand
     {
+        public DeleteIuguPaymentMethodCommand()
+        {
+            ExternalConnectionType = ExternalConnectionType.IuguCustomer;
+        }
+
         public string DataStoreId { get; set; }
         public string ApplicationUserId { get; set; }
 
         [JsonProperty("id")]
         public string PaymentMethodId { get; set; }
+
+        public ExternalConnectionType ExternalConnectionType { get; set; }
     }
 
     #endregion

@@ -27,7 +27,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public enum ExternalConnectionType
         {
             Unknown,
-            IuguCustomer
+            IuguCustomer,
+            IuguCustomerMarketplace
         }
 
     }
