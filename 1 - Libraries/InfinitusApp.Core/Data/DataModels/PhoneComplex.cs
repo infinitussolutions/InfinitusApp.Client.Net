@@ -22,18 +22,6 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public bool IsValid 
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(DDD) 
-                    || string.IsNullOrEmpty(PhoneNumber)
-                    )
-                    return false;
-
-                return true;
-            }
-        }
-
+        public bool IsValid => !string.IsNullOrEmpty(DDD) && !string.IsNullOrEmpty(PhoneNumber);
     }
 }

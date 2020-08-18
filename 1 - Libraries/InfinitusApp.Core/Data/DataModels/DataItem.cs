@@ -824,7 +824,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 {
                     l.Add(new DeliveryOptionsToPresentation
                     {
-                        Identity = "Entregador de " + Description?.Title,
+                        Identity = DeliveryInfo.MakeHumanizedDelivery ? "Entrega Humanizada" : "Entregador de " + Description?.Title,
                         Price = DeliveryPriceByDistanceByActualLocation.Value,
                         DeliveryType = FinancialRequestDeliveryType.Normal
                     });
@@ -840,15 +840,15 @@ namespace InfinitusApp.Core.Data.DataModels
                     });
                 }
 
-                if (DeliveryInfo.MakeHumanizedDelivery)
-                {
-                    l.Add(new DeliveryOptionsToPresentation
-                    {
-                        Identity = "Entrega Humanizada ",
-                        Price = 0,
-                        DeliveryType = FinancialRequestDeliveryType.Humanized
-                    });
-                }
+                //if (DeliveryInfo.MakeHumanizedDelivery)
+                //{
+                //    l.Add(new DeliveryOptionsToPresentation
+                //    {
+                //        Identity = "Entrega Humanizada ",
+                //        Price = 0,
+                //        DeliveryType = FinancialRequestDeliveryType.Humanized
+                //    });
+                //}
 
                 return l;
             }
