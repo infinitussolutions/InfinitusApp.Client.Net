@@ -826,7 +826,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     {
                         Identity = DeliveryInfo.MakeHumanizedDelivery ? "Entrega Humanizada" : "Entregador de " + Description?.Title,
                         Price = DeliveryPriceByDistanceByActualLocation.Value,
-                        DeliveryType = FinancialRequestDeliveryType.Normal
+                        DeliveryType = DeliveryInfo.MakeHumanizedDelivery ? FinancialRequestDeliveryType.Humanized : FinancialRequestDeliveryType.Normal
                     });
                 }
 

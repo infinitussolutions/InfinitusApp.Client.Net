@@ -790,7 +790,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public decimal Price { get; set; }
 
-        public string TypePresentation 
+        public string TypePresentation
         {
             get
             {
@@ -804,12 +804,12 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public string PricePresentation 
+        public string PricePresentation
         {
             get
             {
                 return Price.ToString("C");
-            } 
+            }
         }
 
         public enum FinancialRequestDeliveryType
@@ -818,6 +818,43 @@ namespace InfinitusApp.Core.Data.DataModels
             InHands,
             Normal,
             Humanized
+        }
+    }
+
+    public static class FinancialRequestDeliveryInfoExtention
+    {
+        public static string GetEmoji(this FinancialRequestDeliveryInfo.FinancialRequestDeliveryType type)
+        {
+            switch (type)
+            {
+                case FinancialRequestDeliveryInfo.FinancialRequestDeliveryType.InHands:
+                    return "🤲 ";
+
+                case FinancialRequestDeliveryInfo.FinancialRequestDeliveryType.Humanized:
+                    return "🙋‍♀️ ";
+
+                case FinancialRequestDeliveryInfo.FinancialRequestDeliveryType.Normal:
+                    return "🏍 ";
+            }
+
+            return "";
+        }
+
+        public static string GetFontAwesomeIcon(this FinancialRequestDeliveryInfo.FinancialRequestDeliveryType type)
+        {
+            switch (type)
+            {
+                case FinancialRequestDeliveryInfo.FinancialRequestDeliveryType.InHands:
+                    return "\uf256";
+
+                case FinancialRequestDeliveryInfo.FinancialRequestDeliveryType.Humanized:
+                    return "\uf182";
+
+                case FinancialRequestDeliveryInfo.FinancialRequestDeliveryType.Normal:
+                    return "\uf21c";
+            }
+
+            return "";
         }
     }
 }
