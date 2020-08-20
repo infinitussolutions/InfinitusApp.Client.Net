@@ -59,6 +59,11 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public class StatusFinancialRequestConfig
     {
+        public StatusFinancialRequestConfig()
+        {
+            Delivery = new StatusFinancialRequestDeliveryConfig();
+        }
+
         public bool IsClosed { get; set; }
 
         public StatusFinancialRequestDeliveryConfig Delivery { get; set; }
