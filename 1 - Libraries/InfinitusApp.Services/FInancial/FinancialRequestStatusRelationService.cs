@@ -24,25 +24,25 @@ namespace InfinitusApp.Services.FInancial
 
         public async Task<List<FinancialRequestStatusRelation>> GetAllWithoutStatusClosed(Expression<Func<FinancialRequestStatusRelation, bool>> entityFilter = null, Expression<Func<FinancialRequestStatusRelation, object>> entityOrderBy = null, int? skip = null, int? top = null)
         {
-            //var odataBuilder = new ODataQueryBuilder<FinancialRequestStatusRelation>("")
-            //   .For<FinancialRequestStatusRelation>(x => x)
-            //   .ByList()
-            //   .OrderByDescending(x => x.CreatedAt)
-            //   ;
+            var odataBuilder = new ODataQueryBuilder<FinancialRequestStatusRelation>("")
+               .For<FinancialRequestStatusRelation>(x => x)
+               .ByList()
+               .OrderByDescending(x => x.CreatedAt)
+               ;
 
-            //if (skip.HasValue)
-            //    odataBuilder.Skip(skip.Value);
+            if (skip.HasValue)
+                odataBuilder.Skip(skip.Value);
 
-            //if (top.HasValue)
-            //    odataBuilder.Top(top.Value);
+            if (top.HasValue)
+                odataBuilder.Top(top.Value);
 
-            //if (entityFilter != null)
-            //    odataBuilder.Filter(entityFilter);
+            if (entityFilter != null)
+                odataBuilder.Filter(entityFilter);
 
-            //if (entityOrderBy != null)
-            //    odataBuilder.OrderBy(entityOrderBy);
+            if (entityOrderBy != null)
+                odataBuilder.OrderBy(entityOrderBy);
 
-            var dic = new Dictionary<string, string>();
+            var dic = odataBuilder.ToDictionary();
 
             return await ServiceClient.InvokeApiAsync<List<FinancialRequestStatusRelation>>(nameof(FinancialRequestStatusRelation) + "/GetAllWithoutStatusClosed", HttpMethod.Get, dic);
         }
