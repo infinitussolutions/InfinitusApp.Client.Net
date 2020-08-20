@@ -22,25 +22,29 @@ namespace InfinitusApp.Services.FInancial
             return await ServiceClient.InvokeApiAsync<CreateFinancialRequestStatusRelationCommand, FinancialRequestStatusRelation>("FinancialRequestStatusRelation/Create", createCommand);
         }
 
-        public async Task<List<FinancialRequestStatusRelation>> GetAllWithoutStatusClosed(Expression<Func<FinancialRequestStatusRelation, bool>> entityFilter = null, Expression<Func<FinancialRequestStatusRelation, object>> entityOrderBy = null, int? skip = null, int? top = null)
+        public async Task<List<FinancialRequestStatusRelation>> GetAllWithoutStatusClosed(Expression<Func<FinancialRequestStatusRelation, bool>> entityFilter = null, Expression<Func<FinancialRequestStatusRelation, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<FinancialRequestStatusRelation>("")
-               .For<FinancialRequestStatusRelation>(x => x)
-               .ByList()
-               .OrderByDescending(x => x.CreatedAt)
-               ;
-
-            if (skip.HasValue)
-                odataBuilder.Skip(skip.Value);
+                    .For<FinancialRequestStatusRelation>(x => x)
+                    .ByList();
 
             if (top.HasValue)
                 odataBuilder.Top(top.Value);
+
+            if (skip.HasValue)
+                odataBuilder.Skip(skip.Value);
 
             if (entityFilter != null)
                 odataBuilder.Filter(entityFilter);
 
             if (entityOrderBy != null)
-                odataBuilder.OrderBy(entityOrderBy);
+            {
+                if (desc)
+                    odataBuilder.OrderByDescending(entityOrderBy);
+
+                else
+                    odataBuilder.OrderBy(entityOrderBy);
+            }
 
             var dic = odataBuilder.ToDictionary();
 
