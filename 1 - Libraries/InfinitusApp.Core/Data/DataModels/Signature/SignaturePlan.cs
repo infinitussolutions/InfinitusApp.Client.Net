@@ -70,6 +70,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         public SignaturePlanConfig()
         {
             Requirements = new SignaturePlanRequirements();
+            ChargeConfig = new SignaturePlanChargeConfig();
         }
         public int DaysToStartFirstCharge { get; set; }
 
@@ -81,6 +82,8 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         public int DaysWithoutPaymentToBlock { get; set; } = 5;
 
         public SignaturePlanRequirements Requirements { get; set; }
+
+        public SignaturePlanChargeConfig ChargeConfig { get; set; }
 
         #region Help
 
@@ -188,5 +191,11 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         public string SignaturePlanId { get; set; }
 
         #endregion
+    }
+
+    public class SignaturePlanChargeConfig
+    {
+        public int MinFinancialRequest { get; set; }
+        public int MinPushNotification { get; set; }
     }
 }
