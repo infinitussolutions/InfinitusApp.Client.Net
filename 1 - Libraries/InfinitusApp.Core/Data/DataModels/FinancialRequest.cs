@@ -379,6 +379,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public int Number { get; set; }
 
+        public string LetterAndNumber => Letter + Number;
+
         public string LetterAndNumberPresentation
         {
             get
