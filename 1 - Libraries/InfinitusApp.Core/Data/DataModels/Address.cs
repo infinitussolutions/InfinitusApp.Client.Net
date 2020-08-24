@@ -75,19 +75,6 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public string FullAddress
-        {
-            get
-            {
-                var full = FullAddressSimple;
-                if (!string.IsNullOrEmpty(StateProvince)) { full += "" + StateProvince + "\n"; }
-                if (!string.IsNullOrEmpty(Country)) { full += "" + Country + " - "; }
-                if (!string.IsNullOrEmpty(PostalCode)) { full += "" + PostalCode + "\n"; }
-
-                return full;
-            }
-        }
-
         public string AddressAndNumber
         {
             get
@@ -111,7 +98,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #region Presentation
 
-        public string FullAddressPresentation
+        public string FullAddress
         {
             get
             {
@@ -128,6 +115,15 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 if (!string.IsNullOrEmpty(City))
                     returnAddress += " - " + City;
+
+                if (!string.IsNullOrEmpty(StateProvince))
+                    returnAddress += " - " + StateProvince;
+
+                if (!string.IsNullOrEmpty(PostalCode))
+                    returnAddress += " - " + StateProvince;
+
+                if (!string.IsNullOrEmpty(Country))
+                    returnAddress += " - " + Country;
 
                 return returnAddress;
             }
