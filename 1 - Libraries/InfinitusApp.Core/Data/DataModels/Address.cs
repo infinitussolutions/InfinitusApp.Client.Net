@@ -120,7 +120,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     returnAddress += " - " + StateProvince;
 
                 if (!string.IsNullOrEmpty(PostalCode))
-                    returnAddress += " - " + StateProvince;
+                    returnAddress += " - " + PostalCode;
 
                 if (!string.IsNullOrEmpty(Country))
                     returnAddress += " - " + Country;
