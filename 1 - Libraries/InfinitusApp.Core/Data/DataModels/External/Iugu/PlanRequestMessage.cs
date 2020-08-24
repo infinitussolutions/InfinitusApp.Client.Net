@@ -38,7 +38,7 @@ namespace InfinitusApp.Core.Data.DataModels.External.Iugu
             UniqueIdentifier = string.Format("{0} - {1}", cmd.Title, cmd.DataStoreId);
             Cycle = 1;
             IntervalType = PlanIntervalType.Monthly.ToString();
-            ValueInCents = int.Parse((cmd.Amount * 100).ToString());
+            ValueInCents = Convert.ToInt32(cmd.Amount * 100);
             CurrencyTypeName = CurrencyType.BRL.ToString();
         }
 
@@ -48,7 +48,7 @@ namespace InfinitusApp.Core.Data.DataModels.External.Iugu
             UniqueIdentifier = string.Format("{0} - {1}", cmd.Title, dataStoreId);
             Cycle = 1;
             IntervalType = PlanIntervalType.Monthly.ToString();
-            ValueInCents = int.Parse((cmd.Amount * 100).ToString());
+            ValueInCents = Convert.ToInt32(cmd.Amount * 100);
             CurrencyTypeName = CurrencyType.BRL.ToString();
         }
 
