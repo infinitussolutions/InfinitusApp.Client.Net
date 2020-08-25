@@ -80,18 +80,18 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public static class StatusFinancialRequestExtention
     {
-        public static StatusFinancialRequest GetPossibleNextStatus(this FinancialRequest financialRequest, List<StatusFinancialRequest> possibleFinancialRequestList)
+        public static StatusFinancialRequest GetPossibleNextStatus(this FinancialRequest financialRequest, List<StatusFinancialRequest> statusList)
         {
             var currentStatus = financialRequest.CurrentStatus;
 
             if (currentStatus.Config.IsClosed)
                 return null;
 
-            var closedStatus = possibleFinancialRequestList.FirstOrDefault(x => x.Deleted == false && x.Id != currentStatus.Id && currentStatus.Config.IsClosed);
+            var closedStatus = statusList.FirstOrDefault(x => x.Deleted == false && x.Id != currentStatus.Id && currentStatus.Config.IsClosed);
 
-            var availableToDeliveryStatus = possibleFinancialRequestList.FirstOrDefault(x => x.Deleted == false && x.Id != currentStatus.Id && currentStatus.Config.Delivery.Available);
+            var availableToDeliveryStatus = statusList.FirstOrDefault(x => x.Deleted == false && x.Id != currentStatus.Id && currentStatus.Config.Delivery.Available);
 
-            var onDeliverytatus = possibleFinancialRequestList.FirstOrDefault(x => x.Deleted == false && x.Id != currentStatus.Id && currentStatus.Config.Delivery.On);
+            var onDeliverytatus = statusList.FirstOrDefault(x => x.Deleted == false && x.Id != currentStatus.Id && currentStatus.Config.Delivery.On);
 
             switch (financialRequest.DeliveryInfo.Type)
             {
