@@ -42,6 +42,7 @@ namespace InfinitusApp.Core.Data.DataModels
             TermsOfUseAccepteds = new List<TermsOfUseAccepted>();
             Addresses = new List<Address>();
             ExternalConnections = new List<ExternalConnection>();
+            FinancialRequestToDeliveryList = new List<FinancialRequest>();
         }
 
         public PhoneComplex Phone { get; set; }
@@ -79,6 +80,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public IList<Address> Addresses { get; set; }
 
         public IList<ExternalConnection> ExternalConnections { get; set; }
+
+        public IList<FinancialRequest> FinancialRequestToDeliveryList { get; set; }
 
         #region Enum
         public enum UserStatus

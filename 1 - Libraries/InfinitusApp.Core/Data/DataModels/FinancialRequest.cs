@@ -33,6 +33,7 @@ namespace InfinitusApp.Core.Data.DataModels
             SignaturePlanConsumptions = new List<SignaturePlanConsumption>();
             VoucherGenerateList = new List<VoucherGenerate>();
             DeliveryInfo = new FinancialRequestDeliveryInfo();
+            DeliveryMan = new ApplicationUser();
         }
 
         public string Observation { get; set; }
@@ -99,7 +100,12 @@ namespace InfinitusApp.Core.Data.DataModels
         public string PaymentConditionId { get; set; }
 
         public DataItem Provider { get; set; }
+
         public string ProviderId { get; set; }
+
+        public ApplicationUser DeliveryMan { get; set; }
+
+        public string DeliveryManId { get; set; }
 
         public List<FinancialRequestStatusRelation> FinancialRequestStatusRelations { get; set; }
 
