@@ -3,6 +3,7 @@ using InfinitusApp.Core.Data.Commands.ExternalDependence.Ebanx;
 using InfinitusApp.Core.Data.Commands.ExternalDependence.Iugu;
 using InfinitusApp.Core.Data.DataModels;
 using InfinitusApp.Core.Data.DataModels.Voucher;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,26 +25,23 @@ namespace InfinitusApp.Core.Data.Commands
 
         public ExternalReference ExternalReference { get; set; }
 
+        public bool? IsTest { get; set; }
+
         public string PaymentConditionId { get; set; }
 
-        public string ProviderId { get; set; }
+        [Obsolete("Use delivery info", true)]
+        public AddressComplex DeliveryAddress { get; set; }
 
-        public string PaymentMethodPresentation { get; set; }
+        [Obsolete("Use delivery info", true)]
+        public decimal DeliveryPrice { get; set; }
 
-        //public AddressComplex DeliveryAddress { get; set; }
-
-        //public decimal DeliveryPrice { get; set; }
         public FinancialRequestDeliveryInfo DeliveryInfo { get; set; }
+
+        public string DeliveryManId { get; set; }
     }
 
     public class CreateFinancialRequestCommand : FinancialRequestCommand
     {
-        public CreateFinancialRequestCommand()
-        {
-            Items = new List<CreateFinancialRequestItemCommand>();
-            //VouchersGenerate = new List<VoucherGenerate>();
-        }
-
         public string DataStoreId { get; set; }
 
         public string CustomerId { get; set; }
@@ -52,13 +50,15 @@ namespace InfinitusApp.Core.Data.Commands
 
         public VoucherGenerate VouchersGenerate { get; set; }
 
-        public bool IsTest { get; set; }
-
         /// <summary>
         /// Is platform User
         /// </summary>
 
         public string SalesmanUserId { get; set; }
+
+        public string ProviderId { get; set; }
+
+        public string PaymentMethodPresentation { get; set; }
 
         public EbanxDirectPaymentCommand EbanxCommand { get; set; }
 
@@ -67,13 +67,9 @@ namespace InfinitusApp.Core.Data.Commands
 
     public class UpdateFinancialRequestCommand : FinancialRequestCommand
     {
-        public UpdateFinancialRequestCommand()
-        {
-            Items = new List<UpdateFinancialRequestItemCommand>();
-        }
-
         public string Id { get; set; }
 
+        [Obsolete("Use financialRequest status", true)]
         public FinancialRequestStatus? Status { get; set; }
 
         public IList<UpdateFinancialRequestItemCommand> Items { get; set; }
@@ -81,15 +77,14 @@ namespace InfinitusApp.Core.Data.Commands
         public CanceledInfo IfIsCanceledInfo { get; set; }
     }
 
-    public class UpdateFinancialRequestStatusCommand
-    {
-        public string Id { get; set; }
-
-        public FinancialRequestStatus Status { get; set; }
-    }
-
     public class FinancialRequestItemCommand
     {
+        public FinancialRequestItemCommand()
+        {
+            Price = new Price();
+            MediaImageData = new MediaImageData();
+        }
+
         public string Description { get; set; }
 
         public int Quantity { get; set; }
@@ -99,7 +94,9 @@ namespace InfinitusApp.Core.Data.Commands
         public MediaImageData MediaImageData { get; set; }
 
         public string DataItemId { get; set; }
+
         public string VariationId { get; set; }
+
         public string FinancialRequestId { get; set; }
 
         public bool Deleted { get; set; }
@@ -113,53 +110,12 @@ namespace InfinitusApp.Core.Data.Commands
         }
 
         public FinancialRequestItemFrom FromItem { get; set; }
-
-        public static IList<CreateFinancialRequestItemCommand> ConvertFromFinancialRequestItem(List<FinancialRequestItem> financialRequestItemList)
-        {
-            var objReturn = new List<CreateFinancialRequestItemCommand>();
-
-            objReturn = financialRequestItemList.Select(x => new CreateFinancialRequestItemCommand
-            {
-                //DataItemId = x.DataItemId,
-                Description = x.Description,
-                Price = x.Price,
-                Quantity = x.Quantity,
-                MediaImageData = x.MediaImageData,
-                FinancialRequestId = x.FinancialRequestId,
-                FromItem = x.FromItem,
-                //VariationId = x.VariationId,
-                Deleted = x.Deleted
-            }).ToList();
-
-            return objReturn;
-        }
     }
 
     public class UpdateFinancialRequestItemCommand : FinancialRequestItemCommand
     {
         public string Id { get; set; }
 
-       
-
-        public static IList<UpdateFinancialRequestItemCommand> ConvertFromFinancialRequestItem(List<FinancialRequestItem> financialRequestItemList)
-        {
-            var objReturn = new List<UpdateFinancialRequestItemCommand>();
-
-            objReturn = financialRequestItemList.Select(x => new UpdateFinancialRequestItemCommand
-            {
-                //DataItemId = x.DataItemId,
-                Description = x.Description,
-                Price = x.Price,
-                Quantity = x.Quantity,
-                MediaImageData = x.MediaImageData,
-                Id = x.Id,
-                FinancialRequestId = x.FinancialRequestId,
-                //VariationId = x.VariationId,
-                Deleted = x.Deleted
-            }).ToList();
-
-            return objReturn;
-        }
     }
 
     public class SimulatedFinancialRequestCommand
