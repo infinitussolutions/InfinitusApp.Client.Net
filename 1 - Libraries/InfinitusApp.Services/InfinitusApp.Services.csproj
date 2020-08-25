@@ -5,7 +5,7 @@
 	<PackageTargetFallback Condition="'$(TargetFramework)'=='Net45'">$(PackageTargetFallback);portable-net45+win8+wpa81+wp8</PackageTargetFallback>
 	<Authors>Infinitus Solutions Team</Authors>
 	<Company>Infinitus Solutions</Company>
-	<Version>1.1.130</Version>
+	<Version>1.1.131</Version>
 	<Description>InfinitusApp .net api library</Description>
   </PropertyGroup>
 

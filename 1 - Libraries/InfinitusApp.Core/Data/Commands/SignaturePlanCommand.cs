@@ -4,6 +4,7 @@ using InfinitusApp.Core.Data.DataModels.Signature;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static InfinitusApp.Core.Data.DataModels.Signature.SignaturePlanConsumption;
 
 namespace InfinitusApp.Core.Data.Commands
 {
@@ -186,6 +187,8 @@ namespace InfinitusApp.Core.Data.Commands
         public string SignaturePlanId { get; set; }
         public string FinancialRequestId { get; set; }
         public string DataStoreId { get; set; }
+        public string SignaturePlanApplicationUserId { get; set; }
+        public SignaturePlanConsumptionType Type { get; set; }
     }
 
     public class UpdateSignaturePlanConsumptionCommand : SignaturePlanConsumptionCommand

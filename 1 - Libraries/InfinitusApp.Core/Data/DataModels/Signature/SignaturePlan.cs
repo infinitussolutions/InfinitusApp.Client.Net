@@ -164,6 +164,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         public string Observation { get; set; }
 
+        public SignaturePlanConsumptionType Type { get; set; }
         #region Relations
 
         public virtual DataStore DataStore { get; set; }
@@ -172,8 +173,17 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         public virtual string SignaturePlanId { get; set; }
         public virtual FinancialRequest FinancialRequest { get; set; }
         public virtual string FinancialRequestId { get; set; }
+        public virtual SignaturePlanApplicationUser SignaturePlanApplicationUser { get; set; }
+        public virtual string SignaturePlanApplicationUserId { get; set; }
 
         #endregion
+
+        public enum SignaturePlanConsumptionType
+        {
+            Unknown,
+            FinancialRequest,
+            PushNotification
+        }
     }
 
     public class SignaturePlanRequirements
@@ -197,5 +207,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
     {
         public int MinFinancialRequest { get; set; }
         public int MinPushNotification { get; set; }
+        public decimal FinancialRequestPrice { get; set; }
+        public decimal PushNotificationPrice { get; set; }
     }
 }
