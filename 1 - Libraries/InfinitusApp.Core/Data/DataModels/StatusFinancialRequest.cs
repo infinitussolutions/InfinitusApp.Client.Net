@@ -87,11 +87,11 @@ namespace InfinitusApp.Core.Data.DataModels
             if (currentStatus.Config.IsClosed)
                 return null;
 
-            var closedStatus = statusList.FirstOrDefault(x => x.Deleted == false && x.Id != currentStatus.Id && currentStatus.Config.IsClosed);
+            var closedStatus = statusList.FirstOrDefault(x => x.Deleted == false && x.Id != currentStatus.Id && currentStatus.Config.IsClosed == true);
 
-            var availableToDeliveryStatus = statusList.FirstOrDefault(x => x.Deleted == false && x.Id != currentStatus.Id && currentStatus.Config.Delivery.Available);
+            var availableToDeliveryStatus = statusList.FirstOrDefault(x => x.Deleted == false && x.Id != currentStatus.Id && currentStatus.Config.Delivery.Available == true);
 
-            var onDeliverytatus = statusList.FirstOrDefault(x => x.Deleted == false && x.Id != currentStatus.Id && currentStatus.Config.Delivery.On);
+            var onDeliverytatus = statusList.FirstOrDefault(x => x.Deleted == false && x.Id != currentStatus.Id && currentStatus.Config.Delivery.On == true);
 
             switch (financialRequest.DeliveryInfo.Type)
             {
