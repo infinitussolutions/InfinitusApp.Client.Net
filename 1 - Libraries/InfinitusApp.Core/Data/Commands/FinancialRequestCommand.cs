@@ -110,12 +110,51 @@ namespace InfinitusApp.Core.Data.Commands
         }
 
         public FinancialRequestItemFrom FromItem { get; set; }
+
+        public static IList<CreateFinancialRequestItemCommand> ConvertFromFinancialRequestItem(List<FinancialRequestItem> financialRequestItemList)
+        {
+            var objReturn = new List<CreateFinancialRequestItemCommand>();
+
+            objReturn = financialRequestItemList.Select(x => new CreateFinancialRequestItemCommand
+            {
+                //DataItemId = x.DataItemId,
+                Description = x.Description,
+                Price = x.Price,
+                Quantity = x.Quantity,
+                MediaImageData = x.MediaImageData,
+                FinancialRequestId = x.FinancialRequestId,
+                FromItem = x.FromItem,
+                //VariationId = x.VariationId,
+                Deleted = x.Deleted
+            }).ToList();
+
+            return objReturn;
+        }
     }
 
     public class UpdateFinancialRequestItemCommand : FinancialRequestItemCommand
     {
         public string Id { get; set; }
 
+        public static IList<UpdateFinancialRequestItemCommand> ConvertFromFinancialRequestItem(List<FinancialRequestItem> financialRequestItemList)
+        {
+            var objReturn = new List<UpdateFinancialRequestItemCommand>();
+
+            objReturn = financialRequestItemList.Select(x => new UpdateFinancialRequestItemCommand
+            {
+                //DataItemId = x.DataItemId,
+                Description = x.Description,
+                Price = x.Price,
+                Quantity = x.Quantity,
+                MediaImageData = x.MediaImageData,
+                Id = x.Id,
+                FinancialRequestId = x.FinancialRequestId,
+                //VariationId = x.VariationId,
+                Deleted = x.Deleted
+            }).ToList();
+
+            return objReturn;
+        }
     }
 
     public class SimulatedFinancialRequestCommand
