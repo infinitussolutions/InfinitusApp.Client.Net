@@ -46,6 +46,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public string CustomerId { get; set; }
 
+        public string BuyerId { get; set; }
+
         public IList<CreateFinancialRequestItemCommand> Items { get; set; }
 
         public VoucherGenerate VouchersGenerate { get; set; }
