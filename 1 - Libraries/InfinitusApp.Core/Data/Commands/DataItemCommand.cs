@@ -39,18 +39,17 @@ namespace InfinitusApp.Core.Data.Commands
         public ContactInfo Contact { get; set; }
 
         public string ApplicationUserId { get; set; }
+
+        public DataItemCompanyInfo Company { get; set; }
     }
 
     public class CreateDataItemCommand : DataItemCommand
     {
         public CreateDataItemCommand()
         {
-            CompanyInfo = new CreateDataItemCompanyInfo();
             Price = new DataItemPriceInfo();
             Phones = new List<CreatePhoneCommand>();
         }
-
-        public CreateDataItemCompanyInfo CompanyInfo { get; set; }
 
         public string DataStoreId { get; set; }
 
@@ -65,10 +64,4 @@ namespace InfinitusApp.Core.Data.Commands
     {
         public string Id { get; set; }
     }
-
-    public class CreateDataItemCompanyInfo
-    {
-        public string DocumentNumber { get; set; }
-    }
-
 }
