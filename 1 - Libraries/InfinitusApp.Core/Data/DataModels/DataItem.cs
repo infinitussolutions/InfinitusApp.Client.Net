@@ -1225,14 +1225,10 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public class DataItemCompanyInfo
     {
-        //public DataItemCompanyInfo()
-        //{
-        //    Phone = new PhoneComplex();
-        //}
-
-        //public PhoneComplex Phone { get; set; }
-
-        //public string Email { get; set; }
+        public DataItemCompanyInfo()
+        {
+            Restriction = new DataItemCompanyInfoRestriction();
+        }
 
         public string VideoUri { get; set; }
 
@@ -1240,31 +1236,18 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string DocumentNumber { get; set; }
 
-        public bool IsCPF
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(DocumentNumber))
-                    return false;
+        public DataItemCompanyInfoRestriction Restriction { get; set; }
 
-                return DocumentNumber.Replace(".", "").Replace("-", "").Length.Equals(11);
-            }
-        }
+        public bool IsCPF => !string.IsNullOrEmpty(DocumentNumber) && DocumentNumber.Replace(".", "").Replace("-", "").Length.Equals(11);
 
-        public bool IsCNPJ
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(DocumentNumber))
-                    return false;
+        public bool IsCNPJ => !string.IsNullOrEmpty(DocumentNumber) && DocumentNumber.Replace(".", "").Replace("-", "").Replace("/", "").Length.Equals(14);
+    }
 
-                return DocumentNumber
-                    .Replace(".", "")
-                    .Replace("-", "")
-                    .Replace("/", "")
-                    .Length.Equals(14);
-            }
-        }
+    public class DataItemCompanyInfoRestriction
+    {
+        public decimal MinValueToFinancialRequest { get; set; }
+
+        public string MinValueToFinancialRequestPresentation => MinValueToFinancialRequest.ToString("C");
     }
 
     public class DataItemPersonInfo
