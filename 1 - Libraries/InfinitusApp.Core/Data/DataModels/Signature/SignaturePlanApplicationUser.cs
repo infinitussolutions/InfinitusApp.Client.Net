@@ -12,6 +12,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         {
             PaymentHistoryList = new List<SignaturePlanPaymentHistory>();
             CanceledInfo = new CanceledInfo();
+            Consumptions = new List<SignaturePlanConsumption>();
         }
 
         public CanceledInfo CanceledInfo { get; set; }
@@ -38,6 +39,7 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
 
         public virtual IList<SignaturePlanPaymentHistory> PaymentHistoryList { get; set; }
 
+        public virtual IList<SignaturePlanConsumption> Consumptions { get; set; }
         #endregion
 
         #region Help

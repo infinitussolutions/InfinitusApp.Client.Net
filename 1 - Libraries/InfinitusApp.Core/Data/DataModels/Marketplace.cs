@@ -84,28 +84,29 @@ namespace InfinitusApp.Core.Data.DataModels
         public string LiveToken { get; set; }
         public string TestToken { get; set; }
         public string UserToken { get; set; }
+        [Obsolete("Use PaymentInfo.InTest",true)]
         public bool InTest { get; set; }
 
         #region Helps
 
-        [JsonIgnore]
-        public string ActiveToken
-        {
-            get
-            {
-                return InTest ? TestToken : LiveToken;
-            }
-        }
+        //[JsonIgnore]
+        //public string ActiveToken
+        //{
+        //    get
+        //    {
+        //        return InTest ? TestToken : LiveToken;
+        //    }
+        //}
 
-        [JsonIgnore]
-        public string EnvironmentPresentation
-        {
-            get
-            {
-                return InTest ? "Teste" : "Produção";
-            }
+        //[JsonIgnore]
+        //public string EnvironmentPresentation
+        //{
+        //    get
+        //    {
+        //        return InTest ? "Teste" : "Produção";
+        //    }
 
-        }
+        //}
 
         #endregion
     }
