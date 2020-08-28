@@ -2,7 +2,6 @@
 
 namespace InfinitusApp.Core.Data.DataModels
 {
-    [Obsolete("Use Phone Model")]
     public class PhoneComplex
     {
         public string IDD { get; set; }

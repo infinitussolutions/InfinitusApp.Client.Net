@@ -36,6 +36,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public DeliveryInfo DeliveryInfo { get; set; }
 
+        public PhoneComplex PhoneMain { get; set; }
+
         public string ApplicationUserId { get; set; }
     }
 

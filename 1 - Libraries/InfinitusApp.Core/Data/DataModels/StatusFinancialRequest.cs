@@ -98,7 +98,6 @@ namespace InfinitusApp.Core.Data.DataModels
                 case FinancialRequestDeliveryInfo.FinancialRequestDeliveryType.InHands:
                     return currentStatus.Config.Delivery.Available ? closedStatus : availableToDeliveryStatus;
 
-
                 case FinancialRequestDeliveryInfo.FinancialRequestDeliveryType.Humanized:
                     return currentStatus.Config.Delivery.Available ? onDeliverytatus : currentStatus.Config.Delivery.On ? closedStatus : availableToDeliveryStatus;
 
