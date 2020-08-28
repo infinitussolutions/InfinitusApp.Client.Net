@@ -1225,14 +1225,14 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public class DataItemCompanyInfo
     {
-        public DataItemCompanyInfo()
-        {
-            Phone = new PhoneComplex();
-        }
+        //public DataItemCompanyInfo()
+        //{
+        //    Phone = new PhoneComplex();
+        //}
 
-        public PhoneComplex Phone { get; set; }
+        //public PhoneComplex Phone { get; set; }
 
-        public string Email { get; set; }
+        //public string Email { get; set; }
 
         public string VideoUri { get; set; }
 
@@ -1384,24 +1384,14 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public class ContactInfo
     {
+        public ContactInfo()
+        {
+            PhoneMain = new PhoneComplex();
+        }
+
         public string Email { get; set; }
-        //public ContactInfo()
-        //{
-        //    ContactType = ContactTypes.Undefined;
-        //}
 
-        //public string Value { get; set; }
-
-        //public ContactTypes ContactType { get; set; }
-
-        //public enum ContactTypes
-        //{
-        //    Undefined,
-        //    Phone,
-        //    Email,
-        //    WebSite,
-        //    Blog
-        //}
+        public PhoneComplex PhoneMain { get; set; }
     }
 
     public static class DataItemExtensions
