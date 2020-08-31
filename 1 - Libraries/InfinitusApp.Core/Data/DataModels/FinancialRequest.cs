@@ -19,7 +19,7 @@ namespace InfinitusApp.Core.Data.DataModels
             ExtraChargeInRequest = new ExtraCharge();
             //  InformationToGeneratedInstallment = new InvoiceInfo();
 
-            Customer = new Customer();
+            //Customer = new Customer();
             FinancialOrigin = new FinancialOrigin();
             SalesmanUser = new Naylah.Core.Entities.Identity.Person();
             InvoicesSimulation = new List<FinancialInvoiceToSimulation>();
