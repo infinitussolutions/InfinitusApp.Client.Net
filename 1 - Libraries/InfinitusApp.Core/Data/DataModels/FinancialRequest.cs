@@ -121,6 +121,8 @@ namespace InfinitusApp.Core.Data.DataModels
         /// <summary>
         /// If customer is not null return it else if return buyer
         /// </summary>
+        /// 
+        [Obsolete("On app remove it", true)]
         public Customer CustomerInfo { get; set; }
 
         #endregion
