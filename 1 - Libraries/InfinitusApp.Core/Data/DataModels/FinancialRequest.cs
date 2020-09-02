@@ -311,7 +311,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public int TotalDiscountFromVoucher => VoucherGenerateList.Sum(x => x.CreditValue);
 
-        public string TotalDiscountFromVoucherPresentation => TotalDiscountFromVoucher.ToString("C");
+        public string TotalDiscountFromVoucherPresentation => TotalDiscountFromVoucher > 0 ? TotalDiscountFromVoucher.ToString("C") : "";
 
         #endregion
 
