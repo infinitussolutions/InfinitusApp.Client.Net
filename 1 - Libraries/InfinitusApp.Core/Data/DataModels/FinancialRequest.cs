@@ -860,6 +860,26 @@ namespace InfinitusApp.Core.Data.DataModels
         }
     }
 
+    public static class FinancialRequestExtention
+    {
+        public static string GetTotalResume(this FinancialRequest toFinancialRequest)
+        {
+            var msg = "🏷 Itens: .............. " + toFinancialRequest.TotalItensPresentation + "\n";
+
+            if (!string.IsNullOrEmpty(toFinancialRequest?.TotalDiscountFromVoucherPresentation))
+                msg += "🙌 Voucher: ....... -" + toFinancialRequest.TotalDiscountFromVoucherPresentation + "\n";
+
+            if (toFinancialRequest.DiscountInRequest.DiscountInPercent > 0)
+                msg += "🙌 Desconto (" + toFinancialRequest.DiscountInRequest.DiscountInPercent + "% OFF) : -" + toFinancialRequest.Discount.ToString("C") + "\n";
+
+            msg += toFinancialRequest.DeliveryInfo.Type.GetEmoji() + " Entrega: ......... " + toFinancialRequest.DeliveryInfo.PricePresentation + "\n" +
+                "💰 TOTAL GERAL: " + toFinancialRequest.TotalRequest.ToString("C")
+                ;
+
+            return msg;
+        }
+    }
+
     public static class FinancialRequestDeliveryInfoExtention
     {
         public static string GetEmoji(this FinancialRequestDeliveryInfo.FinancialRequestDeliveryType type)
