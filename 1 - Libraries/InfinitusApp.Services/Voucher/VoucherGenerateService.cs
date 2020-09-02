@@ -95,5 +95,18 @@ namespace InfinitusApp.Services.Voucher
 
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<VoucherGenerate>(nameof(VoucherGenerate) + "/SetUsedByCurrentApplicationUser", HttpMethod.Patch, dic);
         }
+
+        public async Task<List<VoucherGenerateAddressResult>> GetAllDataItemByLocation(double latitude, double longitude, int skip = 0, int top = 10)
+        {
+            var dic = new Dictionary<string, string>
+            {
+                { "$skip", skip.ToString() },
+                { "$top", top.ToString() },
+                {"latitude",latitude.ToString().Replace(",",".") },
+                {"longitude",longitude.ToString().Replace(",",".") }
+            };
+
+            return await ServiceClient.InvokeApiAsync<List<VoucherGenerateAddressResult>>("/GetAllByDistance", HttpMethod.Get, dic);
+        }
     }
 }

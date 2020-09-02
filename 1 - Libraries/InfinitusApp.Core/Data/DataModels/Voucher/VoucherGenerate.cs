@@ -139,4 +139,16 @@ namespace InfinitusApp.Core.Data.DataModels.Voucher
             return 0;
         }
     }
+
+    public class VoucherGenerateAddressResult
+    {
+        public VoucherGenerateAddressResult()
+        {
+            VoucherGenerate = new VoucherGenerate();
+        }
+
+        public VoucherGenerate VoucherGenerate { get; set; }
+
+        public double Distance { get; set; }
+    }
 }
