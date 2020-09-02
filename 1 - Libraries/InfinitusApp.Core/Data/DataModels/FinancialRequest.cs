@@ -72,7 +72,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #region Relations
 
-        [Obsolete("Use customer info", true)]
+        [Obsolete("Use customer info")]
         public Customer Customer { get; set; }
 
         public string CustomerId { get; set; }
