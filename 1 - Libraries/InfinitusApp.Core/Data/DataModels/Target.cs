@@ -139,12 +139,24 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public class TargetInfo
     {
+        public TargetInfo()
+        {
+            TargetEditConfig = new TargetEditConfig();
+        }
+
         public NavigationType NavigationType { get; set; }
 
         public PageNameType Page { get; set; }
 
         public PageOrderType OrderType { get; set; }
 
+        public TargetEditConfig TargetEditConfig { get; set; }
+
+    }
+
+    public class TargetEditConfig
+    {
+        public bool CreateActive { get; set; }
     }
 
     public enum NavigationType
