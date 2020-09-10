@@ -106,7 +106,7 @@ namespace InfinitusApp.Services.Voucher
                 {"longitude",longitude.ToString().Replace(",",".") }
             };
 
-            return await ServiceClient.InvokeApiAsync<List<VoucherGenerateAddressResult>>("/GetAllByDistance", HttpMethod.Get, dic);
+            return await ServiceClient.InvokeApiAsync<List<VoucherGenerateAddressResult>>(nameof(VoucherGenerate) + "/GetAllByDistance", HttpMethod.Get, dic);
         }
     }
 }
