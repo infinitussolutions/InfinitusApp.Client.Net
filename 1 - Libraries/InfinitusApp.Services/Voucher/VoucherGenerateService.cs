@@ -96,18 +96,16 @@ namespace InfinitusApp.Services.Voucher
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<VoucherGenerate>(nameof(VoucherGenerate) + "/SetUsedByCurrentApplicationUser", HttpMethod.Patch, dic);
         }
 
-        public async Task<List<VoucherGenerateAddressResult>> GetAllByDistance(double latitude, double longitude, List<string> withoutVoucherCampaignList = null, int skip = 0, int top = 10)
+        public async Task<List<VoucherGenerateAddressResult>> GetAllByDistance(double latitude, double longitude, bool onlyAvailableToCurrentUser = false, int skip = 0, int top = 10)
         {
             var dic = new Dictionary<string, string>
             {
                 { "$skip", skip.ToString() },
                 { "$top", top.ToString() },
                 {"latitude",latitude.ToString().Replace(",",".") },
-                {"longitude",longitude.ToString().Replace(",",".") }
+                {"longitude",longitude.ToString().Replace(",",".") },
+                {"onlyAvailableToCurrentUser", onlyAvailableToCurrentUser.ToString() },
             };
-
-            if (withoutVoucherCampaignList != null)
-                dic.Add("withoutVoucherCampaignList", withoutVoucherCampaignList.ToString());
 
             return await ServiceClient.InvokeApiAsync<List<VoucherGenerateAddressResult>>(nameof(VoucherGenerate) + "/GetAllByDistance", HttpMethod.Get, dic);
         }
