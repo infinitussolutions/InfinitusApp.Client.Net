@@ -6,7 +6,9 @@ namespace InfinitusApp.Core.Data.DataModels
     {
         Default,
         Agenda,
-        Publication
+        Publication,
+        FinancialRequest,
+        FinancialRequestDeliveryAvailable
     }
 
     public class ApplicationNotification : Naylah.Core.Entities.EntityBase
