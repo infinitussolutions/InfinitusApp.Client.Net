@@ -76,6 +76,22 @@ namespace InfinitusApp.Services.Voucher
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<VoucherGenerate>>(nameof(VoucherGenerate) + "/GetAllByCurrentAppUser", HttpMethod.Get, dic);
         }
 
+        public async Task<int> GetAllByCurrentAppUserSumValue(bool onlyNotExpired = false, Expression<Func<VoucherGenerate, bool>> entityFilter = null)
+        {
+            var odataBuilder = new ODataQueryBuilder<VoucherGenerate>("")
+                    .For<VoucherGenerate>(x => x)
+                    .ByList();
+
+            if (entityFilter != null)
+                odataBuilder.Filter(entityFilter);
+
+            var dic = odataBuilder.ToDictionary();
+
+            dic.Add("onlyNotExpired", onlyNotExpired.ToString());
+
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<int>(nameof(VoucherGenerate) + "/GetAllByCurrentAppUserSumValue", HttpMethod.Get, dic);
+        }
+
         public async Task<VoucherGenerate> GetById(string id)
         {
             var dic = new Dictionary<string, string>

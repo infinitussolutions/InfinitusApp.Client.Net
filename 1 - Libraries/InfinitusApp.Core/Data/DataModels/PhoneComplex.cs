@@ -21,6 +21,8 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        public string FullNumberToWhatsApp => (FullPhone.Contains("55") ? FullPhone : "55" + FullPhone).Replace(" ", "").Replace("+", "").Replace("-", "").Replace(".", "");
+
         public bool IsValid => !string.IsNullOrEmpty(DDD) && !string.IsNullOrEmpty(PhoneNumber);
     }
 }
