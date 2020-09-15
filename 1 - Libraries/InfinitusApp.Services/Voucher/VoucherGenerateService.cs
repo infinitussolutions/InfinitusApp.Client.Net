@@ -85,9 +85,10 @@ namespace InfinitusApp.Services.Voucher
             if (entityFilter != null)
                 odataBuilder.Filter(entityFilter);
 
-            var dic = odataBuilder.ToDictionary();
-
-            dic.Add("onlyNotExpired", onlyNotExpired.ToString());
+            var dic = new Dictionary<string, string>
+            {
+                { "onlyNotExpired", onlyNotExpired.ToString() }
+            };
 
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<int>(nameof(VoucherGenerate) + "/GetAllByCurrentAppUserSumValue", HttpMethod.Get, dic);
         }
