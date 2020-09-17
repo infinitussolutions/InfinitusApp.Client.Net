@@ -16,9 +16,9 @@ namespace InfinitusApp.Services.FInancial
 
         }
 
-        public async Task<List<FinancialRequest>> GetAllByDataStoreId(string dataStoreId, Expression<Func<FinancialInvoice, bool>> entityFilter = null, int skip = 0, int top = 10)
+        public async Task<List<FinancialInvoice>> GetAllByDataStoreId(string dataStoreId, Expression<Func<FinancialInvoice, bool>> entityFilter = null, int skip = 0, int top = 10)
         {
-            var odataBuilder = new ODataQueryBuilder<FinancialRequest>("")
+            var odataBuilder = new ODataQueryBuilder<FinancialInvoice>("")
                  .For<FinancialInvoice>(x => x)
                  .ByList()
                  .Top(top)
@@ -33,7 +33,7 @@ namespace InfinitusApp.Services.FInancial
 
             dic.Add("dataStoreId", dataStoreId);
 
-            return await ServiceClient.InvokeApiAsync<List<FinancialRequest>>("FinancialInvoice/GetAllByDataStoreId", HttpMethod.Get, dic);
+            return await ServiceClient.InvokeApiAsync<List<FinancialInvoice>>("FinancialInvoice/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
     }
 }
