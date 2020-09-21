@@ -17,8 +17,11 @@ namespace InfinitusApp.Services.FInancial
 
         }
 
-        public async Task<List<FinancialInvoice>> GetAllByDataStoreId(string dataStoreId, ODataFilter filter, Expression<Func<FinancialInvoice, bool>> entityFilter = null, int month = 0, int year = 0 )
+        public async Task<List<FinancialInvoice>> GetAllByDataStoreId(string dataStoreId, ODataFilter filter = null, Expression<Func<FinancialInvoice, bool>> entityFilter = null, int month = 0, int year = 0 )
         {
+            if (filter == null)
+                filter = new ODataFilter();
+
             var odataBuilder = new ODataQueryBuilder<FinancialInvoice>("")
                  .For<FinancialInvoice>(x => x)
                  .ByList()
