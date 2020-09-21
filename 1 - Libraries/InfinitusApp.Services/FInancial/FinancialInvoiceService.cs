@@ -1,4 +1,5 @@
-﻿using InfinitusApp.Core.Data.DataModels;
+﻿using InfinitusApp.Core.Data.Commands.OData;
+using InfinitusApp.Core.Data.DataModels;
 using InfinitusApp.Core.Extensions;
 using OData.QueryBuilder.Builders;
 using System;
@@ -16,13 +17,13 @@ namespace InfinitusApp.Services.FInancial
 
         }
 
-        public async Task<List<FinancialInvoice>> GetAllByDataStoreId(string dataStoreId, Expression<Func<FinancialInvoice, bool>> entityFilter = null, int skip = 0, int top = 10)
+        public async Task<List<FinancialInvoice>> GetAllByDataStoreId(string dataStoreId, ODataFilter filter, Expression<Func<FinancialInvoice, bool>> entityFilter = null, int month = 0, int year = 0 )
         {
             var odataBuilder = new ODataQueryBuilder<FinancialInvoice>("")
                  .For<FinancialInvoice>(x => x)
                  .ByList()
-                 .Top(top)
-                 .Skip(skip)
+                 .Top(filter.Top)
+                 .Skip(filter.Skip)
                  .OrderByDescending(x => x.CreatedAt)
                  ;
 
@@ -32,6 +33,8 @@ namespace InfinitusApp.Services.FInancial
             var dic = odataBuilder.ToDictionary();
 
             dic.Add("dataStoreId", dataStoreId);
+            dic.Add("month", month.ToString());
+            dic.Add("year", year.ToString());
 
             return await ServiceClient.InvokeApiAsync<List<FinancialInvoice>>("FinancialInvoice/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
