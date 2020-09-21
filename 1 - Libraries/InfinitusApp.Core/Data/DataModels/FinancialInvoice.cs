@@ -86,6 +86,22 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        public string CreatedPresentation
+        {
+            get
+            {
+                return CreatedAt.Value.ToString("dd/MM/yyyy");
+            }
+        }
+
+        public string DueDatePresentation
+        {
+            get
+            {
+                return DueDate.ToString("dd/MM/yyyy");
+            }
+        }
+
         #endregion
 
     }
