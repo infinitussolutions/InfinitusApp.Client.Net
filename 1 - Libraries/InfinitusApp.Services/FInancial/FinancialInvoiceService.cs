@@ -41,5 +41,17 @@ namespace InfinitusApp.Services.FInancial
 
             return await ServiceClient.InvokeApiAsync<List<FinancialInvoice>>("FinancialInvoice/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
+
+        public async Task<List<FinancialInvoice>> GetMonthTotal(string dataStoreId, int month = 0, int year = 0)
+        {
+            var dic = new Dictionary<string, string>
+            {
+                { "dataStoreId", dataStoreId },
+                { "month", month.ToString() },
+                { "year", year.ToString() }
+            };
+
+            return await ServiceClient.InvokeApiAsync<List<FinancialInvoice>>("FinancialInvoice/GetMonthTotal", HttpMethod.Get, dic);
+        }
     }
 }
