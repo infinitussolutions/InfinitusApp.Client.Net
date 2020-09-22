@@ -42,7 +42,7 @@ namespace InfinitusApp.Core.Data.DataModels
             ApplicationUserInteractionRatings = new List<ApplicationUserInteractionRating>();
             IdentificationCode = new DataItemIdentificationInfo();
 
-            //Phones = new List<Phone>();
+            Phones = new List<Phone>();
             Addresses = new List<Address>();
             Appointments = new List<Appointment>();
             AppointmentRelations = new List<AppointmentRelation>();
@@ -258,9 +258,10 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public IList<ApplicationUserInteractionRating> ApplicationUserInteractionRatings { get; set; }
 
-        [Obsolete("Use Contact.PhoneMain", true)]
+        [Obsolete("Use Contact.PhoneMain")]
         public IList<Phone> Phones { get; set; }
 
+        [Obsolete("Use Location")]
         public IList<Address> Addresses { get; set; }
 
         public DataItemAgendaInfo AgendaInfo { get; set; }
