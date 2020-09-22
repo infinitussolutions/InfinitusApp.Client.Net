@@ -857,6 +857,10 @@ namespace InfinitusApp.Core.Data.DataModels
         [JsonIgnore]
         public bool HasDeliveryOption => DeliveryOptions.Count > 0;
 
+        [JsonIgnore]
+        public bool ShowTakeAway => DeliveryInfo.InHands &&
+            (Type == DataItemType.Company.ToString() || Type == DataItemType.Product.ToString() || Type == DataItemType.Book.ToString() || Type == DataItemType.Eat.ToString() || Type == DataItemType.Vehicle.ToString());
+
         #endregion
 
         [JsonIgnore]
