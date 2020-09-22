@@ -42,13 +42,14 @@ namespace InfinitusApp.Services.FInancial
             return await ServiceClient.InvokeApiAsync<List<FinancialInvoice>>("FinancialInvoice/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
 
-        public async Task<decimal> GetMonthTotal(string dataStoreId, int month = 0, int year = 0)
+        public async Task<decimal> GetMonthTotal(string dataStoreId, int month = 0, int year = 0, string providerId = null)
         {
             var dic = new Dictionary<string, string>
             {
                 { "dataStoreId", dataStoreId },
                 { "month", month.ToString() },
-                { "year", year.ToString() }
+                { "year", year.ToString() },
+                { "providerId", providerId }
             };
 
             return await ServiceClient.InvokeApiAsync<decimal>("FinancialInvoice/GetMonthTotal", HttpMethod.Get, dic);
