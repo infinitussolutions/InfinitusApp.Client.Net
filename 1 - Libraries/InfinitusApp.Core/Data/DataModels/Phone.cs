@@ -3,10 +3,12 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 
 namespace InfinitusApp.Core.Data.DataModels
 {
+    [Obsolete("Use PhoneComplex", true)]
     public class Phone : Naylah.Core.Entities.EntityBase
     {
         public Phone()

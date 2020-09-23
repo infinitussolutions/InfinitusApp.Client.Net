@@ -42,8 +42,8 @@ namespace InfinitusApp.Core.Data.DataModels
             ApplicationUserInteractionRatings = new List<ApplicationUserInteractionRating>();
             IdentificationCode = new DataItemIdentificationInfo();
 
-            Phones = new List<Phone>();
-            Addresses = new List<Address>();
+            //Phones = new List<Phone>();
+            //Addresses = new List<Address>();
             Appointments = new List<Appointment>();
             AppointmentRelations = new List<AppointmentRelation>();
             CollaboratorUserLevels = new List<CollaboratorUserLevel>();
@@ -258,10 +258,10 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public IList<ApplicationUserInteractionRating> ApplicationUserInteractionRatings { get; set; }
 
-        [Obsolete("Use Contact.PhoneMain")]
+        [Obsolete("Use Contact.PhoneMain", true)]
         public IList<Phone> Phones { get; set; }
 
-        [Obsolete("Use Location")]
+        [Obsolete("Use Location", true)]
         public IList<Address> Addresses { get; set; }
 
         public DataItemAgendaInfo AgendaInfo { get; set; }
@@ -338,7 +338,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return Helper?.Auxiliary?.FirstPhone != null && !string.IsNullOrEmpty(Helper.Auxiliary.FirstPhone.Number);
+                return !string.IsNullOrEmpty(Contact?.PhoneMain?.FullPhone);
             }
         }
 
@@ -1726,7 +1726,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public DataItemAuxiliaryHelper()
         {
             //FirstLocation = new Location();
-            FirstPhone = new Phone();
+            //FirstPhone = new Phone();
             //FirstAddress = new Address();
             Type = new DataItemAuxiliaryType();
             Actions = new DataItemAuxiliaryActions();
@@ -1735,7 +1735,7 @@ namespace InfinitusApp.Core.Data.DataModels
         [Obsolete("Use location address", true)]
         public Location FirstLocation { get; set; }
 
-        public Phone FirstPhone { get; set; }
+        //public Phone FirstPhone { get; set; }
 
         [Obsolete("Use location address", true)]
         public Address FirstAddress { get; set; }

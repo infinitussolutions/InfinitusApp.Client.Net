@@ -38,7 +38,7 @@ namespace InfinitusApp.Core.Data.DataModels
             CustomProperties = new ApplicationUserProperties();
             Groups = new List<ApplicationUserGroup>();
             DataItems = new List<DataItem>();
-            Phones = new List<Phone>();
+            //Phones = new List<Phone>();
             TermsOfUseAccepteds = new List<TermsOfUseAccepted>();
             Addresses = new List<Address>();
             ExternalConnections = new List<ExternalConnection>();
@@ -72,7 +72,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public IList<DataItem> DataItems { get; set; }
 
-        public IList<Phone> Phones { get; set; }
+        //public IList<Phone> Phones { get; set; }
 
         public IList<TermsOfUseAccepted> TermsOfUseAccepteds { get; set; }
 
@@ -127,10 +127,8 @@ namespace InfinitusApp.Core.Data.DataModels
                 text += "👤 Nome: " + FirstName + " " + LastName + "\n";
                 text += !string.IsNullOrEmpty(DocumentIdentifier) ? "📝 Documento: " + DocumentIdentifier + "\n" : "";
 
-                if (!string.IsNullOrEmpty(Phone?.PhoneNumber) || Phones?.Count > 0)
-                {
-                    text += !string.IsNullOrEmpty(Phone?.PhoneNumber) ? "📱 Fone: " + Phone?.PhoneNumber : "📱 Fone: " + Phones?.FirstOrDefault()?.PhonePresentation;
-                }
+                if (!string.IsNullOrEmpty(Phone?.PhoneNumber))
+                    text += "📱 Fone: " + Phone?.PhoneNumber;
 
                 return text;
             }
