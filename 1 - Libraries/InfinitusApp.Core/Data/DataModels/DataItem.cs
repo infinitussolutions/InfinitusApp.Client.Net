@@ -838,7 +838,7 @@ namespace InfinitusApp.Core.Data.DataModels
             {
                 var r = "";
 
-                if (!Booking.AllowBooking && !DeliveryInfo.InHands)
+                if ((!Booking.AllowBooking && !DeliveryInfo.InHands) || !CurrentOpeningHours.HasConfiguration)
                     return r;
 
                 r = "Horário para ";
