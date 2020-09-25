@@ -72,6 +72,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Visibility = new VisibilityInfo();
             PaymentConditionRelations = new List<PaymentConditionRelation>();
             SignaturePlanApplicationUsers = new List<SignaturePlanApplicationUser>();
+            Booking = new DataItemBooking();
         }
 
         public string Referency { get; set; }
@@ -289,6 +290,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public IList<Tag> Tags { get; set; }
 
         public Availability Availability { get; set; }
+
+        public DataItemBooking Booking { get; set; }
 
         public string WebAdminUri
         {
@@ -2133,5 +2136,10 @@ namespace InfinitusApp.Core.Data.DataModels
         public string PriceAndIdentiyPresentation => Identity + ": " + PricePresentation;
 
         public FinancialRequestDeliveryType DeliveryType { get; set; }
+    }
+
+    public class DataItemBooking
+    {
+        public bool AllowBooking { get; set; }
     }
 }

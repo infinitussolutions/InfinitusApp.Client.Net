@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static InfinitusApp.Core.Data.DataModels.TargetFilter;
 using static InfinitusApp.Core.Data.Enums.DataItemEnums;
 
 namespace InfinitusApp.Core.Data.DataModels
@@ -142,6 +143,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public TargetInfo()
         {
             TargetEditConfig = new TargetEditConfig();
+            Filter = new TargetFilter();
         }
 
         public NavigationType NavigationType { get; set; }
@@ -152,11 +154,36 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public TargetEditConfig TargetEditConfig { get; set; }
 
+        public TargetFilter Filter { get; set; }
+
     }
 
     public class TargetEditConfig
     {
         public bool CreateActive { get; set; }
+    }
+
+    public class TargetFilter
+    {
+        public TargetFilter()
+        {
+            DataItem = new TargetFilterDataItem();
+        }
+
+        public TargetFilterDataItem DataItem { get; set; }
+
+        public enum TargetFilterOption
+        {
+            All,
+            True,
+            False
+        }
+    }
+
+    public class TargetFilterDataItem
+    {
+        public TargetFilterOption AllowInHands { get; set; }
+        public TargetFilterOption AllowBooking { get; set; }
     }
 
     public enum NavigationType
