@@ -83,7 +83,7 @@ namespace InfinitusApp.Services.DataItem
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<Core.Data.DataModels.DataItem>>("DataItem/GetAllSimple", HttpMethod.Get, dic);
         }
 
-        public async Task<List<DataItemAddressResult>> GetAllDataItemByLocation(double latitude, double longitude, string dtItemType = "", string groupId = "", int skip = 0, int top = 10, string tagId = "", string q = "")
+        public async Task<List<DataItemAddressResult>> GetAllDataItemByLocation(double latitude, double longitude, string dataItemType = "", string groupId = "", string tagId = "", bool onlyTakeAway = false, bool onlyBooking = false, string q = "", int skip = 0, int top = 10)
         {
             var dic = new Dictionary<string, string>
             {
@@ -93,14 +93,20 @@ namespace InfinitusApp.Services.DataItem
                 {"longitude",longitude.ToString().Replace(",",".") }
             };
 
-            if (!string.IsNullOrEmpty(dtItemType))
-                dic.Add("dataItemType", dtItemType.ToString());
+            if (!string.IsNullOrEmpty(dataItemType))
+                dic.Add("dataItemType", dataItemType.ToString());
 
             if (!string.IsNullOrEmpty(groupId))
                 dic.Add("groupId", groupId.ToString());
 
             if (!string.IsNullOrEmpty(tagId))
                 dic.Add("tagId", tagId);
+
+            if (onlyTakeAway)
+                dic.Add("onlyTakeAway", onlyTakeAway.ToString());
+
+            if (onlyBooking)
+                dic.Add("onlyBooking", onlyBooking.ToString());
 
             if (!string.IsNullOrEmpty(q))
                 dic.Add("q", q);
