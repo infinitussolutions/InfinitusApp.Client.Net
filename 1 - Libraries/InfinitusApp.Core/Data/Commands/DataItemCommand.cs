@@ -41,6 +41,8 @@ namespace InfinitusApp.Core.Data.Commands
         public string ApplicationUserId { get; set; }
 
         public DataItemCompanyInfo Company { get; set; }
+
+        public DataItemBooking Booking { get; set; }
     }
 
     public class CreateDataItemCommand : DataItemCommand
