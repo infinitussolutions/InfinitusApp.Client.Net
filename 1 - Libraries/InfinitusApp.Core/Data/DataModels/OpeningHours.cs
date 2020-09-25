@@ -133,29 +133,54 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public string DaysPresentation
+        public string DaysPresentation => string.Format(
+            "Segunda: {0}\n" +
+            "Terça: {1}\n" +
+            "Quarta: {2}\n" +
+            "Quinta: {3}\n" +
+            "Sexta: {4}\n" +
+            "Sábado: {5}\n" +
+            "Domingo: {6}",
+            Monday.PeriodPresentation,
+            Tuesday.PeriodPresentation,
+            Wednesday.PeriodPresentation,
+            Thursday.PeriodPresentation,
+            Friday.PeriodPresentation,
+            Saturday.PeriodPresentation,
+            Sunday.PeriodPresentation
+            );
+
+
+        public string DaysPresentationInLine
         {
             get
             {
-                return string.Format(
-                    "Segunda: {0}\n" +
-                    "Terça: {1}\n" +
-                    "Quarta: {2}\n" +
-                    "Quinta: {3}\n" +
-                    "Sexta: {4}\n" +
-                    "Sábado: {5}\n" +
-                    "Domingo: {6}",
-                    Monday.PeriodPresentation,
-                    Tuesday.PeriodPresentation,
-                    Wednesday.PeriodPresentation,
-                    Thursday.PeriodPresentation,
-                    Friday.PeriodPresentation,
-                    Saturday.PeriodPresentation,
-                    Sunday.PeriodPresentation
-                    );
+                var msg = "";
+
+                if (Monday.IsOpen)
+                    msg += "Seg: " + Monday.PeriodPresentation;
+
+                if (Tuesday.IsOpen)
+                    msg += " | Ter: " + Tuesday.PeriodPresentation;
+
+                if (Wednesday.IsOpen)
+                    msg += " | Qua: " + Wednesday.PeriodPresentation;
+
+                if (Thursday.IsOpen)
+                    msg += " | Qui: " + Thursday.PeriodPresentation;
+
+                if (Friday.IsOpen)
+                    msg += " | Sex: " + Friday.PeriodPresentation;
+
+                if (Saturday.IsOpen)
+                    msg += " | Sab: " + Saturday.PeriodPresentation;
+
+                if (Sunday.IsOpen)
+                    msg += " | Dom: " + Sunday.PeriodPresentation;
+
+                return msg;
             }
         }
-
 
         #endregion
     }
