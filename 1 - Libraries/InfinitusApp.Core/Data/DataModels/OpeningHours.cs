@@ -180,7 +180,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 return msg;
             }
-        }}
+        }
 
         #endregion
     }
