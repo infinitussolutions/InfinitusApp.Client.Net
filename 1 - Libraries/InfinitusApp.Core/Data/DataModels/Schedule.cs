@@ -7,6 +7,7 @@ using System.Text;
 
 namespace InfinitusApp.Core.Data.DataModels
 {
+    [Obsolete]
     public class Schedule : EntityBase
     {
         public Schedule()

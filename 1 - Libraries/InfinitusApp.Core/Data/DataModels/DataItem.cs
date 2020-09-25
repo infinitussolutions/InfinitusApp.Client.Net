@@ -273,6 +273,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public IList<CollaboratorUserLevel> CollaboratorUserLevels { get; set; }
 
+        [Obsolete("Use time", true)]
         public Schedule Schedule { get; set; }
 
         public string ScheduleId { get; set; }
@@ -555,17 +556,6 @@ namespace InfinitusApp.Core.Data.DataModels
                 {
                     var msg = "";
 
-                    //if (!HasOperating)
-                    //{
-                    //    return msg;
-                    //    //if (!Availability.DaysAvailable.AvailableDaysOfWeak.HasToday)
-                    //    //{
-                    //    //    var nextDay = Availability.DaysAvailable.Days.FirstOrDefault(x => x > DateTime.Now.DayOfWeek).ToPresentation();
-                    //    //    msg += Description.Title + ", disponível na próxima " + nextDay + ".";
-                    //    //    return msg;
-                    //    //}
-                    //}
-
                     if (!CurrentOpeningHours.HasConfiguration)
                         return msg;
 
@@ -574,37 +564,6 @@ namespace InfinitusApp.Core.Data.DataModels
 
                     return string.Format("Fechado, abre {0} ás {1}", WorkingDay.GetDayPresentation((int)CurrentOpeningHours.NextOpenDay.DayOfWeek), CurrentOpeningHours.NextOpenDay.StartPresentation);
 
-                    //var schedulesConfig = Schedule.Schedules;
-
-                    //var operationToday = schedulesConfig.Where(x => x.DayOfWeek == DateTime.Today.DayOfWeek).FirstOrDefault();
-
-                    //if (operationToday == null)
-                    //{
-                    //    var schedule = schedulesConfig.FirstOrDefault(x => x.DayOfWeek > DateTime.Now.DayOfWeek);
-                    //    return "Fechado hoje, abre " + schedule.DayOfWeek.ToPresentation() + " ás " + new DateTime(schedule.Start.Ticks).ToString("HH:mm tt");
-
-                    //    //for (int i = 1; i < 7; i++)
-                    //    //{
-                    //    //    var thisDayOfWeek = DateTime.Today.AddDays(i).DayOfWeek;
-                    //    //    var schedule = .FirstOrDefault();
-
-                    //    //    if (schedule != null)
-                    //    //        return "Fechado hoje, abre " + schedule.DayOfWeek.ToPresentation() + " ás " + new DateTime(schedule.Start.Ticks).ToString("HH:mm tt");
-                    //    //}
-                    //}
-
-                    //var actualTimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-
-                    //if (actualTimeSpan > operationToday.Start && actualTimeSpan < operationToday.End)
-                    //    return "Aberto agora, fecha às " + new DateTime(operationToday.End.Ticks).ToString("HH:mm tt");
-
-                    //if (actualTimeSpan < operationToday.Start)
-                    //    return "Fechado agora, abre às " + new DateTime(operationToday.Start.Ticks).ToString("HH:mm tt");
-
-                    //if (actualTimeSpan > operationToday.End)
-                    //    return "Fechado agora, fechou a " + new DateTime((actualTimeSpan - operationToday.End).Ticks).ToString("HH:mm") + " atrás";
-
-                    //return msg;
                 }
 
                 catch (Exception)
@@ -870,6 +829,37 @@ namespace InfinitusApp.Core.Data.DataModels
 
         [JsonIgnore]
         public bool CompleteRegistrationVisible { get { return IsAdmin && !string.IsNullOrEmpty(InfoCompleteRegistration); } }
+
+        #region OperatingTime
+
+        public string TitleToUseOperatingTime
+        {
+            get
+            {
+                var r = "";
+
+                if (!Booking.AllowBooking && !DeliveryInfo.InHands)
+                    return r;
+
+                r = "Horário para ";
+
+                if (Booking.AllowBooking && DeliveryInfo.InHands)
+                { 
+                    r += "Reserva ou retira no local";
+                    return r;
+                }
+
+                if (Booking.AllowBooking)
+                    r += "Reserva";
+
+                if (DeliveryInfo.InHands)
+                    r += "Retirada no local";
+
+                return r;
+            }
+        }
+
+        #endregion
 
         public static DataItem ConvertAppUserToPerson(ApplicationUser user, string dataStoreId)
         {
