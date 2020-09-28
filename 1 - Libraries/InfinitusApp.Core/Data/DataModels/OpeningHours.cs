@@ -1,4 +1,5 @@
 ﻿using InfinitusApp.Core.Extensions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -164,31 +165,26 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 var msg = "";
 
-                foreach (var d in ListDaysWhereIsOpen)
-                {
-                    msg += d.PeriodPresentationWithDayOfWeek + " | ";
-                }
+                if (Monday.IsOpen)
+                    msg += "Seg: " + Monday.PeriodPresentation;
 
-                //if (Monday.IsOpen)
-                //    msg += "Seg: " + Monday.PeriodPresentation;
+                if (Tuesday.IsOpen)
+                    msg += " | Ter: " + Tuesday.PeriodPresentation;
 
-                //if (Tuesday.IsOpen)
-                //    msg += " | Ter: " + Tuesday.PeriodPresentation;
+                if (Wednesday.IsOpen)
+                    msg += " | Qua: " + Wednesday.PeriodPresentation;
 
-                //if (Wednesday.IsOpen)
-                //    msg += " | Qua: " + Wednesday.PeriodPresentation;
+                if (Thursday.IsOpen)
+                    msg += " | Qui: " + Thursday.PeriodPresentation;
 
-                //if (Thursday.IsOpen)
-                //    msg += " | Qui: " + Thursday.PeriodPresentation;
+                if (Friday.IsOpen)
+                    msg += " | Sex: " + Friday.PeriodPresentation;
 
-                //if (Friday.IsOpen)
-                //    msg += " | Sex: " + Friday.PeriodPresentation;
+                if (Saturday.IsOpen)
+                    msg += " | Sab: " + Saturday.PeriodPresentation;
 
-                //if (Saturday.IsOpen)
-                //    msg += " | Sab: " + Saturday.PeriodPresentation;
-
-                //if (Sunday.IsOpen)
-                //    msg += " | Dom: " + Sunday.PeriodPresentation;
+                if (Sunday.IsOpen)
+                    msg += " | Dom: " + Sunday.PeriodPresentation;
 
                 return msg;
             }
@@ -203,16 +199,64 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 var msg = "";
 
-                var listOrder = ListDaysWhereIsOpen.OrderBy(x => x.DayOfWeek).ThenBy(x => x.IsTomorrow).ThenBy(x => x.IsToday);
-
-                foreach (var d in listOrder)
+                if (Monday.IsOpen)
                 {
-                    msg += d.PeriodPresentationWithDayOfWeekWithTodayInfo + " | ";
+                    var today = DayOfWeek.Monday.GetTodayPresentation();
+                    msg += !string.IsNullOrEmpty(today) ? today : "Seg: " + Monday.PeriodPresentation + " | ";
+                }
+
+                if (Tuesday.IsOpen)
+                {
+                    var today = DayOfWeek.Tuesday.GetTodayPresentation();
+                    msg += !string.IsNullOrEmpty(today) ? today : "Ter: " + Tuesday.PeriodPresentation + " | ";
+                }
+
+                if (Wednesday.IsOpen)
+                {
+                    var today = DayOfWeek.Wednesday.GetTodayPresentation();
+                    msg += !string.IsNullOrEmpty(today) ? today : " Qua: " + Wednesday.PeriodPresentation + " | ";
+                }
+
+                if (Thursday.IsOpen)
+                {
+                    var today = DayOfWeek.Thursday.GetTodayPresentation();
+                    msg += !string.IsNullOrEmpty(today) ? today : "Qui: " + Thursday.PeriodPresentation + " | ";
+                }
+
+                if (Friday.IsOpen)
+                {
+                    var today = DayOfWeek.Friday.GetTodayPresentation();
+                    msg += !string.IsNullOrEmpty(today) ? today : "Sex: " + Friday.PeriodPresentation + " | ";
+                }
+
+                if (Saturday.IsOpen)
+                {
+                    var today = DayOfWeek.Saturday.GetTodayPresentation();
+                    msg += !string.IsNullOrEmpty(today) ? today : "Sab: " + Saturday.PeriodPresentation + " | ";
+                }
+
+                if (Sunday.IsOpen)
+                {
+                    var today = DayOfWeek.Sunday.GetTodayPresentation();
+                    msg += !string.IsNullOrEmpty(today) ? today : "Dom: " + Sunday.PeriodPresentation + " | ";
                 }
 
                 return msg;
             }
         }
+
+
+
+        //public string PeriodPresentationWithDayOfWeek => (DayOfWeek.Value.GetPresentation(true) + ": " + StartPresentation + " - " + EndPresentation);
+
+        //public string PeriodPresentationWithDayOfWeekWithTodayInfo => (IsToday ? "Hoje" : IsTomorrow ? "Amanhã" : DayOfWeek.Value.GetPresentation(true)) + ": " + StartPresentation + " - " + EndPresentation;
+
+        //public bool IsToday => DayOfWeek.HasValue && DateTime.Today.DayOfWeek.Equals(DayOfWeek.Value);
+
+        //public bool IsTomorrow => DayOfWeek.HasValue && DateTime.Today.AddDays(1).DayOfWeek.Equals(DayOfWeek.Value);
+
+        //[JsonIgnore]
+        //public DayOfWeek DayOfWeek { get; private set; }
 
         #endregion
     }
@@ -242,19 +286,11 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public string PeriodPresentationWithDayOfWeek => (DayOfWeek.Value.GetPresentation(true) + ": " + StartPresentation + " - " + EndPresentation);
-
-        public string PeriodPresentationWithDayOfWeekWithTodayInfo => (IsToday ? "Hoje" : IsTomorrow ? "Amanhã" : DayOfWeek.Value.GetPresentation(true)) + ": " + StartPresentation + " - " + EndPresentation;
-
         public string StartPresentation => Start.ToString("hh':'mm");
 
         public string EndPresentation => End.ToString("hh':'mm");
 
         public bool IsValid => Start <= End;
-
-        public bool IsToday => DayOfWeek.HasValue && DateTime.Today.DayOfWeek.Equals(DayOfWeek.Value);
-
-        public bool IsTomorrow => DayOfWeek.HasValue && DateTime.Today.AddDays(1).DayOfWeek.Equals(DayOfWeek.Value);
 
         public static string GetDayPresentation(int day)
         {

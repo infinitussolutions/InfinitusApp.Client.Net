@@ -28,5 +28,16 @@ namespace InfinitusApp.Core.Extensions
 
             return "";
         }
+
+        public static string GetTodayPresentation(this DayOfWeek dayOfWeek)
+        {
+            if (DateTime.Today.DayOfWeek == dayOfWeek)
+                return "Hoje";
+
+            if (DateTime.Today.AddDays(1).DayOfWeek == dayOfWeek)
+                return "Amanhã";
+
+            return "";
+        }
     }
 }
