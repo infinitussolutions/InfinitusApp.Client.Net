@@ -214,7 +214,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (Wednesday.IsOpen)
                 {
                     var today = DayOfWeek.Wednesday.GetTodayPresentation();
-                    msg += !string.IsNullOrEmpty(today) ? today : " Qua: " + Wednesday.PeriodPresentation + " | ";
+                    msg += !string.IsNullOrEmpty(today) ? today : "Qua: " + Wednesday.PeriodPresentation + " | ";
                 }
 
                 if (Thursday.IsOpen)
