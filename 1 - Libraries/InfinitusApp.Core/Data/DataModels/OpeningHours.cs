@@ -242,7 +242,7 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public string PeriodPresentationWithDayOfWeek => DayOfWeek.HasValue ? DayOfWeek.Value.GetPresentation(true) + ": " + StartPresentation + " - " + EndPresentation : "";
+        public string PeriodPresentationWithDayOfWeek => DayOfWeek.HasValue ? (DayOfWeek.Value.GetPresentation(true) + ": " + StartPresentation + " - " + EndPresentation) : "";
 
         public string PeriodPresentationWithDayOfWeekWithTodayInfo => DayOfWeek.HasValue ? (IsToday ? "Hoje" : IsTomorrow ? "Amanhã" : DayOfWeek.Value.GetPresentation(true)) + ": " + StartPresentation + " - " + EndPresentation : "";
 

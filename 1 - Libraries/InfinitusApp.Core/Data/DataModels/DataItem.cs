@@ -845,15 +845,15 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 if (Booking.AllowBooking && DeliveryInfo.InHands)
                 { 
-                    r += "reserva ou retirada no local";
+                    r += "reservar ou retirar no local";
                     return r;
                 }
 
                 if (Booking.AllowBooking)
-                    r += "reserva";
+                    r += "reservar";
 
                 if (DeliveryInfo.InHands)
-                    r += "retirada no local";
+                    r += "retirar no local";
 
                 return r;
             }
