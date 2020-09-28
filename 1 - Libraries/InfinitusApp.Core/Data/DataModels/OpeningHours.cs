@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InfinitusApp.Core.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -202,9 +203,11 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 var msg = "";
 
-                foreach (var d in ListDaysWhereIsOpen)
+                var listOrder = ListDaysWhereIsOpen.OrderBy(x => x.DayOfWeek).ThenBy(x => x.IsTomorrow).ThenBy(x => x.IsToday);
+
+                foreach (var d in listOrder)
                 {
-                    msg += d.PeriodPresentationWithDayOfWeek + " | ";
+                    msg += d.PeriodPresentationWithDayOfWeekWithTodayInfo + " | ";
                 }
 
                 return msg;
@@ -239,9 +242,9 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public string PeriodPresentationWithDayOfWeek => DayOfWeek.HasValue ? System.Threading.Thread.CurrentThread.CurrentUICulture.DateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Value) + ": " + StartPresentation + " - " + EndPresentation : "";
+        public string PeriodPresentationWithDayOfWeek => DayOfWeek.HasValue ? DayOfWeek.Value.GetPresentation(true) + ": " + StartPresentation + " - " + EndPresentation : "";
 
-        public string PeriodPresentationWithDayOfWeekWithTodayInfo => DayOfWeek.HasValue ? (IsToday ? "Hoje" : IsTomorrow ? "Amanhã" : System.Threading.Thread.CurrentThread.CurrentUICulture.DateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Value)) + ": " + StartPresentation + " - " + EndPresentation : "";
+        public string PeriodPresentationWithDayOfWeekWithTodayInfo => DayOfWeek.HasValue ? (IsToday ? "Hoje" : IsTomorrow ? "Amanhã" : DayOfWeek.Value.GetPresentation(true)) + ": " + StartPresentation + " - " + EndPresentation : "";
 
         public string StartPresentation => Start.ToString("hh':'mm");
 
