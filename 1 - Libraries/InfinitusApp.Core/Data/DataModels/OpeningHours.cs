@@ -67,6 +67,9 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        public List<WorkingDay> ListDaysWhereIsOpen => ListDays.Where(x => x.IsOpen).ToList();
+
+
         public WorkingDay CurrentDay
         {
             get
@@ -155,28 +158,54 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
+                if (!HasConfiguration)
+                    return "Informação não encontrada";
+
                 var msg = "";
 
-                if (Monday.IsOpen)
-                    msg += "Seg: " + Monday.PeriodPresentation;
+                foreach (var d in ListDaysWhereIsOpen)
+                {
+                    msg += d.PeriodPresentationWithDayOfWeek + " | ";
+                }
 
-                if (Tuesday.IsOpen)
-                    msg += " | Ter: " + Tuesday.PeriodPresentation;
+                //if (Monday.IsOpen)
+                //    msg += "Seg: " + Monday.PeriodPresentation;
 
-                if (Wednesday.IsOpen)
-                    msg += " | Qua: " + Wednesday.PeriodPresentation;
+                //if (Tuesday.IsOpen)
+                //    msg += " | Ter: " + Tuesday.PeriodPresentation;
 
-                if (Thursday.IsOpen)
-                    msg += " | Qui: " + Thursday.PeriodPresentation;
+                //if (Wednesday.IsOpen)
+                //    msg += " | Qua: " + Wednesday.PeriodPresentation;
 
-                if (Friday.IsOpen)
-                    msg += " | Sex: " + Friday.PeriodPresentation;
+                //if (Thursday.IsOpen)
+                //    msg += " | Qui: " + Thursday.PeriodPresentation;
 
-                if (Saturday.IsOpen)
-                    msg += " | Sab: " + Saturday.PeriodPresentation;
+                //if (Friday.IsOpen)
+                //    msg += " | Sex: " + Friday.PeriodPresentation;
 
-                if (Sunday.IsOpen)
-                    msg += " | Dom: " + Sunday.PeriodPresentation;
+                //if (Saturday.IsOpen)
+                //    msg += " | Sab: " + Saturday.PeriodPresentation;
+
+                //if (Sunday.IsOpen)
+                //    msg += " | Dom: " + Sunday.PeriodPresentation;
+
+                return msg;
+            }
+        }
+
+        public string DaysPresentationWithTodayInLine
+        {
+            get
+            {
+                if (!HasConfiguration)
+                    return "Informação não encontrada";
+
+                var msg = "";
+
+                foreach (var d in ListDaysWhereIsOpen)
+                {
+                    msg += d.PeriodPresentationWithDayOfWeek + " | ";
+                }
 
                 return msg;
             }
@@ -188,20 +217,16 @@ namespace InfinitusApp.Core.Data.DataModels
     public class WorkingDay
     {
         public bool IsOpen { get; set; }
+
         public TimeSpan Start { get; set; }
+
         public TimeSpan End { get; set; }
 
         public DayOfWeek? DayOfWeek { get; set; }
 
         #region Presentation
 
-        public string IsOpenPresentation
-        {
-            get
-            {
-                return IsOpen ? "Aberto" : "Fechado";
-            }
-        }
+        public string IsOpenPresentation => IsOpen ? "Aberto" : "Fechado";
 
         public string PeriodPresentation
         {
@@ -214,29 +239,19 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public string StartPresentation
-        {
-            get
-            {
-                return Start.ToString("hh':'mm");
-            }
-        }
+        public string PeriodPresentationWithDayOfWeek => DayOfWeek.HasValue ? System.Threading.Thread.CurrentThread.CurrentUICulture.DateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Value) + ": " + StartPresentation + " - " + EndPresentation : "";
 
-        public string EndPresentation
-        {
-            get
-            {
-                return End.ToString("hh':'mm");
-            }
-        }
+        public string PeriodPresentationWithDayOfWeekWithTodayInfo => DayOfWeek.HasValue ? (IsToday ? "Hoje" : IsTomorrow ? "Amanhã" : System.Threading.Thread.CurrentThread.CurrentUICulture.DateTimeFormat.GetAbbreviatedDayName(DayOfWeek.Value)) + ": " + StartPresentation + " - " + EndPresentation : "";
 
-        public bool IsValid
-        {
-            get
-            {
-                return Start <= End;
-            }
-        }
+        public string StartPresentation => Start.ToString("hh':'mm");
+
+        public string EndPresentation => End.ToString("hh':'mm");
+
+        public bool IsValid => Start <= End;
+
+        public bool IsToday => DayOfWeek.HasValue && DateTime.Today.DayOfWeek.Equals(DayOfWeek.Value);
+
+        public bool IsTomorrow => DayOfWeek.HasValue && DateTime.Today.AddDays(1).DayOfWeek.Equals(DayOfWeek.Value);
 
         public static string GetDayPresentation(int day)
         {
