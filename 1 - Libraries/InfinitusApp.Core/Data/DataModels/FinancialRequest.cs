@@ -391,21 +391,21 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #region Validation
 
-        public static string CheckStatusToChange(FinancialRequestStatus? status)
-        {
-            var objReturn = "";
+        //public static string CheckStatusToChange(FinancialRequestStatus? status)
+        //{
+        //    var objReturn = "";
 
-            if (status == FinancialRequestStatus.InProgress)
-                objReturn += "Financial Request in progress\n";
+        //    if (status == FinancialRequestStatus.InProgress)
+        //        objReturn += "Financial Request in progress\n";
 
-            if (status == FinancialRequestStatus.Canceled)
-                objReturn += "Financial Request is canceled\n";
+        //    if (status == FinancialRequestStatus.Canceled)
+        //        objReturn += "Financial Request is canceled\n";
 
-            if (status == FinancialRequestStatus.Finalized)
-                objReturn += "Financial Request is finalized";
+        //    if (status == FinancialRequestStatus.Finalized)
+        //        objReturn += "Financial Request is finalized";
 
-            return objReturn;
-        }
+        //    return objReturn;
+        //}
 
         #endregion
     }
@@ -662,6 +662,7 @@ namespace InfinitusApp.Core.Data.DataModels
         CreditCard
     }
 
+    [Obsolete("Use FinancialRequestStatusRelation", true)]
     public enum FinancialRequestStatus
     {
         None,
@@ -730,18 +731,18 @@ namespace InfinitusApp.Core.Data.DataModels
 
 
 
-        public static FinancialRequestPresentationStatus FinancialRequestStatusToPresentation(FinancialRequestStatus status)
-        {
-            switch (status)
-            {
-                default: return FinancialRequestPresentationStatus.None;
-                case FinancialRequestStatus.Open: return FinancialRequestPresentationStatus.Budgeted;
-                case FinancialRequestStatus.InProgress: return FinancialRequestPresentationStatus.InProgress;
-                case FinancialRequestStatus.Finalized: return FinancialRequestPresentationStatus.Finalized;
-                case FinancialRequestStatus.Canceled: return FinancialRequestPresentationStatus.Canceled;
-                case FinancialRequestStatus.Approved: return FinancialRequestPresentationStatus.Approved;
-            }
-        }
+        //public static FinancialRequestPresentationStatus FinancialRequestStatusToPresentation(FinancialRequestStatus status)
+        //{
+        //    switch (status)
+        //    {
+        //        default: return FinancialRequestPresentationStatus.None;
+        //        case FinancialRequestStatus.Open: return FinancialRequestPresentationStatus.Budgeted;
+        //        case FinancialRequestStatus.InProgress: return FinancialRequestPresentationStatus.InProgress;
+        //        case FinancialRequestStatus.Finalized: return FinancialRequestPresentationStatus.Finalized;
+        //        case FinancialRequestStatus.Canceled: return FinancialRequestPresentationStatus.Canceled;
+        //        case FinancialRequestStatus.Approved: return FinancialRequestPresentationStatus.Approved;
+        //    }
+        //}
     }
 
     public class FinancialRequestActions
