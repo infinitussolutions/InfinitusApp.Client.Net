@@ -34,10 +34,12 @@ namespace InfinitusApp.Core.Data.DataModels
             VoucherGenerateList = new List<VoucherGenerate>();
             DeliveryInfo = new FinancialRequestDeliveryInfo();
             DeliveryMan = new ApplicationUser();
+            TakeAwayInfo = new FinancialRequestTakeAwayInfo();
         }
 
         public string Observation { get; set; }
-        [Obsolete("Use CurrentStatus")]
+
+        [Obsolete("Use CurrentStatus", true)]
         public FinancialRequestStatus Status { get; set; }
 
         public FinancialRequestType Type { get; set; }
@@ -50,11 +52,9 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public FinancialRequestExternalModel ExternalModel { get; set; }
 
-        //public AddressComplex DeliveryAddress { get; set; }
-
-        //public decimal DeliveryPrice { get; set; }
-
         public FinancialRequestDeliveryInfo DeliveryInfo { get; set; }
+
+        public FinancialRequestTakeAwayInfo TakeAwayInfo { get; set; }
 
         #region Extention
 
@@ -139,20 +139,20 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        [JsonIgnore]
-        public FinancialRequestActions PossibleActions
-        {
-            get
-            {
-                return new FinancialRequestActions
-                {
-                    Approve = Status == FinancialRequestStatus.Open || Status == FinancialRequestStatus.InProgress,
-                    Progress = Status == FinancialRequestStatus.Open,
-                    Cancel = Status == FinancialRequestStatus.Open || Status == FinancialRequestStatus.InProgress || Status == FinancialRequestStatus.Approved,
-                    Finalize = Status == FinancialRequestStatus.Approved || Status == FinancialRequestStatus.InProgress
-                };
-            }
-        }
+        //[JsonIgnore]
+        //public FinancialRequestActions PossibleActions
+        //{
+        //    get
+        //    {
+        //        return new FinancialRequestActions
+        //        {
+        //            Approve = Status == FinancialRequestStatus.Open || Status == FinancialRequestStatus.InProgress,
+        //            Progress = Status == FinancialRequestStatus.Open,
+        //            Cancel = Status == FinancialRequestStatus.Open || Status == FinancialRequestStatus.InProgress || Status == FinancialRequestStatus.Approved,
+        //            Finalize = Status == FinancialRequestStatus.Approved || Status == FinancialRequestStatus.InProgress
+        //        };
+        //    }
+        //}
 
         [JsonIgnore]
         public bool StatusIsOpen

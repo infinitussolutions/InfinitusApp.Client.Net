@@ -29,13 +29,9 @@ namespace InfinitusApp.Core.Data.Commands
 
         public string PaymentConditionId { get; set; }
 
-        [Obsolete("Use delivery info", true)]
-        public AddressComplex DeliveryAddress { get; set; }
-
-        [Obsolete("Use delivery info", true)]
-        public decimal DeliveryPrice { get; set; }
-
         public FinancialRequestDeliveryInfo DeliveryInfo { get; set; }
+
+        public FinancialRequestTakeAwayInfo TakeAwayInfo { get; set; }
 
         public string DeliveryManId { get; set; }
     }
