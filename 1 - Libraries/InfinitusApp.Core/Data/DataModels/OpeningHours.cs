@@ -126,7 +126,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (CurrentDay == null || !CurrentDay.IsOpen)
                     return false;
 
-                return DateTime.Now.TimeOfDay >= CurrentDay.Start && DateTime.Now.TimeOfDay < CurrentDay.End;
+                return DateTime.Now.TimeOfDay >= CurrentDay.Start && DateTime.Now.TimeOfDay <= CurrentDay.End;
             }
         }
 
