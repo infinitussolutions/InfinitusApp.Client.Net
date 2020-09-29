@@ -17,8 +17,8 @@ namespace InfinitusApp.Core.Data.DataModels
             FinancialRequest = new FinancialRequest();
             //Variation = new Variation();
 
-            IsEditableQuantity = !FinancialRequest.CurrentStatus.Config.IsClosed; // FinancialRequest.Status == FinancialRequestStatus.Open;
-            CanRemoveItem = !FinancialRequest.CurrentStatus.Config.IsClosed;
+            IsEditableQuantity = !FinancialRequest?.CurrentStatus?.Config?.IsClosed ?? true; // FinancialRequest.Status == FinancialRequestStatus.Open;
+            CanRemoveItem = !FinancialRequest?.CurrentStatus?.Config?.IsClosed ?? true;
         }
 
         public string Description { get; set; }
