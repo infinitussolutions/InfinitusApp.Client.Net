@@ -336,9 +336,9 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public DayOfWeek DayOfWeek { get; set; }
 
-        public string DayOfWeekPresentation => DayOfWeek.ToPresentation();
+        public string DayOfWeekPresentation => DayOfWeek.ToPresentation(false, true);
 
-        public string DayOfWeekPresentationResume => DayOfWeek.ToPresentation(true);
+        public string DayOfWeekPresentationResume => DayOfWeek.ToPresentation(true, true);
 
         public List<TimeSpan> TimeInterval
         {
