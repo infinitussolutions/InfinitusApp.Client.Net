@@ -99,14 +99,16 @@ namespace InfinitusApp.Core.Data.DataModels
             get
             {
                 var l = new List<WorkingDateToBooking>();
-                var daysOfWeekAvailable = ListDaysWithDayOfWeekWhereIsOpen.Select(x => x.DayOfWeek);
+                //var daysOfWeekAvailable = ListDaysWithDayOfWeekWhereIsOpen.Select(x => x.DayOfWeek);
 
                 for (int i = 0; i < QuantiyNextDaysToBooking; i++)
                 {
                     var dateToAdd = DateTime.Today.AddDays(i);
 
-                    if (daysOfWeekAvailable.Contains(dateToAdd.DayOfWeek))
-                        l.Add(new WorkingDateToBooking(dateToAdd));
+                    var workingDate = ListDaysWithDayOfWeekWhereIsOpen.First(x => x.DayOfWeek == dateToAdd.DayOfWeek);
+
+                    if (workingDate != null)
+                        l.Add(new WorkingDateToBooking(dateToAdd, workingDate));
                 }
 
                 return l;
@@ -350,43 +352,47 @@ namespace InfinitusApp.Core.Data.DataModels
         public WorkingDay WorkingDay { get; private set; }
 
         public DayOfWeek DayOfWeek { get; set; }
-
-        //public List<WorkingDayWithTimeInterval> TimeInterval
-        //{
-        //    get
-        //    {
-        //        var l = new List<WorkingDayWithTimeInterval>();
-
-        //        var intervalHours = (WorkingDay.End - WorkingDay.Start).TotalHours;
-
-        //        if (DayOfWeekIsToday && DateTime.Now.TimeOfDay > WorkingDay.Start)
-        //            intervalHours = (WorkingDay.End - DateTime.Now.TimeOfDay).TotalHours;
-
-        //        var start = WorkingDay.Start;
-
-        //        for (int i = 0; i < intervalHours; i++)
-        //        {
-        //            l.Add(new WorkingDayWithTimeInterval(start.Add(new TimeSpan(i, 0, 0)), DayOfWeekIsToday));
-        //        }
-
-        //        return l;
-        //    }
-        //}
     }
 
     public class WorkingDateToBooking
     {
-        public WorkingDateToBooking(DateTime _dateToBooking)
+        public WorkingDateToBooking(DateTime _dateToBooking, WorkingDayWithDayOfWeek _workingDayWithDayOfWeek)
         {
-            //WorkingDayWithDayOfWeek = _workingDayWithDayOfWeek;
+            WorkingDayWithDayOfWeek = _workingDayWithDayOfWeek;
             DateToBooking = _dateToBooking;
         }
 
-        //public WorkingDayWithDayOfWeek WorkingDayWithDayOfWeek { get; private set; }
+        public WorkingDayWithDayOfWeek WorkingDayWithDayOfWeek { get; private set; }
 
         public DateTime DateToBooking { get; set; }
 
-        public string DateToBookingPresentation => DateToBooking.ToString("dddd - dd/MM");
+        public string DateToBookingPresentation => IsToday ? ("Hoje | " + DateToBooking.ToString("dddd - dd/MM")) : IsTomorrow ? ("Amanhã | " + DateToBooking.ToString("dddd - dd/MM")) : DateToBooking.ToString("dddd - dd/MM");
+
+        public bool IsToday => DateTime.Today == DateToBooking.Date;
+
+        public bool IsTomorrow => DateTime.Today.AddDays(1) == DateToBooking.Date;
+
+        public List<WorkingDayWithTimeInterval> TimeInterval
+        {
+            get
+            {
+                var l = new List<WorkingDayWithTimeInterval>();
+
+                var intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - WorkingDayWithDayOfWeek.WorkingDay.Start).TotalHours;
+
+                if (IsToday && DateTime.Now.TimeOfDay > WorkingDayWithDayOfWeek.WorkingDay.Start)
+                    intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - DateTime.Now.TimeOfDay).TotalHours;
+
+                var start = WorkingDayWithDayOfWeek.WorkingDay.Start;
+
+                for (int i = 0; i < intervalHours; i++)
+                {
+                    l.Add(new WorkingDayWithTimeInterval(start.Add(new TimeSpan(i, 0, 0))));
+                }
+
+                return l;
+            }
+        }
 
         //public string DayOfWeekPresentation
         //{
@@ -406,33 +412,18 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public class WorkingDayWithTimeInterval
     {
-        public WorkingDayWithTimeInterval(TimeSpan _time, bool _isActualDayOfWeek)
+        public WorkingDayWithTimeInterval(TimeSpan _time)
         {
             Time = _time;
-            IsActualDayOfWeek = _isActualDayOfWeek;
+            //IsActualDayOfWeek = _isActualDayOfWeek;
         }
 
         public TimeSpan Time { get; set; }
 
-        public bool IsActualDayOfWeek { get; set; }
+        //public bool IsActualDayOfWeek { get; set; }
 
-        public bool IsActualDayOfWeekAndTime => IsActualDayOfWeek && DateTime.Now.TimeOfDay.Hours == Time.Hours;
+        //public bool IsActualDayOfWeekAndTime => IsActualDayOfWeek && DateTime.Now.TimeOfDay.Hours == Time.Hours;
 
-        public string TimePresentation => IsActualDayOfWeekAndTime ? "O mais breve possível" : Time.ToString(@"hh\:mm") + " hrs";
+        public string TimePresentation => /*IsActualDayOfWeekAndTime ? "O mais breve possível" : */Time.ToString(@"hh\:mm") + " hrs";
     }
-
-    //public static class WorkingDateToBookingExtention
-    //{
-    //    public static List<WorkingDateToBooking> GetNextDaysToBooking(this WorkingDayWithDayOfWeek workingDayWithDayOfWeek, int quantityNextDays)
-    //    {
-    //        var l = new List<WorkingDateToBooking>();
-
-    //        for (int i = 0; i < quantityNextDays; i++)
-    //        {
-    //            l.Add(new WorkingDateToBooking(workingDayWithDayOfWeek, DateTime.Today.AddDays(i)));
-    //        }
-
-    //        return l;
-    //    }
-    //}
 }
