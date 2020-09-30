@@ -89,8 +89,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public List<WorkingDay> ListDaysWhereIsOpen => ListDays.Where(x => x.IsOpen).ToList();
 
-        public List<WorkingDayWithDayOfWeek> ListDaysWithDayOfWeekWhereIsOpen => ListDaysWithDayOfWeek.Where(x => x.WorkingDay.IsOpen).OrderBy(x => x.DayOfWeekIsToday).ThenBy(x => x.DayOfWeekIsTomorrow).ToList();
-
+        public List<WorkingDayWithDayOfWeek> ListDaysWithDayOfWeekWhereIsOpen => ListDaysWithDayOfWeek.Where(x => x.WorkingDay.IsOpen).OrderByDescending(x => x.DayOfWeekIsToday).ThenByDescending(x => x.DayOfWeekIsTomorrow).ToList();
 
         public WorkingDay CurrentDay
         {
@@ -381,6 +380,6 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public bool IsActualDayOfWeekAndTime => IsActualDayOfWeek && DateTime.Now.TimeOfDay.Hours == Time.Hours;
 
-        public string TimePresentation => IsActualDayOfWeekAndTime ? "O mais breve possível" : Time.ToString("HH:mm");
+        public string TimePresentation => IsActualDayOfWeekAndTime ? "O mais breve possível" : Time.ToString("hh\:mm");
     }
 }
