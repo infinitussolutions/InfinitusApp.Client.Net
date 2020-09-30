@@ -380,6 +380,6 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public bool IsActualDayOfWeekAndTime => IsActualDayOfWeek && DateTime.Now.TimeOfDay.Hours == Time.Hours;
 
-        public string TimePresentation => IsActualDayOfWeekAndTime ? "O mais breve possível" : Time.ToString("hh\:mm");
+        public string TimePresentation => IsActualDayOfWeekAndTime ? "O mais breve possível" : Time.ToString(@"hh\:mm");
     }
 }
