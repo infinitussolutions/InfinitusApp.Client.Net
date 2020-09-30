@@ -329,118 +329,40 @@ namespace InfinitusApp.Core.Data.DataModels
 
 
         [JsonIgnore]
-        public bool HasType
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(Type);
-            }
-        }
+        public bool HasType => !string.IsNullOrEmpty(Type);
 
         [JsonIgnore]
-        public bool HasPhone
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(Contact?.PhoneMain?.FullPhone);
-            }
-        }
+        public bool HasPhone => !string.IsNullOrEmpty(Contact?.PhoneMain?.FullPhone);
 
         [JsonIgnore]
-        public bool IsCompany
-        {
-            get
-            {
-                return HasType && Type.Equals("Company");
-            }
-        }
+        public bool IsCompany => HasType && Type.ToLower().Equals("company");
 
         [JsonIgnore]
-        public bool IsDepartment
-        {
-            get
-            {
-                return HasType && Type.Equals("Department");
-            }
-        }
+        public bool IsDepartment => HasType && Type.ToLower().Equals("department");
 
         [JsonIgnore]
-        public bool IsCompanyOrDepartment
-        {
-            get
-            {
-                return IsCompany || IsDepartment;
-            }
-        }
+        public bool IsEvent => HasType && Type.ToLower().Equals("event");
 
         [JsonIgnore]
-        public bool NotIsDepartment
-        {
-            get
-            {
-                return !IsDepartment;
-            }
-        }
+        public bool IsProduct => HasType && Type.ToLower().Equals("product");
 
         [JsonIgnore]
-        public bool NotIsCompanyOrDepartment
-        {
-            get
-            {
-                return !IsCompanyOrDepartment;
-            }
-        }
+        public bool IsPerson => HasType && Type.ToLower().Equals("person");
 
         [JsonIgnore]
-        public bool IsEvent
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(Type) && Type.Equals("Event");
-            }
-        }
+        public bool IsInscription => HasType && Type.ToLower().Equals("inscription");
 
         [JsonIgnore]
-        public bool IsProduct
-        {
-            get
-            {
-                return Type.Equals("Product");
-            }
-        }
+        public bool IsPet => HasType && Type.ToLower().Equals("pet");
 
         [JsonIgnore]
-        public bool IsPerson
-        {
-            get
-            {
-                return Type.Equals("Person");
-            }
-        }
+        public bool IsCompanyOrDepartment => IsCompany || IsDepartment;
 
         [JsonIgnore]
-        public bool IsInscription
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Type))
-                    return false;
-
-                return Type.Equals("Inscription");
-            }
-        }
+        public bool IsNotDepartment => !IsDepartment;
 
         [JsonIgnore]
-        public bool IsPet
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Type))
-                    return false;
-
-                return Type.ToUpper().Equals("PET");
-            }
-        }
+        public bool IsNotCompanyOrDepartment => !IsCompanyOrDepartment;
 
         [JsonIgnore]
         public string IsVisibleAdminMessage
@@ -466,141 +388,10 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         [JsonIgnore]
-        public OpeningHours CurrentOpeningHours
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(Parent?.Id) && Parent.OpeningHours.HasConfiguration)
-                    return Parent.OpeningHours;
-
-                return OpeningHours;
-            }
-        }
-
-        [JsonIgnore]
-        public bool HasOperating
-        {
-            get
-            {
-                return CurrentOpeningHours.HasConfiguration;
-
-                //if (Parent != null && Parent.Schedule != null && !Parent.Schedule.Deleted && Parent.Schedule.Schedules.Count > 0)
-                //{
-                //    Schedule = Parent.Schedule;
-                //    return true;
-                //}
-
-                //if (Schedule != null && !Schedule.Deleted && Schedule.Schedules.Count > 0)
-                //    return true;
-
-                //return false;
-            }
-        }
-
-        [JsonIgnore]
-        public bool InOperating
-        {
-            get
-            {
-                if (!HasOperating)
-                    return Availability.DaysAvailable.AvailableDaysOfWeak.HasToday;
-
-                return CurrentOpeningHours.CurrentDayIsOpen;
-
-                //var schedulesConfig = new List<ScheduleConfig>();
-
-                //if (!string.IsNullOrEmpty(Parent?.Id) && Parent.Schedule?.Schedules?.Count > 0)
-                //    schedulesConfig = Parent.Schedule.Schedules.ToList();
-
-                //else
-                //    schedulesConfig = Schedule.Schedules.ToList();
-
-                //var operationToday = schedulesConfig.Where(x => x.DayOfWeek == DateTime.Today.DayOfWeek).FirstOrDefault();
-
-                //if (operationToday == null)
-                //    return false;
-
-                //var actualTimeSpan = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
-
-                //return actualTimeSpan > operationToday.Start && actualTimeSpan < operationToday.End;
-            }
-        }
-        [JsonIgnore]
-        public bool ShowAddress
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(FirstAddressPresentation) || Company.IsCPF)
-                    return false;
-
-                return true;
-
-            }
-        }
-
-        [JsonIgnore]
-        public bool NotOperating
-        {
-            get
-            {
-                return !InOperating;
-            }
-        }
-
-        [JsonIgnore]
-        public string OperatingPresentation
-        {
-            get
-            {
-                try
-                {
-                    var msg = "";
-
-                    if (!CurrentOpeningHours.HasConfiguration)
-                        return msg;
-
-                    if (CurrentOpeningHours.CurrentDayIsOpen)
-                        return string.Format("Aberto, fecha ás {0}", CurrentOpeningHours.CurrentDay.EndPresentation);
-
-                    return string.Format("Fechado, abre {0} ás {1}", WorkingDay.GetDayPresentation((int)CurrentOpeningHours.NextOpenDay.DayOfWeek), CurrentOpeningHours.NextOpenDay.StartPresentation);
-
-                }
-
-                catch (Exception)
-                {
-                    return string.Empty;
-                }
-            }
-        }
-
-        [JsonIgnore]
-        public string OperatingTimePresentation
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(OperatingPresentation))
-                    return "";
-
-                var a = OperatingPresentation.Split(',');
-
-                return a.LastOrDefault();
-            }
-        }
-
-        [JsonIgnore]
         public bool IsAdmin { get; set; }
 
         [JsonIgnore]
-        public bool AdminMessageVisible
-        {
-            get
-            {
-                if (!IsAdmin || IsPet || IsInscription)
-                    return false;
-
-                return true;
-            }
-        }
+        public bool AdminMessageVisible => !(!IsAdmin || IsPet || IsInscription);
 
         [JsonIgnore]
         public string ParentPresentation
@@ -618,31 +409,13 @@ namespace InfinitusApp.Core.Data.DataModels
 
 
         [JsonIgnore]
-        public bool HasParent
-        {
-            get
-            {
-                return Parent != null;
-            }
-        }
+        public bool HasParent => Parent != null;
 
         [JsonIgnore]
-        public bool AcceptAnyCard
-        {
-            get
-            {
-                return (PaymentInfo != null) && PaymentInfo.AcceptsCreditCard || PaymentInfo.AcceptsDebitCard || PaymentInfo.AcceptTicketFood;
-            }
-        }
+        public bool AcceptAnyCard => (PaymentInfo != null) && (PaymentInfo.AcceptsCreditCard || PaymentInfo.AcceptsDebitCard || PaymentInfo.AcceptTicketFood);
 
         [JsonIgnore]
-        public bool IsEdit
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(Id);
-            }
-        }
+        public bool IsEdit => !string.IsNullOrEmpty(Id);
 
         [JsonIgnore]
         public IList<Booking> GetDaysAvailableForBook
@@ -822,8 +595,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public bool HasDeliveryOption => DeliveryOptions.Count > 0;
 
         [JsonIgnore]
-        public bool ShowTakeAway => DeliveryInfo.InHands &&
-            (Type == DataItemType.Company.ToString() || Type == DataItemType.Product.ToString() || Type == DataItemType.Book.ToString() || Type == DataItemType.Eat.ToString() || Type == DataItemType.Vehicle.ToString());
+        public bool ShowTakeAway => DeliveryInfo.InHands && (Type == DataItemType.Company.ToString() || Type == DataItemType.Product.ToString() || Type == DataItemType.Book.ToString() || Type == DataItemType.Eat.ToString() || Type == DataItemType.Vehicle.ToString());
 
         #endregion
 
@@ -832,7 +604,80 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #region OperatingTime
 
-        public string TitleToUseOperatingTime
+        [JsonIgnore]
+        public OpeningHours CurrentOpeningHours
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(Parent?.Id) && Parent.OpeningHours.HasConfiguration)
+                    return Parent.OpeningHours;
+
+                return OpeningHours;
+            }
+        }
+
+        [JsonIgnore]
+        public bool HasOperating => CurrentOpeningHours.HasConfiguration;
+
+        [JsonIgnore]
+        public bool InOperating
+        {
+            get
+            {
+                if (!HasOperating)
+                    return Availability.DaysAvailable.AvailableDaysOfWeak.HasToday;
+
+                return CurrentOpeningHours.CurrentDayIsOpen;
+            }
+        }
+        [JsonIgnore]
+        public bool ShowAddress => !(string.IsNullOrEmpty(FirstAddressPresentation) || Company.IsCPF);
+
+        [JsonIgnore]
+        public bool IsNotOperating => !InOperating;
+
+        [JsonIgnore]
+        public string OperatingPresentation
+        {
+            get
+            {
+                try
+                {
+                    var msg = "";
+
+                    if (!CurrentOpeningHours.HasConfiguration)
+                        return msg;
+
+                    if (CurrentOpeningHours.CurrentDayIsOpen)
+                        return string.Format("Aberto, fecha ás {0}", CurrentOpeningHours.CurrentDay.EndPresentation);
+
+                    return string.Format("Fechado, abre {0} ás {1}", WorkingDay.GetDayPresentation((int)CurrentOpeningHours.NextOpenDay.DayOfWeek), CurrentOpeningHours.NextOpenDay.StartPresentation);
+
+                }
+
+                catch (Exception)
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        [JsonIgnore]
+        public string OperatingTimePresentation
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(OperatingPresentation))
+                    return "";
+
+                var a = OperatingPresentation.Split(',');
+
+                return a.LastOrDefault();
+            }
+        }
+
+        [JsonIgnore]
+        public string OperatingTimeTitleToUse
         {
             get
             {
@@ -844,7 +689,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 r = "Horário para ";
 
                 if (Booking.AllowBooking && DeliveryInfo.InHands)
-                { 
+                {
                     r += "reservar ou retirar no local:";
                     return r;
                 }
@@ -858,6 +703,8 @@ namespace InfinitusApp.Core.Data.DataModels
                 return r;
             }
         }
+
+
 
         #endregion
 
@@ -1973,7 +1820,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     CreatedAt = dtItem.UpdatedAt ?? dtItem?.CreatedAt.Value,
 
                     //IsAdmin = (!string.IsNullOrEmpty(dtItem?.ApplicationUserId) && !string.IsNullOrEmpty(dbVM?.CurrentApplicationUser?.Id)) && dtItem.ApplicationUserId.Equals(dbVM?.CurrentApplicationUser?.Id) || dtItem?.CollaboratorUserLevels?.Count > 0 && dtItem.CollaboratorUserLevels.Any(x => x.Identity.Equals(dbVM?.CurrentApplicationUser?.Email)) || dtItem.Parent != null && dtItem.Parent.CollaboratorUserLevels.Count > 0 && dtItem.Parent.CollaboratorUserLevels.Any(x => x.Identity.Equals(dbVM?.CurrentApplicationUser?.Email)),
-                    ShowMessageBlockIfNotOperating = dtItem.NotOperating && showMessageBlockIfNotOperating
+                    ShowMessageBlockIfNotOperating = dtItem.IsNotOperating && showMessageBlockIfNotOperating
                 };
 
                 if (objReturn.DataItem.DeliveryFees.Count > 0)
@@ -2015,7 +1862,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     //Distance = dtItem.DistanceFromActualLocation.InKilometer, //dtItem.DistanceFromActualLocation != 0 ? dtItem.DistanceFromActualLocation : 0, // dbVM?.CurrentAddress?.Location != null && dtItem?.FirstLocation != null ? UnitConverters.CoordinatesToKilometers(dbVM.CurrentAddress.Location.Latitude, dbVM.CurrentAddress.Location.Longitude, dtItem.FirstLocation.Latitude, dtItem.FirstLocation.Longitude) : 0,
                     //Distance = dbVM?.CurrentAddress?.Location != null && dtItem?.FirstLocation != null ? Xamarin.Essentials.Location.CalculateDistance(new Xamarin.Essentials.Location(dbVM.CurrentAddress.Location.Latitude, dbVM.CurrentAddress.Location.Longitude), new Xamarin.Essentials.Location(dtItem.FirstLocation.Latitude, dtItem.FirstLocation.Longitude), DistanceUnits.Kilometers) : 0,
                     //IsAdmin = (!string.IsNullOrEmpty(dtItem?.ApplicationUserId) && !string.IsNullOrEmpty(dbVM?.CurrentApplicationUser?.Id)) && dtItem.ApplicationUserId.Equals(dbVM?.CurrentApplicationUser?.Id) || dtItem?.CollaboratorUserLevels?.Count > 0 && dtItem.CollaboratorUserLevels.Any(x => x.Identity.Equals(dbVM?.CurrentApplicationUser?.Email)) || dtItem.Parent != null && dtItem.Parent.CollaboratorUserLevels.Count > 0 && dtItem.Parent.CollaboratorUserLevels.Any(x => x.Identity.Equals(dbVM?.CurrentApplicationUser?.Email)),
-                    ShowMessageBlockIfNotOperating = dtItem.NotOperating && showMessageBlockIfNotOperating,
+                    ShowMessageBlockIfNotOperating = dtItem.IsNotOperating && showMessageBlockIfNotOperating,
                 }).ToList();
 
                 objReturn.Select(x =>

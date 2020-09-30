@@ -69,7 +69,27 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        public List<WorkingDayWithDayOfWeek> ListDaysWithDayOfWeek
+        {
+            get
+            {
+                return new List<WorkingDayWithDayOfWeek>
+                {
+                    new WorkingDayWithDayOfWeek(Sunday, DayOfWeek.Sunday),
+                    new WorkingDayWithDayOfWeek(Monday, DayOfWeek.Monday),
+                    new WorkingDayWithDayOfWeek(Tuesday, DayOfWeek.Tuesday),
+                    new WorkingDayWithDayOfWeek(Wednesday, DayOfWeek.Wednesday),
+                    new WorkingDayWithDayOfWeek(Thursday, DayOfWeek.Thursday),
+                    new WorkingDayWithDayOfWeek(Friday, DayOfWeek.Friday),
+                    new WorkingDayWithDayOfWeek(Saturday, DayOfWeek.Saturday),
+                };
+            }
+        }
+
+
         public List<WorkingDay> ListDaysWhereIsOpen => ListDays.Where(x => x.IsOpen).ToList();
+
+        public List<WorkingDayWithDayOfWeek> ListDaysWithDayOfWeekWhereIsOpen => ListDaysWithDayOfWeek.Where(x => x.WorkingDay.IsOpen).ToList();
 
 
         public WorkingDay CurrentDay
@@ -302,5 +322,42 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         #endregion
+    }
+
+    public class WorkingDayWithDayOfWeek
+    {
+        public WorkingDayWithDayOfWeek(WorkingDay _workingDay, DayOfWeek _dayOfWeek)
+        {
+            WorkingDay = _workingDay;
+            DayOfWeek = _dayOfWeek;
+        }
+
+        public WorkingDay WorkingDay { get; set; }
+
+        public DayOfWeek DayOfWeek { get; set; }
+
+        public string DayOfWeekPresentation => DayOfWeek.ToPresentation();
+
+        public string DayOfWeekPresentationResume => DayOfWeek.ToPresentation(true);
+
+        public List<TimeSpan> TimeInterval
+        {
+            get
+            {
+                var l = new List<TimeSpan>();
+
+                var intervalHours = (WorkingDay.End - WorkingDay.Start).TotalHours;
+
+                var start = WorkingDay.Start;
+
+                for (int i = 0; i < intervalHours; i++)
+                {
+                    l.Add(start.Add(new TimeSpan(i, 0, 0)));
+                }
+
+                return l;
+            }
+
+        }
     }
 }
