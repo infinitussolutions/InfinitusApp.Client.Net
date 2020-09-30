@@ -89,7 +89,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public List<WorkingDay> ListDaysWhereIsOpen => ListDays.Where(x => x.IsOpen).ToList();
 
-        public List<WorkingDayWithDayOfWeek> ListDaysWithDayOfWeekWhereIsOpen => ListDaysWithDayOfWeek.Where(x => x.WorkingDay.IsOpen).OrderByDescending(x => x.DayOfWeekIsToday).ThenByDescending(x => x.DayOfWeekIsTomorrow).ToList();
+        public List<WorkingDayWithDayOfWeek> ListDaysWithDayOfWeekWhereIsOpen => ListDaysWithDayOfWeek.Where(x => x.WorkingDay.IsOpen).OrderByDescending(x => x.DayOfWeek).ThenByDescending(x => x.DayOfWeekIsToday).ThenByDescending(x => x.DayOfWeekIsTomorrow).ToList();
 
         public WorkingDay CurrentDay
         {
@@ -351,8 +351,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 var intervalHours = (WorkingDay.End - WorkingDay.Start).TotalHours;
 
-                //if (DayOfWeekIsToday && DateTime.Now.TimeOfDay > WorkingDay.Start)
-                //    intervalHours = (WorkingDay.End - DateTime.Now.TimeOfDay).TotalHours;
+                if (DayOfWeekIsToday && DateTime.Now.TimeOfDay > WorkingDay.Start)
+                    intervalHours = (WorkingDay.End - DateTime.Now.TimeOfDay).TotalHours;
 
                 var start = WorkingDay.Start;
 
@@ -380,6 +380,6 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public bool IsActualDayOfWeekAndTime => IsActualDayOfWeek && DateTime.Now.TimeOfDay.Hours == Time.Hours;
 
-        public string TimePresentation => IsActualDayOfWeekAndTime ? "O mais breve possível" : Time.ToString(@"hh\:mm");
+        public string TimePresentation => IsActualDayOfWeekAndTime ? "O mais breve possível" : Time.ToString(@"hh\:mm") + " hrs";
     }
 }
