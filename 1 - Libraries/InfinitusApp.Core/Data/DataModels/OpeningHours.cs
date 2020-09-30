@@ -336,28 +336,51 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public DayOfWeek DayOfWeek { get; set; }
 
-        public string DayOfWeekPresentation => DayOfWeek.ToPresentation(false, true);
+        public string DayOfWeekPresentation => DayOfWeekIsToday ? "Hoje" : DayOfWeekIsTomorrow ? "Amanhã" : DayOfWeek.ToPresentation(false);
 
-        public string DayOfWeekPresentationResume => DayOfWeek.ToPresentation(true, true);
+        public string DayOfWeekPresentationResume => DayOfWeekIsToday ? "Hoje" : DayOfWeekIsTomorrow ? "Amanhã" : DayOfWeek.ToPresentation(true);
 
-        public List<TimeSpan> TimeInterval
+        public bool DayOfWeekIsToday => DateTime.Today.DayOfWeek == DayOfWeek;
+
+        public bool DayOfWeekIsTomorrow => DateTime.Today.AddDays(1).DayOfWeek == DayOfWeek;
+
+        public List<WorkingDayWithTimeInterval> TimeInterval
         {
             get
             {
-                var l = new List<TimeSpan>();
+                var l = new List<WorkingDayWithTimeInterval>();
 
                 var intervalHours = (WorkingDay.End - WorkingDay.Start).TotalHours;
+
+                if (DayOfWeekIsToday && DateTime.Now.TimeOfDay > WorkingDay.Start)
+                    intervalHours = (WorkingDay.End - DateTime.Now.TimeOfDay).TotalHours;
 
                 var start = WorkingDay.Start;
 
                 for (int i = 0; i < intervalHours; i++)
                 {
-                    l.Add(start.Add(new TimeSpan(i, 0, 0)));
+                    l.Add(new WorkingDayWithTimeInterval(start.Add(new TimeSpan(i, 0, 0)), DayOfWeekIsToday));
                 }
 
                 return l;
             }
-
         }
+    }
+
+    public class WorkingDayWithTimeInterval
+    {
+        public WorkingDayWithTimeInterval(TimeSpan _time, bool _isActualDayOfWeek)
+        {
+            Time = _time;
+            IsActualDayOfWeek = _isActualDayOfWeek;
+        }
+
+        public TimeSpan Time { get; set; }
+
+        public bool IsActualDayOfWeek { get; set; }
+
+        public bool IsActualDayOfWeekAndTime => IsActualDayOfWeek && DateTime.Now.TimeOfDay.Hours == Time.Hours;
+
+        public string TimePresentation => IsActualDayOfWeekAndTime ? "O mais breve possível" : Time.ToString("HH:mm");
     }
 }

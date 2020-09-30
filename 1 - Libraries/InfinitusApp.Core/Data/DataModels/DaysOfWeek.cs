@@ -59,17 +59,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public static class DayOfWeekExtend
     {
-        public static string ToPresentation(this DayOfWeek dayOfWeek, bool isResume = false, bool todayAndTomorrowInfo = false)
+        public static string ToPresentation(this DayOfWeek dayOfWeek, bool isResume = false)
         {
-            if (todayAndTomorrowInfo)
-            {
-                if (dayOfWeek == DateTime.Today.DayOfWeek)
-                    return "Hoje";
-
-                if (dayOfWeek == DateTime.Today.AddDays(1).DayOfWeek)
-                    return "Amanhã";
-            }
-
             switch (dayOfWeek)
             {
                 case DayOfWeek.Friday:
