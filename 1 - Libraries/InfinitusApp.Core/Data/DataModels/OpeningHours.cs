@@ -352,8 +352,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 var intervalHours = (WorkingDay.End - WorkingDay.Start).TotalHours;
 
-                if (DayOfWeekIsToday && DateTime.Now.TimeOfDay > WorkingDay.Start)
-                    intervalHours = (WorkingDay.End - DateTime.Now.TimeOfDay).TotalHours;
+                //if (DayOfWeekIsToday && DateTime.Now.TimeOfDay > WorkingDay.Start)
+                //    intervalHours = (WorkingDay.End - DateTime.Now.TimeOfDay).TotalHours;
 
                 var start = WorkingDay.Start;
 
