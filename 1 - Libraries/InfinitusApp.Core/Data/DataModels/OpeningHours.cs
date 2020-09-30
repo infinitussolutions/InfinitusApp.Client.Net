@@ -113,7 +113,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 //ListDaysWithDayOfWeek.Where(x => x.WorkingDay.IsOpen).OrderByDescending(x => x.DayOfWeekIsToday).ThenByDescending(x => x.DayOfWeekIsTomorrow).ThenByDescending(x => x.DayOfWeek).ToList()
             }
-        };
+        }
 
         public WorkingDay CurrentDay
         {
