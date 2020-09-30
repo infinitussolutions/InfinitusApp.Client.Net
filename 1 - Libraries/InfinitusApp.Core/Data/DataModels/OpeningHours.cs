@@ -89,7 +89,31 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public List<WorkingDay> ListDaysWhereIsOpen => ListDays.Where(x => x.IsOpen).ToList();
 
-        public List<WorkingDayWithDayOfWeek> ListDaysWithDayOfWeekWhereIsOpen => ListDaysWithDayOfWeek.Where(x => x.WorkingDay.IsOpen).OrderByDescending(x => x.DayOfWeekIsToday).ThenByDescending(x => x.DayOfWeekIsTomorrow).ThenByDescending(x => x.DayOfWeek).ToList();
+        public List<WorkingDayWithDayOfWeek> ListDaysWithDayOfWeekWhereIsOpen
+        {
+            get
+            {
+                var l = new List<WorkingDayWithDayOfWeek>();
+
+                var isOpen = ListDaysWithDayOfWeek.Where(x => x.WorkingDay.IsOpen);
+
+                foreach (var item in isOpen)
+                {
+                    if (item.DayOfWeekIsToday)
+                        l.Insert(0, item);
+
+                    else if (item.DayOfWeekIsTomorrow)
+                        l.Insert(1, item);
+
+                    else
+                        l.Add(item);
+                }
+
+                return l;
+
+                //ListDaysWithDayOfWeek.Where(x => x.WorkingDay.IsOpen).OrderByDescending(x => x.DayOfWeekIsToday).ThenByDescending(x => x.DayOfWeekIsTomorrow).ThenByDescending(x => x.DayOfWeek).ToList()
+            }
+        };
 
         public WorkingDay CurrentDay
         {
