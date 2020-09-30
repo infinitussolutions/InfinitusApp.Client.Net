@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace InfinitusApp.Core.Data.DataModels
@@ -50,6 +51,8 @@ namespace InfinitusApp.Core.Data.DataModels
         /// </summary>
         public WorkingDay Saturday { get; set; }
 
+        public int QuantiyNextDaysToBooking { get; set; } = 15;
+
         #region Helps
 
         public List<WorkingDay> ListDays
@@ -89,29 +92,24 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public List<WorkingDay> ListDaysWhereIsOpen => ListDays.Where(x => x.IsOpen).ToList();
 
-        public List<WorkingDayWithDayOfWeek> ListDaysWithDayOfWeekWhereIsOpen
+        public List<WorkingDayWithDayOfWeek> ListDaysWithDayOfWeekWhereIsOpen => ListDaysWithDayOfWeek.Where(x => x.WorkingDay.IsOpen).ToList();
+
+        public List<WorkingDateToBooking> ListWorkingDateToBooking
         {
             get
             {
-                var l = new List<WorkingDayWithDayOfWeek>();
+                var l = new List<WorkingDateToBooking>();
+                var daysOfWeekAvailable = ListDaysWithDayOfWeekWhereIsOpen.Select(x => x.DayOfWeek);
 
-                var isOpen = ListDaysWithDayOfWeek.Where(x => x.WorkingDay.IsOpen);
-
-                foreach (var item in isOpen)
+                for (int i = 0; i < QuantiyNextDaysToBooking; i++)
                 {
-                    if (item.DayOfWeekIsToday)
-                        l.Insert(0, item);
+                    var dateToAdd = DateTime.Today.AddDays(i);
 
-                    else if (item.DayOfWeekIsTomorrow)
-                        l.Insert(1, item);
-
-                    else
-                        l.Add(item);
+                    if (daysOfWeekAvailable.Contains(dateToAdd.DayOfWeek))
+                        l.Add(new WorkingDateToBooking(dateToAdd));
                 }
 
                 return l;
-
-                //ListDaysWithDayOfWeek.Where(x => x.WorkingDay.IsOpen).OrderByDescending(x => x.DayOfWeekIsToday).ThenByDescending(x => x.DayOfWeekIsTomorrow).ThenByDescending(x => x.DayOfWeek).ToList()
             }
         }
 
@@ -173,13 +171,7 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public bool HasConfiguration
-        {
-            get
-            {
-                return ListDays.Any(x => x.IsOpen);
-            }
-        }
+        public bool HasConfiguration => ListDays.Any(x => x.IsOpen);
 
         public string DaysPresentation => string.Format(
             "Segunda: {0}\n" +
@@ -355,39 +347,61 @@ namespace InfinitusApp.Core.Data.DataModels
             DayOfWeek = _dayOfWeek;
         }
 
-        public WorkingDay WorkingDay { get; set; }
+        public WorkingDay WorkingDay { get; private set; }
 
         public DayOfWeek DayOfWeek { get; set; }
 
-        public string DayOfWeekPresentation => DayOfWeekIsToday ? "Hoje" : DayOfWeekIsTomorrow ? "Amanhã" : DayOfWeek.ToPresentation(false);
+        //public List<WorkingDayWithTimeInterval> TimeInterval
+        //{
+        //    get
+        //    {
+        //        var l = new List<WorkingDayWithTimeInterval>();
 
-        public string DayOfWeekPresentationResume => DayOfWeekIsToday ? "Hoje" : DayOfWeekIsTomorrow ? "Amanhã" : DayOfWeek.ToPresentation(true);
+        //        var intervalHours = (WorkingDay.End - WorkingDay.Start).TotalHours;
 
-        public bool DayOfWeekIsToday => DateTime.Today.DayOfWeek == DayOfWeek;
+        //        if (DayOfWeekIsToday && DateTime.Now.TimeOfDay > WorkingDay.Start)
+        //            intervalHours = (WorkingDay.End - DateTime.Now.TimeOfDay).TotalHours;
 
-        public bool DayOfWeekIsTomorrow => DateTime.Today.AddDays(1).DayOfWeek == DayOfWeek;
+        //        var start = WorkingDay.Start;
 
-        public List<WorkingDayWithTimeInterval> TimeInterval
+        //        for (int i = 0; i < intervalHours; i++)
+        //        {
+        //            l.Add(new WorkingDayWithTimeInterval(start.Add(new TimeSpan(i, 0, 0)), DayOfWeekIsToday));
+        //        }
+
+        //        return l;
+        //    }
+        //}
+    }
+
+    public class WorkingDateToBooking
+    {
+        public WorkingDateToBooking(DateTime _dateToBooking)
         {
-            get
-            {
-                var l = new List<WorkingDayWithTimeInterval>();
-
-                var intervalHours = (WorkingDay.End - WorkingDay.Start).TotalHours;
-
-                if (DayOfWeekIsToday && DateTime.Now.TimeOfDay > WorkingDay.Start)
-                    intervalHours = (WorkingDay.End - DateTime.Now.TimeOfDay).TotalHours;
-
-                var start = WorkingDay.Start;
-
-                for (int i = 0; i < intervalHours; i++)
-                {
-                    l.Add(new WorkingDayWithTimeInterval(start.Add(new TimeSpan(i, 0, 0)), DayOfWeekIsToday));
-                }
-
-                return l;
-            }
+            //WorkingDayWithDayOfWeek = _workingDayWithDayOfWeek;
+            DateToBooking = _dateToBooking;
         }
+
+        //public WorkingDayWithDayOfWeek WorkingDayWithDayOfWeek { get; private set; }
+
+        public DateTime DateToBooking { get; set; }
+
+        public string DateToBookingPresentation => DateToBooking.ToString("dddd - dd/MM");
+
+        //public string DayOfWeekPresentation
+        //{
+        //    get
+        //    {
+        //        var msg = DayOfWeekIsToday ? "Hoje " : DayOfWeekIsTomorrow ? "Amanhã" : WorkingDayWithDayOfWeek.DayOfWeek.ToPresentation(false);
+        //        msg += DateToBooking.ToString("dd/MM")
+        //    }
+        //}
+
+        //public string DayOfWeekPresentationResume => DayOfWeekIsToday ? "Hoje" : DayOfWeekIsTomorrow ? "Amanhã" : WorkingDayWithDayOfWeek.DayOfWeek.ToPresentation(true);
+
+        //public bool DayOfWeekIsToday => DateTime.Today == DateToBooking.Date;
+
+        //public bool DayOfWeekIsTomorrow => DateTime.Today.AddDays(1).Date == DateToBooking.Date;
     }
 
     public class WorkingDayWithTimeInterval
@@ -406,4 +420,19 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string TimePresentation => IsActualDayOfWeekAndTime ? "O mais breve possível" : Time.ToString(@"hh\:mm") + " hrs";
     }
+
+    //public static class WorkingDateToBookingExtention
+    //{
+    //    public static List<WorkingDateToBooking> GetNextDaysToBooking(this WorkingDayWithDayOfWeek workingDayWithDayOfWeek, int quantityNextDays)
+    //    {
+    //        var l = new List<WorkingDateToBooking>();
+
+    //        for (int i = 0; i < quantityNextDays; i++)
+    //        {
+    //            l.Add(new WorkingDateToBooking(workingDayWithDayOfWeek, DateTime.Today.AddDays(i)));
+    //        }
+
+    //        return l;
+    //    }
+    //}
 }
