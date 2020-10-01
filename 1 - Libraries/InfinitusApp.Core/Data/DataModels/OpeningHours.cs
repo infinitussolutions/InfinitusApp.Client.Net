@@ -379,15 +379,17 @@ namespace InfinitusApp.Core.Data.DataModels
                 var l = new List<WorkingDayWithTimeInterval>();
 
                 var intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - WorkingDayWithDayOfWeek.WorkingDay.Start).TotalHours;
+                var start = WorkingDayWithDayOfWeek.WorkingDay.Start;
 
                 if (IsToday && DateTime.Now.TimeOfDay > WorkingDayWithDayOfWeek.WorkingDay.Start)
+                {
                     intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - DateTime.Now.TimeOfDay).TotalHours;
-
-                var start = WorkingDayWithDayOfWeek.WorkingDay.Start;
+                    start = DateTime.Now.TimeOfDay;
+                }
 
                 for (int i = 0; i < intervalHours; i++)
                 {
-                    l.Add(new WorkingDayWithTimeInterval(start.Add(new TimeSpan(i, 0, 0))));
+                    l.Add(new WorkingDayWithTimeInterval(start.Add(new TimeSpan(i, 0, 0)), IsToday));
                 }
 
                 return l;
@@ -412,18 +414,18 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public class WorkingDayWithTimeInterval
     {
-        public WorkingDayWithTimeInterval(TimeSpan _time)
+        public WorkingDayWithTimeInterval(TimeSpan _time, bool _isToday)
         {
             Time = _time;
-            //IsActualDayOfWeek = _isActualDayOfWeek;
+            IsToday = _isToday;
         }
 
         public TimeSpan Time { get; set; }
 
-        //public bool IsActualDayOfWeek { get; set; }
+        public bool IsToday { get; set; }
 
-        //public bool IsActualDayOfWeekAndTime => IsActualDayOfWeek && DateTime.Now.TimeOfDay.Hours == Time.Hours;
+        public bool IsTodayAndActualTime => IsToday && DateTime.Now.TimeOfDay.Hours == Time.Hours;
 
-        public string TimePresentation => /*IsActualDayOfWeekAndTime ? "O mais breve possível" : */Time.ToString(@"hh\:mm") + " hrs";
+        public string TimePresentation => IsTodayAndActualTime ? "O mais breve possível" : Time.ToString(@"hh\:mm") + " hrs";
     }
 }
