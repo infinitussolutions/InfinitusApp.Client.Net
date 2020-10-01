@@ -21,5 +21,19 @@ namespace InfinitusApp.Core.Data.DataModels.ComboModels
         public ComboCategory ComboCategory { get; set; }
 
         public string ComboCategoryId { get; set; }
+
+        public string Title 
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(DataItemId))
+                    return "Novo item";
+
+                if (DataItem == null)
+                    return "Null";
+
+                return DataItem.Description.Title;
+            }
+        }
     }
 }
