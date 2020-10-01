@@ -105,7 +105,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 {
                     var dateToAdd = DateTime.Today.AddDays(i);
 
-                    var workingDate = ListDaysWithDayOfWeekWhereIsOpen.First(x => x.DayOfWeek == dateToAdd.DayOfWeek);
+                    var workingDate = ListDaysWithDayOfWeekWhereIsOpen.FirstOrDefault(x => x.DayOfWeek == dateToAdd.DayOfWeek);
 
                     if (workingDate != null)
                         l.Add(new WorkingDateToBooking(dateToAdd, workingDate));
