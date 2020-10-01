@@ -381,13 +381,15 @@ namespace InfinitusApp.Core.Data.DataModels
                 var intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - WorkingDayWithDayOfWeek.WorkingDay.Start).TotalHours;
                 var start = WorkingDayWithDayOfWeek.WorkingDay.Start;
 
-                if (IsToday && DateTime.Now.TimeOfDay > WorkingDayWithDayOfWeek.WorkingDay.Start)
+                var hourTimeOfDay = new TimeSpan(DateTime.Now.Hour, 0, 0);
+
+                if (IsToday && hourTimeOfDay > WorkingDayWithDayOfWeek.WorkingDay.Start)
                 {
-                    intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - DateTime.Now.TimeOfDay).TotalHours;
-                    start = DateTime.Now.TimeOfDay;
+                    intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - hourTimeOfDay).TotalHours;
+                    start = hourTimeOfDay;
                 }
 
-                for (int i = 0; i < intervalHours; i++)
+                for (int i = 0; i <= intervalHours; i++)
                 {
                     l.Add(new WorkingDayWithTimeInterval(start.Add(new TimeSpan(i, 0, 0)), IsToday));
                 }
@@ -395,21 +397,6 @@ namespace InfinitusApp.Core.Data.DataModels
                 return l;
             }
         }
-
-        //public string DayOfWeekPresentation
-        //{
-        //    get
-        //    {
-        //        var msg = DayOfWeekIsToday ? "Hoje " : DayOfWeekIsTomorrow ? "Amanhã" : WorkingDayWithDayOfWeek.DayOfWeek.ToPresentation(false);
-        //        msg += DateToBooking.ToString("dd/MM")
-        //    }
-        //}
-
-        //public string DayOfWeekPresentationResume => DayOfWeekIsToday ? "Hoje" : DayOfWeekIsTomorrow ? "Amanhã" : WorkingDayWithDayOfWeek.DayOfWeek.ToPresentation(true);
-
-        //public bool DayOfWeekIsToday => DateTime.Today == DateToBooking.Date;
-
-        //public bool DayOfWeekIsTomorrow => DateTime.Today.AddDays(1).Date == DateToBooking.Date;
     }
 
     public class WorkingDayWithTimeInterval
