@@ -8,6 +8,8 @@ namespace InfinitusApp.Core.Data.DataModels
     {
         public DateTime? DateToTake { get; set; }
 
-        public string DateToTakePresentation => DateToTake.HasValue ? DateToTake.Value.ToString("dd/MM/yy") : "";
+        public bool HasDateToTake => DateToTake.HasValue;
+
+        public string DateToTakePresentation => HasDateToTake ? DateToTake.Value.ToString("dd/MM/yy") : "";
     }
 }
