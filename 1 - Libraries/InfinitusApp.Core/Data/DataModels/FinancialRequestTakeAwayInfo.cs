@@ -10,6 +10,6 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public bool HasDateToTake => DateToTake.HasValue;
 
-        public string DateToTakePresentation => HasDateToTake ? DateToTake.Value.ToString("dd/MM/yy") : "";
+        public string DateToTakePresentation => HasDateToTake ? DateToTake.Value.ToString("dd MMM yy - ddd ás HH:mm") : "";
     }
 }
