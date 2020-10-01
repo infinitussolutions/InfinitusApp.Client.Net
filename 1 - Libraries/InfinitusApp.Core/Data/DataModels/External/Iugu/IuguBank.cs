@@ -105,23 +105,39 @@ namespace InfinitusApp.Core.Data.DataModels.External.Iugu
 
                 new IuguBank{ Name = "Via Credi", AgencyMask = "9999", NumberMask = "99999999999-D", BankNumber = "085"},
 
-                new IuguBank{ Name = "Neon", AgencyMask = "9999", NumberMask = "9999999-D", BankNumber = "655"},
+                new IuguBank{ Name = "Neon/Votorantim", AgencyMask = "9999", NumberMask = "9999999-D", BankNumber = "655"},
 
-                new IuguBank{ Name = "Votorantim", AgencyMask = "9999", NumberMask = "9999999-D", BankNumber = "260"},
+                new IuguBank{ Name = "Nubank", AgencyMask = "9999", NumberMask = "9999999999-D", BankNumber = "260"},
 
-                new IuguBank{ Name = "Nubank", AgencyMask = "9999", NumberMask = "9999999999-D", BankNumber = "290"},
+                new IuguBank{ Name = "PagSeguro", AgencyMask = "9999", NumberMask = "99999999-D", BankNumber = "290"},
 
-                new IuguBank{ Name = "PagSeguro", AgencyMask = "9999", NumberMask = "99999999-D", BankNumber = "212"},
+                new IuguBank{ Name = "Banco Original", AgencyMask = "9999", NumberMask = "9999999-D", BankNumber = "212"},
 
-                new IuguBank{ Name = "Banco Original", AgencyMask = "9999", NumberMask = "9999999-D", BankNumber = "422"},
+                new IuguBank{ Name = "Safra", AgencyMask = "9999", NumberMask = "99999999-D", BankNumber = "422"},
 
-                new IuguBank{ Name = "Safra", AgencyMask = "9999", NumberMask = "99999999-D", BankNumber = "746"},
+                new IuguBank{ Name = "Modal", AgencyMask = "9999", NumberMask = "999999999-D", BankNumber = "746"},
 
-                new IuguBank{ Name = "Modal", AgencyMask = "9999", NumberMask = "999999999-D", BankNumber = "021"},
+                new IuguBank{ Name = "Banestes", AgencyMask = "9999", NumberMask = "99999999-D", BankNumber = "021"},
 
-                new IuguBank{ Name = "Banestes", AgencyMask = "9999", NumberMask = "99999999-D", BankNumber = "136"},
+                new IuguBank{ Name = "Unicred", AgencyMask = "9999", NumberMask = "99999999-D", BankNumber = "136"},
 
-                new IuguBank{ Name = "Unicred", AgencyMask = "9999", NumberMask = "99999999-D", BankNumber = "274"}
+                new IuguBank{ Name = "Money Plus", AgencyMask = "9", NumberMask = "99999999-D", BankNumber = "274"},
+
+                new IuguBank{ Name = "Mercantil do Brasil", AgencyMask = "9999", NumberMask = "99999999-D", BankNumber = "389"},
+
+                new IuguBank{ Name = "JP Morgan", AgencyMask = "9999", NumberMask = "99999999999-D", BankNumber = "376"},
+
+                new IuguBank{ Name = "Gerencianet Pagamentos do Brasil", AgencyMask = "9999", NumberMask = "99999999-D", BankNumber = "364"},
+
+                new IuguBank{ Name = "C6 Bank", AgencyMask = "9999", NumberMask = "	9999999-D", BankNumber = "336"},
+
+                new IuguBank{ Name = "BS2", AgencyMask = "9999", NumberMask = "	999999-D", BankNumber = "218"},
+
+                new IuguBank{ Name = "Banco Topazio", AgencyMask = "9999", NumberMask = "99999-D", BankNumber = "082"},
+
+                new IuguBank{ Name = "Uniprime", AgencyMask = "9999", NumberMask = "9999-D", BankNumber = "099"},
+
+                new IuguBank{ Name = "Banco Stone", AgencyMask = "9999", NumberMask = "999999-D", BankNumber = "197"}
 
             }
             .OrderBy(x => x.BankNumber).ToList();
