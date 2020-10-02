@@ -86,41 +86,41 @@ namespace InfinitusApp.Core.Data.Commands
 
         public HourSelect HourToCheckIn { get; set; }
 
-        public int DurationInMinutesToCheckOut { get; set; }
+        public int? DurationInMinutesToCheckOut { get; set; }
 
-        protected string ModelValueErrorsMessage
-        {
-            get
-            {
-                var message = "";
+        //protected string ModelValueErrorsMessage
+        //{
+        //    get
+        //    {
+        //        var message = "";
 
-                if (HourToCheckIn.HourSelected < 0 || HourToCheckIn.HourSelected > 23)
-                    message += "HourToCheckIn.HourSelected is not valid\n";
+        //        if (HourToCheckIn.HourSelected < 0 || HourToCheckIn.HourSelected > 23)
+        //            message += "HourToCheckIn.HourSelected is not valid\n";
 
-                if (DurationInMinutesToCheckOut < 0)
-                    message += "Duration is not valid\n";
+        //        if (DurationInMinutesToCheckOut < 0)
+        //            message += "Duration is not valid\n";
 
-                return message;
-            }
-        }
+        //        return message;
+        //    }
+        //}
     }
 
     public class CreateBookingConfigurationCommand : BookingConfigurationCommand
     {
         public string DataStoreId { get; set; }
 
-        public string CreateModelValueErrorsMessage
-        {
-            get
-            {
-                var message = ModelValueErrorsMessage;
+        //public string CreateModelValueErrorsMessage
+        //{
+        //    get
+        //    {
+        //        var message = ModelValueErrorsMessage;
 
-                if (string.IsNullOrEmpty(DataStoreId))
-                    message += "DataStoreId is not valid\n";
+        //        if (string.IsNullOrEmpty(DataStoreId))
+        //            message += "DataStoreId is not valid\n";
 
-                return message;
-            }
-        }
+        //        return message;
+        //    }
+        //}
     }
 
     public class UpdateBookingConfigurationCommand : BookingConfigurationCommand

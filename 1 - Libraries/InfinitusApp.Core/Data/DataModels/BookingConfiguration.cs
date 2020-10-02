@@ -20,39 +20,30 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public HourSelect HourToCheckIn { get; set; }
 
-        public int DurationInMinutesToCheckOut { get; set; }
+        public int? DurationInMinutesToCheckOut { get; set; }
 
-        public bool HasLimitedToStart { get { return !MinDaysToStart.Equals(0) || !MaxDaysToStart.Equals(0); } }
+        public bool HasLimitedToStart => !MinDaysToStart.Equals(0) || !MaxDaysToStart.Equals(0);
 
-        public DateTime FirstDateToStart
-        {
-            get
-            {
-                return HasLimitedToStart ? DateTime.Today.AddDays(MinDaysToStart) : DateTime.Today;
-            }
-        }
+        public DateTime FirstDateToStart => HasLimitedToStart ? DateTime.Today.AddDays(MinDaysToStart) : DateTime.Today;
 
-        public DateTime LastDateToStart
-        {
-            get
-            {
-                return HasLimitedToStart ? FirstDateToStart.AddDays(MaxDaysToStart) : DateTime.Today.AddYears(1);
-            }
-        }
+        public DateTime LastDateToStart => HasLimitedToStart ? FirstDateToStart.AddDays(MaxDaysToStart) : DateTime.Today.AddYears(1);
 
         #region Helper
 
-        public string FirstDateToStartPresentation { get { return MinDaysToStart + " Ex: (" + FirstDateToStart.AddHours(HourToCheckIn.HourSelected).ToString("dd/MM/yy HH:mm") + ")"; } }
+        public string FirstDateToStartPresentation => HourToCheckIn.HourSelected.HasValue ? MinDaysToStart + " Ex: (" + FirstDateToStart.AddHours(HourToCheckIn.HourSelected.Value).ToString("dd/MM/yy HH:mm") + ")" : "";
 
-        public string LastDateToStartPresentation { get { return MaxDaysToStart + " Ex: (" + LastDateToStart.AddHours(HourToCheckIn.HourSelected).ToString("dd/MM/yy HH:mm") + ")"; } }
+        public string LastDateToStartPresentation => HourToCheckIn.HourSelected.HasValue ? MaxDaysToStart + " Ex: (" + LastDateToStart.AddHours(HourToCheckIn.HourSelected.Value).ToString("dd/MM/yy HH:mm") + ")" : "";
 
         public string DurationBookingPresentation
         {
             get
             {
-
                 var msgReturn = "";
-                var time = new TimeSpan(0, DurationInMinutesToCheckOut, 0);
+
+                if (!DurationInMinutesToCheckOut.HasValue)
+                    return msgReturn;
+
+                var time = new TimeSpan(0, DurationInMinutesToCheckOut.Value, 0);
 
                 if (time.Days > 0)
                 {
@@ -86,33 +77,33 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #endregion
 
-        #region Methods
+        //#region Methods
 
-        public static BookingConfiguration Create(CreateBookingConfigurationCommand cmd)
-        {
-            if (!string.IsNullOrEmpty(cmd?.CreateModelValueErrorsMessage))
-                throw new ArgumentException(cmd.CreateModelValueErrorsMessage);
+        //public static BookingConfiguration Create(CreateBookingConfigurationCommand cmd)
+        //{
+        //    if (!string.IsNullOrEmpty(cmd?.CreateModelValueErrorsMessage))
+        //        throw new ArgumentException(cmd.CreateModelValueErrorsMessage);
 
-            var modelReturn = new BookingConfiguration
-            {
-                DataStoreId = cmd.DataStoreId,
-                HourToCheckIn = cmd.HourToCheckIn,
-                DurationInMinutesToCheckOut = cmd.DurationInMinutesToCheckOut,
-                MaxDaysToStart = cmd.MaxDaysToStart,
-                MinDaysToStart = cmd.MinDaysToStart
-            };
+        //    var modelReturn = new BookingConfiguration
+        //    {
+        //        DataStoreId = cmd.DataStoreId,
+        //        HourToCheckIn = cmd.HourToCheckIn,
+        //        DurationInMinutesToCheckOut = cmd.DurationInMinutesToCheckOut,
+        //        MaxDaysToStart = cmd.MaxDaysToStart,
+        //        MinDaysToStart = cmd.MinDaysToStart
+        //    };
 
-            modelReturn.GenerateId();
+        //    modelReturn.GenerateId();
 
-            return modelReturn;
-        }
+        //    return modelReturn;
+        //}
 
-        #endregion
+        //#endregion
     }
 
     public class HourSelect
     {
-        public int HourSelected { get; set; }
+        public int? HourSelected { get; set; }
 
         public List<HourInfo> HourListForSelect
         {
@@ -151,9 +142,9 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public class HourInfo
     {
-        public int HourValue { get; set; }
+        public int? HourValue { get; set; }
 
-        public string HourDisplay { get { return new TimeSpan(HourValue, 0, 0).ToString(@"hh\:mm"); } }
+        public string HourDisplay => HourValue.HasValue ? new TimeSpan(HourValue.Value, 0, 0).ToString(@"hh\:mm") : "Qualquer, conforme funcionamento";
     }
 
     //public class MinuteSelect
