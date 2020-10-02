@@ -428,8 +428,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
                     var firstDateConfig = BookingConfiguration.FirstDateToStart;
                     var lastDateConfig = BookingConfiguration.LastDateToStart;
-                    var startDateTime = firstDateConfig.AddHours(BookingConfiguration.HourToCheckIn.HourSelected);
-                    var finishiDateTime = lastDateConfig.AddHours(BookingConfiguration.HourToCheckIn.HourSelected);
+                    var startDateTime = BookingConfiguration.HourToCheckIn.HourSelected.HasValue ? firstDateConfig.AddHours(BookingConfiguration.HourToCheckIn.HourSelected.Value) : DateTime.Now.AddTicks(OpeningHours.CurrentDay.Start.Ticks);
+                    var finishiDateTime = BookingConfiguration.HourToCheckIn.HourSelected.HasValue ? lastDateConfig.AddHours(BookingConfiguration.HourToCheckIn.HourSelected.Value) : DateTime.Now.AddTicks(OpeningHours.CurrentDay.End.Ticks);
 
                     do
                     {
@@ -437,7 +437,7 @@ namespace InfinitusApp.Core.Data.DataModels
                         {
                             CheckInDate = startDateTime
                         };
-                        bookingAvailable.CheckOutDate = bookingAvailable.CheckInDate.AddMinutes(BookingConfiguration.DurationInMinutesToCheckOut);
+                        bookingAvailable.CheckOutDate = BookingConfiguration.DurationInMinutesToCheckOut.HasValue ? bookingAvailable.CheckInDate.AddMinutes(BookingConfiguration.DurationInMinutesToCheckOut.Value) : bookingAvailable.CheckInDate.AddDays(1);
 
                         if (!Bookings.Any(x => (bookingAvailable.CheckInDate.Ticks > x.CheckInDate.Ticks && bookingAvailable.CheckInDate.Ticks < x.CheckOutDate.Ticks) || (bookingAvailable.CheckOutDate.Ticks > x.CheckInDate.Ticks && bookingAvailable.CheckOutDate.Ticks < x.CheckOutDate.Ticks)))
                             list.Add(bookingAvailable);
