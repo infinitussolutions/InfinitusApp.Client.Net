@@ -376,25 +376,33 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                var l = new List<WorkingDayWithTimeInterval>();
-
-                var intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - WorkingDayWithDayOfWeek.WorkingDay.Start).TotalHours;
-                var start = WorkingDayWithDayOfWeek.WorkingDay.Start;
-
-                var hourTimeOfDay = new TimeSpan(DateTime.Now.Hour, 0, 0);
-
-                if (IsToday && hourTimeOfDay > WorkingDayWithDayOfWeek.WorkingDay.Start)
+                try
                 {
-                    intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - hourTimeOfDay).TotalHours;
-                    start = hourTimeOfDay;
+                    var l = new List<WorkingDayWithTimeInterval>();
+
+                    var intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - WorkingDayWithDayOfWeek.WorkingDay.Start).TotalHours;
+                    var start = WorkingDayWithDayOfWeek.WorkingDay.Start;
+
+                    var hourTimeOfDay = new TimeSpan(DateTime.Now.Hour, 0, 0);
+
+                    if (IsToday && hourTimeOfDay > WorkingDayWithDayOfWeek.WorkingDay.Start)
+                    {
+                        intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - hourTimeOfDay).TotalHours;
+                        start = hourTimeOfDay;
+                    }
+
+                    for (int i = 0; i <= intervalHours; i++)
+                    {
+                        l.Add(new WorkingDayWithTimeInterval(start.Add(new TimeSpan(i, 0, 0)), IsToday));
+                    }
+
+                    return l;
                 }
 
-                for (int i = 0; i <= intervalHours; i++)
+                catch(Exception e)
                 {
-                    l.Add(new WorkingDayWithTimeInterval(start.Add(new TimeSpan(i, 0, 0)), IsToday));
+                    return new List<WorkingDayWithTimeInterval>();
                 }
-
-                return l;
             }
         }
     }
