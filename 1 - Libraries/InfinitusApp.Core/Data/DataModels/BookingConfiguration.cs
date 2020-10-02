@@ -111,6 +111,7 @@ namespace InfinitusApp.Core.Data.DataModels
             {
                 return new List<HourInfo>
                 {
+                    new HourInfo(),
                     new HourInfo{ HourValue = 0},
                     new HourInfo{ HourValue = 1},
                     new HourInfo{ HourValue = 2},
