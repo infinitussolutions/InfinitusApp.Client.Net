@@ -22,6 +22,10 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public int? DurationInMinutesToCheckOut { get; set; }
 
+        public bool HasDurationToCheckOut => DurationInMinutesToCheckOut.HasValue;
+
+        public bool HasNoDurationToCheckOut => !HasDurationToCheckOut;
+
         public bool HasLimitedToStart => !MinDaysToStart.Equals(0) || !MaxDaysToStart.Equals(0);
 
         public DateTime FirstDateToStart => HasLimitedToStart ? DateTime.Today.AddDays(MinDaysToStart) : DateTime.Today;
@@ -71,8 +75,6 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public virtual string DataStoreId { get; set; }
 
-        public virtual DataStore DataStore { get; set; }
-
         public virtual IList<DataItem> DataItems { get; set; }
 
         #endregion
@@ -104,6 +106,8 @@ namespace InfinitusApp.Core.Data.DataModels
     public class HourSelect
     {
         public int? HourSelected { get; set; }
+
+        public bool AnyFromOpeningHours => !HourSelected.HasValue;
 
         public List<HourInfo> HourListForSelect
         {
@@ -147,20 +151,4 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string HourDisplay => HourValue.HasValue ? new TimeSpan(HourValue.Value, 0, 0).ToString(@"hh\:mm") : "Qualquer, conforme funcionamento";
     }
-
-    //public class MinuteSelect
-    //{
-    //    public int MinuteSelected { get; set; }
-
-    //    public List<int> MinuteListForSelect
-    //    {
-    //        get
-    //        {
-    //            return new List<int>
-    //            {
-    //                00,15,30,45,60
-    //            };
-    //        }
-    //    }
-    //}
 }
