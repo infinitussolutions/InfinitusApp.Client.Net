@@ -183,7 +183,10 @@ namespace InfinitusApp.Core.Data.DataModels
     public class TargetFilterDataItem
     {
         public TargetFilterOption AllowInHands { get; set; }
+
         public TargetFilterOption AllowBooking { get; set; }
+
+        public TargetFilterOption AllowDelivery { get; set; }
     }
 
     public enum NavigationType
