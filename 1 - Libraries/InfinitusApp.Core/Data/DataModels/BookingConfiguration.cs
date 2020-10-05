@@ -44,7 +44,7 @@ namespace InfinitusApp.Core.Data.DataModels
             {
                 var msgReturn = "";
 
-                if (!DurationInMinutesToCheckOut.HasValue)
+                if (HasNoDurationToCheckOut)
                     return msgReturn;
 
                 var time = new TimeSpan(0, DurationInMinutesToCheckOut.Value, 0);
@@ -67,7 +67,7 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public string Presentation { get { return "MIN dias p/ iniciar: " + MinDaysToStart + " | MAX p/ para iniciar: " + MaxDaysToStart + " | Hrs Início do check-in: " + HourToCheckIn.HourSelected + " | Duração: " + DurationBookingPresentation; } }
+        public string Presentation => "MIN dias p/ iniciar: " + MinDaysToStart + " | MAX p/ para iniciar: " + MaxDaysToStart + " | Hrs Início do check-in: " + HourToCheckIn.HourSelected + " | Duração: " + DurationBookingPresentation;
 
         #endregion
 
