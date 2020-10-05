@@ -22,7 +22,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public int? DurationInMinutesToCheckOut { get; set; }
 
-        public bool HasDurationToCheckOut => DurationInMinutesToCheckOut.HasValue;
+        public bool HasDurationToCheckOut => DurationInMinutesToCheckOut.HasValue && DurationInMinutesToCheckOut > 0;
 
         public bool HasNoDurationToCheckOut => !HasDurationToCheckOut;
 
