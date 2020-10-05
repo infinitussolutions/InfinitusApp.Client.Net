@@ -207,7 +207,9 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
     {
         public int MinFinancialRequest { get; set; }
         public int MinPushNotification { get; set; }
+        public int MinBooking { get; set; }
         public decimal FinancialRequestPrice { get; set; }
         public decimal PushNotificationPrice { get; set; }
+        public decimal BookingPrice { get; set; }
     }
 }
