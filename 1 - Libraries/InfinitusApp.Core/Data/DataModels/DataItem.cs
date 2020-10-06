@@ -648,7 +648,21 @@ namespace InfinitusApp.Core.Data.DataModels
         public bool HasOperating => CurrentOpeningHours.HasConfiguration;
 
         [JsonIgnore]
+        public bool InOperating
+        {
+            get
+            {
+                if (!HasOperating)
+                    return Availability.DaysAvailable.AvailableDaysOfWeak.HasToday;
+
+                return CurrentOpeningHours.CurrentDayIsOpenAndWorking;
+            }
+        }
+        [JsonIgnore]
         public bool ShowAddress => !(string.IsNullOrEmpty(FirstAddressPresentation) || Company.IsCPF);
+
+        [JsonIgnore]
+        public bool IsNotOperating => !InOperating;
 
         [JsonIgnore]
         public string OperatingPresentation
@@ -662,12 +676,10 @@ namespace InfinitusApp.Core.Data.DataModels
                     if (!CurrentOpeningHours.HasConfiguration)
                         return msg;
 
-                    return "Horário de funcionamento hoje:" + CurrentOpeningHours.CurrentDay.PeriodPresentation;
+                    if (CurrentOpeningHours.CurrentDayIsNotOpenAndWorking)
+                        return string.Format("Aberto, fecha ás {0}", CurrentOpeningHours.CurrentDay.EndPresentation);
 
-                    //if (CurrentOpeningHours.CurrentDayIsOpenAndWorking)
-                    //    return string.Format("Aberto, fecha ás {0}", CurrentOpeningHours.CurrentDay.EndPresentation);
-
-                    //return string.Format("Fechado, abre {0} ás {1}", WorkingDay.GetDayPresentation((int)CurrentOpeningHours.NextOpenDay.DayOfWeek), CurrentOpeningHours.NextOpenDay.StartPresentation);
+                    return string.Format("Fechado, abre {0} ás {1}", WorkingDay.GetDayPresentation((int)CurrentOpeningHours.NextOpenDay.DayOfWeek), CurrentOpeningHours.NextOpenDay.StartPresentation);
 
                 }
 
@@ -1836,7 +1848,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     CreatedAt = dtItem.UpdatedAt ?? dtItem?.CreatedAt.Value,
 
                     //IsAdmin = (!string.IsNullOrEmpty(dtItem?.ApplicationUserId) && !string.IsNullOrEmpty(dbVM?.CurrentApplicationUser?.Id)) && dtItem.ApplicationUserId.Equals(dbVM?.CurrentApplicationUser?.Id) || dtItem?.CollaboratorUserLevels?.Count > 0 && dtItem.CollaboratorUserLevels.Any(x => x.Identity.Equals(dbVM?.CurrentApplicationUser?.Email)) || dtItem.Parent != null && dtItem.Parent.CollaboratorUserLevels.Count > 0 && dtItem.Parent.CollaboratorUserLevels.Any(x => x.Identity.Equals(dbVM?.CurrentApplicationUser?.Email)),
-                    //ShowMessageBlockIfNotOperating = dtItem.IsNotOperating && showMessageBlockIfNotOperating
+                    ShowMessageBlockIfNotOperating = dtItem.IsNotOperating && showMessageBlockIfNotOperating
                 };
 
                 if (objReturn.DataItem.DeliveryFees.Count > 0)
@@ -1878,7 +1890,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     //Distance = dtItem.DistanceFromActualLocation.InKilometer, //dtItem.DistanceFromActualLocation != 0 ? dtItem.DistanceFromActualLocation : 0, // dbVM?.CurrentAddress?.Location != null && dtItem?.FirstLocation != null ? UnitConverters.CoordinatesToKilometers(dbVM.CurrentAddress.Location.Latitude, dbVM.CurrentAddress.Location.Longitude, dtItem.FirstLocation.Latitude, dtItem.FirstLocation.Longitude) : 0,
                     //Distance = dbVM?.CurrentAddress?.Location != null && dtItem?.FirstLocation != null ? Xamarin.Essentials.Location.CalculateDistance(new Xamarin.Essentials.Location(dbVM.CurrentAddress.Location.Latitude, dbVM.CurrentAddress.Location.Longitude), new Xamarin.Essentials.Location(dtItem.FirstLocation.Latitude, dtItem.FirstLocation.Longitude), DistanceUnits.Kilometers) : 0,
                     //IsAdmin = (!string.IsNullOrEmpty(dtItem?.ApplicationUserId) && !string.IsNullOrEmpty(dbVM?.CurrentApplicationUser?.Id)) && dtItem.ApplicationUserId.Equals(dbVM?.CurrentApplicationUser?.Id) || dtItem?.CollaboratorUserLevels?.Count > 0 && dtItem.CollaboratorUserLevels.Any(x => x.Identity.Equals(dbVM?.CurrentApplicationUser?.Email)) || dtItem.Parent != null && dtItem.Parent.CollaboratorUserLevels.Count > 0 && dtItem.Parent.CollaboratorUserLevels.Any(x => x.Identity.Equals(dbVM?.CurrentApplicationUser?.Email)),
-                    //ShowMessageBlockIfNotOperating = dtItem.IsNotOperating && showMessageBlockIfNotOperating,
+                    ShowMessageBlockIfNotOperating = dtItem.IsNotOperating && showMessageBlockIfNotOperating,
                 }).ToList();
 
                 objReturn.Select(x =>

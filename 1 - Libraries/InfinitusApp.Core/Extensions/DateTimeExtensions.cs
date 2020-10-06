@@ -26,6 +26,11 @@ namespace InfinitusApp.Core.Extensions
         {
             return GetIntervalBetween(from, interval, to);
         }
+
+        public static DateTime SetBrasilia(this DateTime datetime)
+        {
+            return datetime.ToLocalTime();
+        }
     }
 
     public class DateTimeRange
