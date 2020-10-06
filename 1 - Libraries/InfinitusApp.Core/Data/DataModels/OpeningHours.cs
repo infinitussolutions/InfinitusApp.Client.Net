@@ -142,10 +142,6 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public bool CurrentDayIsOpenAndWorking => CurrentDay.IsOpen && DateTime.Now.TimeOfDay.IsBetween(CurrentDay.Start, CurrentDay.End);
-
-        public bool CurrentDayIsNotOpenAndWorking => !CurrentDayIsOpenAndWorking;
-
         public string TimeOfDayPresentation => DateTime.Now.TimeOfDay.ToString("hh':'mm");
 
         public bool HasConfiguration => ListDays.Any(x => x.IsOpen);
@@ -265,6 +261,14 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         #endregion
+    }
+
+    public static class OpeningHoursExtention
+    {
+        public static bool IsWorking(this OpeningHours openingHours, TimeSpan timeOfDay)
+        {
+            return openingHours.CurrentDay.IsOpen && timeOfDay.IsBetween(openingHours.CurrentDay.Start, openingHours.CurrentDay.End);
+        }
     }
 
     public class WorkingDay
