@@ -27,9 +27,16 @@ namespace InfinitusApp.Core.Extensions
             return GetIntervalBetween(from, interval, to);
         }
 
-        public static DateTime SetBrasilia(this DateTime datetime)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns>Brasilia datetime</returns>
+        public static DateTime ToSouthAmerica(this DateTime datetime)
         {
-            return datetime.ToLocalTime();
+            TimeZoneInfo TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");//(GMT-03:00) Brasília
+            DateTime DateTimeBrasilia = TimeZoneInfo.ConvertTimeFromUtc(datetime, TimeZoneInfo);
+            return DateTimeBrasilia;
         }
     }
 

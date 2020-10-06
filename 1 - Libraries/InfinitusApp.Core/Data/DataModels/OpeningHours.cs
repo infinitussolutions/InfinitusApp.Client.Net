@@ -142,11 +142,11 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public bool CurrentDayIsOpenAndWorking => CurrentDay.IsOpen && DateTime.Now.ToLocalTime().TimeOfDay.IsBetween(CurrentDay.Start, CurrentDay.End);
+        public bool CurrentDayIsOpenAndWorking => CurrentDay.IsOpen && DateTime.Now.ToSouthAmerica().TimeOfDay.IsBetween(CurrentDay.Start, CurrentDay.End);
 
         public bool CurrentDayIsNotOpenAndWorking => !CurrentDayIsOpenAndWorking;
 
-        public string TimeOfDayPresentation => DateTime.Now.TimeOfDay.ToString("hh':'mm");
+        public string TimeOfDayPresentation => DateTime.Now.ToSouthAmerica().TimeOfDay.ToString("hh':'mm");
 
         public bool HasConfiguration => ListDays.Any(x => x.IsOpen);
 
