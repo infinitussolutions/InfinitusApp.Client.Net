@@ -655,7 +655,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (!HasOperating)
                     return Availability.DaysAvailable.AvailableDaysOfWeak.HasToday;
 
-                return CurrentOpeningHours.CurrentDayIsOpen;
+                return CurrentOpeningHours.CurrentDayIsOpenAndWorking;
             }
         }
         [JsonIgnore]
@@ -676,7 +676,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     if (!CurrentOpeningHours.HasConfiguration)
                         return msg;
 
-                    if (CurrentOpeningHours.CurrentDayIsOpen)
+                    if (CurrentOpeningHours.CurrentDayIsOpenAndWorking)
                         return string.Format("Aberto, fecha ás {0}", CurrentOpeningHours.CurrentDay.EndPresentation);
 
                     return string.Format("Fechado, abre {0} ás {1}", WorkingDay.GetDayPresentation((int)CurrentOpeningHours.NextOpenDay.DayOfWeek), CurrentOpeningHours.NextOpenDay.StartPresentation);
