@@ -149,9 +149,11 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (CurrentDay == null || !CurrentDay.IsOpen)
                     return false;
 
-                return DateTime.Now.TimeOfDay >= CurrentDay.Start && DateTime.Now.TimeOfDay <= CurrentDay.End;
+                return DateTime.Now.TimeOfDay.IsBetween(CurrentDay.Start, CurrentDay.End);
             }
         }
+
+        public bool CurrentDayIsNotOpen => !CurrentDayIsOpen;
 
         public bool HasConfiguration => ListDays.Any(x => x.IsOpen);
 
