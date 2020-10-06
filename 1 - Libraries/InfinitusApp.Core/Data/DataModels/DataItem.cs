@@ -417,6 +417,8 @@ namespace InfinitusApp.Core.Data.DataModels
         [JsonIgnore]
         public bool IsEdit => !string.IsNullOrEmpty(Id);
 
+        #region Booking
+
         [JsonIgnore]
         public IList<Booking> GetDaysAvailableForBook
         {
@@ -455,6 +457,30 @@ namespace InfinitusApp.Core.Data.DataModels
                 }
             }
         }
+
+        [JsonIgnore]
+        public List<WorkingDateToBooking> ListWorkingDateToBooking
+        {
+            get
+            {
+                var l = new List<WorkingDateToBooking>();
+                //var daysOfWeekAvailable = ListDaysWithDayOfWeekWhereIsOpen.Select(x => x.DayOfWeek);
+
+                for (int i = 0; i < Booking.MaxDaysToBooking; i++)
+                {
+                    var dateToAdd = DateTime.Today.AddDays(i);
+
+                    var workingDate = OpeningHours.ListDaysWithDayOfWeekWhereIsOpen.FirstOrDefault(x => x.DayOfWeek == dateToAdd.DayOfWeek);
+
+                    if (workingDate != null)
+                        l.Add(new WorkingDateToBooking(dateToAdd, workingDate));
+                }
+
+                return l;
+            }
+        }
+
+        #endregion
 
         [JsonIgnore]
         public bool ShowPanelBlock { get; set; }
@@ -1978,5 +2004,7 @@ namespace InfinitusApp.Core.Data.DataModels
     public class DataItemBooking
     {
         public bool AllowBooking { get; set; }
+
+        public int MaxDaysToBooking { get; set; } = 15;
     }
 }

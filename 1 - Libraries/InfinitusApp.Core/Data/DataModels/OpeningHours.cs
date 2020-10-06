@@ -21,7 +21,6 @@ namespace InfinitusApp.Core.Data.DataModels
             Saturday = new WorkingDay();
         }
 
-
         /// <summary>
         /// Domingo
         /// </summary>
@@ -50,8 +49,6 @@ namespace InfinitusApp.Core.Data.DataModels
         /// Sábado
         /// </summary>
         public WorkingDay Saturday { get; set; }
-
-        public int QuantiyNextDaysToBooking { get; set; } = 15;
 
         #region Helps
 
@@ -97,27 +94,6 @@ namespace InfinitusApp.Core.Data.DataModels
         public List<WorkingDay> ListDaysWhereIsNotOpen => ListDays.Where(x => !x.IsOpen).ToList();
 
         public List<WorkingDayWithDayOfWeek> ListDaysWithDayOfWeekWhereIsNotOpen => ListDaysWithDayOfWeek.Where(x => !x.WorkingDay.IsOpen).ToList();
-
-        public List<WorkingDateToBooking> ListWorkingDateToBooking
-        {
-            get
-            {
-                var l = new List<WorkingDateToBooking>();
-                //var daysOfWeekAvailable = ListDaysWithDayOfWeekWhereIsOpen.Select(x => x.DayOfWeek);
-
-                for (int i = 0; i < QuantiyNextDaysToBooking; i++)
-                {
-                    var dateToAdd = DateTime.Today.AddDays(i);
-
-                    var workingDate = ListDaysWithDayOfWeekWhereIsOpen.FirstOrDefault(x => x.DayOfWeek == dateToAdd.DayOfWeek);
-
-                    if (workingDate != null)
-                        l.Add(new WorkingDateToBooking(dateToAdd, workingDate));
-                }
-
-                return l;
-            }
-        }
 
         public WorkingDay CurrentDay
         {
