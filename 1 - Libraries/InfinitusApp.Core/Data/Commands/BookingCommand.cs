@@ -88,21 +88,7 @@ namespace InfinitusApp.Core.Data.Commands
 
         public int? DurationInMinutesToCheckOut { get; set; }
 
-        //protected string ModelValueErrorsMessage
-        //{
-        //    get
-        //    {
-        //        var message = "";
-
-        //        if (HourToCheckIn.HourSelected < 0 || HourToCheckIn.HourSelected > 23)
-        //            message += "HourToCheckIn.HourSelected is not valid\n";
-
-        //        if (DurationInMinutesToCheckOut < 0)
-        //            message += "Duration is not valid\n";
-
-        //        return message;
-        //    }
-        //}
+        public bool? AllowMultipleBookingToSameDate { get; set; }
     }
 
     public class CreateBookingConfigurationCommand : BookingConfigurationCommand
