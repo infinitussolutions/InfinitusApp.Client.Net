@@ -94,6 +94,10 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public List<WorkingDayWithDayOfWeek> ListDaysWithDayOfWeekWhereIsOpen => ListDaysWithDayOfWeek.Where(x => x.WorkingDay.IsOpen).ToList();
 
+        public List<WorkingDay> ListDaysWhereIsNotOpen => ListDays.Where(x => !x.IsOpen).ToList();
+
+        public List<WorkingDayWithDayOfWeek> ListDaysWithDayOfWeekWhereIsNotOpen => ListDaysWithDayOfWeek.Where(x => !x.WorkingDay.IsOpen).ToList();
+
         public List<WorkingDateToBooking> ListWorkingDateToBooking
         {
             get
@@ -399,7 +403,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     return l;
                 }
 
-                catch(Exception e)
+                catch (Exception e)
                 {
                     return new List<WorkingDayWithTimeInterval>();
                 }
