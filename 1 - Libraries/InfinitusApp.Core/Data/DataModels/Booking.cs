@@ -14,6 +14,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             User = new UserReference();
             Price = new Price();
+            BookingExtraInfo = new BookingExtraInfo();
         }
 
         public DateTime CheckInDate { get; set; }
@@ -23,6 +24,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public UserReference User { get; set; }
 
         public Price Price { get; set; }
+
+        public BookingExtraInfo BookingExtraInfo { get; set; }
 
         #region Relations
 
@@ -43,8 +46,6 @@ namespace InfinitusApp.Core.Data.DataModels
         public virtual string FinancialRequestId { get; set; }
 
         #endregion
-
-        public DataItem ReservedItem { get; set; }
 
         [JsonIgnore]
         public string Status
@@ -106,5 +107,10 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         
+    }
+
+    public class BookingExtraInfo
+    {
+        public int PersonQuantity { get; set; }
     }
 }
