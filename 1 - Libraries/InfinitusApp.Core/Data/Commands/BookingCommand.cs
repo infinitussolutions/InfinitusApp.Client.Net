@@ -13,6 +13,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public string FinancialRequestId { get; set; }
 
+        public BookingExtraInfo BookingExtraInfo { get; set; }
+
         protected string ModelValueErrorsMessage
         {
             get
