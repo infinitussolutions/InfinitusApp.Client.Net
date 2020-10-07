@@ -116,6 +116,6 @@ namespace InfinitusApp.Core.Data.DataModels
     {
         public int PersonQuantity { get; set; }
 
-        public bool HasPersonQuantitiy => PersonQuantity > 0;
+        public bool HasExtraInfo => PersonQuantity > 0;
     }
 }
