@@ -112,5 +112,7 @@ namespace InfinitusApp.Core.Data.DataModels
     public class BookingExtraInfo
     {
         public int PersonQuantity { get; set; }
+
+        public bool HasPersonQuantitiy => PersonQuantity > 0;
     }
 }
