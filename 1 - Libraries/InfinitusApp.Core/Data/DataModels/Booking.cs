@@ -48,6 +48,9 @@ namespace InfinitusApp.Core.Data.DataModels
         #endregion
 
         [JsonIgnore]
+        public bool BookingRequirePayment => Price != null && Price.FinalPrice > 0;
+
+        [JsonIgnore]
         public string Status
         {
             get
@@ -106,7 +109,7 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        
+
     }
 
     public class BookingExtraInfo
