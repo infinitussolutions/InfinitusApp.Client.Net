@@ -32,7 +32,7 @@ namespace InfinitusApp.Services.Booking
             return await ServiceClient.InvokeApiAsync<List<string>, bool>("Booking/Delete", IdsToDelete, HttpMethod.Delete, null);
         }
 
-        public async Task<List<Core.Data.DataModels.Booking>> GetAllByDataStoreId(string dataStoreId, Expression<Func<Core.Data.DataModels.Booking, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.Booking, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        public async Task<List<Core.Data.DataModels.Booking>> GetAllByDataStoreId(bool removePast = false, Expression<Func<Core.Data.DataModels.Booking, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.Booking, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<Core.Data.DataModels.Booking>("")
                     .For<Core.Data.DataModels.Booking>(x => x)
@@ -61,43 +61,10 @@ namespace InfinitusApp.Services.Booking
 
             var dic = odataBuilder.ToDictionary();
 
-            dic.Add("dataStoreId", dataStoreId);
+            if (removePast)
+                dic.Add("removePast", removePast.ToString());
 
             return await ServiceClient.InvokeApiAsync<List<Core.Data.DataModels.Booking>>("Booking/GetAllByDataStoreId", HttpMethod.Get, dic);
-        }
-
-        public async Task<List<Core.Data.DataModels.Booking>> GetAllByDataItemId(string dataItemId, Expression<Func<Core.Data.DataModels.Booking, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.Booking, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
-        {
-            var odataBuilder = new ODataQueryBuilder<Core.Data.DataModels.Booking>("")
-                    .For<Core.Data.DataModels.Booking>(x => x)
-                    .ByList();
-
-            if (skip.HasValue)
-                odataBuilder.Skip(skip.Value);
-
-            if (top.HasValue)
-                odataBuilder.Top(top.Value);
-
-            if (entityFilter != null)
-                odataBuilder.Filter(entityFilter);
-
-            if (entityOrderBy != null)
-            {
-                if (desc)
-                    odataBuilder.OrderBy(entityOrderBy);
-
-                else
-                    odataBuilder.OrderBy(entityOrderBy);
-            }
-
-            else
-                odataBuilder.OrderByDescending(x => x.CreatedAt);
-
-            var dic = odataBuilder.ToDictionary();
-
-            dic.Add("dataItemId", dataItemId);
-
-            return await ServiceClient.InvokeApiAsync<List<Core.Data.DataModels.Booking>>("Booking/GetAllByDataItemId", HttpMethod.Get, dic);
         }
 
         public async Task<BookingConfiguration> CreateConfig(CreateBookingConfigurationCommand cmd)
