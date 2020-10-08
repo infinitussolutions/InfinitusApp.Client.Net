@@ -32,13 +32,11 @@ namespace InfinitusApp.Services.Booking
             return await ServiceClient.InvokeApiAsync<List<string>, bool>("Booking/Delete", IdsToDelete, HttpMethod.Delete, null);
         }
 
-        public async Task<List<Core.Data.DataModels.Booking>> GetAllByDataStoreId(string dataStoreId, Expression<Func<Core.Data.DataModels.Booking, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.Booking, object>> entityOrderBy = null, int? skip = null, int? top = null)
+        public async Task<List<Core.Data.DataModels.Booking>> GetAllByDataStoreId(string dataStoreId, Expression<Func<Core.Data.DataModels.Booking, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.Booking, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<Core.Data.DataModels.Booking>("")
                     .For<Core.Data.DataModels.Booking>(x => x)
-                    .ByList()
-                    .OrderByDescending(x => x.CreatedAt)
-                    ;
+                    .ByList();
 
             if (skip.HasValue)
                 odataBuilder.Skip(skip.Value);
@@ -50,7 +48,16 @@ namespace InfinitusApp.Services.Booking
                 odataBuilder.Filter(entityFilter);
 
             if (entityOrderBy != null)
-                odataBuilder.OrderBy(entityOrderBy);
+            {
+                if (desc)
+                    odataBuilder.OrderBy(entityOrderBy);
+
+                else
+                    odataBuilder.OrderBy(entityOrderBy);
+            }
+
+            else
+                odataBuilder.OrderByDescending(x => x.CreatedAt);
 
             var dic = odataBuilder.ToDictionary();
 
@@ -59,13 +66,11 @@ namespace InfinitusApp.Services.Booking
             return await ServiceClient.InvokeApiAsync<List<Core.Data.DataModels.Booking>>("Booking/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
 
-        public async Task<List<Core.Data.DataModels.Booking>> GetAllByDataItemId(string dataItemId, Expression<Func<Core.Data.DataModels.Booking, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.Booking, object>> entityOrderBy = null, int? skip = null, int? top = null)
+        public async Task<List<Core.Data.DataModels.Booking>> GetAllByDataItemId(string dataItemId, Expression<Func<Core.Data.DataModels.Booking, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.Booking, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<Core.Data.DataModels.Booking>("")
                     .For<Core.Data.DataModels.Booking>(x => x)
-                    .ByList()
-                    .OrderByDescending(x => x.CreatedAt)
-                    ;
+                    .ByList();
 
             if (skip.HasValue)
                 odataBuilder.Skip(skip.Value);
@@ -77,7 +82,16 @@ namespace InfinitusApp.Services.Booking
                 odataBuilder.Filter(entityFilter);
 
             if (entityOrderBy != null)
-                odataBuilder.OrderBy(entityOrderBy);
+            {
+                if (desc)
+                    odataBuilder.OrderBy(entityOrderBy);
+
+                else
+                    odataBuilder.OrderBy(entityOrderBy);
+            }
+
+            else
+                odataBuilder.OrderByDescending(x => x.CreatedAt);
 
             var dic = odataBuilder.ToDictionary();
 
@@ -86,9 +100,9 @@ namespace InfinitusApp.Services.Booking
             return await ServiceClient.InvokeApiAsync<List<Core.Data.DataModels.Booking>>("Booking/GetAllByDataItemId", HttpMethod.Get, dic);
         }
 
-        public async Task<Core.Data.DataModels.BookingConfiguration> CreateConfig(CreateBookingConfigurationCommand cmd)
+        public async Task<BookingConfiguration> CreateConfig(CreateBookingConfigurationCommand cmd)
         {
-            return await ServiceClient.InvokeApiAsync<CreateBookingConfigurationCommand, Core.Data.DataModels.BookingConfiguration>("BookingConfiguration/Create", cmd);
+            return await ServiceClient.InvokeApiAsync<CreateBookingConfigurationCommand, BookingConfiguration>("BookingConfiguration/Create", cmd);
         }
     }
 }
