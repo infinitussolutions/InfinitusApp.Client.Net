@@ -67,6 +67,41 @@ namespace InfinitusApp.Services.Booking
             return await ServiceClient.InvokeApiAsync<List<Core.Data.DataModels.Booking>>("Booking/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
 
+        public async Task<List<Core.Data.DataModels.Booking>> GetAllByCurrentUser(bool removePast = false, Expression<Func<Core.Data.DataModels.Booking, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.Booking, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        {
+            var odataBuilder = new ODataQueryBuilder<Core.Data.DataModels.Booking>("")
+                    .For<Core.Data.DataModels.Booking>(x => x)
+                    .ByList();
+
+            if (skip.HasValue)
+                odataBuilder.Skip(skip.Value);
+
+            if (top.HasValue)
+                odataBuilder.Top(top.Value);
+
+            if (entityFilter != null)
+                odataBuilder.Filter(entityFilter);
+
+            if (entityOrderBy != null)
+            {
+                if (desc)
+                    odataBuilder.OrderBy(entityOrderBy);
+
+                else
+                    odataBuilder.OrderBy(entityOrderBy);
+            }
+
+            else
+                odataBuilder.OrderByDescending(x => x.CreatedAt);
+
+            var dic = odataBuilder.ToDictionary();
+
+            if (removePast)
+                dic.Add("removePast", removePast.ToString());
+
+            return await ServiceClient.InvokeApiAsync<List<Core.Data.DataModels.Booking>>("Booking/GetAllByCurrentUser", HttpMethod.Get, dic);
+        }
+
         public async Task<BookingConfiguration> CreateConfig(CreateBookingConfigurationCommand cmd)
         {
             return await ServiceClient.InvokeApiAsync<CreateBookingConfigurationCommand, BookingConfiguration>("BookingConfiguration/Create", cmd);
