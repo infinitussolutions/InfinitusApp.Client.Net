@@ -44,6 +44,7 @@ namespace InfinitusApp.Core.Data.DataModels
             ExternalConnections = new List<ExternalConnection>();
             FinancialRequestToDeliveryList = new List<FinancialRequest>();
             FinancialRequestToPurchasesList = new List<FinancialRequest>();
+            BookingList = new List<Booking>();
         }
 
         public PhoneComplex Phone { get; set; }
@@ -85,6 +86,9 @@ namespace InfinitusApp.Core.Data.DataModels
         public IList<FinancialRequest> FinancialRequestToDeliveryList { get; set; }
 
         public IList<FinancialRequest> FinancialRequestToPurchasesList { get; set; }
+
+        public IList<Booking> BookingList { get; set; }
+
         #region Enum
         public enum UserStatus
         {

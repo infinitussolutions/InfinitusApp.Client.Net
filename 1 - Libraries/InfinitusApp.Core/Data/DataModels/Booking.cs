@@ -45,6 +45,10 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public virtual string FinancialRequestId { get; set; }
 
+        public virtual ApplicationUser ApplicationUser { get; set; }
+
+        public virtual string ApplicationUserId { get; set; }
+
         #endregion
 
         [JsonIgnore]
