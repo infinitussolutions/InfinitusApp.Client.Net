@@ -37,6 +37,7 @@ namespace InfinitusApp.Core.Data.Commands
             Price = new Price();
         }
 
+        [Obsolete]
         public UserReference User { get; set; }
 
         public Price Price { get; set; }
@@ -58,9 +59,6 @@ namespace InfinitusApp.Core.Data.Commands
 
                 if (string.IsNullOrEmpty(DataItemId))
                     message += "DataItemId is not valid\n";
-
-                if (string.IsNullOrEmpty(User?.UserId))
-                    message += "User uninformed\n";
 
                 return message;
             }
