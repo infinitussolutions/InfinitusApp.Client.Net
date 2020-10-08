@@ -182,7 +182,8 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
         {
             Unknown,
             FinancialRequest,
-            PushNotification
+            PushNotification,
+            Booking
         }
     }
 
