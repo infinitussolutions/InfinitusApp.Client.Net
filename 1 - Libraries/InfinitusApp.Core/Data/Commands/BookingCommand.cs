@@ -68,6 +68,8 @@ namespace InfinitusApp.Core.Data.Commands
     public class UpdateBookingCommand : BookingCommand
     {
         public string Id { get; set; }
+
+        public BookingStatus? CurrentStatus { get; set; }
     }
 
     public class BookingConfigurationCommand

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace InfinitusApp.Core.Data.DataModels
@@ -26,6 +27,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public Price Price { get; set; }
 
         public BookingExtraInfo BookingExtraInfo { get; set; }
+
+        public BookingStatus CurrentStatus { get; set; }
 
         #region Relations
 
@@ -113,7 +116,30 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        [JsonIgnore]
+        public string CurrentStatusPresentation => CurrentStatus.GetPresentation();
 
+        public List<BookingStatusPresentation> NextPossibleBookingByActual
+        {
+            get
+            {
+                var l = new List<BookingStatusPresentation>();
+
+                switch (CurrentStatus)
+                {
+                    case BookingStatus.Open:
+                        l.Add(new BookingStatusPresentation { BookingStatus = BookingStatus.Accept });
+                        l.Add(new BookingStatusPresentation { BookingStatus = BookingStatus.Canceled });
+                        break;
+
+                    case BookingStatus.Accept:
+                        l.Add(new BookingStatusPresentation { BookingStatus = BookingStatus.Canceled });
+                        break;
+                }
+
+                return l;
+            }
+        }
     }
 
     public class BookingExtraInfo
@@ -121,5 +147,37 @@ namespace InfinitusApp.Core.Data.DataModels
         public int PersonQuantity { get; set; }
 
         public bool HasExtraInfo => PersonQuantity > 0;
+    }
+
+    public enum BookingStatus
+    {
+        Open,
+        Accept,
+        Canceled
+    }
+
+    public class BookingStatusPresentation
+    {
+        public BookingStatus BookingStatus { get; set; }
+
+        public string Presentation => BookingStatus.GetPresentation();
+    }
+
+    public static class BookingStatusExtention
+    {
+        public static string GetPresentation(this BookingStatus bookingStatus)
+        {
+            switch (bookingStatus)
+            {
+                case BookingStatus.Open:
+                    return "Aberto";
+                case BookingStatus.Accept:
+                    return "Aceito";
+                case BookingStatus.Canceled:
+                    return "Cancelado";
+                default:
+                    return "";
+            }
+        }
     }
 }
