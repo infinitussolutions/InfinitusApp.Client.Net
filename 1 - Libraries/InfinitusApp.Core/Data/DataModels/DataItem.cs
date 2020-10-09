@@ -589,9 +589,9 @@ namespace InfinitusApp.Core.Data.DataModels
                 {
                     l.Add(new DeliveryOptionsToPresentation
                     {
-                        Identity = DeliveryInfo.MakeHumanizedDelivery ? "Entrega Humanizada" : "Entregador de " + Description?.Title,
+                        Identity = "Entregador de " + Description?.Title,
                         Price = DeliveryPriceByDistanceByActualLocation.Value,
-                        DeliveryType = DeliveryInfo.MakeHumanizedDelivery ? FinancialRequestDeliveryType.Humanized : FinancialRequestDeliveryType.Normal
+                        DeliveryType = FinancialRequestDeliveryType.Normal
                     });
                 }
 
