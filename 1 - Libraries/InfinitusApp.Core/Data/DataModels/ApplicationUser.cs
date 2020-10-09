@@ -131,8 +131,8 @@ namespace InfinitusApp.Core.Data.DataModels
                 text += "👤 Nome: " + FirstName + " " + LastName + "\n";
                 text += !string.IsNullOrEmpty(DocumentIdentifier) ? "📝 Documento: " + DocumentIdentifier + "\n" : "";
 
-                if (!string.IsNullOrEmpty(Phone?.PhoneNumber))
-                    text += "📱 Fone: " + Phone?.PhoneNumber;
+                if (!string.IsNullOrEmpty(Phone?.FullPhone))
+                    text += "📱 Fone: " + Phone?.FullPhone;
 
                 return text;
             }

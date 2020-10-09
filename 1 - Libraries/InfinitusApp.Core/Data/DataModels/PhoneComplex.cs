@@ -17,7 +17,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (string.IsNullOrEmpty(PhoneNumber))
                     return "";
 
-                return string.Format("+{0}({1}){2}", IDD, DDD, PhoneNumber);
+                return string.Format("+{0} ({1}) {2}", IDD, DDD, PhoneNumber);
             }
         }
 
