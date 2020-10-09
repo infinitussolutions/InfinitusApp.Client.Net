@@ -119,6 +119,15 @@ namespace InfinitusApp.Core.Data.DataModels
         [JsonIgnore]
         public string CurrentStatusPresentation => CurrentStatus.GetPresentation();
 
+        [JsonIgnore]
+        public bool CurrentStatusIsOpen => CurrentStatus == BookingStatus.Open;
+
+        [JsonIgnore]
+        public bool CurrentStatusIsAccept => CurrentStatus == BookingStatus.Accept;
+
+        [JsonIgnore]
+        public bool CurrentStatusIsCanceled => CurrentStatus == BookingStatus.Canceled;
+
         public List<BookingStatusPresentation> NextPossibleBookingByActual
         {
             get
