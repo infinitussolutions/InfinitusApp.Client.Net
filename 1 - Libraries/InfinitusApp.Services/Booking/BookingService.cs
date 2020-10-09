@@ -32,6 +32,16 @@ namespace InfinitusApp.Services.Booking
             return await ServiceClient.InvokeApiAsync<List<string>, bool>("Booking/Delete", IdsToDelete, HttpMethod.Delete, null);
         }
 
+        public async Task<Core.Data.DataModels.Booking> GetById(string id)
+        {
+            var dic = new Dictionary<string, string>
+            {
+                {"id",id }
+            };
+
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<Core.Data.DataModels.Booking>(nameof(Core.Data.DataModels.Booking) + "/GetById", HttpMethod.Get, dic);
+        }
+
         public async Task<List<Core.Data.DataModels.Booking>> GetAllByDataStoreId(bool removePast = false, Expression<Func<Core.Data.DataModels.Booking, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.Booking, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             var odataBuilder = new ODataQueryBuilder<Core.Data.DataModels.Booking>("")
