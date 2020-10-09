@@ -185,6 +185,28 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
             PushNotification,
             Booking
         }
+
+        public string TotalPresentation 
+        {
+            get
+            {
+                return Total.ToString("C");
+            } 
+        }
+
+        public string TypePresentation 
+        {
+            get
+            {
+                switch (Type)
+                {
+                    case SignaturePlanConsumptionType.Booking: return "Reserva";
+                    case SignaturePlanConsumptionType.FinancialRequest: return "Pedido de venda";
+                    case SignaturePlanConsumptionType.PushNotification: return "Notificação";
+                    default: return string.Empty;
+                }
+            }
+        }
     }
 
     public class SignaturePlanRequirements
