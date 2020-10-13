@@ -466,6 +466,9 @@ namespace InfinitusApp.Core.Data.DataModels
                 var l = new List<WorkingDateToBooking>();
                 //var daysOfWeekAvailable = ListDaysWithDayOfWeekWhereIsOpen.Select(x => x.DayOfWeek);
 
+                if (string.IsNullOrEmpty(BookingConfiguration?.Id))
+                    return l;
+
                 var daysToBooking = BookingConfiguration.MaxDaysToStart > 0 ? BookingConfiguration.MaxDaysToStart : Booking.MaxDaysToBooking;
 
                 for (int i = 0; i < daysToBooking; i++)
