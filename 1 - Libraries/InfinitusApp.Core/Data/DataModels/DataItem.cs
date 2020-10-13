@@ -471,9 +471,9 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 //var daysToBooking = BookingConfiguration.MaxDaysToStart > 0 ? BookingConfiguration.MaxDaysToStart : Booking.MaxDaysToBooking;
 
-                var firtstDateToStart = DateTime.Now.Date.AddDays(BookingConfiguration.MaxDaysToStart);
+                var firtstDateToStart = DateTime.Now.Date.AddDays(BookingConfiguration.MinDaysToStart);
 
-                var maxDaysToBooking = Booking.MaxDaysToBooking > 0 ? Booking.MaxDaysToBooking : 30;
+                var maxDaysToBooking = BookingConfiguration.MaxDaysToStart > 0 ? BookingConfiguration.MaxDaysToStart : 30;
 
                 for (int i = 0; i < maxDaysToBooking; i++)
                 {
@@ -2014,6 +2014,6 @@ namespace InfinitusApp.Core.Data.DataModels
     {
         public bool AllowBooking { get; set; }
 
-        public int MaxDaysToBooking { get; set; } = 15;
+        //public int MaxDaysToBooking { get; set; } = 15;
     }
 }
