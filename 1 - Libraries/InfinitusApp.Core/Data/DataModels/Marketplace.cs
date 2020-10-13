@@ -126,6 +126,7 @@ namespace InfinitusApp.Core.Data.DataModels
     {
         public bool UseWhatsapp { get; set; }
         public bool NotifyNewRequest { get; set; }
+        public bool SendEmailNewRequest { get; set; }
     }
 
     public class MarketplaceFee
