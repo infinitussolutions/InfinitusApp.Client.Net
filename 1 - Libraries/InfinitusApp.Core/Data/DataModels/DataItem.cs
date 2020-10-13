@@ -469,11 +469,15 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (string.IsNullOrEmpty(BookingConfiguration?.Id))
                     return l;
 
-                var daysToBooking = BookingConfiguration.MaxDaysToStart > 0 ? BookingConfiguration.MaxDaysToStart : Booking.MaxDaysToBooking;
+                //var daysToBooking = BookingConfiguration.MaxDaysToStart > 0 ? BookingConfiguration.MaxDaysToStart : Booking.MaxDaysToBooking;
 
-                for (int i = 0; i < daysToBooking; i++)
+                var firtstDateToStart = DateTime.Now.Date.AddDays(BookingConfiguration.MaxDaysToStart);
+
+                var maxDaysToBooking = Booking.MaxDaysToBooking > 0 ? Booking.MaxDaysToBooking : 30;
+
+                for (int i = 0; i < maxDaysToBooking; i++)
                 {
-                    var dateToAdd = DateTime.Today.AddDays(i);
+                    var dateToAdd = firtstDateToStart.AddDays(i);
 
                     var workingDate = OpeningHours.ListDaysWithDayOfWeekWhereIsOpen.FirstOrDefault(x => x.DayOfWeek == dateToAdd.DayOfWeek);
 
