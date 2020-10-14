@@ -360,11 +360,11 @@ namespace InfinitusApp.Core.Data.DataModels
 
                     var hourTimeOfDay = new TimeSpan(DateTime.Now.Hour, 0, 0);
 
-                    if (IsToday && hourTimeOfDay > WorkingDayWithDayOfWeek.WorkingDay.Start)
-                    {
-                        intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - hourTimeOfDay).TotalHours;
-                        start = hourTimeOfDay;
-                    }
+                    //if (IsToday && hourTimeOfDay > WorkingDayWithDayOfWeek.WorkingDay.Start)
+                    //{
+                    //    intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - hourTimeOfDay).TotalHours;
+                    //    start = hourTimeOfDay;
+                    //}
 
                     for (int i = 0; i <= intervalHours; i++)
                     {
