@@ -481,8 +481,12 @@ namespace InfinitusApp.Core.Data.DataModels
 
                     var workingDate = OpeningHours.ListDaysWithDayOfWeekWhereIsOpen.FirstOrDefault(x => x.DayOfWeek == dateToAdd.DayOfWeek);
 
-                    if (workingDate != null && workingDate.WorkingDay.IsOpen)
+                    var isTodayAndClosed = dateToAdd.Date == DateTime.Now.Date && !DateTime.Now.TimeOfDay.IsBetween(workingDate.WorkingDay.Start, workingDate.WorkingDay.End);
+
+                    if (workingDate != null && workingDate.WorkingDay.IsOpen && !isTodayAndClosed)
+                    {
                         l.Add(new WorkingDateToBooking(dateToAdd, workingDate));
+                    }
                 }
 
                 return l;
