@@ -484,9 +484,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     var isTodayAndClosed = dateToAdd.Date == DateTime.Now.Date && !DateTime.Now.TimeOfDay.IsBetween(workingDate.WorkingDay.Start, workingDate.WorkingDay.End);
 
                     if (workingDate != null && workingDate.WorkingDay.IsOpen && !isTodayAndClosed)
-                    {
                         l.Add(new WorkingDateToBooking(dateToAdd, workingDate));
-                    }
                 }
 
                 return l;
