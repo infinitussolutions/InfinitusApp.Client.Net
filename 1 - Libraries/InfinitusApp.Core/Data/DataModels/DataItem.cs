@@ -835,16 +835,10 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public int DayNumber { get; set; }
 
-        public string AbbreviateMonth
-        {
-            get
-            {
-                var month = EventDateTime.HasValue ? DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(EventDateTime.Value.Month) : "DDD";
-                return month.ToUpper();
-            }
-        }
-
         public string StartAndFinishEventPresentation { get; set; }
+
+        [JsonIgnore]
+        public string AbbreviateMonth => (EventDateTime.HasValue ? DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(EventDateTime.Value.Month) : "DDD")?.ToUpper() ?? "";
 
         #endregion
     }
