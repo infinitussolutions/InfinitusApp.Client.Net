@@ -1,4 +1,5 @@
 ﻿using InfinitusApp.Core.Data.Commands;
+using InfinitusApp.Core.Data.DataModels.ComboModels;
 using InfinitusApp.Core.Data.DataModels.Signature;
 using InfinitusApp.Core.Extensions;
 using Newtonsoft.Json;
@@ -17,13 +18,10 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             Children = new List<DataItem>();
             Medias = new List<DataItemMedia>();
-            //SocialMediaUrls = new List<SocialMediaUrl>();
             MediaImageData = new MediaImageData();
-
             Description = new DataItemDescriptionInfo();
             Price = new DataItemPriceInfo();
             Location = new DataItemLocationInfo();
-
             Product = new DataItemProductInfo();
             Vehicle = new DataItemVehicleInfo();
             Event = new DataItemEventInfo();
@@ -31,41 +29,30 @@ namespace InfinitusApp.Core.Data.DataModels
             Person = new DataItemPersonInfo();
             Speaker = new DataItemSpeakerInfo();
             Sponsor = new DataItemSponsorInfo();
-
             Property = new DataItemPropertyInfo();
             PropertyTenancy = new DataItemProperyTenancyInfo();
             Pet = new DataItemPetInfo();
-
             Publications = new List<Publication>();
             TargetUserGroups = new List<ApplicationUserGroup>();
             SubGroupRecommendations = new List<SubGroupRecommendation>();
             ApplicationUserInteractionRatings = new List<ApplicationUserInteractionRating>();
             IdentificationCode = new DataItemIdentificationInfo();
-
-            //Phones = new List<Phone>();
-            //Addresses = new List<Address>();
             Appointments = new List<Appointment>();
             AppointmentRelations = new List<AppointmentRelation>();
             CollaboratorUserLevels = new List<CollaboratorUserLevel>();
-
             AgendaInfo = new DataItemAgendaInfo();
             Helper = new DataItemHelper();
             Contact = new ContactInfo();
             Inscription = new DataItemInscriptionInfo();
-
             PaymentInfo = new PaymentInfo();
             DeliveryInfo = new DeliveryInfo();
-
-            // ApplicationUser = new ApplicationUser();
             DataItemUsers = new List<DataItemUser>();
             DeliveryFees = new List<DeliveryFee>();
-
             DistanceFromActualLocation = new DistanceFrom();
             Tags = new List<Tag>();
             Availability = new Availability();
             Variations = new List<Variation>();
             Indications = new List<Indication>();
-            //BookingConfiguration = new BookingConfiguration();
             Bookings = new List<Booking>();
             TagRelations = new List<TagDataItemRelation>();
             SocialMedia = new SocialMedia();
@@ -73,17 +60,19 @@ namespace InfinitusApp.Core.Data.DataModels
             PaymentConditionRelations = new List<PaymentConditionRelation>();
             SignaturePlanApplicationUsers = new List<SignaturePlanApplicationUser>();
             Booking = new DataItemBooking();
+            Combos = new List<Combo>();
+            Comboitems = new List<ComboItem>();
         }
 
         public string Referency { get; set; }
 
-        [Obsolete("Use Visibility.Visible")]
+        [Obsolete("Use Visibility.Visible", true)]
         public bool Visible { get; set; }
 
-        [Obsolete("Use Visibility.PausedByUser")]
+        [Obsolete("Use Visibility.PausedByUser", true)]
         public bool Paused { get; set; }
 
-        [Obsolete("Use Visibility.ShowInFeed")]
+        [Obsolete("Use Visibility.ShowInFeed", true)]
         public bool ShowInFeed { get; set; }
 
         public string Type { get; set; }
@@ -152,26 +141,95 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public bool ActiveInLastMonthByUser { get; set; }
 
-        [JsonIgnore]
-        public bool HasVariations
-        {
-            get
-            {
-                return Variations != null && Variations.Count > 0;
-            }
-        }
+        public MediaImageData MediaImageData { get; set; }
+
+        public IList<DataItemMedia> Medias { get; set; }
+
+        public SocialMedia SocialMedia { get; set; }
+
+        public IList<DataItem> Children { get; set; }
+
+        public DataItem Parent { get; set; }
+
+        public string ParentId { get; set; }
+
+        public string DataStoreId { get; set; }
+
+        public IList<Publication> Publications { get; set; }
+
+        public IList<ApplicationUserGroup> TargetUserGroups { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
+
+        public string ApplicationUserId { get; set; }
+
+        public Group GroupType { get; set; }
+
+        public string GroupTypeId { get; set; }
+
+        public SubGroup SubGroupType { get; set; }
+
+        public string SubGroupTypeId { get; set; }
+
+        public IList<SubGroupRecommendation> SubGroupRecommendations { get; set; }
+
+        public IList<ApplicationUserInteractionRating> ApplicationUserInteractionRatings { get; set; }
+
+        public DataItemAgendaInfo AgendaInfo { get; set; }
+
+        public IList<Appointment> Appointments { get; set; }
+
+        public IList<AppointmentRelation> AppointmentRelations { get; set; }
+
+        public IList<CollaboratorUserLevel> CollaboratorUserLevels { get; set; }
+
+        public string ScheduleId { get; set; }
+
+        public ContactInfo Contact { get; set; }
+
+        public PaymentInfo PaymentInfo { get; set; }
+
+        public DeliveryInfo DeliveryInfo { get; set; }
+
+        public VisibilityInfo Visibility { get; set; }
+
+        public IList<DeliveryFee> DeliveryFees { get; set; }
+
+        public IList<Tag> Tags { get; set; }
+
+        public Availability Availability { get; set; }
+
+        public DataItemBooking Booking { get; set; }
+
+        public virtual IList<Combo> Combos { get; set; }
+
+        public virtual IList<ComboItem> Comboitems { get; set; }
 
         [JsonIgnore]
-        public int TotalVariations
-        {
-            get
-            {
-                if (!HasVariations)
-                    return 0;
+        public string WebAdminUri => string.IsNullOrEmpty(Id) ? "http://ec2-18-222-239-212.us-east-2.compute.amazonaws.com/#/order/" : string.Format("http://ec2-18-222-239-212.us-east-2.compute.amazonaws.com/#/order/{0}", Id);
 
-                return Variations.Count(x => !x.Deleted);
-            }
-        }
+        #region Helpers Props
+
+        public DataItemHelper Helper { get; set; }
+
+        public string FirstPhonePresentation { get; set; }
+
+        public string FirstAddressPresentation { get; set; }
+
+        public string DateOfEventWithTitle { get; set; }
+
+        public bool HasMediaImages { get; set; }
+
+        public bool IsPropertyTenancy { get; set; }
+
+        #endregion
+
+
+        [JsonIgnore]
+        public bool HasVariations => Variations != null && Variations.Count > 0;
+
+        [JsonIgnore]
+        public int TotalVariations => HasVariations ? Variations.Count(x => !x.Deleted) : 0;
 
         [JsonIgnore]
         public string TotalVariationsPricePresentation
@@ -211,6 +269,7 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        [JsonIgnore]
         public string PricePresentation
         {
             get
@@ -225,108 +284,8 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public MediaImageData MediaImageData { get; set; }
-
-        public IList<DataItemMedia> Medias { get; set; }
-
-        public SocialMedia SocialMedia { get; set; }
-
-        public IList<DataItem> Children { get; set; }
-
-        public DataItem Parent { get; set; }
-
-        public string ParentId { get; set; }
-
-        public string DataStoreId { get; set; }
-
-        public IList<Publication> Publications { get; set; }
-
-        public IList<ApplicationUserGroup> TargetUserGroups { get; set; }
-
-        public ApplicationUser ApplicationUser { get; set; }
-
-        public string ApplicationUserId { get; set; }
-
-        public Group GroupType { get; set; }
-
-        public string GroupTypeId { get; set; }
-
-        public SubGroup SubGroupType { get; set; }
-
-        public string SubGroupTypeId { get; set; }
-
-        public IList<SubGroupRecommendation> SubGroupRecommendations { get; set; }
-
-        public IList<ApplicationUserInteractionRating> ApplicationUserInteractionRatings { get; set; }
-
-        [Obsolete("Use Contact.PhoneMain", true)]
-        public IList<Phone> Phones { get; set; }
-
-        [Obsolete("Use Location", true)]
-        public IList<Address> Addresses { get; set; }
-
-        public DataItemAgendaInfo AgendaInfo { get; set; }
-
-        public IList<Appointment> Appointments { get; set; }
-
-        public IList<AppointmentRelation> AppointmentRelations { get; set; }
-
-        public IList<CollaboratorUserLevel> CollaboratorUserLevels { get; set; }
-
-        [Obsolete("Use time", true)]
-        public Schedule Schedule { get; set; }
-
-        public string ScheduleId { get; set; }
-
-        public ContactInfo Contact { get; set; }
-
-        public PaymentInfo PaymentInfo { get; set; }
-
-        public DeliveryInfo DeliveryInfo { get; set; }
-
-        public VisibilityInfo Visibility { get; set; }
-
-        public IList<DeliveryFee> DeliveryFees { get; set; }
-
-        public IList<Tag> Tags { get; set; }
-
-        public Availability Availability { get; set; }
-
-        public DataItemBooking Booking { get; set; }
-
-        public string WebAdminUri
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Id))
-                    return "http://ec2-18-222-239-212.us-east-2.compute.amazonaws.com/#/order/";
-
-                return string.Format("http://ec2-18-222-239-212.us-east-2.compute.amazonaws.com/#/order/{0}", Id);
-            }
-        }
-
-        #region Helpers Props
-
-        public DataItemHelper Helper { get; set; }
-
-        public string FirstPhonePresentation { get; set; }
-
-        public string FirstAddressPresentation { get; set; }
-
-        [Obsolete("Use location", true)]
-        public Location FirstLocation { get; set; }
-
-        public string DateOfEventWithTitle { get; set; }
-
-        public bool HasMediaImages { get; set; }
-
-        public bool IsPropertyTenancy { get; set; }
-
-        #endregion
-
         [JsonIgnore]
         public int Quantity { get; set; } = 1;
-
 
         [JsonIgnore]
         public bool HasType => !string.IsNullOrEmpty(Type);
@@ -365,27 +324,12 @@ namespace InfinitusApp.Core.Data.DataModels
         public bool IsNotCompanyOrDepartment => !IsCompanyOrDepartment;
 
         [JsonIgnore]
-        public string IsVisibleAdminMessage
-        {
-            get
-            {
-                return Visibility.Visible ?
+        public string IsVisibleAdminMessage => Visibility.Visible ?
                     "Aprovado! Este item já esta visivel para os usuários, e você já pode incluir seus itens." :
                     "Pendente de Aprovação Este Item esta em processo de aprovação por um administrador, após aprovado você podera enviar suas imagens e incluir seus itens.";
-            }
-        }
 
         [JsonIgnore]
-        public string CreatedAtPresentation
-        {
-            get
-            {
-                if (!CreatedAt.HasValue)
-                    return "";
-
-                return CreatedAt.Value.ToPresentation();
-            }
-        }
+        public string CreatedAtPresentation => CreatedAt.HasValue ? CreatedAt.Value.ToPresentation() : "";
 
         [JsonIgnore]
         public bool IsAdmin { get; set; }
@@ -394,22 +338,10 @@ namespace InfinitusApp.Core.Data.DataModels
         public bool AdminMessageVisible => !(!IsAdmin || IsPet || IsInscription);
 
         [JsonIgnore]
-        public string ParentPresentation
-        {
-            get
-            {
-                var msg = "";
-
-                if (string.IsNullOrEmpty(Parent?.Description?.Title))
-                    return msg;
-
-                return "Em: " + Parent.Description.Title;
-            }
-        }
-
+        public string ParentPresentation => !string.IsNullOrEmpty(Parent?.Description?.Title) ? "Em: " + Parent.Description.Title : "";
 
         [JsonIgnore]
-        public bool HasParent => Parent != null;
+        public bool HasParent => !string.IsNullOrEmpty(Parent?.Id);
 
         [JsonIgnore]
         public bool AcceptAnyCard => (PaymentInfo != null) && (PaymentInfo.AcceptsCreditCard || PaymentInfo.AcceptsDebitCard || PaymentInfo.AcceptTicketFood);
@@ -495,9 +427,6 @@ namespace InfinitusApp.Core.Data.DataModels
 
         [JsonIgnore]
         public bool ShowPanelBlock { get; set; }
-
-        //[JsonIgnore]
-        //public double DistanceFromActualLocation { get; set; } = 0;
 
         [JsonIgnore]
         public DistanceFrom DistanceFromActualLocation { get; set; }
@@ -642,31 +571,14 @@ namespace InfinitusApp.Core.Data.DataModels
         #region OperatingTime
 
         [JsonIgnore]
-        public OpeningHours CurrentOpeningHours
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(Parent?.Id) && Parent.OpeningHours.HasConfiguration)
-                    return Parent.OpeningHours;
-
-                return OpeningHours;
-            }
-        }
+        public OpeningHours CurrentOpeningHours => !string.IsNullOrEmpty(Parent?.Id) && Parent.OpeningHours.HasConfiguration ? Parent.OpeningHours : OpeningHours;
 
         [JsonIgnore]
         public bool HasOperating => CurrentOpeningHours.HasConfiguration;
 
         [JsonIgnore]
-        public bool InOperating
-        {
-            get
-            {
-                if (!HasOperating)
-                    return Availability.DaysAvailable.AvailableDaysOfWeak.HasToday;
+        public bool InOperating => HasOperating ? CurrentOpeningHours.CurrentDayIsOpenAndWorking : Availability.DaysAvailable.AvailableDaysOfWeak.HasToday;
 
-                return CurrentOpeningHours.CurrentDayIsOpenAndWorking;
-            }
-        }
         [JsonIgnore]
         public bool ShowAddress => !(string.IsNullOrEmpty(FirstAddressPresentation) || Company.IsCPF);
 
@@ -694,7 +606,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 catch (Exception)
                 {
-                    return string.Empty;
+                    return "";
                 }
             }
         }
@@ -741,8 +653,6 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-
-
         #endregion
 
         public static DataItem ConvertAppUserToPerson(ApplicationUser user, string dataStoreId)
@@ -757,8 +667,6 @@ namespace InfinitusApp.Core.Data.DataModels
                     ShowInFeed = false,
                     Visible = false
                 },
-                ShowInFeed = false,
-                Visible = false,
                 MediaImageData = new MediaImageData
                 {
                     WideImageUri = user.ImageUri
@@ -913,9 +821,9 @@ namespace InfinitusApp.Core.Data.DataModels
             InvitedUsersEmails = new List<string>();
         }
 
-        public System.DateTime? EventDateTime { get; set; }
+        public DateTime? EventDateTime { get; set; }
 
-        public System.DateTime? EventEndDateTime { get; set; }
+        public DateTime? EventEndDateTime { get; set; }
 
         public List<string> InvitedUsersEmails { get; set; }
 
@@ -1054,13 +962,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public decimal? ExtraPrice { get; set; }
 
         [JsonIgnore]
-        public bool ShowPrice
-        {
-            get
-            {
-                return FinalPrice.HasValue && PriceVisible;
-            }
-        }
+        public bool ShowPrice => FinalPrice.HasValue && PriceVisible;
 
         [JsonIgnore]
         public string DiscountInfoPresentation
@@ -1075,28 +977,10 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
         [JsonIgnore]
-        public string PricePresentation
-        {
-            get
-            {
-                if (!InitialPrice.HasValue)
-                    return string.Empty;
-
-                return InitialPrice.Value.ToString("C");
-            }
-        }
+        public string PricePresentation => InitialPrice.HasValue ? InitialPrice.Value.ToString("C") : "";
 
         [JsonIgnore]
-        public string FinalPricePresentation
-        {
-            get
-            {
-                if (!FinalPrice.HasValue)
-                    return string.Empty;
-
-                return FinalPrice.Value.ToString("C");
-            }
-        }
+        public string FinalPricePresentation => FinalPrice.HasValue ? FinalPrice.Value.ToString("C") : "";
     }
 
     public class ExtraPrice
@@ -1147,14 +1031,14 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string LastName { get; set; }
 
-        public string FullName { get { return GetFullName(); } }
-
         public string ImageUri { get; set; }
 
         public GenderTypes GenderType { get; set; }
 
         public WorkInfo WorkInfo { get; set; }
+
         public DocumentIdentityInfo DocumentIdentity { get; set; }
+
         public BankAccount BankAccount { get; set; }
 
         public enum GenderTypes
@@ -1164,10 +1048,8 @@ namespace InfinitusApp.Core.Data.DataModels
             Female
         }
 
-        public string GetFullName()
-        {
-            return FirstName + " " + LastName;
-        }
+        [JsonIgnore]
+        public string FullName => FirstName + " " + LastName;
     }
 
     public class WorkInfo
@@ -1214,38 +1096,14 @@ namespace InfinitusApp.Core.Data.DataModels
         public int Capacity { get; set; }
 
         #region Helps
-        public TimeSpan Duration
-        {
-            get
-            {
-                if (Start == null || End == null)
-                    return new TimeSpan();
+        public TimeSpan Duration => Start == null || End == null ? new TimeSpan() : (TimeSpan)(End - Start);
 
-                else
-                    return (TimeSpan)(End - Start);
-            }
-        }
         #endregion
     }
 
     public class DocumentIdentityInfo
     {
         public string Cpf { get; set; }
-        //public DocumentIdentityInfo()
-        //{
-        //    DocumentType = DocumentIdentityTypes.Undefined;
-        //}
-
-        //public enum DocumentIdentityTypes
-        //{
-        //    Undefined,
-        //    Rg,
-        //    Cpf,
-        //}
-
-        //public string Data { get; set; }
-
-        //public DocumentIdentityTypes DocumentType { get; set; }
     }
 
     public class ContactInfo
@@ -1324,21 +1182,11 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string LastObservation { get; set; }
 
-        public bool IsVisible
-        {
-            get
-            {
-                return Visible && !PausedByUser;
-            }
-        }
+        [JsonIgnore]
+        public bool IsVisible => Visible && !PausedByUser;
 
-        public bool IsVisibleInFeed
-        {
-            get
-            {
-                return IsVisible && ShowInFeed;
-            }
-        }
+        [JsonIgnore]
+        public bool IsVisibleInFeed => IsVisible && ShowInFeed;
     }
 
     public class DataItemIdentificationInfo
@@ -1392,30 +1240,31 @@ namespace InfinitusApp.Core.Data.DataModels
     public class PaymentInfo
     {
         public bool InTest { get; set; }
+
         public ExternalReferenceType ExternalType { get; set; }
+
         [Obsolete("Use PaymentCondition")]
         public bool AcceptsCreditCard { get; set; } = true;
+
         [Obsolete("Use PaymentCondition")]
         public bool AcceptsDebitCard { get; set; }
+
         [Obsolete("Use PaymentCondition")]
         public bool AcceptTicketFood { get; set; }
+
         [Obsolete("Use PaymentCondition")]
         public bool AcceptMealTicket { get; set; }
+
         [Obsolete("Use PaymentCondition")]
         public bool AcceptMoney { get; set; } = true;
+
         [Obsolete("Use PaymentCondition")]
         public bool AcceptBankSlip { get; set; }
 
-        public bool IsAnyCheckMarked { get { return AcceptsCreditCard || AcceptsDebitCard || AcceptTicketFood || AcceptMealTicket || AcceptMoney || AcceptBankSlip; } }
+        public bool IsAnyCheckMarked => AcceptsCreditCard || AcceptsDebitCard || AcceptTicketFood || AcceptMealTicket || AcceptMoney || AcceptBankSlip;
 
         [JsonIgnore]
-        public bool AcceptSomeMethod
-        {
-            get
-            {
-                return MethodsList?.Count > 0;
-            }
-        }
+        public bool AcceptSomeMethod => MethodsList?.Count > 0;
 
         [JsonIgnore]
         public List<string> MethodsList
@@ -1484,10 +1333,10 @@ namespace InfinitusApp.Core.Data.DataModels
             Deliveryman = new DeliverymanInfo();
         }
 
-        [Obsolete]
+        [Obsolete("Use delivery fee", true)]
         public bool MakesDelivery { get; set; } = true;
 
-        [Obsolete("use delivery fee")]
+        [Obsolete("Use delivery fee", true)]
         public double MaxKm { get; set; }
 
         public DeliverymanInfo Deliveryman { get; set; }
@@ -1522,6 +1371,7 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         public DataItemAgendaConfig AgendaConfig { get; set; }
+
         public DataItemAppointmentConfig AppointmentConfig { get; set; }
     }
 
@@ -1545,16 +1395,12 @@ namespace InfinitusApp.Core.Data.DataModels
         public DataItemAgendaConfig()
         {
             Capacity = new DataItemAgendaCapacity();
+
             StaffUserIdList = new List<string>();
         }
 
-        /// <summary>
-        /// Use Microsoft Values
-        /// <para>https://support.microsoft.com/en-us/help/973627/microsoft-time-zone-index-values</para>
-        /// </summary>
-
-
         public DataItemAgendaCapacity Capacity { get; set; }
+
         public IList<string> StaffUserIdList { get; set; }
 
     }
@@ -1562,6 +1408,7 @@ namespace InfinitusApp.Core.Data.DataModels
     public class DataItemAgendaCapacity
     {
         public bool IgnoreCapacity { get; set; }
+
         public int CapacityBySchedule { get; set; } = 1;
     }
 
@@ -1602,33 +1449,15 @@ namespace InfinitusApp.Core.Data.DataModels
     {
         public DataItemAuxiliaryHelper()
         {
-            //FirstLocation = new Location();
-            //FirstPhone = new Phone();
-            //FirstAddress = new Address();
             Type = new DataItemAuxiliaryType();
             Actions = new DataItemAuxiliaryActions();
         }
-
-        [Obsolete("Use location address", true)]
-        public Location FirstLocation { get; set; }
-
-        //public Phone FirstPhone { get; set; }
-
-        [Obsolete("Use location address", true)]
-        public Address FirstAddress { get; set; }
 
         public double ActualRatting { get; set; }
 
         public int RattingCount { get; set; }
 
         public int InscriptionCount { get; set; }
-        //public bool HasMediaImages { get; set; }
-
-        //public bool HasDescription { get; set; }
-
-        //public bool HasAditionalInfo { get; set; }
-
-        //public bool HasValueInType { get; set; }
 
         public DataItemAuxiliaryType Type { get; set; }
 
@@ -1636,16 +1465,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public bool DataItemMediaDataHaveAnyContent { get; set; }
 
-        public string RatingCountPresentation
-        {
-            get
-            {
-                if (RattingCount == 0)
-                    return "";
-
-                return "Média entre " + RattingCount + " opniões";
-            }
-        }
+        public string RatingCountPresentation => RattingCount > 0 ? "Média entre " + RattingCount + " opniões" : "";
 
         public string RatingCountSimplePresentation
         {
@@ -1660,14 +1480,7 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public bool HasRating
-        {
-            get
-            {
-                return ActualRatting > 0;
-            }
-        }
-
+        public bool HasRating => ActualRatting > 0;
     }
 
     public class DataItemAuxiliaryType
@@ -2005,17 +1818,17 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public decimal Price { get; set; }
 
+        public FinancialRequestDeliveryType DeliveryType { get; set; }
+
+        [JsonIgnore]
         public string PricePresentation => Price.ToString("C");
 
+        [JsonIgnore]
         public string PriceAndIdentiyPresentation => Identity + ": " + PricePresentation;
-
-        public FinancialRequestDeliveryType DeliveryType { get; set; }
     }
 
     public class DataItemBooking
     {
         public bool AllowBooking { get; set; }
-
-        //public int MaxDaysToBooking { get; set; } = 15;
     }
 }
