@@ -1,4 +1,5 @@
 ﻿using Naylah.Core.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,6 +23,7 @@ namespace InfinitusApp.Core.Data.DataModels.ComboModels
 
         public string ComboCategoryId { get; set; }
 
+        [JsonIgnore]
         public string Title 
         {
             get
@@ -35,5 +37,11 @@ namespace InfinitusApp.Core.Data.DataModels.ComboModels
                 return DataItem.Description.Title;
             }
         }
+
+        [JsonIgnore]
+        public string Description => DataItem?.Description?.Body ?? "";
+
+        [JsonIgnore]
+        public int Quantity { get; set; }
     }
 }
