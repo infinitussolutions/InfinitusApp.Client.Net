@@ -74,6 +74,9 @@ namespace InfinitusApp.Core.Data.Commands
                 if (string.IsNullOrEmpty(ComboId))
                     msg += "- " + nameof(ComboId) + " invalid\n";
 
+                if (QuantityRequired <= 0)
+                    msg += "- Quantidade inválida\n";
+
                 return msg;
             }
         }
@@ -91,6 +94,12 @@ namespace InfinitusApp.Core.Data.Commands
 
                 if (string.IsNullOrEmpty(Id))
                     msg += "- " + nameof(Id) + " invalid\n";
+
+                if (string.IsNullOrEmpty(Title))
+                    msg += "- " + nameof(Title) + " invalid\n";
+
+                if (QuantityRequired <= 0)
+                    msg += "- Quantidade inválida\n";
 
                 return msg;
             }
