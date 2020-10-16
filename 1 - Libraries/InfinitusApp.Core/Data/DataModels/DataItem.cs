@@ -391,6 +391,36 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         [JsonIgnore]
+        public List<WorkingDateToBooking> ListWorkingDateToTakeAway
+        {
+            get
+            {
+                var l = new List<WorkingDateToBooking>();
+
+                if (!OpeningHours.HasConfiguration)
+                    return l;
+
+                var firtstDateToStart = DateTime.Now.Date;
+
+                var maxDaysToBooking = 30;
+
+                for (int i = 0; i < maxDaysToBooking; i++)
+                {
+                    var dateToAdd = firtstDateToStart.AddDays(i);
+
+                    var workingDate = OpeningHours.ListDaysWithDayOfWeekWhereIsOpen.FirstOrDefault(x => x.DayOfWeek == dateToAdd.DayOfWeek);
+
+                    var isTodayAndClosed = dateToAdd.Date == DateTime.Now.Date && !DateTime.Now.TimeOfDay.IsBetween(workingDate.WorkingDay.Start, workingDate.WorkingDay.End);
+
+                    if (workingDate != null && workingDate.WorkingDay.IsOpen && !isTodayAndClosed)
+                        l.Add(new WorkingDateToBooking(dateToAdd, workingDate));
+                }
+
+                return l;
+            }
+        }
+
+        [JsonIgnore]
         public List<WorkingDateToBooking> ListWorkingDateToBooking
         {
             get
