@@ -1,6 +1,8 @@
 ﻿using Naylah.Core.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace InfinitusApp.Core.Data.DataModels.ComboModels
@@ -25,5 +27,8 @@ namespace InfinitusApp.Core.Data.DataModels.ComboModels
         public string ComboId { get; set; }
 
         #endregion
+
+        [JsonIgnore]
+        public bool IsCompleted => Items.Where(x => x.Quantity > 0).Count().Equals(QuantityRequired);
     }
 }
