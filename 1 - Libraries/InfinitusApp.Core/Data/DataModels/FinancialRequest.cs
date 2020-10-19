@@ -72,7 +72,6 @@ namespace InfinitusApp.Core.Data.DataModels
 
         #region Relations
 
-        [Obsolete("Use customer info")]
         public Customer Customer { get; set; }
 
         public string CustomerId { get; set; }
@@ -118,12 +117,24 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public List<VoucherGenerate> VoucherGenerateList { get; set; }
 
-        /// <summary>
-        /// If customer is not null return it else if return buyer
-        /// </summary>
-        /// 
-        [Obsolete("On app remove it", true)]
-        public Customer CustomerInfo { get; set; }
+        public FinancialRequestCustomerInfo CustomerInfo
+        {
+            get
+            {
+                if (Buyer == null && Customer == null)
+                    return new FinancialRequestCustomerInfo();
+
+                return new FinancialRequestCustomerInfo
+                {
+                    FirstName = Buyer?.FirstName ?? Customer?.FirstName,
+                    LastName = Buyer?.LastName ?? Customer?.LastName,
+                    Address = Buyer?.BillingAddress ?? Customer?.Address,
+                    Phone = Buyer?.Phone ?? Customer?.Phone,
+                    DocumentNumber = Buyer?.DocumentIdentifier ?? Customer?.IdentityDocument,
+                    Email = Buyer?.Email ?? Customer?.Email
+                };
+            }
+        }
 
         #endregion
 
@@ -941,4 +952,28 @@ namespace InfinitusApp.Core.Data.DataModels
     //        }
     //    }
     //}
+
+    public class FinancialRequestCustomerInfo
+    {
+        public FinancialRequestCustomerInfo()
+        {
+            Phone = new PhoneComplex();
+            Address = new AddressComplex();
+        }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public PhoneComplex Phone { get; set; }
+        public AddressComplex Address { get; set; }
+        public string DocumentNumber { get; set; }
+        public string Email { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return string.Format("{0} {1}", FirstName, LastName);
+            }
+        }
+    }
 }
