@@ -144,6 +144,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             TargetEditConfig = new TargetEditConfig();
             Filter = new TargetFilter();
+            NavigationParameter = new TargetNavigationParameter();
         }
 
         public NavigationType NavigationType { get; set; }
@@ -155,6 +156,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public TargetEditConfig TargetEditConfig { get; set; }
 
         public TargetFilter Filter { get; set; }
+        public TargetNavigationParameter NavigationParameter { get; set; }
 
     }
 
@@ -236,6 +238,17 @@ namespace InfinitusApp.Core.Data.DataModels
     {
         public string PageTitle { get; set; }
         public string Parameter { get; set; }
+    }
+
+    public class TargetNavigationParameter
+    {
+        public NavigationObjective Objective { get; set; }
+
+        public enum NavigationObjective
+        {
+            Normal,
+            FinancialRequest
+        }
     }
 
 }
