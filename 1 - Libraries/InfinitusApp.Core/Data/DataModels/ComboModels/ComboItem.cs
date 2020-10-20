@@ -1,4 +1,6 @@
-﻿using Naylah.Core.Entities;
+﻿using GalaSoft.MvvmLight;
+using InfinitusApp.Core.Shared;
+using Naylah.Core.Entities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,7 +8,7 @@ using System.Text;
 
 namespace InfinitusApp.Core.Data.DataModels.ComboModels
 {
-    public class ComboItem : EntityBase
+    public class ComboItem : ModelObservableBase
     {
         public ComboItem()
         {
@@ -24,7 +26,7 @@ namespace InfinitusApp.Core.Data.DataModels.ComboModels
         public string ComboCategoryId { get; set; }
 
         [JsonIgnore]
-        public string Title 
+        public string Title
         {
             get
             {
@@ -42,6 +44,11 @@ namespace InfinitusApp.Core.Data.DataModels.ComboModels
         public string Description => DataItem?.Description?.Body ?? "";
 
         [JsonIgnore]
-        public int Quantity { get; set; }
+        private int _quantity;
+        public int Quantity
+        {
+            get { return _quantity; }
+            set { Set(ref _quantity, value); }
+        }
     }
 }
