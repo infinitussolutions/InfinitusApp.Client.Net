@@ -30,5 +30,8 @@ namespace InfinitusApp.Core.Data.DataModels.ComboModels
 
         [JsonIgnore]
         public bool IsCompleted => Items.Where(x => x.Quantity > 0).Count().Equals(QuantityRequired);
+
+        [JsonIgnore]
+        public string SelectedTitle => "SELECIONE " + QuantityRequired + " " + Title.ToUpper();
     }
 }
