@@ -8,7 +8,7 @@ using System.Text;
 
 namespace InfinitusApp.Core.Data.DataModels.ComboModels
 {
-    public class ComboItem : ModelObservableBase
+    public class ComboItem : EntityObservableBase
     {
         public ComboItem()
         {

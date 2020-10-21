@@ -6,7 +6,7 @@ using System.Text;
 
 namespace InfinitusApp.Core.Shared
 {
-    public class ModelObservableBase : ObservableObject, IEntityBase
+    public class EntityObservableBase : ObservableObject, IEntityBase
     {
         public DateTimeOffset? CreatedAt { get; set; }
 
