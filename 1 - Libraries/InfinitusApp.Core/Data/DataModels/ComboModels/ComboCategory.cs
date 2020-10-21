@@ -1,5 +1,4 @@
-﻿using InfinitusApp.Core.Shared;
-using Naylah.Core.Entities;
+﻿using Naylah.Core.Entities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Text;
 
 namespace InfinitusApp.Core.Data.DataModels.ComboModels
 {
-    public class ComboCategory : EntityObservableBase
+    public class ComboCategory : EntityBase
     {
         public ComboCategory()
         {
@@ -36,16 +35,6 @@ namespace InfinitusApp.Core.Data.DataModels.ComboModels
         public bool IsCompleted => QuantityRequired.Equals(QuantityAdded);  //Items.Where(x => x.Quantity > 0).Count().Equals(QuantityRequired);
 
         [JsonIgnore]
-        private string _selectedTitlePresentation;
-        public string SelectedTitlePresentation
-        {
-            get { return _selectedTitlePresentation; }
-            set { Set(ref _selectedTitlePresentation, value); }
-        }
-
-        public void RaisePresentation()
-        {
-            SelectedTitlePresentation = "SELECIONE " + QuantityAdded + "\\" + QuantityRequired;
-        }
+        public string SelectedTitle => "SELECIONE " + QuantityRequired + " " + (QuantityRequired > 1 ? "Itens" : "Item");
     }
 }
