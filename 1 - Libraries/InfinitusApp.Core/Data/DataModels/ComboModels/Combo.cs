@@ -33,6 +33,6 @@ namespace InfinitusApp.Core.Data.DataModels.ComboModels
         #endregion
 
         [JsonIgnore]
-        public bool IsCompleted => Categories.Where(x => x.IsCompleted).Count().Equals(Categories.Count());
+        public bool IsCompleted => Categories.Where(x => x.IsCompleted == true).Count().Equals(Categories.Count());
     }
 }
