@@ -8,6 +8,11 @@ namespace InfinitusApp.Core.Data.DataModels
     
     public class AddressComplex
     {
+        public AddressComplex()
+        {
+            Location = new Location();
+        }
+
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
 
