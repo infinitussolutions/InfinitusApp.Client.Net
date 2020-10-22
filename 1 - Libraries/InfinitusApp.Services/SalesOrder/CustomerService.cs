@@ -1,10 +1,12 @@
 ﻿using InfinitusApp.Core.Data.Commands;
 using InfinitusApp.Core.Data.DataModels;
 using InfinitusApp.Core.Extensions;
+using OData.QueryBuilder.Builders;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace InfinitusApp.Services.SalesOrder
@@ -15,14 +17,40 @@ namespace InfinitusApp.Services.SalesOrder
         {
         }
 
-        public async Task<IList<Customer>> GetAllCustomerByDadaStoreId(string datastoreId)
+        public async Task<IList<Customer>> GetAllByDataStoreId(Expression<Func<Customer, bool>> entityFilter = null, Expression<Func<Customer, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
-            var dic = new Dictionary<string, string>
-            {
-                { "dataStoreId", datastoreId }
-            };
+            //var dic = new Dictionary<string, string>
+            //{
+            //    { "dataStoreId", datastoreId }
+            //};
 
-            return await ServiceClient.InvokeApiAsync<IList<Customer>>("Customer/GetAllByDataStoreId", HttpMethod.Get, dic);
+          //  return await ServiceClient.InvokeApiAsync<IList<Customer>>("Customer/GetAllByDataStoreId", HttpMethod.Get, dic);
+
+            var odataBuilder = new ODataQueryBuilder<Customer>("")
+                    .For<Customer>(x => x)
+                    .ByList();
+
+            if (top.HasValue)
+                odataBuilder.Top(top.Value);
+
+            if (skip.HasValue)
+                odataBuilder.Skip(skip.Value);
+
+            if (entityFilter != null)
+                odataBuilder.Filter(entityFilter);
+
+            if (entityOrderBy != null)
+            {
+                if (desc)
+                    odataBuilder.OrderByDescending(entityOrderBy);
+
+                else
+                    odataBuilder.OrderBy(entityOrderBy);
+            }
+
+            var dic = odataBuilder.ToDictionary();
+
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<Customer>>("Customer/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
 
         public async Task<Customer> GetByEmail(string email)
