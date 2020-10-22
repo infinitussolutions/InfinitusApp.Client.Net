@@ -57,21 +57,11 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-        public decimal FinalPrice
-        {
-            get
-            {
-                return (InitialPrice + TotalExtraCharge) - TotalDiscount;
-            }
-        }
+        public decimal FinalPrice => (InitialPrice + TotalExtraCharge) - TotalDiscount;
 
-        public string FinalPricePresentation
-        {
-            get
-            {
-                return FinalPrice.ToString("C");
-            }
-        }
+        public string FinalPricePresentation => FinalPrice.ToString("C");
+
+        public bool HasValue => InitialPrice > 0;
     }
 
     public class Discount
