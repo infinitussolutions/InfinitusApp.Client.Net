@@ -1,4 +1,6 @@
-﻿namespace InfinitusApp.Core.Data.DataModels
+﻿using InfinitusApp.Core.Extensions;
+
+namespace InfinitusApp.Core.Data.DataModels
 {
     public class Customer : Person
     {
@@ -28,5 +30,30 @@
 
         #endregion Relations
 
+        public string ErrorMsg 
+        {
+            get
+            {
+                var errorMsg = string.Empty;
+
+                if (string.IsNullOrEmpty(FirstName))
+                    errorMsg += "Nome inválido\n";
+
+                if (string.IsNullOrEmpty(Email) || !Email.Contains("@"))
+                    errorMsg += "Email inválido\n";
+
+                if (!IdentityDocument.IsCPF() && !IdentityDocument.IsCNPJ())
+                    errorMsg += "Documento inválido\n";
+
+                return errorMsg;
+            }
+        }
+        public bool IsValid 
+        {
+            get
+            {
+                return string.IsNullOrEmpty(ErrorMsg);
+            }
+        }
     }
 }
