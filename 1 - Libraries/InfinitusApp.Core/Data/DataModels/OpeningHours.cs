@@ -324,6 +324,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 case 5: return "Sexta-Feira";
                 case 6: return "Sábado";
                 case 7: return "Domingo";
+                case 8: return "Feriado";
                 default: return "Valor inválido";
             }
         }
