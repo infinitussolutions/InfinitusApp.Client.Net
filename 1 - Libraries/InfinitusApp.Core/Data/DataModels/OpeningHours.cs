@@ -281,7 +281,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 {
                     var today = CurrentDayIsHoliday ? "Hoje" : "";
                     msg += !string.IsNullOrEmpty(today) ? today : "Fer";
-                    msg += ": " + Sunday.PeriodPresentation + " | ";
+                    msg += ": " + Holiday.PeriodPresentation + " | ";
                 }
 
                 return msg;
