@@ -1,4 +1,5 @@
-﻿using InfinitusApp.Core.Extensions;
+﻿using BrazilHolidays.Net.Extention;
+using InfinitusApp.Core.Extensions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Thursday = new WorkingDay();
             Friday = new WorkingDay();
             Saturday = new WorkingDay();
+            Holiday = new WorkingDay();
         }
 
         /// <summary>
@@ -49,6 +51,10 @@ namespace InfinitusApp.Core.Data.DataModels
         /// Sábado
         /// </summary>
         public WorkingDay Saturday { get; set; }
+        /// <summary>
+        /// Feriado
+        /// </summary>
+        public WorkingDay Holiday { get; set; }
 
         #region Helps
 
@@ -64,7 +70,8 @@ namespace InfinitusApp.Core.Data.DataModels
                     Wednesday,
                     Thursday,
                     Friday,
-                    Saturday
+                    Saturday,
+                    Holiday
                 };
             }
         }
@@ -99,6 +106,9 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
+                if (CurrentDayIsHoliday)
+                    return Holiday;
+
                 switch (DateTime.Now.DayOfWeek)
                 {
                     case DayOfWeek.Monday: return Monday;
@@ -142,6 +152,8 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        public bool CurrentDayIsHoliday => DateTime.Today.IsHoliday();
+
         public bool CurrentDayIsOpenAndWorking => CurrentDay.IsOpen && DateTime.Now.TimeOfDay.IsBetween(CurrentDay.Start, CurrentDay.End);
 
         public bool CurrentDayIsNotOpenAndWorking => !CurrentDayIsOpenAndWorking;
@@ -157,14 +169,16 @@ namespace InfinitusApp.Core.Data.DataModels
             "Quinta: {3}\n" +
             "Sexta: {4}\n" +
             "Sábado: {5}\n" +
-            "Domingo: {6}",
+            "Domingo: {6}\n",
+            "Feriado: {7}",
             Monday.PeriodPresentation,
             Tuesday.PeriodPresentation,
             Wednesday.PeriodPresentation,
             Thursday.PeriodPresentation,
             Friday.PeriodPresentation,
             Saturday.PeriodPresentation,
-            Sunday.PeriodPresentation
+            Sunday.PeriodPresentation,
+            Holiday.PeriodPresentation
             );
 
 
@@ -197,6 +211,9 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 if (Sunday.IsOpen)
                     msg += " | Dom: " + Sunday.PeriodPresentation;
+
+                if (Holiday.IsOpen)
+                    msg += " | Fer: " + Holiday.PeriodPresentation;
 
                 return msg;
             }
@@ -260,6 +277,13 @@ namespace InfinitusApp.Core.Data.DataModels
                     msg += ": " + Sunday.PeriodPresentation + " | ";
                 }
 
+                if (Holiday.IsOpen)
+                {
+                    var today = CurrentDayIsHoliday ? "Hoje" : "";
+                    msg += !string.IsNullOrEmpty(today) ? today : "Fer";
+                    msg += ": " + Sunday.PeriodPresentation + " | ";
+                }
+
                 return msg;
             }
         }
@@ -281,16 +305,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string IsOpenPresentation => IsOpen ? "Aberto" : "Fechado";
 
-        public string PeriodPresentation
-        {
-            get
-            {
-                if (!IsOpen)
-                    return "Fechado";
-
-                return string.Format("{0} - {1}", StartPresentation, EndPresentation);
-            }
-        }
+        public string PeriodPresentation => IsOpen ? string.Format("{0} - {1}", StartPresentation, EndPresentation) : "Fechado";
 
         public string StartPresentation => Start.ToString("hh':'mm");
 

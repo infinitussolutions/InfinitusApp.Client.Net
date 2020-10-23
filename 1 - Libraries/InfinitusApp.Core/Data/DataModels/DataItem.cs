@@ -633,7 +633,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     if (!CurrentOpeningHours.HasConfiguration)
                         return msg;
 
-                    if (CurrentOpeningHours.CurrentDayIsNotOpenAndWorking)
+                    if (CurrentOpeningHours.CurrentDayIsOpenAndWorking)
                         return string.Format("Aberto, fecha ás {0}", CurrentOpeningHours.CurrentDay.EndPresentation);
 
                     return string.Format("Fechado, abre {0} ás {1}", WorkingDay.GetDayPresentation((int)CurrentOpeningHours.NextOpenDay.DayOfWeek), CurrentOpeningHours.NextOpenDay.StartPresentation);

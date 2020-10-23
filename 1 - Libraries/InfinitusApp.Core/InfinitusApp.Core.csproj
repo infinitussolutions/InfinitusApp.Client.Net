@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BrazilHolidays.Net" Version="1.0.1" />
     <PackageReference Include="Ebanx.net" Version="2.0.20" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="Naylah.Core" Version="2017.6.20" />
