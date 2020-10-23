@@ -89,6 +89,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     new WorkingDayWithDayOfWeek(Thursday, DayOfWeek.Thursday),
                     new WorkingDayWithDayOfWeek(Friday, DayOfWeek.Friday),
                     new WorkingDayWithDayOfWeek(Saturday, DayOfWeek.Saturday),
+                    new WorkingDayWithDayOfWeek(Holiday),
                 };
             }
         }
@@ -334,15 +335,21 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public class WorkingDayWithDayOfWeek
     {
-        public WorkingDayWithDayOfWeek(WorkingDay _workingDay, DayOfWeek _dayOfWeek)
+        public WorkingDayWithDayOfWeek(WorkingDay _workingDay, DayOfWeek? _dayOfWeek = null)
         {
             WorkingDay = _workingDay;
-            DayOfWeek = _dayOfWeek;
+
+            if (_dayOfWeek.HasValue)
+                DayOfWeek = _dayOfWeek.Value;
+
+            IsHoliday = !_dayOfWeek.HasValue;
         }
 
         public WorkingDay WorkingDay { get; private set; }
 
         public DayOfWeek DayOfWeek { get; set; }
+
+        public bool IsHoliday { get; set; }
     }
 
     public class WorkingDateToBooking

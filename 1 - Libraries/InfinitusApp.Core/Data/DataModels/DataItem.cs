@@ -1,4 +1,5 @@
-﻿using InfinitusApp.Core.Data.Commands;
+﻿using BrazilHolidays.Net.Extention;
+using InfinitusApp.Core.Data.Commands;
 using InfinitusApp.Core.Data.DataModels.ComboModels;
 using InfinitusApp.Core.Data.DataModels.Signature;
 using InfinitusApp.Core.Extensions;
@@ -408,7 +409,9 @@ namespace InfinitusApp.Core.Data.DataModels
                 {
                     var dateToAdd = firtstDateToStart.AddDays(i);
 
-                    var workingDate = OpeningHours?.ListDaysWithDayOfWeekWhereIsOpen?.FirstOrDefault(x => x.DayOfWeek == dateToAdd.DayOfWeek);
+                    var dateToAddIsHoliday = dateToAdd.IsHoliday();
+
+                    var workingDate = dateToAddIsHoliday ? OpeningHours?.ListDaysWithDayOfWeekWhereIsOpen?.FirstOrDefault(x => x.IsHoliday == true) : OpeningHours?.ListDaysWithDayOfWeekWhereIsOpen?.FirstOrDefault(x => x.DayOfWeek == dateToAdd.DayOfWeek);
 
                     if (workingDate != null)
                     {
@@ -444,7 +447,9 @@ namespace InfinitusApp.Core.Data.DataModels
                 {
                     var dateToAdd = firtstDateToStart.AddDays(i);
 
-                    var workingDate = OpeningHours?.ListDaysWithDayOfWeekWhereIsOpen?.FirstOrDefault(x => x.DayOfWeek == dateToAdd.DayOfWeek);
+                    var dateToAddIsHoliday = dateToAdd.IsHoliday();
+
+                    var workingDate = dateToAddIsHoliday ? OpeningHours?.ListDaysWithDayOfWeekWhereIsOpen?.FirstOrDefault(x => x.IsHoliday == true) : OpeningHours?.ListDaysWithDayOfWeekWhereIsOpen?.FirstOrDefault(x => x.DayOfWeek == dateToAdd.DayOfWeek);
 
                     if (workingDate != null)
                     {
