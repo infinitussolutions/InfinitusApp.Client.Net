@@ -1200,6 +1200,11 @@ namespace InfinitusApp.Core.Data.DataModels
                 default: return DataItemPreDefinedTypes.Generic;
             }
         }
+
+        public static string GetUriToShare(this DataItem dtItem)
+        {
+            return string.Format("https://share-item.vercel.app/api?title={0}&subtitle={1}&characteristics={2}&price={3}", dtItem?.Description?.Title, dtItem?.Description?.SubTitle, dtItem?.Description?.Characteristics, dtItem?.PricePresentation);
+        }
     }
 
     public class VisibilityInfo
