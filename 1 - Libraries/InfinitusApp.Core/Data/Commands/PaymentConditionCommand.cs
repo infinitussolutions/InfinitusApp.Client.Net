@@ -110,6 +110,13 @@ namespace InfinitusApp.Core.Data.Commands
                                 errorMsg += "Vale refeição só pode ser usado em pagamentos á vista\n";
 
                             break;
+
+                        case PaymentMethodType.Pix:
+
+                            if (Type != PaymentConditionType.InCash)
+                                errorMsg += "Pix só pode ser usado em pagamentos á vista\n";
+
+                            break;
                     }
 
                     return errorMsg;
