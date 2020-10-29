@@ -149,7 +149,8 @@ namespace InfinitusApp.Core.Data.DataModels
         DebitCard,
         BankSlip,
         MealTicket,
-        FoodVoucher
+        FoodVoucher,
+        Pix
     }
 
     public enum PaymentConditionTarget

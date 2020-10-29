@@ -44,10 +44,16 @@ namespace InfinitusApp.Core.Data.Commands.ExternalDependence.Iugu
         public PayerModel PayerCustomer { get; set; }
     }
 
+    public class CreateWithPixCommand : InvoiceCommand
+    {
+
+    }
+
     public class IuguInvoiceCommand
     {
         public CreateWithCreditCardCommand CreditCard { get; set; }
         public CreateWithBankSlipCommand BankSlip { get; set; }
+        public CreateWithPixCommand Pix { get; set; }
     }
 
 }
