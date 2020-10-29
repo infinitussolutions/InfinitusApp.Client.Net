@@ -16,15 +16,15 @@ namespace InfinitusApp.Services.ExternalDependence.Iugu
         {
         }
 
-        public async Task<IuguInvoice> CreateWithPaymentCreditCard(CreateWithCreditCardCommand cmd)
-        {
-            return await ServiceClient.InvokeApiAsync<CreateWithCreditCardCommand, IuguInvoice>("Iugu/Invoice/CreateWithPaymentCreditCard", cmd, HttpMethod.Post, null);
-        }
+        //public async Task<IuguInvoice> CreateWithPaymentCreditCard(CreateWithCreditCardCommand cmd)
+        //{
+        //    return await ServiceClient.InvokeApiAsync<CreateWithCreditCardCommand, IuguInvoice>("Iugu/Invoice/CreateWithPaymentCreditCard", cmd, HttpMethod.Post, null);
+        //}
 
-        public async Task<IuguInvoice> CreateWithPaymentBankSlip(CreateWithBankSlipCommand cmd)
-        {
-            return await ServiceClient.InvokeApiAsync<CreateWithBankSlipCommand, IuguInvoice>("Iugu/Invoice/CreateWithPaymentBankSlip", cmd, HttpMethod.Post, null);
-        }
+        //public async Task<IuguInvoice> CreateWithPaymentBankSlip(CreateWithBankSlipCommand cmd)
+        //{
+        //    return await ServiceClient.InvokeApiAsync<CreateWithBankSlipCommand, IuguInvoice>("Iugu/Invoice/CreateWithPaymentBankSlip", cmd, HttpMethod.Post, null);
+        //}
         public async Task<IuguInvoice> GetInvoiceById(string dataStoreId, string id)
         {
             var dic = new Dictionary<string, string>
