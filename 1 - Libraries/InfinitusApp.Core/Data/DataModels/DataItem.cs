@@ -1870,5 +1870,7 @@ namespace InfinitusApp.Core.Data.DataModels
     public class DataItemBooking
     {
         public bool AllowBooking { get; set; }
+
+        public int MaxPeople { get; set; }
     }
 }
