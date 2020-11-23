@@ -41,12 +41,13 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return string.Format("{0}, {1} - {2}, {3} - {4}",
+                return string.Format("{0}, {1} - {2}, {3} - {4} ({5})",
                     AddressLine1, 
                     Number,
                     District,
                     City,
-                    StateProvince
+                    StateProvince,
+                    PostalCode
                     );
 
                // return AddressLine1 + ", " + Number + " - " + Building + " " + City + "-" + StateProvince;
