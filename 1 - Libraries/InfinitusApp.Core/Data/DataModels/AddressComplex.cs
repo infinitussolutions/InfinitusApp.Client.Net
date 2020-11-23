@@ -41,7 +41,16 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return AddressLine1 + ", " + Number + " - " + Building + " " + City + "-" + StateProvince;
+                return string.Format("{0}, {1} - {2}, {3} - {4} ({5})",
+                    AddressLine1, 
+                    Number,
+                    District,
+                    City,
+                    StateProvince,
+                    PostalCode
+                    );
+
+               // return AddressLine1 + ", " + Number + " - " + Building + " " + City + "-" + StateProvince;
             }
         }
 

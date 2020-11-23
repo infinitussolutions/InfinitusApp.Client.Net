@@ -109,5 +109,15 @@ namespace InfinitusApp.Services.FInancial
 
             return await ServiceClient.InvokeApiAsync<string>("DataStore/GetDefaultSalesmanByDataStoreId", HttpMethod.Get, dic);
         }
+
+        public async Task<string> ExportRequest(string Id)
+        {
+            var dic = new Dictionary<string, string>
+            {
+                { "id", Id }
+            };
+
+            return await ServiceClient.InvokeApiAsync<string>("FinancialRequest/ExportRequest", HttpMethod.Get, dic);
+        }
     }
 }
