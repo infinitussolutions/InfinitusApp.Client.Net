@@ -421,6 +421,6 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public bool IsTodayAndActualTime => IsToday && DateTime.Now.TimeOfDay.Hours == Time.Hours;
 
-        public string TimePresentation => IsTodayAndActualTime ? "O mais breve possível (a partir de " + Time.ToString(@"hh\:mm") + " hrs)" : Time.ToString(@"hh\:mm") + " hrs";
+        public string TimePresentation => IsTodayAndActualTime ? "O mais breve possível (a partir das " + Time.ToString(@"hh\:mm") + " hrs)" : Time.ToString(@"hh\:mm") + " hrs";
     }
 }
