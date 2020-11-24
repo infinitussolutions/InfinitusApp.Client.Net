@@ -119,6 +119,7 @@ namespace InfinitusApp.Core.Data.DataModels
     public class TagFinancialRequestOption
     {
         public TagFinancialRequestType FinancialRequestType { get; set; }
+
         public int Quantity { get; set; }
 
         public enum TagFinancialRequestType
