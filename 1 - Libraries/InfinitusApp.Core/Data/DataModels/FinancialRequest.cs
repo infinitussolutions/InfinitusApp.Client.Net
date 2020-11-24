@@ -870,6 +870,22 @@ namespace InfinitusApp.Core.Data.DataModels
             Normal,
             Humanized
         }
+
+        public bool IsNormal 
+        {
+            get
+            {
+                return Type == FinancialRequestDeliveryType.Normal;
+            } 
+        }
+
+        public bool IsInHands
+        {
+            get
+            {
+                return Type == FinancialRequestDeliveryType.InHands;
+            }
+        }
     }
 
     public static class FinancialRequestExtention

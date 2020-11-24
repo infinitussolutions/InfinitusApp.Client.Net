@@ -564,7 +564,7 @@ namespace InfinitusApp.Core.Data.DataModels
             {
                 var l = new List<DeliveryOptionsToPresentation>();
 
-                if (DeliveryPriceByDistanceByActualLocation.HasValue)
+                if (DeliveryInfo.MakesDelivery && DeliveryPriceByDistanceByActualLocation.HasValue)
                 {
                     l.Add(new DeliveryOptionsToPresentation
                     {
@@ -609,7 +609,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return DeliveryInfo.InHands || DeliveryInfo.MakeHumanizedDelivery || DeliveryFees?.Count > 0;
+                return DeliveryInfo.InHands || DeliveryInfo.MakeHumanizedDelivery || DeliveryInfo.MakesDelivery;
             }
         }
 
@@ -1384,8 +1384,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Deliveryman = new DeliverymanInfo();
         }
 
-        [Obsolete("Use delivery fee", true)]
-        public bool MakesDelivery { get; set; } = true;
+        public bool MakesDelivery { get; set; }
 
         [Obsolete("Use delivery fee", true)]
         public double MaxKm { get; set; }

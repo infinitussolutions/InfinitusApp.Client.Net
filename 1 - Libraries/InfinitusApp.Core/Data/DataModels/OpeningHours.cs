@@ -378,14 +378,16 @@ namespace InfinitusApp.Core.Data.DataModels
                 {
                     var l = new List<WorkingDayWithTimeInterval>();
 
-                    var intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - WorkingDayWithDayOfWeek.WorkingDay.Start).TotalHours;
+                    var end = WorkingDayWithDayOfWeek.WorkingDay.End == new TimeSpan(0, 0, 0) ? new TimeSpan(23, 59, 59) : WorkingDayWithDayOfWeek.WorkingDay.End;
+
+                    var intervalHours = (end - WorkingDayWithDayOfWeek.WorkingDay.Start).TotalHours;
                     var start = WorkingDayWithDayOfWeek.WorkingDay.Start;
 
                     var hourTimeOfDay = new TimeSpan(DateTime.Now.Hour, 0, 0);
 
                     if (IsToday && hourTimeOfDay > WorkingDayWithDayOfWeek.WorkingDay.Start)
                     {
-                        intervalHours = (WorkingDayWithDayOfWeek.WorkingDay.End - hourTimeOfDay).TotalHours;
+                        intervalHours = (end - hourTimeOfDay).TotalHours;
                         start = hourTimeOfDay;
                     }
 
