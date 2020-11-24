@@ -61,5 +61,29 @@ namespace InfinitusApp.Services.Tags
             return result;
 
         }
+
+        public async Task<List<TagDataItemRelation>> GetAll(Expression<Func<Core.Data.DataModels.TagDataItemRelation, bool>> entityFilter = null, int? skip = null, int? top = null)
+        {
+            var odataBuilder = new ODataQueryBuilder<TagDataItemRelation>("")
+                   .For<TagDataItemRelation>(x => x)
+                   .ByList()
+                   ;
+
+            if (entityFilter != null)
+                odataBuilder.Filter(entityFilter);
+
+            if (skip.HasValue)
+                odataBuilder.Skip(skip.Value);
+
+            if (top.HasValue)
+                odataBuilder.Top(top.Value);
+
+            var dic = odataBuilder.ToDictionary();
+
+            var result = await ServiceClient.InvokeApiAsync<List<TagDataItemRelation>>("TagDataItemRelation/GetAll", HttpMethod.Get, dic);
+
+            return result;
+
+        }
     }
 }
