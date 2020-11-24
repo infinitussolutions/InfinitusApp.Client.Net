@@ -1,4 +1,5 @@
 ﻿using InfinitusApp.Core.Extensions;
+using OData.QueryBuilder.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -15,15 +16,43 @@ namespace InfinitusApp.Services.Group
 
         }
 
-        public async Task<List<Core.Data.DataModels.Group>> GetAllByTypeWithRelations(string dataStoreId, string type)
+        public async Task<List<Core.Data.DataModels.Group>> GetAllByTypeWithRelations(string type)
         {
             var dic = new Dictionary<string, string>
             {
-                { "dataStoreId", dataStoreId },
                 { "type", type }
             };
 
             return await ServiceClient.InvokeApiAsync<List<Core.Data.DataModels.Group>>("Group/Group/GetAllByTypeWithRelations", HttpMethod.Get, dic);
+        }
+
+        public async Task<List<Core.Data.DataModels.Group>> GetAll(Expression<Func<Core.Data.DataModels.Group, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.Group, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        {
+            var odataBuilder = new ODataQueryBuilder<Core.Data.DataModels.Group>("")
+                    .For<Core.Data.DataModels.Group>(x => x)
+                    .ByList();
+
+            if (top.HasValue)
+                odataBuilder.Top(top.Value);
+
+            if (skip.HasValue)
+                odataBuilder.Skip(skip.Value);
+
+            if (entityFilter != null)
+                odataBuilder.Filter(entityFilter);
+
+            if (entityOrderBy != null)
+            {
+                if (desc)
+                    odataBuilder.OrderByDescending(entityOrderBy);
+
+                else
+                    odataBuilder.OrderBy(entityOrderBy);
+            }
+
+            var dic = odataBuilder.ToDictionary();
+
+            return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<Core.Data.DataModels.Group>>(nameof(Core.Data.DataModels.Group) + "/Group/GetAll", HttpMethod.Get, dic);
         }
 
         //public async Task<List<Core.Data.DataModels.Group>> GetAllByTypeWithRelations(string dataStoreId, DataItemType type)
