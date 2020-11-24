@@ -45,6 +45,9 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (!IdentityDocument.IsCPF() && !IdentityDocument.IsCNPJ())
                     errorMsg += "Documento inválido\n";
 
+                if (Address == null || !Address.IsValid)
+                    errorMsg += "Endereço inválido\n";
+
                 return errorMsg;
             }
         }
