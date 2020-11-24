@@ -15,13 +15,14 @@ namespace InfinitusApp.Core.Data.Commands
         public string TagId { get; set; }
 
         public string DataItemId { get; set; }
+
+        public string DataStoreId { get; set; }
     }
 
     public class TagDataItemRelationUpdateCommand : TagDataItemRelationCommand
     {
         public string Id { get; set; }
     }
-
 
     public class TagTagRelationCommand
     {

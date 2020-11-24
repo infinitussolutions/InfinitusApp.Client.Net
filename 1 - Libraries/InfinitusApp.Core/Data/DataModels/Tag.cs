@@ -141,6 +141,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string DataItemId { get; set; }
 
+        public string DataStoreId { get; set; }
+
         public enum TagDataItemRelationType
         {
             Normal,
