@@ -15,17 +15,17 @@ namespace InfinitusApp.Services.Tags
         {
         }
 
-        public async Task<Core.Data.DataModels.TagDataItemRelation> GetById(string id)
+        public async Task<TagDataItemRelation> GetById(string id)
         {
             var dic = new Dictionary<string, string>
             {
                 { "id", id }
             };
 
-            return await ServiceClient.InvokeApiAsync<Core.Data.DataModels.TagDataItemRelation>("TagDataItemRelation/GetById", HttpMethod.Get, dic);
+            return await ServiceClient.InvokeApiAsync<TagDataItemRelation>(nameof(TagDataItemRelation) + "/GetById", HttpMethod.Get, dic);
         }
 
-        public async Task<List<TagDataItemRelation>> GetAllByTagId(string tagId, Expression<Func<Core.Data.DataModels.TagDataItemRelation, bool>> entityFilter = null, int? skip = null, int? top = null, PageOrderType order = PageOrderType.Date)
+        public async Task<List<TagDataItemRelation>> GetAllByTagId(string tagId, Expression<Func<TagDataItemRelation, bool>> entityFilter = null, int? skip = null, int? top = null, PageOrderType order = PageOrderType.Date)
         {
             var odataBuilder = new ODataQueryBuilder<TagDataItemRelation>("")
                    .For<TagDataItemRelation>(x => x)
@@ -56,13 +56,13 @@ namespace InfinitusApp.Services.Tags
 
             dic.Add("tagId", tagId);
 
-            var result = await ServiceClient.InvokeApiAsync<List<TagDataItemRelation>>("TagDataItemRelation/GetAllByTagId", HttpMethod.Get, dic);
+            var result = await ServiceClient.InvokeApiAsync<List<TagDataItemRelation>>(nameof(TagDataItemRelation) + "/GetAllByTagId", HttpMethod.Get, dic);
 
             return result;
 
         }
 
-        public async Task<List<TagDataItemRelation>> GetAll(Expression<Func<Core.Data.DataModels.TagDataItemRelation, bool>> entityFilter = null, int? skip = null, int? top = null)
+        public async Task<List<TagDataItemRelation>> GetAll(Expression<Func<TagDataItemRelation, bool>> entityFilter = null, int? skip = null, int? top = null)
         {
             var odataBuilder = new ODataQueryBuilder<TagDataItemRelation>("")
                    .For<TagDataItemRelation>(x => x)
@@ -80,10 +80,9 @@ namespace InfinitusApp.Services.Tags
 
             var dic = odataBuilder.ToDictionary();
 
-            var result = await ServiceClient.InvokeApiAsync<List<TagDataItemRelation>>("TagDataItemRelation/GetAll", HttpMethod.Get, dic);
+            var result = await ServiceClient.InvokeApiAsync<List<TagDataItemRelation>>(nameof(TagDataItemRelation) + "/GetAll", HttpMethod.Get, dic);
 
             return result;
-
         }
     }
 }
