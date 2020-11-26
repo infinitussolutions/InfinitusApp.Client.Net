@@ -53,17 +53,18 @@ namespace InfinitusApp.Core.Data.DataModels
             Presentation = new TagPresentation();
             DataItems = new List<DataItem>();
             Tags = new List<Tag>();
-            FinancialRequestOption = new TagFinancialRequestOption();
+          //  FinancialRequestOption = new TagFinancialRequestOption();
             SelectedDataItem = new DataItem();
             TagTagRelations = new List<TagTagRelation>();
             TagDataItemRelations = new List<TagDataItemRelation>();
-            NavigationOption = new TagNavigationOption();
+           // NavigationOption = new TagNavigationOption();
         }
 
         public TagPresentation Presentation { get; set; }
-
+        [Obsolete("", true)]
         public TagFinancialRequestOption FinancialRequestOption { get; set; }
 
+        [Obsolete("", true)]
         public TagNavigationOption NavigationOption { get; set; }
         #region Relations
 

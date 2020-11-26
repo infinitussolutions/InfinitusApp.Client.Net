@@ -223,6 +223,24 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public bool IsPropertyTenancy { get; set; }
 
+        public DataItemValidationHelper Validation
+        {
+            get
+            {
+                return new DataItemValidationHelper
+                {
+                    Email = !string.IsNullOrEmpty(Contact.Email),
+                    Address = Location.LocationAsAddress.IsValid,
+                    Image = !string.IsNullOrEmpty(MediaImageData.WideImageUri),
+                    Items = Children.Count > 0,
+                    Phone = HasPhone,
+                    PaymentCondition = PaymentConditionRelations.Count > 0,
+                    Tag = Tags.Count > 0,
+                    Group = !string.IsNullOrEmpty(GroupTypeId),
+                    DeliveryOptions = DeliveryInfo.InHands || (DeliveryInfo.MakesDelivery && DeliveryFees.Count > 0)
+                };
+            }
+        }
         #endregion
 
 
@@ -1493,6 +1511,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public DataItemAuxiliaryHelper Auxiliary { get; set; }
 
         public DataItemPresentationHelper Presentation { get; set; }
+
     }
 
     public class DataItemAuxiliaryHelper
@@ -1602,6 +1621,18 @@ namespace InfinitusApp.Core.Data.DataModels
 
     }
 
+    public class DataItemValidationHelper
+    {
+        public bool Email { get; set; }
+        public bool Address { get; set; }
+        public bool Phone { get; set; }
+        public bool Tag { get; set; }
+        public bool Image { get; set; }
+        public bool Group { get; set; }
+        public bool Items { get; set; }
+        public bool PaymentCondition { get; set; }
+        public bool DeliveryOptions { get; set; }
+    }
     #endregion
 
     #region RODRIGO REFAZER
