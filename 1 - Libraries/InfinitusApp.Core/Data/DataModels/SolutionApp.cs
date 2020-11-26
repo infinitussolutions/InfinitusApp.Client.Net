@@ -86,5 +86,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public const string Voucher = "A0781F2A-E191-4D28-A111-1774A785203D";
         public const string Combo = "063E678F-55F3-441D-8C2A-44EBA30CE48B";
         public const string Variation = "9D4C1236-F2FF-4E05-A74B-D9E39169A7AC";
+        public const string Tag = "3B04196C-1320-4DED-800E-43C844DFACD4";
+        public const string Group = "9FEBF541-F6FE-482B-BB28-F0B3FA7C5D74";
     }
 }
