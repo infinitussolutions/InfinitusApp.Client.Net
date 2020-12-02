@@ -86,6 +86,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 || string.IsNullOrEmpty(District)
                 || string.IsNullOrEmpty(City)
                 || string.IsNullOrEmpty(Number)
+                || string.IsNullOrEmpty(StateProvince)
                 || !PostalCode.IsCEP()
                 )
                     return false;
