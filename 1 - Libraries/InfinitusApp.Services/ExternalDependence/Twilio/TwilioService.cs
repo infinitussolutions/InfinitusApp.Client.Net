@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using tw = Twilio;
-using Twilio.Rest.Api.V2010.Account;
+
 using InfinitusApp.Core.Data.Commands.ExternalDependence.Twilio;
 
 namespace InfinitusApp.Services.ExternalDependence.Twilio

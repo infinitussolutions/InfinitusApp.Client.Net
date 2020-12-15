@@ -5,7 +5,7 @@
 	<PackageTargetFallback Condition="'$(TargetFramework)'=='Net45'">$(PackageTargetFallback);portable-net45+win8+wpa81+wp8</PackageTargetFallback>
 	<Authors>Infinitus Solutions Team</Authors>
 	<Company>Infinitus Solutions</Company>
-	<Version>1.1.316</Version>
+	<Version>1.1.317</Version>
 	<Description>InfinitusApp .net api library</Description>
   </PropertyGroup>
 
@@ -13,9 +13,8 @@
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="Naylah.Identity.Client" Version="2017.4.26-alpha" />
     <PackageReference Include="Naylah.Services.Client" Version="2017.4.26-alpha" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="OData.QueryBuilder" Version="1.0.11" />
-    <PackageReference Include="Twilio" Version="5.37.2" />
     <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
   </ItemGroup>
 
