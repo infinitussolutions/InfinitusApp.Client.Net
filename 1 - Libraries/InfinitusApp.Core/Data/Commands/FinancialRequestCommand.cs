@@ -126,7 +126,8 @@ namespace InfinitusApp.Core.Data.Commands
                 FinancialRequestId = x.FinancialRequestId,
                 FromItem = x.FromItem,
                 //VariationId = x.VariationId,
-                Deleted = x.Deleted
+                Deleted = x.Deleted,
+                ExternalCode = x.ExternalCode
             }).ToList();
 
             return objReturn;
@@ -151,7 +152,8 @@ namespace InfinitusApp.Core.Data.Commands
                 Id = x.Id,
                 FinancialRequestId = x.FinancialRequestId,
                 //VariationId = x.VariationId,
-                Deleted = x.Deleted
+                Deleted = x.Deleted,
+                ExternalCode = x.ExternalCode
             }).ToList();
 
             return objReturn;
