@@ -19,6 +19,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
             IsEditableQuantity = !FinancialRequest?.CurrentStatus?.Config?.IsClosed ?? true; // FinancialRequest.Status == FinancialRequestStatus.Open;
             CanRemoveItem = !FinancialRequest?.CurrentStatus?.Config?.IsClosed ?? true;
+            ExternalCode = new IdentificationCode();
         }
 
         public string Description { get; set; }
@@ -30,6 +31,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public MediaImageData MediaImageData { get; set; }
 
         public FinancialRequestItemFrom FromItem { get; set; }
+
+        public IdentificationCode ExternalCode { get; set; }
 
         #region Relations
 
@@ -184,7 +187,8 @@ namespace InfinitusApp.Core.Data.DataModels
                 Description = dataItem.Description.Title,
                 CanRemoveItem = true,
                 IsEditableQuantity = true,
-                MediaImageData = dataItem.MediaImageData
+                MediaImageData = dataItem.MediaImageData,
+                ExternalCode = dataItem.IdentificationCode?.ExternalReference ?? new IdentificationCode()
             };
         }
 
@@ -208,7 +212,8 @@ namespace InfinitusApp.Core.Data.DataModels
                 MediaImageData = new MediaImageData
                 {
 
-                }
+                },
+                ExternalCode = variation.DataItem?.IdentificationCode?.ExternalReference ?? new IdentificationCode()
             };
         }
 
@@ -232,7 +237,8 @@ namespace InfinitusApp.Core.Data.DataModels
                 MediaImageData = booking?.DataItem?.MediaImageData ?? new MediaImageData
                 {
 
-                }
+                },
+                ExternalCode = booking?.DataItem?.IdentificationCode?.ExternalReference ?? new IdentificationCode()
             };
         }
     }
