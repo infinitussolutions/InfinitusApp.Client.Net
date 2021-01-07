@@ -81,6 +81,7 @@ namespace InfinitusApp.Core.Data.Commands
         {
             Price = new Price();
             MediaImageData = new MediaImageData();
+            ExternalCode = new IdentificationCode();
         }
 
         public string Description { get; set; }
@@ -98,6 +99,8 @@ namespace InfinitusApp.Core.Data.Commands
         public string FinancialRequestId { get; set; }
 
         public bool Deleted { get; set; }
+
+        public IdentificationCode ExternalCode { get; set; }
     }
 
     public class CreateFinancialRequestItemCommand : FinancialRequestItemCommand
