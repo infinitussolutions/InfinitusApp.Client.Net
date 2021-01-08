@@ -145,40 +145,42 @@ namespace InfinitusApp.Services.DataItem
 
 
 
-        public async Task<List<Core.Data.DataModels.DataItem>> Find(string q, Expression<Func<Core.Data.DataModels.DataItem, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.DataItem, object>> entityOrderBy = null, int skip = 0, int top = 10, bool desc = false)
+        public async Task<List<Core.Data.DataModels.DataItem>> Find(string dataStoreId, string q, Expression<Func<Core.Data.DataModels.DataItem, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.DataItem, object>> entityOrderBy = null, int skip = 0, int top = 10, bool desc = false)
         {
-            //var odataBuilder = new ODataQueryBuilder<Core.Data.DataModels.DataItem>("")
-            //       .For<Core.Data.DataModels.DataItem>(x => x)
-            //       .ByList()
-            //       .Top(top)
-            //       .Skip(skip)
-            //       ;
+            var odataBuilder = new ODataQueryBuilder<Core.Data.DataModels.DataItem>("")
+                   .For<Core.Data.DataModels.DataItem>(x => x)
+                   .ByList()
+                   .Top(top)
+                   .Skip(skip)
+                   ;
 
-            //if (entityOrderBy != null)
-            //{
-            //    if (desc)
-            //        odataBuilder.OrderByDescending(entityOrderBy);
-
-            //    else
-            //        odataBuilder.OrderBy(entityOrderBy);
-            //}
-
-            //else
-            //    odataBuilder.OrderByDescending(x => x.CreatedAt);
-
-            //if (entityFilter != null)
-            //    odataBuilder.Filter(entityFilter);
-
-            //var dic = odataBuilder.ToDictionary();
-
-            var dic = new Dictionary<string, string>
+            if (entityOrderBy != null)
             {
-                { "q", q },
-                { "$skip", 0.ToString() },
-                { "$top", 3.ToString() }
-            };
+                if (desc)
+                    odataBuilder.OrderByDescending(entityOrderBy);
 
-            //dic.Add("q", q);
+                else
+                    odataBuilder.OrderBy(entityOrderBy);
+            }
+
+            else
+                odataBuilder.OrderByDescending(x => x.CreatedAt);
+
+            if (entityFilter != null)
+                odataBuilder.Filter(entityFilter);
+
+            var dic = odataBuilder.ToDictionary();
+
+            dic.Add("dataStoreId", dataStoreId);
+            dic.Add("q", q);
+
+            //var dic = new Dictionary<string, string>
+            //{
+            //    { "dataStoreId", dataStoreId },
+            //    { "q", q },
+            //    { "$skip", 0.ToString() },
+            //    { "$top", 3.ToString() }
+            //};
 
             return await ServiceClient.InvokeApiAsync<List<Core.Data.DataModels.DataItem>>("DataItem/Find", HttpMethod.Get, dic);
         }
