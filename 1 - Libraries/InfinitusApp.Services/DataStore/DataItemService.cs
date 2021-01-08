@@ -154,17 +154,17 @@ namespace InfinitusApp.Services.DataItem
                    .Skip(skip)
                    ;
 
-            if (entityOrderBy != null)
-            {
-                if (desc)
-                    odataBuilder.OrderByDescending(entityOrderBy);
+            //if (entityOrderBy != null)
+            //{
+            //    if (desc)
+            //        odataBuilder.OrderByDescending(entityOrderBy);
 
-                else
-                    odataBuilder.OrderBy(entityOrderBy);
-            }
+            //    else
+            //        odataBuilder.OrderBy(entityOrderBy);
+            //}
 
-            else
-                odataBuilder.OrderByDescending(x => x.CreatedAt);
+            //else
+            //    odataBuilder.OrderByDescending(x => x.CreatedAt);
 
             if (entityFilter != null)
                 odataBuilder.Filter(entityFilter);
