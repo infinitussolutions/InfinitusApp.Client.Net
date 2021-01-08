@@ -871,12 +871,12 @@ namespace InfinitusApp.Core.Data.DataModels
             Humanized
         }
 
-        public bool IsNormal 
+        public bool IsNormal
         {
             get
             {
                 return Type == FinancialRequestDeliveryType.Normal;
-            } 
+            }
         }
 
         public bool IsInHands
@@ -890,21 +890,41 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public static class FinancialRequestExtention
     {
-        public static string GetTotalResume(this FinancialRequest toFinancialRequest)
+        public static string GetTotalResume(this FinancialRequest toFinancialRequest, HideFinancialRequestInfo hideFinancialRequestInfo = null)
         {
-            var msg = "🏷 Itens: .............. " + toFinancialRequest.TotalItensPresentation + "\n";
+            var msg = "";
 
-            if (!string.IsNullOrEmpty(toFinancialRequest?.TotalDiscountFromVoucherPresentation))
-                msg += "🙌 Voucher: ....... -" + toFinancialRequest.TotalDiscountFromVoucherPresentation + "\n";
+            var hide = hideFinancialRequestInfo ?? new HideFinancialRequestInfo();
 
-            if (toFinancialRequest.DiscountInRequest.DiscountInPercent > 0)
-                msg += "🙌 Desconto (" + toFinancialRequest.DiscountInRequest.DiscountInPercent + "% OFF) : -" + toFinancialRequest.Discount.ToString("C") + "\n";
+            if (!hide.TotalItems)
+                msg += "🏷 Itens: .............. " + toFinancialRequest.TotalItensPresentation + "\n\n";
 
-            msg += toFinancialRequest.DeliveryInfo.Type.GetEmoji() + " Entrega: ......... " + toFinancialRequest.DeliveryInfo.PricePresentation + "\n" +
-                "💰 TOTAL GERAL: " + toFinancialRequest.TotalRequest.ToString("C")
-                ;
+            if (!hide.Voucher && !string.IsNullOrEmpty(toFinancialRequest?.TotalDiscountFromVoucherPresentation))
+                msg += "🙌 Voucher: ....... -" + toFinancialRequest.TotalDiscountFromVoucherPresentation + "\n\n";
+
+            if (!hide.Discount && toFinancialRequest.DiscountInRequest.DiscountInPercent > 0)
+                msg += "🙌 Desconto (" + toFinancialRequest.DiscountInRequest.DiscountInPercent + "% OFF) : -" + toFinancialRequest.Discount.ToString("C") + "\n\n";
+
+            if (!hide.Delivery)
+                msg += toFinancialRequest.DeliveryInfo.Type.GetEmoji() + " Entrega: ......... " + toFinancialRequest.DeliveryInfo.PricePresentation + "\n\n";
+
+            if (!hide.Total)
+                msg += "💰 TOTAL GERAL: " + toFinancialRequest.TotalRequest.ToString("C");
 
             return msg;
+        }
+
+        public class HideFinancialRequestInfo
+        {
+            public bool TotalItems { get; set; }
+
+            public bool Voucher { get; set; }
+
+            public bool Discount { get; set; }
+
+            public bool Delivery { get; set; }
+
+            public bool Total { get; set; }
         }
     }
 
