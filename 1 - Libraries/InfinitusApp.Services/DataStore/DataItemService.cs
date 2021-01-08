@@ -145,15 +145,40 @@ namespace InfinitusApp.Services.DataItem
 
 
 
-        public async Task<List<Core.Data.DataModels.DataItem>> Find(string dataStoreId, string q)
+        public async Task<List<Core.Data.DataModels.DataItem>> Find(string q, Expression<Func<Core.Data.DataModels.DataItem, bool>> entityFilter = null, Expression<Func<Core.Data.DataModels.DataItem, object>> entityOrderBy = null, int skip = 0, int top = 10, bool desc = false)
         {
-            var dic = new Dictionary<string, string>
+            var odataBuilder = new ODataQueryBuilder<Core.Data.DataModels.DataItem>("")
+                   .For<Core.Data.DataModels.DataItem>(x => x)
+                   .ByList()
+                   .Top(top)
+                   .Skip(skip)
+                   ;
+
+            if (entityOrderBy != null)
             {
-                { "dataStoreId", dataStoreId },
-                { "q", q },
-                { "$skip", 0.ToString() },
-                { "$top", 3.ToString() }
-            };
+                if (desc)
+                    odataBuilder.OrderByDescending(entityOrderBy);
+
+                else
+                    odataBuilder.OrderBy(entityOrderBy);
+            }
+
+            else
+                odataBuilder.OrderByDescending(x => x.CreatedAt);
+
+            if (entityFilter != null)
+                odataBuilder.Filter(entityFilter);
+
+            var dic = odataBuilder.ToDictionary();
+
+            //var dic = new Dictionary<string, string>
+            //{
+            //    { "q", q },
+            //    { "$skip", 0.ToString() },
+            //    { "$top", 3.ToString() }
+            //};
+
+            dic.Add("q", q);
 
             return await ServiceClient.InvokeApiAsync<List<Core.Data.DataModels.DataItem>>("DataItem/Find", HttpMethod.Get, dic);
         }

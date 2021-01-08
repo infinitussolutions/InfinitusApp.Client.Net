@@ -897,16 +897,16 @@ namespace InfinitusApp.Core.Data.DataModels
             var hide = hideFinancialRequestInfo ?? new HideFinancialRequestInfo();
 
             if (!hide.TotalItems)
-                msg += "🏷 Itens: .............. " + toFinancialRequest.TotalItensPresentation + "\n\n";
+                msg += "🏷 Itens: .............. " + toFinancialRequest.TotalItensPresentation + "\n";
 
             if (!hide.Voucher && !string.IsNullOrEmpty(toFinancialRequest?.TotalDiscountFromVoucherPresentation))
-                msg += "🙌 Voucher: ....... -" + toFinancialRequest.TotalDiscountFromVoucherPresentation + "\n\n";
+                msg += "🙌 Voucher: ....... -" + toFinancialRequest.TotalDiscountFromVoucherPresentation + "\n";
 
             if (!hide.Discount && toFinancialRequest.DiscountInRequest.DiscountInPercent > 0)
-                msg += "🙌 Desconto (" + toFinancialRequest.DiscountInRequest.DiscountInPercent + "% OFF) : -" + toFinancialRequest.Discount.ToString("C") + "\n\n";
+                msg += "🙌 Desconto (" + toFinancialRequest.DiscountInRequest.DiscountInPercent + "% OFF) : -" + toFinancialRequest.Discount.ToString("C") + "\n";
 
             if (!hide.Delivery)
-                msg += toFinancialRequest.DeliveryInfo.Type.GetEmoji() + " Entrega: ......... " + toFinancialRequest.DeliveryInfo.PricePresentation + "\n\n";
+                msg += toFinancialRequest.DeliveryInfo.Type.GetEmoji() + " Entrega: ......... " + toFinancialRequest.DeliveryInfo.PricePresentation + "\n";
 
             if (!hide.Total)
                 msg += "💰 TOTAL GERAL: " + toFinancialRequest.TotalRequest.ToString("C");
