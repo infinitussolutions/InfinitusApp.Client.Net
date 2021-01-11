@@ -73,6 +73,8 @@ namespace InfinitusApp.Core.Data.Commands
         public IList<UpdateFinancialRequestItemCommand> Items { get; set; }
 
         public CanceledInfo IfIsCanceledInfo { get; set; }
+
+        public TrackingCode TrackingCode { get; set; }
     }
 
     public class FinancialRequestItemCommand
