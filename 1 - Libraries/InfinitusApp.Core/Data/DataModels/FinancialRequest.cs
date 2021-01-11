@@ -902,9 +902,15 @@ namespace InfinitusApp.Core.Data.DataModels
             if (!hide.Voucher && !string.IsNullOrEmpty(toFinancialRequest?.TotalDiscountFromVoucherPresentation))
                 msg += "🙌 Voucher: ....... -" + toFinancialRequest.TotalDiscountFromVoucherPresentation + "\n";
 
-            if (!hide.Discount && toFinancialRequest.DiscountInRequest.DiscountInPercent > 0)
-                msg += "🙌 Desconto (" + toFinancialRequest.DiscountInRequest.DiscountInPercent + "% OFF) : -" + toFinancialRequest.Discount.ToString("C") + "\n";
+            if (!hide.Discount)
+            {
+                if (toFinancialRequest.DiscountInRequest.DiscountInPercent > 0)
+                    msg += "🙌 Desconto (" + toFinancialRequest.DiscountInRequest.DiscountInPercent + "% OFF) : -" + toFinancialRequest.Discount.ToString("C") + "\n";
 
+                else if(toFinancialRequest.DiscountInRequest.DiscountInMoney > 0)
+                    msg += "🙌 Desconto: .............. " + toFinancialRequest.Discount.ToString("C") + "\n";
+
+            }
             if (!hide.Delivery)
                 msg += toFinancialRequest.DeliveryInfo.Type.GetEmoji() + " Entrega: ......... " + toFinancialRequest.DeliveryInfo.PricePresentation + "\n";
 
