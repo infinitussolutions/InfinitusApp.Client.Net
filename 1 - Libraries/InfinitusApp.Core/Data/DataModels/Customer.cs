@@ -24,6 +24,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public bool Edited { get; set; } = false;
 
+        public string ContactName { get; set; }
+
         #region Relations
 
         public string DataStoreId { get; set; }

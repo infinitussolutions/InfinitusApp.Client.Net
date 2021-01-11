@@ -21,6 +21,8 @@ namespace InfinitusApp.Core.Data.Commands
         public AddressComplex Address { get; set; }
 
         public LegalEntityInfo LegalEntityInfo { get; set; }
+
+        public string ContactName { get; set; }
     }
 
     public class CreateCustomerCommand : CustomerCommand
