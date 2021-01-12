@@ -908,7 +908,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     msg += "🙌 Desconto (" + toFinancialRequest.DiscountInRequest.DiscountInPercent + "% OFF) : -" + toFinancialRequest.Discount.ToString("C") + "\n";
 
                 else if(toFinancialRequest.DiscountInRequest.DiscountInMoney > 0)
-                    msg += "🙌 Desconto: ...... " + toFinancialRequest.Discount.ToString("C") + "\n";
+                    msg += "🙌 Desconto: ....... " + toFinancialRequest.Discount.ToString("C") + "\n";
 
             }
             if (!hide.Delivery)
