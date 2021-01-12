@@ -60,5 +60,27 @@ namespace InfinitusApp.Core.Data.DataModels
                 return string.IsNullOrEmpty(ErrorMsg);
             }
         }
+
+        public bool IsCNPJ 
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(IdentityDocument))
+                    return false;
+
+                return IdentityDocument.IsCNPJ();
+            }
+        }
+
+        public bool IsCPF
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(IdentityDocument))
+                    return false;
+
+                return IdentityDocument.IsCPF();
+            }
+        }
     }
 }
