@@ -17,7 +17,7 @@ namespace InfinitusApp.Services.SalesOrder
         {
         }
 
-        public async Task<IList<Customer>> GetAllByDataStoreId(Expression<Func<Customer, bool>> entityFilter = null, Expression<Func<Customer, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
+        public async Task<IList<Customer>> GetAllByDataStoreId(string entityFilter = null, Expression<Func<Customer, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false)
         {
             //var dic = new Dictionary<string, string>
             //{
@@ -36,8 +36,8 @@ namespace InfinitusApp.Services.SalesOrder
             if (skip.HasValue)
                 odataBuilder.Skip(skip.Value);
 
-            if (entityFilter != null)
-                odataBuilder.Filter(entityFilter);
+            //if (entityFilter != null)
+            //    odataBuilder.Filter(entityFilter);
 
             if (entityOrderBy != null)
             {
@@ -49,6 +49,9 @@ namespace InfinitusApp.Services.SalesOrder
             }
 
             var dic = odataBuilder.ToDictionary();
+
+            if (!string.IsNullOrEmpty(entityFilter))
+                dic.Add("$filter", entityFilter);
 
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<Customer>>("Customer/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
