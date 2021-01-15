@@ -80,8 +80,8 @@ namespace InfinitusApp.Services.FInancial
             if (!string.IsNullOrEmpty(trackingCode))
                 dic.Add("trackingCode", trackingCode);
 
-            if (createDate != null)
-                dic.Add("createDate", createDate.ToString());
+            if (createDate.HasValue)
+                dic.Add("createDate", createDate.Value.ToString());
 
             return await ServiceClient.InvokeApiAsync<List<FinancialRequest>>("FinancialRequest/GetAll", HttpMethod.Get, dic);
         }
