@@ -4,6 +4,7 @@ using InfinitusApp.Core.Extensions;
 using OData.QueryBuilder.Builders;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +58,8 @@ namespace InfinitusApp.Services.FInancial
                .OrderByDescending(x => x.CreatedAt)
                ;
 
+            var hasFilter = false;
+
             if (skip.HasValue)
                 odataBuilder.Skip(skip.Value);
 
@@ -64,12 +67,41 @@ namespace InfinitusApp.Services.FInancial
                 odataBuilder.Top(top.Value);
 
             if (entityFilter != null)
+            {
                 odataBuilder.Filter(entityFilter);
+
+                hasFilter = true;
+            }
 
             if (entityOrderBy != null)
                 odataBuilder.OrderBy(entityOrderBy);
 
             var dic = odataBuilder.ToDictionary();
+
+            if (!hasFilter)
+            {
+                var filter = string.Empty;
+
+                if (createDate.HasValue)
+                    filter = string.Format("month(CreatedAt) ge {0} and year(CreatedAt) ge {1} and day(CreatedAt) ge {2}", createDate.Value.Month, createDate.Value.Year, createDate.Value.Day);
+
+                if (!string.IsNullOrEmpty(filter))
+                    dic.Add("$filter", filter);
+            }
+
+            else
+            {
+                if (createDate.HasValue)
+                {
+                    var originalFilter = dic.FirstOrDefault(x => x.Key.Equals("$filter")).Value;
+
+                    dic.Remove("$filter");
+
+                    originalFilter += string.Format("and month(CreatedAt) ge {0} and year(CreatedAt) ge {1} and day(CreatedAt) ge {2}", createDate.Value.Month, createDate.Value.Year, createDate.Value.Day);
+
+                    dic.Add("$filter", originalFilter);
+                }
+            }
 
             if (!string.IsNullOrEmpty(customerEmail))
                 dic.Add("customerEmail", customerEmail);
@@ -80,8 +112,8 @@ namespace InfinitusApp.Services.FInancial
             if (!string.IsNullOrEmpty(trackingCode))
                 dic.Add("trackingCode", trackingCode);
 
-            if (createDate.HasValue)
-                dic.Add("createDate", createDate.Value.ToString());
+            //if (createDate.HasValue)
+            //    dic.Add("createDate", createDate.Value.ToString());
 
             return await ServiceClient.InvokeApiAsync<List<FinancialRequest>>("FinancialRequest/GetAll", HttpMethod.Get, dic);
         }
