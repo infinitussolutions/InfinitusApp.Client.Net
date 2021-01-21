@@ -98,6 +98,24 @@ namespace InfinitusApp.Core.Data.DataModels
 
     public static class AddressComplexExtensions
     {
+        public static Address ToAddress(this AddressComplex a)
+        {
+            return new Address
+            {
+                AddressLine1 = a.AddressLine1,
+                AddressLine2 = a.AddressLine2,
+                City = a.City,
+                Country = a.Country,
+                District = a.District,
+                Number = a.Number,
+                PostalCode = a.PostalCode,
+                StateProvince = a.StateProvince,
+                Location = a.Location,
+                Building = a.Building
+
+            };
+        }
+
         public static AddressModel ToAddressModel(this AddressComplex a)
         {
             return new AddressModel
