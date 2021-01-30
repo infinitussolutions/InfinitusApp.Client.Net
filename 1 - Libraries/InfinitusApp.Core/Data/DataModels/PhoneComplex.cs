@@ -23,7 +23,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     phone += string.Format("+{0}", IDD.Replace("+", ""));
 
                 if (!string.IsNullOrEmpty(DDD))
-                    phone += string.Format(" ({0})", DDD);
+                    phone += string.Format(" ({0})", DDD.Replace(" ", ""));
 
                 phone += string.Format(" {0}", PhoneNumber);
 

@@ -99,7 +99,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return string.Format("CEP: ", PostalCode);
+                return string.Format("CEP: {0}", PostalCode);
             }
         }
 
@@ -107,7 +107,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                var address = string.Format("Endereço: ", AddressLine1);
+                var address = string.Format("Endereço: {0}", AddressLine1);
 
                 if (!string.IsNullOrEmpty(Number))
                     address += string.Format(", {0}", Number);
@@ -120,7 +120,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return string.Format("Cidade: ", City);
+                return string.Format("Cidade: {0}", City);
             }
         }
 
@@ -128,7 +128,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return string.Format("UF: ", StateProvince);
+                return string.Format("UF: {0}", StateProvince);
             }
         }
     }

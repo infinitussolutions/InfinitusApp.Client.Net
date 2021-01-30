@@ -155,7 +155,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return string.Format("CEP: ", PostalCode);
+                return string.Format("CEP: {0}", PostalCode);
             } 
         }
 
@@ -163,7 +163,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return string.Format("Endereço: ", AddressAndNumber);
+                return string.Format("Endereço: {0}", AddressAndNumber);
             }
         }
 
@@ -171,7 +171,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return string.Format("Cidade: ", City);
+                return string.Format("Cidade: {0}", City);
             }
         }
 
@@ -179,7 +179,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return string.Format("UF: ", StateProvince);
+                return string.Format("UF: {0}", StateProvince);
             }
         }
         #endregion
