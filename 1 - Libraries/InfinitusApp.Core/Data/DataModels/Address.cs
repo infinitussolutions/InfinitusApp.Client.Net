@@ -151,8 +151,37 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        public string PostalCodePresentation 
+        {
+            get
+            {
+                return string.Format("CEP: ", PostalCode);
+            } 
+        }
 
+        public string AddressLinePresentation
+        {
+            get
+            {
+                return string.Format("Endereço: ", AddressAndNumber);
+            }
+        }
 
+        public string CityPresentation
+        {
+            get
+            {
+                return string.Format("Cidade: ", City);
+            }
+        }
+
+        public string StatePresentation
+        {
+            get
+            {
+                return string.Format("UF: ", StateProvince);
+            }
+        }
         #endregion
     }
 

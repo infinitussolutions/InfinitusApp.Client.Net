@@ -45,7 +45,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     errorMsg += "Email inválido\n";
 
                 if (!IdentityDocument.IsCPF() && !IdentityDocument.IsCNPJ())
-                    errorMsg += "Documento inválido\n";
+                    errorMsg += "CPF / CNPJ inválido\n";
 
                 if (Address == null || !Address.IsValid)
                     errorMsg += "Endereço inválido\n";
@@ -82,5 +82,31 @@ namespace InfinitusApp.Core.Data.DataModels
                 return IdentityDocument.IsCPF();
             }
         }
+
+        public string DocumentPresentation
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(IdentityDocument))
+                    return string.Format("Documento: Não informado");
+
+                var document = string.Format("Documento: {0}", IdentityDocument);
+
+                if (IsCNPJ && !string.IsNullOrEmpty(LegalEntityInfo?.StateRegistration))
+                    document += string.Format("\nInscrição: {0}", LegalEntityInfo.StateRegistration);
+
+                return document;
+            }
+        }
+
+        public string ContactPresentation 
+        {
+            get
+            {
+                return string.Format("Contato: {0}", ContactName);
+            }
+        }
+
+
     }
 }

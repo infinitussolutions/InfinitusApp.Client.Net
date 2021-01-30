@@ -17,12 +17,31 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (string.IsNullOrEmpty(PhoneNumber))
                     return "";
 
-                return string.Format("+{0} ({1}) {2}", IDD, DDD, PhoneNumber);
+                var phone = string.Empty;
+
+                if (!string.IsNullOrEmpty(IDD))
+                    phone += string.Format("+{0}", IDD.Replace("+", ""));
+
+                if (!string.IsNullOrEmpty(DDD))
+                    phone += string.Format(" ({0})", DDD);
+
+                phone += string.Format(" {0}", PhoneNumber);
+
+                return phone;
+               // return string.Format("+{0} ({1}) {2}", IDD, DDD, PhoneNumber);
             }
         }
 
         public string FullNumberToWhatsApp => (FullPhone.Contains("55") ? FullPhone : "55" + FullPhone).Replace(" ", "").Replace("+", "").Replace("-", "").Replace(".", "").Replace("(", "").Replace(")", "");
 
         public bool IsValid => !string.IsNullOrEmpty(DDD) && !string.IsNullOrEmpty(PhoneNumber);
+
+        public string PhonePresentation 
+        {
+            get
+            {
+                return string.Format("Fone: {0}", FullPhone);
+            }
+        }
     }
 }
