@@ -107,7 +107,12 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                return string.Format("Endereço: ", AddressAndNumber);
+                var address = string.Format("Endereço: ", AddressLine1);
+
+                if (!string.IsNullOrEmpty(Number))
+                    address += string.Format(", {0}", Number);
+
+                return address;
             }
         }
 
