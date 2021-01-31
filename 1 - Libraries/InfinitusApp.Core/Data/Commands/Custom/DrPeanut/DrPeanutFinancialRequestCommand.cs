@@ -5,7 +5,13 @@ using System.Text;
 
 namespace InfinitusApp.Core.Data.Commands.Custom.DrPeanut
 {
-    public class DrPeanutFinancialRequestCommand
+    public class DrPeanutCommand
+    {
+        [JsonProperty("token")]
+        public string Token { get; }
+    }
+
+    public class DrPeanutFinancialRequestCommand : DrPeanutCommand
     {
         [JsonProperty("numeroPedidoItSofitn")]
         public string FinancialRequestId { get; set; }
@@ -16,14 +22,7 @@ namespace InfinitusApp.Core.Data.Commands.Custom.DrPeanut
         [JsonProperty("condicaoPgto")]
         public string PaymentConditionId { get; set; }
 
-        [JsonProperty("token")]
-        public string Token
-        {
-            get
-            {
-                return "32e73011-0387-4dd2-ade1-fffb53cfa133";
-            }
-        }
+
     }
 
     public class DrPeanutReturnFinancialRequest
@@ -36,5 +35,16 @@ namespace InfinitusApp.Core.Data.Commands.Custom.DrPeanut
 
         [JsonProperty("isCondicaoValida")]
         public bool ValidPaymentCondition { get; set; }
+    }
+
+    public class DrPeanutCustomerCommand : DrPeanutCommand
+    {
+
+    }
+
+    public class DrPeanutCreateFinancialRequestCommand : DrPeanutCommand
+    {
+        [JsonProperty("numeroPedido")]
+        public string FinancialRequestId { get; set; }
     }
 }

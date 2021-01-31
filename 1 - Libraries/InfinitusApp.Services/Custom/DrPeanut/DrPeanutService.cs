@@ -16,5 +16,15 @@ namespace InfinitusApp.Services.Custom.DrPeanut
         {
             return await ServiceClient.InvokeApiAsync<DrPeanutFinancialRequestCommand, DrPeanutReturnFinancialRequest>("Custom/DrPeanut/DrPeanut/GetDiscount", cmd);
         }
+
+        public async Task<bool> CreateRequest(DrPeanutCreateFinancialRequestCommand cmd)
+        {
+            return await ServiceClient.InvokeApiAsync<DrPeanutCreateFinancialRequestCommand, bool>("Custom/DrPeanut/DrPeanut/CreateRequest", cmd);
+        }
+
+        public async Task<bool> CreateCustomer(DrPeanutCustomerCommand cmd)
+        {
+            return await ServiceClient.InvokeApiAsync<DrPeanutCustomerCommand, bool>("Custom/DrPeanut/DrPeanut/CreateCustomer", cmd);
+        }
     }
 }
