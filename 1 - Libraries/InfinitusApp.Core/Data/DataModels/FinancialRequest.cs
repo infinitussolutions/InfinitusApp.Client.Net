@@ -427,7 +427,24 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public int Number { get; set; }
 
-        public string LetterAndNumber => Letter + Number;
+        public string LetterAndNumber 
+        {
+            get
+            {
+                var msg = "";
+
+                if (string.IsNullOrEmpty(Letter) && Number.Equals(0))
+                    return msg;
+
+                if (!string.IsNullOrEmpty(Letter))
+                    msg += Letter.ToUpper();
+
+                if (Number > 0)
+                    msg += Number.ToString();
+
+                return msg;
+            }
+        }
 
         public string LetterAndNumberPresentation
         {
