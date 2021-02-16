@@ -89,6 +89,7 @@ namespace InfinitusApp.Core.Data.Commands
         public string Description { get; set; }
 
         public int Quantity { get; set; }
+        public string Unity { get; set; }
 
         public Price Price { get; set; }
 
@@ -124,6 +125,7 @@ namespace InfinitusApp.Core.Data.Commands
                 Description = x.Description,
                 Price = x.Price,
                 Quantity = x.Quantity,
+                Unity = x.Unity,
                 MediaImageData = x.MediaImageData,
                 FinancialRequestId = x.FinancialRequestId,
                 FromItem = x.FromItem,
@@ -150,6 +152,7 @@ namespace InfinitusApp.Core.Data.Commands
                 Description = x.Description,
                 Price = x.Price,
                 Quantity = x.Quantity,
+                Unity = x.Unity,
                 MediaImageData = x.MediaImageData,
                 Id = x.Id,
                 FinancialRequestId = x.FinancialRequestId,

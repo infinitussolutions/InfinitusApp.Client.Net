@@ -35,6 +35,9 @@ namespace InfinitusApp.Core.Data.Commands.Custom.DrPeanut
 
         [JsonProperty("isCondicaoValida")]
         public bool ValidPaymentCondition { get; set; }
+
+        [JsonProperty("msgRetorno")]
+        public string MsgError { get; set; }
     }
 
     public class DrPeanutCustomerCommand : DrPeanutCommand

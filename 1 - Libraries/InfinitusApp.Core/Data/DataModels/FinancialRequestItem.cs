@@ -25,6 +25,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public string Description { get; set; }
 
         public int Quantity { get; set; }
+        public string Unity { get; set; }
 
         public Price Price { get; set; }
 
@@ -180,6 +181,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     Type = FinancialRequestItemParentType.DataItem
                 },
                 Quantity = quantity,
+                Unity = dataItem.Product?.Unity,
                 Price = new Price
                 {
                     InitialPrice = dataItem.Price.FinalPrice ?? 0
@@ -202,6 +204,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     Type = FinancialRequestItemParentType.Variation
                 },
                 Quantity = quantity,
+                Unity = variation.DataItem?.Product?.Unity,
                 Price = new Price
                 {
                     InitialPrice = variation.Price.FinalPrice
@@ -227,6 +230,7 @@ namespace InfinitusApp.Core.Data.DataModels
                     Type = FinancialRequestItemParentType.Booking
                 },
                 Quantity = quantity,
+                Unity = booking.DataItem?.Product?.Unity,
                 Price = new Price
                 {
                     InitialPrice = booking.Price.FinalPrice
