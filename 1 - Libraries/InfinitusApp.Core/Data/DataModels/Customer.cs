@@ -90,12 +90,20 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (string.IsNullOrEmpty(IdentityDocument))
                     return string.Format("Documento: Não informado");
 
-                var document = string.Format("Documento: {0}", IdentityDocument);
-
-                if (IsCNPJ && !string.IsNullOrEmpty(LegalEntityInfo?.StateRegistration))
-                    document += string.Format("\nInscrição: {0}", LegalEntityInfo.StateRegistration);
+                var document = string.Format("Documento: {0}", IsCPF ? IdentityDocument.ToCPF() : IdentityDocument.ToCNPJ());
 
                 return document;
+            }
+        }
+
+        public string InscriptionPresentation
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(LegalEntityInfo.StateRegistration))
+                    return string.Format("Inscrição: Não informado");
+
+                return string.Format("Inscrição: {0}", LegalEntityInfo.StateRegistration);
             }
         }
 

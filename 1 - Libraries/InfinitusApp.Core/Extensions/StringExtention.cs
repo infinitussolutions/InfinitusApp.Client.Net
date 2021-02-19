@@ -247,5 +247,30 @@ namespace InfinitusApp.Core.Extensions
             int endIndex = text.IndexOf(endTag, startIndex);
             return text.Substring(startIndex, endIndex - startIndex);
         }
+
+        public static string ToCPF(this string cpf)
+        {
+            if (string.IsNullOrEmpty(cpf) || cpf.Contains(".") || cpf.Length != 11)
+                return cpf;
+
+            return cpf
+                .Insert(3, ".")
+                .Insert(7, ".")
+                .Insert(11, "-")
+                ;
+        }
+
+        public static string ToCNPJ(this string cnpj)
+        {
+            if (string.IsNullOrEmpty(cnpj) || cnpj.Contains(".") || cnpj.Length != 14)
+                return cnpj;
+
+            return cnpj
+                .Insert(2, ".")
+                .Insert(6, ".")
+                .Insert(10, "/")
+                .Insert(15, "-")
+                ;
+        }
     }
 }
