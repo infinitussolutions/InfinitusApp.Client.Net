@@ -49,7 +49,7 @@ namespace InfinitusApp.Services.SalesOrder
                 dic.Add("$filter", entityFilter);
 
             if(!string.IsNullOrEmpty(orderBy) && entityOrderBy == null)
-                dic.Add("$orderby", entityFilter);
+                dic.Add("$orderby", orderBy);
 
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<Customer>>("Customer/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
