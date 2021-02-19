@@ -69,7 +69,7 @@ namespace InfinitusApp.Core.Data.Util
             return 
                 state.Equals(Abbreviation.ToUpper()) 
                 || state.Equals(FullName.ToUpper()) 
-                || state.Equals(FullNameWithoutAccent.ToUpper())
+                || state.Equals(FullNameWithoutAccent?.ToUpper())
                 ;
         }
     }
