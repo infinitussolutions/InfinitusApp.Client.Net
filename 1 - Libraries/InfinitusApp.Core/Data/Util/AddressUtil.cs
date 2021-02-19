@@ -64,7 +64,7 @@ namespace InfinitusApp.Core.Data.Util
             if (string.IsNullOrEmpty(state))
                 return false;
 
-            state = state.Replace(" ", "").ToUpper();
+            state = state.ToUpper();
 
             return 
                 state.Equals(Abbreviation.ToUpper()) 
