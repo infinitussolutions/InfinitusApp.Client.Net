@@ -23,7 +23,7 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         public string Description { get; set; }
-
+        public string SubTitle { get; set; }
         public int Quantity { get; set; }
         public string Unity { get; set; }
 
@@ -159,6 +159,14 @@ namespace InfinitusApp.Core.Data.DataModels
 
         //    return list;
         //}
+
+        public string TitleWithSubTitle 
+        {
+            get
+            {
+                return string.IsNullOrEmpty(SubTitle) ? Description : string.Format("{0}({1})", Description, SubTitle);
+            }
+        }
         #endregion
     }
 
@@ -182,6 +190,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 },
                 Quantity = quantity,
                 Unity = dataItem.Product?.Unity,
+                SubTitle = dataItem.Description.SubTitle,
                 Price = new Price
                 {
                     InitialPrice = dataItem.Price.FinalPrice ?? 0
@@ -205,6 +214,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 },
                 Quantity = quantity,
                 Unity = variation.DataItem?.Product?.Unity,
+                SubTitle = variation.DataItem?.Description?.SubTitle,
                 Price = new Price
                 {
                     InitialPrice = variation.Price.FinalPrice
@@ -231,6 +241,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 },
                 Quantity = quantity,
                 Unity = booking.DataItem?.Product?.Unity,
+                SubTitle = booking.DataItem?.Description?.SubTitle,
                 Price = new Price
                 {
                     InitialPrice = booking.Price.FinalPrice

@@ -87,7 +87,7 @@ namespace InfinitusApp.Core.Data.Commands
         }
 
         public string Description { get; set; }
-
+        public string SubTitle { get; set; }
         public int Quantity { get; set; }
         public string Unity { get; set; }
 
@@ -131,7 +131,8 @@ namespace InfinitusApp.Core.Data.Commands
                 FromItem = x.FromItem,
                 //VariationId = x.VariationId,
                 Deleted = x.Deleted,
-                ExternalCode = x.ExternalCode
+                ExternalCode = x.ExternalCode,
+                SubTitle = x.SubTitle
             }).ToList();
 
             return objReturn;
@@ -158,7 +159,8 @@ namespace InfinitusApp.Core.Data.Commands
                 FinancialRequestId = x.FinancialRequestId,
                 //VariationId = x.VariationId,
                 Deleted = x.Deleted,
-                ExternalCode = x.ExternalCode
+                ExternalCode = x.ExternalCode,
+                SubTitle = x.SubTitle
             }).ToList();
 
             return objReturn;
