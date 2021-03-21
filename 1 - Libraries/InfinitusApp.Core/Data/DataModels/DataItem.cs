@@ -207,7 +207,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public virtual IList<ComboItem> Comboitems { get; set; }
 
         [JsonIgnore]
-        public string WebAdminUri => string.IsNullOrEmpty(Id) ? "http://ec2-18-222-239-212.us-east-2.compute.amazonaws.com/#/order/" : string.Format("http://ec2-18-222-239-212.us-east-2.compute.amazonaws.com/#/order/{0}", Id);
+        public string WebAdminUri => string.IsNullOrEmpty(Id) ? "http://pluzapp-web.s3-website.us-east-2.amazonaws.com/#/order/" : string.Format("http://pluzapp-web.s3-website.us-east-2.amazonaws.com/#/order/{0}", Id);
 
         #region Helpers Props
 
