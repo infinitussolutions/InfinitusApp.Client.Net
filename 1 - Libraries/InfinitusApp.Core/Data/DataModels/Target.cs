@@ -190,11 +190,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public TargetFilterOption AllowDelivery { get; set; }
 
-        public TargetFilterOption UseProduct { get; set; }
-
-        public TargetFilterOption UseService { get; set; }
-
-        public TargetFilterOption UseFood { get; set; }
+        public string CompanyMainItemType { get; set; }
     }
 
     public enum NavigationType

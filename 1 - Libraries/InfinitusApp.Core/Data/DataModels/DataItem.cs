@@ -1061,6 +1061,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Restriction = new DataItemCompanyInfoRestriction();
         }
 
+        public string MainItemType { get; set; }
         public string VideoUri { get; set; }
 
         public string WebSiteUri { get; set; }
