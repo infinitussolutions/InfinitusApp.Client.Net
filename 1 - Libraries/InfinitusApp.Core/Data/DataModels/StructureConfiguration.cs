@@ -50,6 +50,10 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string Presentation { get; set; }
 
+        public string IconColor { get; set; }
+
+        public string BackgroundColor { get; set; }
+
         #region Relations
 
         public Application Application { get; set; }
