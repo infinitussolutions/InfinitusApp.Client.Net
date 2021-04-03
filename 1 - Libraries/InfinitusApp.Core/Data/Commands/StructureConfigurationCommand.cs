@@ -26,9 +26,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public string Presentation { get; set; }
 
-        public string IconColor { get; set; }
+        public StructureConfigurationStyle Style { get; set; }
 
-        public string BackgroundColor { get; set; }
     }
 
     public class CreateStructureConfigurationCommand : StructureConfigurationCommand

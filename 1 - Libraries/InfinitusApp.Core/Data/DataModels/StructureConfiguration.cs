@@ -15,6 +15,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Target = new Target();
             TargetGroups = new List<ApplicationUserGroup>();
             TermsOfUse = new TermsOfUse();
+            Style = new StructureConfigurationStyle();
         }
 
         public StructureConfiguration(StructureConfiguration structure)
@@ -29,7 +30,7 @@ namespace InfinitusApp.Core.Data.DataModels
             TermsOfUse = structure.TermsOfUse;
             Title = structure.Title;
             Icon = new FontIcon(structure.Icon);
-            
+            Style = new StructureConfigurationStyle();
         }
 
         public string Title { get; set; }
@@ -50,9 +51,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string Presentation { get; set; }
 
-        public string IconColor { get; set; }
-
-        public string BackgroundColor { get; set; }
+        public StructureConfigurationStyle Style { get; set; }
 
         #region Relations
 
@@ -175,5 +174,29 @@ namespace InfinitusApp.Core.Data.DataModels
     public class MenuBottomConfiguration : MenuConfigurationBase
     {
 
+    }
+
+    public class StructureConfigurationStyle
+    {
+        public StructureConfigurationStyle()
+        {
+            LightColors = new StructureConfigurationColors();
+            DarkColors = new StructureConfigurationColors();
+        }
+
+        public StructureConfigurationColors LightColors { get; set; }
+        public StructureConfigurationColors DarkColors { get; set; }
+
+        public StructureConfigurationColors GetCurrentColors(bool isDark)
+        {
+            return isDark ? DarkColors : LightColors;
+        }
+    }
+
+    public class StructureConfigurationColors
+    {
+        public string IconColor { get; set; }
+        public string BackgroundColor { get; set; }
+        public string TextColor { get; set; }
     }
 }
