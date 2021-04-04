@@ -198,5 +198,29 @@ namespace InfinitusApp.Core.Data.DataModels
         public string IconColor { get; set; }
         public string BackgroundColor { get; set; }
         public string TextColor { get; set; }
+
+        public bool HasBackgroundColor
+        {
+            get
+            {
+                return BackgroundColor != null && !BackgroundColor.Equals("#00000000");
+            }
+        }
+
+        public bool HasIconColor
+        {
+            get
+            {
+                return IconColor != null && !IconColor.Equals("#00000000");
+            }
+        }
+
+        public bool HasTextColor
+        {
+            get
+            {
+                return TextColor != null && !TextColor.Equals("#00000000");
+            }
+        }
     }
 }
