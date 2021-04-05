@@ -131,25 +131,14 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             ColorScheme = new MaterialDesign.ColorScheme();
             Font = new FontInfo();
+            StructureConfigurationStyle = new StructureConfigurationStyle();
         }
 
         public MaterialDesign.ColorScheme ColorScheme { get; set; }
 
         public FontInfo Font { get; set; }
-        ////[Obsolete("Use material design color scheme")]
-        //public string Color1 { get; set; }
 
-        ////[Obsolete("Use material design color scheme")]
-        //public string Color2 { get; set; }
-
-        ////[Obsolete("Use material design color scheme")]
-        //public string Color3 { get; set; }
-
-        ////[Obsolete("Use material design color scheme")]
-        //public string Color4 { get; set; }
-
-        ////[Obsolete("Use material design color scheme")]
-        //public string Color5 { get; set; }
+        public StructureConfigurationStyle StructureConfigurationStyle { get; set; }
     }
 
     public class ApplicationSettings
