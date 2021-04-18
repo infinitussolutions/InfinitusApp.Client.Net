@@ -193,6 +193,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public int MaxDistance { get; set; }
         public List<string> GroupsIdsToNotify { get; set; }
         public string CustomTag { get; set; }
+        public bool SendEmailToNewDataitems { get; set; }
 
         [JsonIgnore]
         public bool NotifyUsingLocation
