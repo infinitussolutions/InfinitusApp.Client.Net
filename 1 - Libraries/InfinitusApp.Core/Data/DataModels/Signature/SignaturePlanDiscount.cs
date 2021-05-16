@@ -50,6 +50,17 @@ namespace InfinitusApp.Core.Data.DataModels.Signature
             }
         }
 
+        public bool IsValid 
+        {
+            get
+            {
+                if (Discount <= 0 || ValidUntil < DateTimeOffset.Now)
+                    return false;
+
+                return true;
+            } 
+        }
+
         #endregion
 
         public enum SignaturePlanDiscountType
