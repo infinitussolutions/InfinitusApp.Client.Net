@@ -8,6 +8,12 @@ namespace InfinitusApp.Core.Data.Commands
 {
     public class TagCommand
     {
+        public TagCommand()
+        {
+            Presentation = new TagPresentation();
+            FinancialRequestOption = new TagFinancialRequestOption();
+            NavigationOption = new TagNavigationOption();
+        }
         public TagPresentation Presentation { get; set; }
 
         public IList<string> DataItemIds { get; set; }
