@@ -910,6 +910,15 @@ namespace InfinitusApp.Core.Data.DataModels
         [JsonIgnore]
         public string AbbreviateMonth => (EventDateTime.HasValue ? DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(EventDateTime.Value.Month) : "DDD")?.ToUpper() ?? "";
 
+        [JsonIgnore]
+        public string DatePresentation => EventDateTime.HasValue ? EventDateTime.Value.ToString("dd/MM/yyyy") : "";
+
+        [JsonIgnore]
+        public string TimePresentation => EventDateTime.HasValue ? EventDateTime.Value.ToString("HH:mm:ss") : "";
+
+        [JsonIgnore]
+        public string DateAndTimePresentation => DatePresentation + " " + TimePresentation;
+
         #endregion
     }
 
