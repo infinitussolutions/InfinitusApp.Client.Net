@@ -63,6 +63,7 @@ namespace InfinitusApp.Core.Data.DataModels
             Booking = new DataItemBooking();
             Combos = new List<Combo>();
             Comboitems = new List<ComboItem>();
+            DataItemRelations = new List<DataItemRelation>();
         }
 
         public string Referency { get; set; }
@@ -205,6 +206,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public virtual IList<Combo> Combos { get; set; }
 
         public virtual IList<ComboItem> Comboitems { get; set; }
+
+        public virtual IList<DataItemRelation> DataItemRelations { get; set; }
 
         [JsonIgnore]
         public string WebAdminUri => string.IsNullOrEmpty(Id) ? "http://pluzapp-web.s3-website.us-east-2.amazonaws.com/#/order/" : string.Format("http://pluzapp-web.s3-website.us-east-2.amazonaws.com/#/order/{0}", Id);
