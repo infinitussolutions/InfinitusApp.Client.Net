@@ -30,6 +30,10 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string DataStoreId { get; set; }
 
+        public CustomerType CustomerType { get; set; }
+
+        public string CustomerTypeId { get; set; }
+
         #endregion Relations
 
         public string ErrorMsg 
@@ -115,6 +119,11 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
-
+        public enum CustomerFinancialStatus
+        {
+            Unknown = -1,
+            Ok = 1,
+            NotOk = 2
+        }
     }
 }

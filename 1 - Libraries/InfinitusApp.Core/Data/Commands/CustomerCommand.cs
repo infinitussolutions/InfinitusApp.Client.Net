@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static InfinitusApp.Core.Data.DataModels.Customer;
 
 namespace InfinitusApp.Core.Data.Commands
 {
@@ -23,6 +24,10 @@ namespace InfinitusApp.Core.Data.Commands
         public LegalEntityInfo LegalEntityInfo { get; set; }
 
         public string ContactName { get; set; }
+
+        public string CustomerTypeId { get; set; }
+
+        public CustomerFinancialStatus FinancialStatus { get; set; }
     }
 
     public class CreateCustomerCommand : CustomerCommand
