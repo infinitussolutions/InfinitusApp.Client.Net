@@ -26,6 +26,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string ContactName { get; set; }
 
+        public CustomerFinancialStatus FinancialStatus { get; set; }
+
         #region Relations
 
         public string DataStoreId { get; set; }
