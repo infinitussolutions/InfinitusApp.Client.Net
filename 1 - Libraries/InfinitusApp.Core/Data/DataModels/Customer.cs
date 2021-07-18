@@ -123,9 +123,9 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public enum CustomerFinancialStatus
         {
-            Unknown = -1,
-            Ok = 1,
-            NotOk = 2
+            Unknown,
+            Ok,
+            NotOk
         }
     }
 }
