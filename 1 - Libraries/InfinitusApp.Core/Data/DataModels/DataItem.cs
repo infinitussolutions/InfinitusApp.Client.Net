@@ -1217,7 +1217,9 @@ namespace InfinitusApp.Core.Data.DataModels
             Person,
             PropertyTenancy,
             Eat,
-            Inscription
+            Inscription,
+            City,
+            Local
         }
 
         public static DataItemPreDefinedTypes GetDataItemTypeByDataItem(this DataItem dtItem)
