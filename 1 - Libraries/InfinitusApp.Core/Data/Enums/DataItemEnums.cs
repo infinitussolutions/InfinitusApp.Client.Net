@@ -28,7 +28,9 @@ namespace InfinitusApp.Core.Data.Enums
             PropertyTenancy,
             Inscription,
             Eat,
-            Additional
+            Additional,
+            City,
+            Local
         };
 
         public static string ToPresentation(this DataItemType dataItemType, bool plural = false)
@@ -75,6 +77,10 @@ namespace InfinitusApp.Core.Data.Enums
                     return plural ? "Inscrições" : "Inscrição";
                 case DataItemType.Additional:
                     return plural ? "Adicionais" : "Adicional";
+                case DataItemType.City:
+                    return plural ? "Cidades" : "Cidade";
+                case DataItemType.Local:
+                    return plural ? "Locais" : "Local";
                 default:
                     return "Não Encontrado";
             }
@@ -124,6 +130,10 @@ namespace InfinitusApp.Core.Data.Enums
                     return plural ? "Inscrições" : "Inscrição";
                 case "Additional":
                     return plural ? "Adicionais" : "Adicional";
+                case "City":
+                    return plural ? "Cidades" : "Cidade";
+                case "Local":
+                    return plural ? "Locais" : "Local";
                 default:
                     return "Não Encontrado";
             }
@@ -169,6 +179,10 @@ namespace InfinitusApp.Core.Data.Enums
                     return "\uf573";
                 case DataItemType.Additional:
                     return "\uf217";
+                case DataItemType.City:
+                    return "\uf64f";
+                case DataItemType.Local:
+                    return "\uf57d";
 
                 case DataItemType.NotFound:
                 default:
