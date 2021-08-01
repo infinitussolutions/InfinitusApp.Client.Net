@@ -626,7 +626,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public bool ShowTakeAway => DeliveryInfo.InHands && (Type == DataItemType.Company.ToString() || Type == DataItemType.Product.ToString() || Type == DataItemType.Book.ToString() || Type == DataItemType.Eat.ToString() || Type == DataItemType.Vehicle.ToString());
 
         [JsonIgnore]
-        public bool HasDeliveyMethod 
+        public bool HasDeliveyMethod
         {
             get
             {
@@ -914,13 +914,28 @@ namespace InfinitusApp.Core.Data.DataModels
         public string AbbreviateMonth => (EventDateTime.HasValue ? DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(EventDateTime.Value.Month) : "DDD")?.ToUpper() ?? "";
 
         [JsonIgnore]
-        public string DatePresentation => EventDateTime.HasValue ? EventDateTime.Value.ToString("dd/MM/yyyy") : "";
+        public string StartDatePresentation => EventDateTime.HasValue ? EventDateTime.Value.ToString("dd/MM/yyyy") : "";
 
         [JsonIgnore]
-        public string TimePresentation => EventDateTime.HasValue ? EventDateTime.Value.ToString("HH:mm:ss") : "";
+        public string StartTimePresentation => EventDateTime.HasValue ? EventDateTime.Value.ToString("HH:mm:ss") : "";
 
         [JsonIgnore]
-        public string DateAndTimePresentation => DatePresentation + " " + TimePresentation;
+        public string EndDatePresentation => EventEndDateTime.HasValue ? EventEndDateTime.Value.ToString("dd/MM/yyyy") : "";
+
+        [JsonIgnore]
+        public string EndTimePresentation => EventEndDateTime.HasValue ? EventEndDateTime.Value.ToString("HH:mm:ss") : "";
+
+        [JsonIgnore]
+        public string StartDateAndTimePresentation => StartDatePresentation + " " + StartTimePresentation;
+
+        [JsonIgnore]
+        public string EndDateAndTimePresentation => EndDatePresentation + " " + EndTimePresentation;
+
+        [JsonIgnore]
+        public string StartAndEndDatePresentation => StartDatePresentation + (!string.IsNullOrEmpty(EndDatePresentation) ? " a " + EndDatePresentation : "");
+
+        [JsonIgnore]
+        public string StartAndEndTimePresentation => StartTimePresentation + (!string.IsNullOrEmpty(EndTimePresentation) ? " ás " + EndTimePresentation : "");
 
         #endregion
     }
