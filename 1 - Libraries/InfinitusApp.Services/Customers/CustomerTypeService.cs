@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InfinitusApp.Services.Customer
+namespace InfinitusApp.Services.Customers
 {
     public class CustomerTypeService : ServiceBase
     {
