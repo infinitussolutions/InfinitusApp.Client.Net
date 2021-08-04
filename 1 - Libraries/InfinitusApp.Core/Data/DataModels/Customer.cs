@@ -121,6 +121,14 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        public string CustomerTypePresentation 
+        {
+            get
+            {
+                return string.Format("Tipo Fiscal: {0}", string.IsNullOrWhiteSpace(CustomerType?.Description) ? "Não informado" : CustomerType.Description);
+            }
+        }
+
         public enum CustomerFinancialStatus
         {
             Unknown,
