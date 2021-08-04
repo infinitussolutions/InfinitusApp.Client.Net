@@ -18,5 +18,13 @@ namespace InfinitusApp.Core.Data.DataModels
         public IList<Customer> Customers { get; set; }
 
         public string DataStoreId { get; set; }
+
+        public string DescriptionPresentation 
+        {
+            get
+            {
+                return string.Format("Tipo Fiscal: {0}", string.IsNullOrWhiteSpace(Description) ? "Não informado" : Description);
+            }
+        }
     }
 }
