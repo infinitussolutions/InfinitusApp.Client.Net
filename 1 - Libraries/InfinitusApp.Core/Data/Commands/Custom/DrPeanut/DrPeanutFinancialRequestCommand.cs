@@ -22,6 +22,8 @@ namespace InfinitusApp.Core.Data.Commands.Custom.DrPeanut
         [JsonProperty("condicaoPgto")]
         public string PaymentConditionId { get; set; }
 
+        [JsonProperty("cpfCnpj ")]
+        public string CustomerDocumentNumber { get; set; }
 
     }
 

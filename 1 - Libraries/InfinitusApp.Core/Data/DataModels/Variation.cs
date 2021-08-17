@@ -18,6 +18,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public bool DefaultInfinitus { get; set; }
 
+        public string DataItemType { get; set; }
+
         #region Relations
 
         public DataStore DataStore { get; set; }

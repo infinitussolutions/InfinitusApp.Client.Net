@@ -10,6 +10,8 @@ namespace InfinitusApp.Core.Data.Commands
     public class VariationGridCommand
     {
         public string Title { get; set; }
+
+        public string DataItemType { get; set; }
     }
 
     public class VariationGridCreateCommand : VariationGridCommand
