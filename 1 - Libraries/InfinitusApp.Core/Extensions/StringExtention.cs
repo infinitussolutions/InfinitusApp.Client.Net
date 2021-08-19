@@ -272,5 +272,16 @@ namespace InfinitusApp.Core.Extensions
                 .Insert(15, "-")
                 ;
         }
+
+        public static string ToCEP(this string postalCode)
+        {
+            if (string.IsNullOrWhiteSpace(postalCode) || postalCode.Contains(".") || postalCode.Length != 8)
+                return postalCode;
+
+            return postalCode
+                .Insert(2, ".")
+                .Insert(6, "-")
+                ;
+        }
     }
 }

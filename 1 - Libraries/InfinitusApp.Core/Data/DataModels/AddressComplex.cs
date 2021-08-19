@@ -43,14 +43,12 @@ namespace InfinitusApp.Core.Data.DataModels
             {
                 return string.Format("{0}, {1} - {2}, {3} - {4} ({5})",
                     AddressLine1, 
-                    Number,
+                    NumberWithComplement,
                     District,
                     City,
                     StateProvince,
-                    PostalCode
+                    PostalCode?.ToCEP()
                     );
-
-               // return AddressLine1 + ", " + Number + " - " + Building + " " + City + "-" + StateProvince;
             }
         }
 
@@ -129,6 +127,20 @@ namespace InfinitusApp.Core.Data.DataModels
             get
             {
                 return string.Format("UF: {0}", StateProvince);
+            }
+        }
+
+        public string NumberWithComplement
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Number))
+                    return AddressLine2;
+
+                if (string.IsNullOrWhiteSpace(AddressLine2))
+                    return Number;
+
+                return string.Format("{0}, {1}", Number, AddressLine2);
             }
         }
     }
