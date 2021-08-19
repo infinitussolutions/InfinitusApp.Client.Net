@@ -134,8 +134,11 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(Number))
-                    return AddressLine2;
+                if (string.IsNullOrWhiteSpace(Number) && string.IsNullOrWhiteSpace(AddressLine2))
+                    return string.Format("S/N");
+
+                if(string.IsNullOrWhiteSpace(Number))
+                    return string.Format("S/N, {0}", AddressLine2);
 
                 if (string.IsNullOrWhiteSpace(AddressLine2))
                     return Number;
