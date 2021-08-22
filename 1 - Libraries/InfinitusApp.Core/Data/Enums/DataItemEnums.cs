@@ -30,7 +30,9 @@ namespace InfinitusApp.Core.Data.Enums
             Eat,
             Additional,
             City,
-            Local
+            Local,
+            Hotel,
+            Bedroom
         };
 
         public static string ToPresentation(this DataItemType dataItemType, bool plural = false)
