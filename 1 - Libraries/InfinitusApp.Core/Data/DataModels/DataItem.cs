@@ -64,6 +64,8 @@ namespace InfinitusApp.Core.Data.DataModels
             Combos = new List<Combo>();
             Comboitems = new List<ComboItem>();
             DataItemRelations = new List<DataItemRelation>();
+            Hotel = new DataItemHotelInfo();
+            Bedroom = new DataItemBedroomInfo();
         }
 
         public string Referency { get; set; }
@@ -203,6 +205,10 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public DataItemBooking Booking { get; set; }
 
+        public DataItemHotelInfo Hotel { get; set; }
+
+        public DataItemBedroomInfo Bedroom { get; set; }
+
         public virtual IList<Combo> Combos { get; set; }
 
         public virtual IList<ComboItem> Comboitems { get; set; }
@@ -335,6 +341,11 @@ namespace InfinitusApp.Core.Data.DataModels
 
         [JsonIgnore]
         public bool IsPet => HasType && Type.ToLower().Equals("pet");
+
+        [JsonIgnore]
+        public bool IsHotel =>  HasType && Type.ToLower().Equals("hotel");
+        [JsonIgnore]
+        public bool IsBedroom =>  HasType && Type.ToLower().Equals("bedroom");
 
         [JsonIgnore]
         public bool IsCompanyOrDepartment => IsCompany || IsDepartment;
@@ -1234,7 +1245,9 @@ namespace InfinitusApp.Core.Data.DataModels
             Eat,
             Inscription,
             City,
-            Local
+            Local,
+            Hotel,
+            Bedroom
         }
 
         public static DataItemPreDefinedTypes GetDataItemTypeByDataItem(this DataItem dtItem)
@@ -1255,6 +1268,9 @@ namespace InfinitusApp.Core.Data.DataModels
                 case "PropertyTenancy": return DataItemPreDefinedTypes.PropertyTenancy;
                 case "Eat": return DataItemPreDefinedTypes.Eat;
                 case "Inscription": return DataItemPreDefinedTypes.Inscription;
+                case "Local": return DataItemPreDefinedTypes.Local;
+                case "Hotel": return DataItemPreDefinedTypes.Hotel;
+                case "Bedroom": return DataItemPreDefinedTypes.Bedroom;
 
                 default: return DataItemPreDefinedTypes.Generic;
             }
@@ -1953,5 +1969,21 @@ namespace InfinitusApp.Core.Data.DataModels
     public class DataItemBookingConfiguration
     {
         public int MaxPeople { get; set; }
+    }
+
+    public class DataItemHotelInfo
+    {
+        public int MyProperty { get; set; }
+    }
+
+    public class DataItemBedroomInfo
+    {
+        public DataItemBedroomInfo()
+        {
+            Capacity = new CapacityInfo();
+        }
+
+        public CapacityInfo Capacity { get; set; }
+
     }
 }

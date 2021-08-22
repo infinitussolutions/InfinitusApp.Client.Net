@@ -88,5 +88,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public const string Variation = "9D4C1236-F2FF-4E05-A74B-D9E39169A7AC";
         public const string Tag = "3B04196C-1320-4DED-800E-43C844DFACD4";
         public const string Group = "9FEBF541-F6FE-482B-BB28-F0B3FA7C5D74";
+        public const string IdentifierHotel = "9263CAB2-B119-4BC8-A775-FDC91DFF411F";
+        public const string IdentifierBedroom = "A0FB98EE-FA10-462A-AA31-A56629E10F23";
     }
 }

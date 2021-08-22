@@ -49,6 +49,10 @@ namespace InfinitusApp.Core.Data.Commands
         public string SubGroupTypeId { get; set; }
 
         public string BookingConfigurationId { get; set; }
+
+        public DataItemHotelInfo Hotel { get; set; }
+
+        public DataItemBedroomInfo Bedroom { get; set; }
     }
 
     public class CreateDataItemCommand : DataItemCommand
