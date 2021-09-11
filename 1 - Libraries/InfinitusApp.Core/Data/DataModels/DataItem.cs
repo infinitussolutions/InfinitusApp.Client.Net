@@ -70,15 +70,6 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string Referency { get; set; }
 
-        [Obsolete("Use Visibility.Visible", true)]
-        public bool Visible { get; set; }
-
-        [Obsolete("Use Visibility.PausedByUser", true)]
-        public bool Paused { get; set; }
-
-        [Obsolete("Use Visibility.ShowInFeed", true)]
-        public bool ShowInFeed { get; set; }
-
         public string Type { get; set; }
 
         public string ExternalReference { get; set; }
@@ -1004,6 +995,17 @@ namespace InfinitusApp.Core.Data.DataModels
         public DateTimeOffset FinalDateTime { get; set; }
 
         public string Motive { get; set; }
+    }
+
+    public class DataItemFacilitiesHotel
+    {
+        public string IconOne { get; set; }
+
+        public string IconTwo { get; set; }
+
+        public string IconThree { get; set; }
+
+        public string IconFour { get; set; }
     }
 
     public class CapacityInfo
@@ -1974,6 +1976,9 @@ namespace InfinitusApp.Core.Data.DataModels
     public class DataItemHotelInfo
     {
         public int MyProperty { get; set; }
+
+        [JsonIgnore]
+        public DataItemFacilitiesHotel Facilities { get; set; }
     }
 
     public class DataItemBedroomInfo
