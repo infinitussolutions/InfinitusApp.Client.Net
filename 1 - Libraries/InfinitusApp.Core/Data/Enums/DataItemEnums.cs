@@ -83,6 +83,10 @@ namespace InfinitusApp.Core.Data.Enums
                     return plural ? "Cidades" : "Cidade";
                 case DataItemType.Local:
                     return plural ? "Locais" : "Local";
+                case DataItemType.Hotel:
+                    return plural ? "Hoteis" : "Hotel";
+                case DataItemType.Bedroom:
+                    return plural ? "Quartos" : "Quarto";
                 default:
                     return "Não Encontrado";
             }
@@ -136,6 +140,10 @@ namespace InfinitusApp.Core.Data.Enums
                     return plural ? "Cidades" : "Cidade";
                 case "Local":
                     return plural ? "Locais" : "Local";
+                case "Hotel":
+                    return plural ? "Hoteis" : "Hotel";
+                case "Bedroom":
+                    return plural ? "Quartos" : "Quarto";
                 default:
                     return "Não Encontrado";
             }
