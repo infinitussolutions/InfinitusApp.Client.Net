@@ -14,6 +14,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public ExternalReferenceType ExternalType { get; set; }
 
         public string ReferenceId { get; set; }
+
+        public string PaymentUrl { get; set; }
     }
 
     public enum ExternalReferenceType
