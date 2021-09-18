@@ -53,6 +53,8 @@ namespace InfinitusApp.Core.Data.Commands
         public DataItemHotelInfo Hotel { get; set; }
 
         public DataItemBedroomInfo Bedroom { get; set; }
+
+        public DataItemEventInfo Event { get; set; }
     }
 
     public class CreateDataItemCommand : DataItemCommand
