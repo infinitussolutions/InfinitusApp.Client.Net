@@ -1,4 +1,5 @@
-﻿using InfinitusApp.Core.Data.DataModels;
+﻿using InfinitusApp.Core.Data.Commands;
+using InfinitusApp.Core.Data.DataModels;
 using InfinitusApp.Core.Extensions;
 using OData.QueryBuilder.Builders;
 using System;
@@ -13,6 +14,16 @@ namespace InfinitusApp.Services.Tags
     {
         public TagDataItemRelationService(InfinitusAppServiceClient _serviceClient) : base(_serviceClient)
         {
+        }
+
+        public async Task<TagDataItemRelation> Create(TagDataItemRelationCreateCommand cmd)
+        {
+            return await ServiceClient.InvokeApiAsync<TagDataItemRelationCreateCommand, TagDataItemRelation>(nameof(TagDataItemRelation) +  "/Create", cmd, HttpMethod.Post, null);
+        }
+
+        public async Task<TagDataItemRelation> Update(TagDataItemRelationUpdateCommand cmd)
+        {
+            return await ServiceClient.InvokeApiAsync<TagDataItemRelationUpdateCommand, TagDataItemRelation>(nameof(TagDataItemRelation) + "/Update", cmd, HttpMethod.Patch, null);
         }
 
         public async Task<TagDataItemRelation> GetById(string id)
