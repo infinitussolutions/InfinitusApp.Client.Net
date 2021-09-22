@@ -209,6 +209,9 @@ namespace InfinitusApp.Core.Data.DataModels
         [JsonIgnore]
         public string WebAdminUri => string.IsNullOrEmpty(Id) ? "http://pluzapp-web.s3-website.us-east-2.amazonaws.com/#/order/" : string.Format("http://pluzapp-web.s3-website.us-east-2.amazonaws.com/#/order/{0}", Id);
 
+        [JsonIgnore]
+        public bool IsSelected { get; set; }
+
         #region Helpers Props
 
         public DataItemHelper Helper { get; set; }
