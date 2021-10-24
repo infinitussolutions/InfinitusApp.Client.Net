@@ -39,11 +39,20 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             Notification = new NotifyActionStatusFinancialRequest();
             User = new UserStatusFinancialRequest();
+            Invoice = new StatusInvoiceAction();
         }
 
         public NotifyActionStatusFinancialRequest Notification { get; set; }
 
         public UserStatusFinancialRequest User { get; set; }
+
+        public StatusInvoiceAction Invoice { get; set; }
+    }
+
+    public class StatusInvoiceAction
+    {
+        public bool ChangeStatus { get; set; }
+        public InvoiceInstallmentmentStatus Status { get; set; }
     }
 
     public class NotifyActionStatusFinancialRequest
