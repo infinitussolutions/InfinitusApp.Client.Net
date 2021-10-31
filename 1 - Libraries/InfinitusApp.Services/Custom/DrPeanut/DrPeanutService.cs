@@ -26,5 +26,10 @@ namespace InfinitusApp.Services.Custom.DrPeanut
         {
             return await ServiceClient.InvokeApiAsync<DrPeanutCustomerCommand, bool>("Custom/DrPeanut/DrPeanut/CreateCustomer", cmd);
         }
+
+        public async Task<DrPeanutGetDiscountResponse> GetDiscountRange(DrPeanutGetDiscountCommand cmd)
+        {
+            return await ServiceClient.InvokeApiAsync<DrPeanutGetDiscountCommand, DrPeanutGetDiscountResponse>("Custom/DrPeanut/DrPeanut/GetDiscountRange", cmd);
+        }
     }
 }

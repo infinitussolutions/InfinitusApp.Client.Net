@@ -52,4 +52,40 @@ namespace InfinitusApp.Core.Data.Commands.Custom.DrPeanut
         [JsonProperty("numeroPedido")]
         public string FinancialRequestId { get; set; }
     }
+
+    public class DrPeanutGetDiscountCommand
+    {
+        [JsonProperty("customerTypeid")]
+        public string CustomerTypeId { get; set; }
+
+        [JsonProperty("identityDocument")]
+        public string IdentityDocument { get; set; }
+
+        [JsonProperty("PaymentCondition")]
+        public string PaymentConditionId { get; set; }
+    }
+
+    public class DrPeanutGetDiscountResponse
+    {
+        [JsonProperty("customerTypeid")]
+        public string CustomerTypeId { get; set; }
+
+        [JsonProperty("value_start")]
+        public decimal DiscountStart { get; set; }
+
+        [JsonProperty("value_end")]
+        public decimal DiscountEnd { get; set; }
+
+        [JsonProperty("Discount_text")]
+        public string Description { get; set; }
+
+        [JsonProperty("discountInPercent")]
+        public decimal DiscountPercent { get; set; }
+
+        [JsonProperty("additionalInPercent")]
+        public decimal AdditionalDiscountPercent { get; set; }
+
+        [JsonProperty("shipping_obs")]
+        public string ShippingObservation { get; set; }
+    }
 }
