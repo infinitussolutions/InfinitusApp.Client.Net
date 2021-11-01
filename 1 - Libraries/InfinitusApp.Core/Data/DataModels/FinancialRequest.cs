@@ -278,10 +278,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
-                if (Discount == 0)
-                    return "";
-
-                return Discount.ToString("C");
+                return Discount.ToString("C2");
             }
         }
 
