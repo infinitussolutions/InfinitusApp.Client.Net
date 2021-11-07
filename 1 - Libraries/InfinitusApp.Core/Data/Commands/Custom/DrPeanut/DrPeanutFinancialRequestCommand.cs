@@ -88,6 +88,8 @@ namespace InfinitusApp.Core.Data.Commands.Custom.DrPeanut
         [JsonProperty("shipping_obs")]
         public string ShippingObservation { get; set; }
 
-        public string DiscountPresentation => string.Format("{0} - {1}%", Description, DiscountPercent);
+        public string DiscountPresentation => string.Format("{0} - {1}%", Description, TotalDiscount);
+
+        public decimal TotalDiscount => DiscountPercent + AdditionalDiscountPercent;
     }
 }
