@@ -133,6 +133,14 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        public string CustomerClassPresentation
+        {
+            get
+            {
+                return string.Format("Tipo: {0}", string.IsNullOrWhiteSpace(CustomerClass?.Description) ? "Não informado" : CustomerClass.Description);
+            }
+        }
+
         public enum CustomerFinancialStatus
         {
             Unknown,
