@@ -27,6 +27,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public string CustomerTypeId { get; set; }
 
+        public string CustomerClassId { get; set; }
+
         public CustomerFinancialStatus FinancialStatus { get; set; }
     }
 
