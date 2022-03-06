@@ -36,6 +36,10 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string CustomerTypeId { get; set; }
 
+        public CustomerClass CustomerClass { get; set; }
+
+        public string CustomerClassId { get; set; }
+
         #endregion Relations
 
         public string ErrorMsg 
