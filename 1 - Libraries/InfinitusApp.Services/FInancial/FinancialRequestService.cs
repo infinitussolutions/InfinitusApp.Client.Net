@@ -113,7 +113,7 @@ namespace InfinitusApp.Services.FInancial
                 dic.Add("trackingCode", trackingCode);
 
             if (createDate.HasValue)
-                dic.Add("createDate", createDate.Value.ToString());
+                dic.Add("createDate", createDate.Value.ToString("yyyy-MM-dd"));
 
             return await ServiceClient.InvokeApiAsync<List<FinancialRequest>>("FinancialRequest/GetAll", HttpMethod.Get, dic);
         }
