@@ -30,6 +30,8 @@ namespace InfinitusApp.Core.Data.Commands
         public string CustomerClassId { get; set; }
 
         public CustomerFinancialStatus FinancialStatus { get; set; }
+
+        public string SalesmanEmail { get; set; }
     }
 
     public class CreateCustomerCommand : CustomerCommand
