@@ -82,8 +82,8 @@ namespace InfinitusApp.Services.FInancial
             {
                 var filter = string.Empty;
 
-                if (createDate.HasValue)
-                    filter = string.Format("month(CreatedAt) ge {0} and year(CreatedAt) ge {1} and day(CreatedAt) ge {2}", createDate.Value.Month, createDate.Value.Year, createDate.Value.Day);
+                //if (createDate.HasValue)
+                //    filter = string.Format("month(CreatedAt) ge {0} and year(CreatedAt) ge {1} and day(CreatedAt) ge {2}", createDate.Value.Month, createDate.Value.Year, createDate.Value.Day);
 
                 if (!string.IsNullOrEmpty(filter))
                     dic.Add("$filter", filter);
@@ -91,16 +91,16 @@ namespace InfinitusApp.Services.FInancial
 
             else
             {
-                if (createDate.HasValue)
-                {
-                    var originalFilter = dic.FirstOrDefault(x => x.Key.Equals("$filter")).Value;
+                //if (createDate.HasValue)
+                //{
+                //    var originalFilter = dic.FirstOrDefault(x => x.Key.Equals("$filter")).Value;
 
-                    dic.Remove("$filter");
+                //    dic.Remove("$filter");
 
-                    originalFilter += string.Format("and month(CreatedAt) ge {0} and year(CreatedAt) ge {1} and day(CreatedAt) ge {2}", createDate.Value.Month, createDate.Value.Year, createDate.Value.Day);
+                //    originalFilter += string.Format("and month(CreatedAt) ge {0} and year(CreatedAt) ge {1} and day(CreatedAt) ge {2}", createDate.Value.Month, createDate.Value.Year, createDate.Value.Day);
 
-                    dic.Add("$filter", originalFilter);
-                }
+                //    dic.Add("$filter", originalFilter);
+                //}
             }
 
             if (!string.IsNullOrEmpty(customerEmail))
@@ -112,8 +112,8 @@ namespace InfinitusApp.Services.FInancial
             if (!string.IsNullOrEmpty(trackingCode))
                 dic.Add("trackingCode", trackingCode);
 
-            //if (createDate.HasValue)
-            //    dic.Add("createDate", createDate.Value.ToString());
+            if (createDate.HasValue)
+                dic.Add("createDate", createDate.Value.ToString());
 
             return await ServiceClient.InvokeApiAsync<List<FinancialRequest>>("FinancialRequest/GetAll", HttpMethod.Get, dic);
         }
