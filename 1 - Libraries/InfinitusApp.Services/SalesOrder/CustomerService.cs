@@ -17,7 +17,7 @@ namespace InfinitusApp.Services.SalesOrder
         {
         }
 
-        public async Task<IList<Customer>> GetAllByDataStoreId(string entityFilter = null, Expression<Func<Customer, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false, string orderBy = null)
+        public async Task<IList<Customer>> GetAllByDataStoreId(string entityFilter = null, Expression<Func<Customer, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false, string orderBy = null, string salesmanEmail = null)
         {
             var odataBuilder = new ODataQueryBuilder<Customer>("")
                     .For<Customer>(x => x)
@@ -50,6 +50,9 @@ namespace InfinitusApp.Services.SalesOrder
 
             if(!string.IsNullOrEmpty(orderBy) && entityOrderBy == null)
                 dic.Add("$orderby", orderBy);
+
+            if (!string.IsNullOrEmpty(salesmanEmail))
+                dic.Add("salesmanEmail", salesmanEmail);
 
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<Customer>>("Customer/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
