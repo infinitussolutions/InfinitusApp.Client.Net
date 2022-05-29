@@ -93,6 +93,8 @@ namespace InfinitusApp.Core.Data.Commands
 
         public string Characteristics { get; set; }
 
+        public string MarkLine { get; set; }
+
         public Price Price { get; set; }
 
         public MediaImageData MediaImageData { get; set; }
@@ -135,7 +137,8 @@ namespace InfinitusApp.Core.Data.Commands
                 Deleted = x.Deleted,
                 ExternalCode = x.ExternalCode,
                 SubTitle = x.SubTitle,
-                Characteristics = x.Characteristics
+                Characteristics = x.Characteristics,
+                MarkLine = x.MarkLine
             }).ToList();
 
             return objReturn;
@@ -164,7 +167,8 @@ namespace InfinitusApp.Core.Data.Commands
                 Deleted = x.Deleted,
                 ExternalCode = x.ExternalCode,
                 SubTitle = x.SubTitle,
-                Characteristics = x.Characteristics
+                Characteristics = x.Characteristics,
+                MarkLine = x.MarkLine
             }).ToList();
 
             return objReturn;

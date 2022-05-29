@@ -29,6 +29,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string Characteristics { get; set; }
 
+        public string MarkLine { get; set; }
+
         public Price Price { get; set; }
 
         public MediaImageData MediaImageData { get; set; }
