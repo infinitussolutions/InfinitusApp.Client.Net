@@ -811,6 +811,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string Characteristics { get; set; }
 
+        public string InternalTitle { get; set; }
+
         public string TitleAndSubtitleAndDescription
         {
             get
