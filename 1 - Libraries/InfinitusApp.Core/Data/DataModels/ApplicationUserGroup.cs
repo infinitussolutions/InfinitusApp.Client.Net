@@ -7,6 +7,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public ApplicationUserGroup()
         {
             Users = new List<ApplicationUser>();
+            RelatedDataItem = new List<DataItem>();
         }
 
         public string Name { get; set; }
@@ -18,5 +19,7 @@ namespace InfinitusApp.Core.Data.DataModels
         public bool AllowAutoInvitation { get; set; }
 
         public bool ForbiddenDelete { get; set; }
+
+        public IList<DataItem> RelatedDataItem { get; set; }
     }
 }

@@ -50,7 +50,7 @@ namespace InfinitusApp.Services.FInancial
             return await ServiceClient.InvokeApiAsync<List<FinancialRequest>>("FinancialRequest/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
 
-        public async Task<List<FinancialRequest>> GetAll(string customerEmail = "", Expression<Func<FinancialRequest, bool>> entityFilter = null, Expression<Func<FinancialRequest, object>> entityOrderBy = null, int? skip = null, int? top = null, string customerName = "", string trackingCode = "", DateTime? createDate = null)
+        public async Task<List<FinancialRequest>> GetAll(string customerEmail = "", Expression<Func<FinancialRequest, bool>> entityFilter = null, Expression<Func<FinancialRequest, object>> entityOrderBy = null, int skip = 0, int top = 15, string customerName = "", string trackingCode = "", DateTime? createDate = null)
         {
             var odataBuilder = new ODataQueryBuilder<FinancialRequest>("")
                .For<FinancialRequest>(x => x)
@@ -59,12 +59,6 @@ namespace InfinitusApp.Services.FInancial
                ;
 
             var hasFilter = false;
-
-            if (skip.HasValue)
-                odataBuilder.Skip(skip.Value);
-
-            if (top.HasValue)
-                odataBuilder.Top(top.Value);
 
             if (entityFilter != null)
             {
@@ -82,25 +76,8 @@ namespace InfinitusApp.Services.FInancial
             {
                 var filter = string.Empty;
 
-                //if (createDate.HasValue)
-                //    filter = string.Format("month(CreatedAt) ge {0} and year(CreatedAt) ge {1} and day(CreatedAt) ge {2}", createDate.Value.Month, createDate.Value.Year, createDate.Value.Day);
-
                 if (!string.IsNullOrEmpty(filter))
                     dic.Add("$filter", filter);
-            }
-
-            else
-            {
-                //if (createDate.HasValue)
-                //{
-                //    var originalFilter = dic.FirstOrDefault(x => x.Key.Equals("$filter")).Value;
-
-                //    dic.Remove("$filter");
-
-                //    originalFilter += string.Format("and month(CreatedAt) ge {0} and year(CreatedAt) ge {1} and day(CreatedAt) ge {2}", createDate.Value.Month, createDate.Value.Year, createDate.Value.Day);
-
-                //    dic.Add("$filter", originalFilter);
-                //}
             }
 
             if (!string.IsNullOrEmpty(customerEmail))
@@ -114,6 +91,10 @@ namespace InfinitusApp.Services.FInancial
 
             if (createDate.HasValue)
                 dic.Add("createDate", createDate.Value.ToString("yyyy-MM-dd"));
+
+            dic.Add("skip", skip.ToString());
+
+            dic.Add("top", top.ToString());
 
             return await ServiceClient.InvokeApiAsync<List<FinancialRequest>>("FinancialRequest/GetAll", HttpMethod.Get, dic);
         }
