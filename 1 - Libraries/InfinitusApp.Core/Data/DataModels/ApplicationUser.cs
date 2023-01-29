@@ -89,6 +89,9 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public IList<Booking> BookingList { get; set; }
 
+        public CustomerZone CustomerZone { get; set; }
+        public string CustomerZoneId { get; set; }
+
         #region Enum
         public enum UserStatus
         {
