@@ -1,7 +1,5 @@
 ﻿using InfinitusApp.Core.Data.DataModels;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using static InfinitusApp.Core.Data.DataModels.ApplicationUser;
 
 namespace InfinitusApp.Core.Data.Commands
@@ -56,6 +54,8 @@ namespace InfinitusApp.Core.Data.Commands
         public SocialMedia SocialMedia { get; set; }
 
         public AddressComplex BillingAddress { get; set; }
+
+        public string CustomerZoneId { get; set; }
     }
 
     public class CreateApplicationUserCommand : ApplicationUserCommandBase

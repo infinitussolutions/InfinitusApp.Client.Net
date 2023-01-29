@@ -1,7 +1,4 @@
 ﻿using InfinitusApp.Core.Data.DataModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using static InfinitusApp.Core.Data.DataModels.Customer;
 
 namespace InfinitusApp.Core.Data.Commands
@@ -32,6 +29,8 @@ namespace InfinitusApp.Core.Data.Commands
         public CustomerFinancialStatus FinancialStatus { get; set; }
 
         public string SalesmanEmail { get; set; }
+
+        public string CustomerZoneId { get; set; }
     }
 
     public class CreateCustomerCommand : CustomerCommand
