@@ -46,6 +46,9 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (ExtraCharge == null)
                     return 0;
 
+                if (ExtraCharge.ICMSSTPercent > 0)
+                    ExtraCharge.InPercent += ExtraCharge.ICMSSTPercent;
+
                 if (ExtraCharge.InPercent > 0)
                     return (InitialPrice * ExtraCharge.InPercent) / 100;
 
@@ -75,5 +78,7 @@ namespace InfinitusApp.Core.Data.DataModels
     {
         public decimal InMoney { get; set; }
         public decimal InPercent { get; set; }
+
+        public decimal ICMSSTPercent { get; set; }
     }
 }

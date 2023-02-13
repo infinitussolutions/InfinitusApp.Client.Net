@@ -63,6 +63,9 @@ namespace InfinitusApp.Core.Data.Commands.Custom.DrPeanut
 
         [JsonProperty("PaymentCondition")]
         public string PaymentConditionId { get; set; }
+
+        [JsonProperty("totalRequest")]
+        public double TotalRequest { get; set; }
     }
 
     public class DrPeanutGetDiscountResponse
@@ -91,5 +94,35 @@ namespace InfinitusApp.Core.Data.Commands.Custom.DrPeanut
         public string DiscountPresentation => string.Format("{0} - {1}%", Description, DiscountPercent);
 
         public decimal TotalDiscount => DiscountPercent + AdditionalDiscountPercent;
+    }
+
+    public class DrPeanutGetICSMRequestCommand
+    {
+        /// <summary>
+        /// estadoOrigem
+        /// </summary>
+        [JsonProperty("estadoOrigem")]
+        public string State { get; set; }
+    }
+
+    public class DrPeanutGetICSMResponseCommand
+    {
+        /// <summary>
+        /// icmsSTId
+        /// </summary>
+        [JsonProperty("icmsSTId")]
+        public string Id { get; set; }
+
+        /// <summary>
+        /// estadoOrigem
+        /// </summary>
+        [JsonProperty("estadoOrigem")]
+        public string State { get; set; }
+
+        /// <summary>
+        /// faixaPercentual
+        /// </summary>
+        [JsonProperty("faixaPercentual")]
+        public decimal Percent { get; set; }
     }
 }

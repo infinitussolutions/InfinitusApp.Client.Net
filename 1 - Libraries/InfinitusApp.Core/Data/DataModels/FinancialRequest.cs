@@ -295,6 +295,9 @@ namespace InfinitusApp.Core.Data.DataModels
 
                 var total = ExtraChargeInRequest.InMoney;
 
+                if (ExtraChargeInRequest.ICMSSTPercent > 0)
+                    total += (TotalItemsWithDiscount * ExtraChargeInRequest.ICMSSTPercent) / 100;
+
                 if (ExtraChargeInRequest.InPercent > 0)
                     total += (TotalItemsWithDiscount * ExtraChargeInRequest.InPercent) / 100;
 

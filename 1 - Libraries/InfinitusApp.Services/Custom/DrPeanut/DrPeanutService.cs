@@ -1,7 +1,5 @@
 ﻿using InfinitusApp.Core.Data.Commands.Custom.DrPeanut;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace InfinitusApp.Services.Custom.DrPeanut
@@ -30,6 +28,11 @@ namespace InfinitusApp.Services.Custom.DrPeanut
         public async Task<List<DrPeanutGetDiscountResponse>> GetDiscountRange(DrPeanutGetDiscountCommand cmd)
         {
             return await ServiceClient.InvokeApiAsync<DrPeanutGetDiscountCommand, List<DrPeanutGetDiscountResponse>>("Custom/DrPeanut/DrPeanut/GetDiscountRange", cmd);
+        }
+
+        public async Task<List<DrPeanutGetICSMResponseCommand>> GetICMSST(DrPeanutGetICSMRequestCommand cmd)
+        {
+            return await ServiceClient.InvokeApiAsync<DrPeanutGetICSMRequestCommand, List<DrPeanutGetICSMResponseCommand>>("Custom/DrPeanut/DrPeanut/GetICMS", cmd);
         }
     }
 }
