@@ -296,7 +296,7 @@ namespace InfinitusApp.Core.Data.DataModels
                 var total = ExtraChargeInRequest.InMoney;
 
                 if (ExtraChargeInRequest.ICMSSTPercent > 0)
-                    total += (TotalItemsWithDiscount * ExtraChargeInRequest.ICMSSTPercent) / 100;
+                    total += ((TotalItemsWithDiscount - Discount) * ExtraChargeInRequest.ICMSSTPercent) / 100;
 
                 if (ExtraChargeInRequest.InPercent > 0)
                     total += (TotalItemsWithDiscount * ExtraChargeInRequest.InPercent) / 100;
@@ -334,6 +334,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public string DateCreatedPresentation => CreatedAt.HasValue ? CreatedAt.Value.ToString("dd/MM/yyyy HH:mm") : "Não Encontrado";
 
+        public decimal TotalRequestWithoutExtraCharge { get; set; }
         #endregion
 
         public FinancialStatusPresentation FinancialStatusPresentation { get; set; }
