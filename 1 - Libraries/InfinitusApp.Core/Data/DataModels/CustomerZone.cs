@@ -13,6 +13,8 @@ namespace InfinitusApp.Core.Data.DataModels
         }
 
         public string Name { get; set; }
+        public string InitialZipCode { get; set; }
+        public string FinalZipCode { get; set; }
 
         #region Relations
 

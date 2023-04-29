@@ -3,6 +3,8 @@
     public class CustomerZoneCommand
     {
         public string Name { get; set; }
+        public string InitialZipCode { get; set; }
+        public string FinalZipCode { get; set; }
     }
 
     public class CreateCustomerZoneCommand : CustomerZoneCommand
