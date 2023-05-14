@@ -39,5 +39,10 @@ namespace InfinitusApp.Services.ApplicationUserService
         {
             return await ServiceClient.InvokeApiAsync<UpdateApplicationUserCommand, ApplicationUser>("ApplicationUser/Update", cmd, HttpMethod.Patch, null);
         }
+
+        public async Task<bool> Delete()
+        {
+            return await ServiceClient.InvokeApiAsync<bool>("ApplicationUser/DeleteUser", HttpMethod.Post, null);
+        }
     }
 }
