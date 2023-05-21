@@ -45,6 +45,7 @@ namespace InfinitusApp.Core.Data.DataModels
             FinancialRequestToDeliveryList = new List<FinancialRequest>();
             FinancialRequestToPurchasesList = new List<FinancialRequest>();
             BookingList = new List<Booking>();
+            CustomerZoneRelations = new List<CustomerZoneRelation>();
         }
 
         public PhoneComplex Phone { get; set; }
@@ -91,6 +92,8 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public CustomerZone CustomerZone { get; set; }
         public string CustomerZoneId { get; set; }
+
+        public IList<CustomerZoneRelation> CustomerZoneRelations { get; set; }
 
         #region Enum
         public enum UserStatus

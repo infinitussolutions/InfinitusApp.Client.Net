@@ -10,6 +10,7 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             Customers = new List<Customer>();
             ApplicationUsers = new List<ApplicationUser>();
+            Relations = new List<CustomerZoneRelation>();
         }
 
         public string Name { get; set; }
@@ -20,6 +21,7 @@ namespace InfinitusApp.Core.Data.DataModels
 
         public IList<Customer> Customers { get; set; }
         public IList<ApplicationUser> ApplicationUsers { get; set; }
+        public IList<CustomerZoneRelation> Relations { get; set; }
         public string DataStoreId { get; set; }
 
         #endregion
