@@ -78,5 +78,14 @@ namespace InfinitusApp.Services.Customers
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<CustomerZoneRelation>>("CustomerZoneRelation/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
 
+        public async Task<List<CustomerZoneRelation>> GetAllByUser(string appUserId)
+        {
+            var dic = new Dictionary<string, string>
+                {
+                    { "appUserId", appUserId }
+                };
+
+            return await ServiceClient.InvokeApiAsync<List<CustomerZoneRelation>>("CustomerZoneRelation/GetAllByUser", HttpMethod.Get, dic);
+        }
     }
 }
