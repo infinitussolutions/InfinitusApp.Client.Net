@@ -1,4 +1,5 @@
 ﻿using InfinitusApp.Core.Data.DataModels;
+using System.Collections.Generic;
 using static InfinitusApp.Core.Data.DataModels.Customer;
 
 namespace InfinitusApp.Core.Data.Commands
@@ -57,5 +58,11 @@ namespace InfinitusApp.Core.Data.Commands
     public class UpdateCustomerCommand : CustomerCommand
     {
         public string Id { get; set; }
+    }
+
+    public class CustomerSearchCommand
+    {
+        public List<string> CustomerZoneId { get; set; }
+        public string CurrentQuery { get; set; }
     }
 }

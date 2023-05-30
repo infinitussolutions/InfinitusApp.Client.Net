@@ -181,4 +181,24 @@ namespace InfinitusApp.Core.Data.Commands
 
         public IList<CreateFinancialRequestItemCommand> Items { get; set; }
     }
+
+    public class FinancialRequestFilterCommand
+    {
+        public string CustomerEmail { get; set; }
+
+        public string CustomerName { get; set; }
+
+        public List<int> TrackingCode { get; set; }
+
+        public DateTime? CreatedDate { get; set; }
+
+        public int? Top { get; set; }
+
+        public int? Skip { get; set; }
+
+        public string StatusId { get; set; }
+
+        public string SalesmanUserId { get; set; }
+
+    }
 }

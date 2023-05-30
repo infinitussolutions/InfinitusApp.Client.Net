@@ -150,6 +150,18 @@ namespace InfinitusApp.Core.Data.DataModels
             }
         }
 
+        public string PaymentConditionTitlePresentation 
+        {
+            get
+            {
+                if (AdditionalInfos != null && AdditionalInfos.Any(x => x.Title.Equals("forma de pagamento", StringComparison.OrdinalIgnoreCase)))
+                    return AdditionalInfos.FirstOrDefault(x => x.Title.Equals("forma de pagamento", StringComparison.OrdinalIgnoreCase)).Description;
+
+                return PaymentCondition?.Title;
+            }
+        }
+
+
         //[JsonIgnore]
         //public FinancialRequestActions PossibleActions
         //{
@@ -267,7 +279,10 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (DiscountInRequest.DiscountInMoney > 0)
                     discount += DiscountInRequest.DiscountInMoney;
 
-                if (DiscountInRequest.DiscountInPercent > 0)
+                if (DiscountInRequest.ManagerDiscountInPercent > 0)
+                    discount += ((DiscountInRequest.ManagerDiscountInPercent * TotalItemsWithDiscount) / (decimal)100);
+
+                else if (DiscountInRequest.DiscountInPercent > 0)
                     discount += ((DiscountInRequest.DiscountInPercent * TotalItemsWithDiscount) / (decimal)100);
 
                 return discount;
@@ -922,7 +937,10 @@ namespace InfinitusApp.Core.Data.DataModels
 
             if (!hide.Discount)
             {
-                if (toFinancialRequest.DiscountInRequest.DiscountInPercent > 0)
+                if (toFinancialRequest.DiscountInRequest.ManagerDiscountInPercent > 0)
+                    msg += "🙌 Desconto (" + toFinancialRequest.DiscountInRequest.ManagerDiscountInPercent + "% OFF) : -" + toFinancialRequest.Discount.ToString("C") + "\n";
+
+                else if (toFinancialRequest.DiscountInRequest.DiscountInPercent > 0)
                     msg += "🙌 Desconto (" + toFinancialRequest.DiscountInRequest.DiscountInPercent + "% OFF) : -" + toFinancialRequest.Discount.ToString("C") + "\n";
 
                 else if(toFinancialRequest.DiscountInRequest.DiscountInMoney > 0)

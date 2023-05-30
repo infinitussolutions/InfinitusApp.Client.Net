@@ -60,6 +60,40 @@ namespace InfinitusApp.Services.SalesOrder
             return await ServiceClient.MobileServiceClient.InvokeApiAsync<List<Customer>>("Customer/GetAllByDataStoreId", HttpMethod.Get, dic);
         }
 
+        public async Task<IList<Customer>> GetAllByCustomerZone(CustomerSearchCommand cmd, string entityFilter = null, Expression<Func<Customer, object>> entityOrderBy = null, int? skip = null, int? top = null, bool desc = false, string orderBy = null)
+        {
+            var odataBuilder = new ODataQueryBuilder<Customer>("")
+                    .For<Customer>(x => x)
+                    .ByList()
+                    ;
+
+            if (top.HasValue)
+                odataBuilder.Top(top.Value);
+
+            if (skip.HasValue)
+                odataBuilder.Skip(skip.Value);
+
+            if (entityOrderBy != null)
+            {
+                if (desc)
+                    odataBuilder.OrderByDescending(entityOrderBy);
+
+                else
+                    odataBuilder.OrderBy(entityOrderBy);
+            }
+
+            var dic = odataBuilder.ToDictionary();
+
+            if (!string.IsNullOrEmpty(entityFilter))
+                dic.Add("$filter", entityFilter);
+
+            if (!string.IsNullOrEmpty(orderBy) && entityOrderBy == null)
+                dic.Add("$orderby", orderBy);
+
+            return await ServiceClient.InvokeApiAsync<CustomerSearchCommand, List<Customer>>("Customer/GetAllByCustomerZone", cmd, HttpMethod.Post, dic);
+        }
+
+
         public async Task<Customer> GetByEmail(string email)
         {
             var dic = new Dictionary<string, string>

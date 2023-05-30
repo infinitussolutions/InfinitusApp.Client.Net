@@ -158,5 +158,10 @@ namespace InfinitusApp.Services.FInancial
 
             return await ServiceClient.InvokeApiAsync<string>("FinancialRequest/ExportRequest", HttpMethod.Get, dic);
         }
+
+        public async Task<List<FinancialRequest>> GetAllByCommand(FinancialRequestFilterCommand cmd)
+        {
+            return await ServiceClient.InvokeApiAsync<FinancialRequestFilterCommand, List<FinancialRequest>>("FinancialRequest/GetAllByCommand", cmd, HttpMethod.Post, null);
+        }
     }
 }

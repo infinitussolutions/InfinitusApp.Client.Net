@@ -125,4 +125,39 @@ namespace InfinitusApp.Core.Data.Commands.Custom.DrPeanut
         [JsonProperty("faixaPercentual")]
         public decimal Percent { get; set; }
     }
+
+    public class DrPeanutRequestsPendingApprovalCommand
+    {
+        [JsonProperty("documentIdentifier")]
+        public string IdentityDocument { get; set; }
+    }
+
+    public class DrPeanutRequestsPendingApprovalResponseCommand
+    {
+        [JsonProperty("orderId")]
+        public string OrderId { get; set; }
+        [JsonProperty("orderExpeditionDate")]
+        public DateTimeOffset OrderExpeditionDate { get; set; }
+        [JsonProperty("orderClient")]
+        public string OrderClient { get; set; }
+        [JsonProperty("orderTotal")]
+        public decimal OrderTotal { get; set; }
+        [JsonProperty("orderStatus")]
+        public string OrderStatus { get; set; }
+        [JsonProperty("orderNote")]
+        public string OrderNote { get; set; }
+        [JsonProperty("salesMan")]
+        public string SalesMan { get; set; }
+
+        public string FormatedId 
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(OrderId))
+                    return string.Empty;
+
+                return OrderId.Remove(0, 4).TrimStart('0');
+            }
+        }
+    }
 }

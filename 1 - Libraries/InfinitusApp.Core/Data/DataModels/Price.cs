@@ -24,6 +24,12 @@ namespace InfinitusApp.Core.Data.DataModels
         {
             get
             {
+                if (Discount.ManagerDiscountInPercent > 0)
+                {
+                    var discount = (InitialPrice * Discount.ManagerDiscountInPercent) / 100;
+                    return discount < InitialPrice ? discount : 0;
+                }
+
                 if (Discount.DiscountInPercent > 0)
                 {
                     var discount = (InitialPrice * Discount.DiscountInPercent) / 100;
@@ -72,6 +78,8 @@ namespace InfinitusApp.Core.Data.DataModels
         public decimal DiscountInMoney { get; set; }
 
         public decimal DiscountInPercent { get; set; }
+
+        public decimal ManagerDiscountInPercent { get; set; }
     }
 
     public class ExtraCharge

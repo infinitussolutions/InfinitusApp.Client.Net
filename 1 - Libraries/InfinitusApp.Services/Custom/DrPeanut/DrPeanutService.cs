@@ -34,5 +34,10 @@ namespace InfinitusApp.Services.Custom.DrPeanut
         {
             return await ServiceClient.InvokeApiAsync<DrPeanutGetICSMRequestCommand, List<DrPeanutGetICSMResponseCommand>>("Custom/DrPeanut/DrPeanut/GetICMS", cmd);
         }
+
+        public async Task<List<DrPeanutRequestsPendingApprovalResponseCommand>> GetRequestsPendingApproval(DrPeanutRequestsPendingApprovalCommand cmd)
+        {
+            return await ServiceClient.InvokeApiAsync<DrPeanutRequestsPendingApprovalCommand, List<DrPeanutRequestsPendingApprovalResponseCommand>>("Custom/DrPeanut/DrPeanut/GetRequestsPendingApproval", cmd);
+        }
     }
 }
