@@ -279,11 +279,11 @@ namespace InfinitusApp.Core.Data.DataModels
                 if (DiscountInRequest.DiscountInMoney > 0)
                     discount += DiscountInRequest.DiscountInMoney;
 
-                if (DiscountInRequest.ManagerDiscountInPercent > 0)
-                    discount += ((DiscountInRequest.ManagerDiscountInPercent * TotalItemsWithDiscount) / (decimal)100);
-
-                else if (DiscountInRequest.DiscountInPercent > 0)
+                if (DiscountInRequest.DiscountInPercent > 0)
                     discount += ((DiscountInRequest.DiscountInPercent * TotalItemsWithDiscount) / (decimal)100);
+
+                if (DiscountInRequest.ManagerDiscountInPercent > 0)
+                    discount += ((DiscountInRequest.ManagerDiscountInPercent * (TotalItemsWithDiscount - discount)) / (decimal)100);
 
                 return discount;
             }
